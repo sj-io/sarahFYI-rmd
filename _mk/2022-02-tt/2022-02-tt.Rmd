@@ -1,0 +1,23 @@
+---
+title: "February Time Trials"
+description: |
+  A review of my time trial PBs in February 2022.
+author:
+  - name: Sarah Johnson
+categories:
+  - time trials
+date: 2022-03-09
+output:
+  distill::distill_article:
+    self_contained: false
+draft: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This post will review my February time trial data.
+
+
