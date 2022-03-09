@@ -1,0 +1,16 @@
+name: "sarahFYI"
+title: "sarah"
+description: |
+  sarahFYI
+output_dir: "_site"
+collections:
+  mk:
+    categories: true
+navbar:
+  right:
+    - text: "Mario Kart"
+      href: mk.html
+    - text: "About"
+      href: index.html
+output: 
+  distill::distill_article:

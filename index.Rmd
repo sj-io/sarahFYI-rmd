@@ -1,0 +1,6 @@
+---
+title: "Welcome"
+output:
+  postcards::trestles
+site: distill::distill_website
+---
