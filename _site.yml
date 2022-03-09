@@ -1,8 +1,9 @@
 name: "sarahFYI"
-title: "sarah"
+title: "SJ"
 description: |
-  sarahFYI
+  Sarah Johnson gaming
 output_dir: "_site"
+exclude: ["*.csv"]
 base_url: https://sarah.fyi
 collections:
   mk:
@@ -13,5 +14,7 @@ navbar:
       href: mk.html
     - text: "About"
       href: index.html
+    - icon: fa fa-twitch
+      href: https://www.twitch.tv/hsgsarah
 output: 
   distill::distill_article:

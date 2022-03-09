@@ -17,22 +17,5 @@
     "preview": {},
     "last_modified": "2022-03-09T00:27:53-06:00",
     "input_file": {}
-  },
-  {
-    "path": "mk/welcome/",
-    "title": "Welcome to sarahFYI",
-    "description": "Welcome to our new blog, sarahFYI. We hope you enjoy \nreading what we have to say!",
-    "author": [
-      {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
-      }
-    ],
-    "date": "2022-03-08",
-    "categories": [],
-    "contents": "\n\n\n\n",
-    "preview": {},
-    "last_modified": "2022-03-08T23:11:39-06:00",
-    "input_file": {}
   }
 ]
