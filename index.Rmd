@@ -1,6 +1,14 @@
 ---
-title: "Welcome"
+title: "Sarah Johnson"
+image: "me.jpg"
+links:
+  - label: Twitch
+    url: https://www.twitch.tv/hsgsarah
+  - label: Github
+    url: https://github.com/sj-io
 output:
-  postcards::trestles
+  postcards::jolla
 site: distill::distill_website
 ---
+
+Hey, I'm Sarah. I'm pretty good at data analysis and okay at video games. I mostly stream Mario Kart and Animal Crossing on Twitch. Come by and say hi!
