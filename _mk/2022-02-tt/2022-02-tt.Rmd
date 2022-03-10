@@ -1,7 +1,7 @@
 ---
 title: "February Time Trials"
 description: |
-  A review of my time trial PBs in February 2022.
+  Reviewing my time trials PBs for February 2022.
 author:
   - name: Sarah Johnson
 categories:
@@ -13,11 +13,66 @@ output:
 draft: false
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This post will review my February time trial data.
+```{r}
+library(tidyverse)
+library(plotly)
+library(lubridate)
+```
 
+In February 2022, I began keeping a spreadsheet of every time I set a new personal best in Mario Kart.
 
+```{r}
+tt <- read_csv("../_data/time-trials.csv", 
+               col_types = cols(total = "c")) %>% 
+  filter(date < "2022-03-01") %>% 
+  mutate(total = lubridate::ms(total)) 
+
+test <- tt %>% 
+  mutate(yr = year(date),
+         mth = month(date),
+         day = day(date),
+         hour = hour(time),
+         min = minute(time),
+         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min))
+```
+
+```{r}
+gg <- ggplot(test, aes(x= dt, y=total, color = cup, group = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Cup") +
+  theme_minimal()
+```
+
+All PBs
+
+```{r, layout = "l-page", fig.height=6}
+ggplotly(gg)
+```
+
+## Mushroom Cup
+
+```{r}
+mr <- test %>% 
+  filter(cup == "Mushroom")
+```
+
+```{r}
+ggMr <- ggplot(mr, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggMr)
+```
