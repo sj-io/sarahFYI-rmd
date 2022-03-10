@@ -29,38 +29,19 @@ In February 2022, I began keeping a spreadsheet of every time I set a new person
 tt <- read_csv("../_data/time-trials.csv", 
                col_types = cols(total = "c")) %>% 
   filter(date < "2022-03-01") %>% 
-  mutate(total = lubridate::ms(total)) 
-
-test <- tt %>% 
-  mutate(yr = year(date),
+  mutate(total = ms(total),
+         yr = year(date),
          mth = month(date),
          day = day(date),
          hour = hour(time),
          min = minute(time),
-         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min))
-```
-
-```{r}
-gg <- ggplot(test, aes(x= dt, y=total, color = cup, group = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Cup") +
-  theme_minimal()
-```
-
-All PBs
-
-```{r, layout = "l-page", fig.height=6}
-ggplotly(gg)
+         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min)) 
 ```
 
 ## Mushroom Cup
 
 ```{r}
-mr <- test %>% 
+mr <- tt %>% 
   filter(cup == "Mushroom")
 ```
 
@@ -76,3 +57,244 @@ ggMr <- ggplot(mr, aes(x= dt, y=total, color = track)) +
 
 ggplotly(ggMr)
 ```
+
+## Flower
+
+```{r}
+fl <- tt %>% 
+  filter(cup == "Flower")
+```
+
+```{r}
+ggFl <- ggplot(fl, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggFl)
+```
+
+No PB for Shy Guy Falls
+
+## Star
+
+```{r}
+st <- tt %>% 
+  filter(cup == "Star")
+```
+
+```{r}
+ggSt <- ggplot(st, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggSt)
+```
+
+## Special
+
+```{r}
+sp <- tt %>% 
+  filter(cup == "Special")
+```
+
+```{r}
+ggSp <- ggplot(sp, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggSp)
+```
+
+## Egg
+
+```{r}
+eg <- tt %>% 
+  filter(cup == "Egg")
+```
+
+```{r}
+ggEg <- ggplot(eg, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggEg)
+```
+
+## Crossing
+
+```{r}
+cr <- tt %>% 
+  filter(cup == "Crossing")
+```
+
+```{r}
+ggCr <- ggplot(cr, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggCr)
+```
+
+## Shell
+
+```{r}
+sh <- tt %>% 
+  filter(cup == "Shell")
+```
+
+```{r}
+ggSh <- ggplot(sh, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggSh)
+```
+
+## Banana
+
+```{r}
+ba <- tt %>% 
+  filter(cup == "Banana")
+```
+
+```{r}
+ggBa <- ggplot(ba, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggBa)
+```
+
+## Leaf
+
+```{r}
+lf <- tt %>% 
+  filter(cup == "Leaf")
+```
+
+```{r}
+ggLf <- ggplot(lf, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggLf)
+```
+
+## Lightning
+
+```{r}
+li <- tt %>% 
+  filter(cup == "Lightning")
+```
+
+```{r}
+ggLi <- ggplot(li, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggLi)
+```
+
+## Triforce
+
+```{r}
+tf <- tt %>% 
+  filter(cup == "Triforce")
+```
+
+```{r}
+ggTf <- ggplot(tf, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggTf)
+```
+
+## Bell
+
+```{r}
+be <- tt %>% 
+  filter(cup == "Bell")
+```
+
+```{r}
+ggBe <- ggplot(be, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+
+ggplotly(ggBe)
+```
+
+## All Tracks
+
+```{r}
+gg <- ggplot(tt, aes(x= dt, y=total, color = cup, group = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Cup") +
+  theme_minimal()
+```
+
+```{r, layout = "l-page", fig.height=6}
+ggplotly(gg)
+```
+
+(group by day, time of day)
