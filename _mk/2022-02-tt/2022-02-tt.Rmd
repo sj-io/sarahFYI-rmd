@@ -10,6 +10,7 @@ date: 2022-03-09
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
 draft: false
 ---
 
@@ -17,13 +18,13 @@ draft: false
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(plotly)
 library(lubridate)
 ```
 
-In February 2022, I began keeping a spreadsheet of every time I set a new personal best in Mario Kart.
+In February 2022, I began keeping a spreadsheet of every time new personal best I set in Mario Kart time trials.
 
 ```{r}
 tt <- read_csv("../_data/time-trials.csv", 
@@ -38,15 +39,21 @@ tt <- read_csv("../_data/time-trials.csv",
          dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min)) 
 ```
 
-## Mushroom Cup
+## Nitro Tracks
+
+The nitro tracks include the Mushroom, Flower, Star, and Special Cups. I set 28 PBs in nitro tracks in February.
 
 ```{r}
-mr <- tt %>% 
-  filter(cup == "Mushroom")
+nitro <- tt %>% 
+  filter(str_detect(cup, "Mushroom|Flower|Star|Special"))
+
+nitro %>% count(track) %>% arrange(desc(n))
 ```
 
+Mario Circuit, Thwomp Ruins, and Twisted Mansion tied for the most PBs set of the Nitro tracks. No PB was set for Shy Guy Falls.
+
 ```{r}
-ggMr <- ggplot(mr, aes(x= dt, y=total, color = track)) +
+ggNitro <- ggplot(nitro, aes(x= dt, y=total, color = track)) +
   geom_point() +
   geom_line() +
   scale_y_time() +
@@ -54,19 +61,27 @@ ggMr <- ggplot(mr, aes(x= dt, y=total, color = track)) +
        y = "",
        color = "Track") +
   theme_minimal()
-
-ggplotly(ggMr)
 ```
 
-## Flower
-
-```{r}
-fl <- tt %>% 
-  filter(cup == "Flower")
+```{r, layout="l-page", fig.height=6}
+ggplotly(ggNitro)
 ```
 
+## Retro Tracks
+
+The retro tracks include Shell, Banana, Leaf, and Lightning Cups. I set 59 PBs in retro tracks in February.
+
 ```{r}
-ggFl <- ggplot(fl, aes(x= dt, y=total, color = track)) +
+retro <- tt %>% 
+  filter(str_detect(cup, "Shell|Banana|Leaf|Lightning"))
+
+retro %>% count(track) %>% arrange(desc(n))
+```
+
+Donut Plains saw the most PBs of any track, by far. This was the first month I began taking the underwater shortcuts, so I practiced them extensively.
+
+```{r}
+ggRetro <- ggplot(retro, aes(x= dt, y=total, color = track)) +
   geom_point() +
   geom_line() +
   scale_y_time() +
@@ -74,21 +89,27 @@ ggFl <- ggplot(fl, aes(x= dt, y=total, color = track)) +
        y = "",
        color = "Track") +
   theme_minimal()
-
-ggplotly(ggFl)
 ```
 
-No PB for Shy Guy Falls
-
-## Star
-
-```{r}
-st <- tt %>% 
-  filter(cup == "Star")
+```{r, layout="l-page", fig.height=6}
+ggplotly(ggRetro)
 ```
 
+## Bonus Tracks
+
+The bonus tracks include the Egg, Crossing, Triforce, and Bell Cups. I set 39 PBs in Bonus Tracks during February.
+
 ```{r}
-ggSt <- ggplot(st, aes(x= dt, y=total, color = track)) +
+bonus <- tt %>% 
+  filter(str_detect(cup, "Egg|Crossing|Triforce|Bell"))
+
+bonus %>% count(track) %>% arrange(desc(n))
+```
+
+SNES Rainbow Road saw the most PBs, followed by Big Blue.
+
+```{r}
+ggBonus <- ggplot(bonus, aes(x= dt, y=total, color = track)) +
   geom_point() +
   geom_line() +
   scale_y_time() +
@@ -96,191 +117,15 @@ ggSt <- ggplot(st, aes(x= dt, y=total, color = track)) +
        y = "",
        color = "Track") +
   theme_minimal()
-
-ggplotly(ggSt)
 ```
 
-## Special
-
-```{r}
-sp <- tt %>% 
-  filter(cup == "Special")
-```
-
-```{r}
-ggSp <- ggplot(sp, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggSp)
-```
-
-## Egg
-
-```{r}
-eg <- tt %>% 
-  filter(cup == "Egg")
-```
-
-```{r}
-ggEg <- ggplot(eg, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggEg)
-```
-
-## Crossing
-
-```{r}
-cr <- tt %>% 
-  filter(cup == "Crossing")
-```
-
-```{r}
-ggCr <- ggplot(cr, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggCr)
-```
-
-## Shell
-
-```{r}
-sh <- tt %>% 
-  filter(cup == "Shell")
-```
-
-```{r}
-ggSh <- ggplot(sh, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggSh)
-```
-
-## Banana
-
-```{r}
-ba <- tt %>% 
-  filter(cup == "Banana")
-```
-
-```{r}
-ggBa <- ggplot(ba, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggBa)
-```
-
-## Leaf
-
-```{r}
-lf <- tt %>% 
-  filter(cup == "Leaf")
-```
-
-```{r}
-ggLf <- ggplot(lf, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggLf)
-```
-
-## Lightning
-
-```{r}
-li <- tt %>% 
-  filter(cup == "Lightning")
-```
-
-```{r}
-ggLi <- ggplot(li, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggLi)
-```
-
-## Triforce
-
-```{r}
-tf <- tt %>% 
-  filter(cup == "Triforce")
-```
-
-```{r}
-ggTf <- ggplot(tf, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggTf)
-```
-
-## Bell
-
-```{r}
-be <- tt %>% 
-  filter(cup == "Bell")
-```
-
-```{r}
-ggBe <- ggplot(be, aes(x= dt, y=total, color = track)) +
-  geom_point() +
-  geom_line() +
-  scale_y_time() +
-  labs(x = "",
-       y = "",
-       color = "Track") +
-  theme_minimal()
-
-ggplotly(ggBe)
+```{r, layout="l-page", fig.height=6}
+ggplotly(ggBonus)
 ```
 
 ## All Tracks
+
+In total, I set 126 PBs in February across 47 tracks (all except Shy Guy Falls).
 
 ```{r}
 gg <- ggplot(tt, aes(x= dt, y=total, color = cup, group = track)) +
@@ -297,4 +142,44 @@ gg <- ggplot(tt, aes(x= dt, y=total, color = cup, group = track)) +
 ggplotly(gg)
 ```
 
-(group by day, time of day)
+Towards the end of the month I focused on getting a PB in every track, using soft drifting, and nailing mushroomless skips.
+
+### Day of Month
+
+```{r}
+ggDay <- tt %>% 
+  ggplot(aes(x = day)) +
+  geom_bar() +
+  theme_minimal()
+
+ggplotly(ggDay)
+```
+
+I set the most PBs on February 3rd (18), followed by the 14th (happy Valentine's Day to me lol) and 26th (16 each).
+
+### Day of Week
+
+```{r}
+ggWday <- tt %>%
+  mutate(wday = wday(date, label = TRUE)) %>% 
+  ggplot(aes(x = wday)) +
+  geom_bar() +
+  theme_minimal()
+
+ggplotly(ggWday)
+```
+
+I set the most PBs on Wednesdays, followed by Saturdays. Tuesday and Fridays saw the fewest PBs.
+
+### Time of Day
+
+```{r}
+ggTime <- tt %>% 
+  ggplot(aes(x = hour)) +
+  geom_bar() +
+  theme_minimal()
+
+ggplotly(ggTime)
+```
+
+I set the vast majority of my PBs at night, particularly between 1-2 AM. No PBs were set between 11AM and 4PM.
