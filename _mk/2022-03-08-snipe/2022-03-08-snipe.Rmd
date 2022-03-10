@@ -1,0 +1,24 @@
+---
+title: "2022-03-08-snipe"
+description: |
+  A short description of the post.
+author:
+  - name: Sarah Johnson
+date: 2022-03-10
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+snipe <- read_csv("../_data/stream-snipe.csv")
+```
+
+
+
