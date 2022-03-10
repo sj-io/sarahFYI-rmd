@@ -1,14 +1,15 @@
 ---
-title: "2022-03-08-snipe"
+title: "March 8th Stream Snipe"
 description: |
   A short description of the post.
 author:
   - name: Sarah Johnson
+categories:
+  - online
 date: 2022-03-10
 output:
   distill::distill_article:
     self_contained: false
-draft: true
 ---
 
 
@@ -17,8 +18,37 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r}
+library(tidyverse)
+library(plotly)
 snipe <- read_csv("../_data/stream-snipe.csv")
+tracks <- read_csv("../_data/track-abbr.csv")
 ```
 
+```{r}
+snp <- snipe %>% 
+  select(-c(`start score`, change)) %>% 
+  left_join(tracks, by = c("track" = "short")) %>% 
+  pivot_longer(cols = c(sarah, clonk),
+               names_to = "user",
+               values_to = "place")
+```
 
+```{r, layout="l-screen-inset", fig.height=6}
+ggSNP <- snp %>% ggplot(aes(x = race, y = place, color = user)) +
+  geom_line() +
+  geom_point(aes(text = full)) +
+  scale_y_reverse() +
+  theme_minimal()
+
+ggplotly(ggSNP)
+```
+
+```{r, layout="l-page", fig.height=6}
+ggSmooth <- snp %>% ggplot(aes(x = race, y = place, color = user)) +
+  geom_smooth() +
+  scale_y_reverse() +
+  theme_minimal()
+
+ggplotly(ggSmooth)
+```
 
