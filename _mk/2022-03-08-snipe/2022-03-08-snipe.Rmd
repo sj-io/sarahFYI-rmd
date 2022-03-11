@@ -17,11 +17,18 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r}
+```{r library}
 library(tidyverse)
 library(plotly)
-snipe <- read_csv("../_data/stream-snipe.csv")
+library(DT)
+```
+
+```{r readcsv}
 tracks <- read_csv("../_data/track-abbr.csv")
+
+results <- read_csv("../_data/stream-snipe.csv") %>% 
+  left_join(tracks, by = "trk") %>% 
+  select(race, Sarah, Clint, track, trk, cc, everything())
 ```
 
 ## Intro
@@ -34,9 +41,17 @@ A few weeks ago I sent Clint Stevens a friend request on the Switch with little 
 </iframe>
 :::
 
-<aside>![](images/phoenix-sweat.jpg){width="212"} Sorry for spamming "ADD SARAH" in chat when you were trying to give an update on Juno. Thanks for the add.</aside>
+<aside>
 
-<p></p>
+![](images/phoenix-sweat.jpg){width="212"}
+
+Sorry for spamming `ADD SARAH` in chat when you were trying to give an update on Juno. Thanks for the add.
+
+</aside>
+
+<p>
+
+</p>
 
 I knew my online game was rusty---most of my \~7K Elo ranking was from spring 2018 or earlier (four years ago wtf). I picked the game back up recently but I've been doing no-item speedruns, which is good for practicing the maps and shortcuts but terrible for item management.
 
@@ -46,27 +61,32 @@ After the game I made a spreadsheet of which games I played in and the results f
 
 ## Analysis
 
+### All Races
+
 In total, I was able to play in 39 races with Clint and the other members of chat, excluding two games where Clint left but myself and other snipers continued to play.
 
-```{r}
-snp <- snipe %>% 
-  select(-c(`start score`, change)) %>% 
-  left_join(tracks, by = c("track" = "short")) %>% 
-  pivot_longer(cols = c(sarah, clonk),
+```{r racerResult}
+racerResult <- results %>% 
+  pivot_longer(cols = c(Sarah, Clint),
                names_to = "racer",
-               values_to = "place")
+               values_to = "result")
 ```
 
 The below graph shows how Clint and I placed in every race. The graph is interactive, so feel free to hover over any point to see more details. Clicking on a line in the legend will isolate it and hide the other line.
 
-```{r, layout="l-screen-inset", fig.height=6}
-ggSNP <- snp %>% ggplot(aes(x = race, y = place, color = racer)) +
+```{r, layout="l-page", fig.height=2}
+ggResult <- racerResult %>% 
+  ggplot(aes(x = race, y = result, color = racer)) +
   geom_line() +
-  geom_point(aes(text = full)) +
-  scale_y_reverse() +
-  theme_minimal()
+  geom_point(aes(text = track)) +
+  scale_y_reverse(breaks = seq(1, 13, by = 4)) +
+  theme_minimal() +
+  labs(title = "Mario Kart online worldwide races. March 8, 2022",
+       x = "Race #",
+       y = NULL,
+       color = "Player")
 
-ggplotly(ggSNP)
+ggplotly(ggResult)
 ```
 
 Clint was able to snag twelve top-3 finishes (31%), including two wins. Unfortunately, I never broke 5th. Still, there were 10 races (26%) where I was able to come out ahead of him. I had five last place finishes (13%), he had three (8%).
@@ -74,17 +94,72 @@ Clint was able to snag twelve top-3 finishes (31%), including two wins. Unfortun
 To better understand how the results trended throughout the game, the below graph shows the same data as above but smoothed out.
 
 ```{r, layout="l-page", fig.height=6}
-ggSmooth <- snp %>% ggplot(aes(x = race, y = place, color = racer)) +
+ggSmooth <- racerResult %>% ggplot(aes(x = race, y = result, color = racer, fill = racer)) +
   geom_smooth() +
-  scale_y_reverse() +
-  theme_minimal()
+  scale_y_reverse(breaks = seq(1, 13, by = 4)) +
+  theme_light() +
+  labs(x = "Race #",
+       y = NULL,
+       color = "Player",
+       fill = NULL)
 
 ggplotly(ggSmooth)
 ```
 
-Clint's strong start turned into a noticeable lull, followed by a momentum swing which died out towards the end. His overall average was between 6th and 7th place. My results were mostly stagnant, averaging between 8th and 9th place.
+Clint's strong start dropped as snipers entered the lobby. He recovered from the lull, followed by a momentum swing which died out towards the end. His overall average was between 6th and 7th place. My results were mostly stagnant, averaging between 8th and 9th place.
 
 Despite my poor results, I had one of the lowest Elo ratings in the lobby and consistently gained points. I entered with a 7010 and left with a 7208, a gain of 198 points.
+
+### Map Frequency
+
+Over the course of the 39 races, 25 unique tracks were played. The most frequently played tracks were Cheep Cheep Beach and Mario Circuit.
+
+```{r}
+trackPopular <- results %>% 
+  count(track) %>% 
+  arrange(desc(n)) 
+
+datatable(trackPopular, 
+          caption = "Most played tracks",
+          options = list(pageLength = 5))
+```
+
+There were 23 tracks not played at all.
+
+```{r}
+notPlayed <- tracks %>% 
+  anti_join(trackPopular, by = "track")
+
+datatable(notPlayed, 
+          caption = "Unplayed tracks",
+          options = list(pageLength = 5))
+```
+
+### Best/Worst Tracks
+
+What are each racer's best and worst tracks? The table below shows the average result for each racer on each map, along with the number of times they've played the map. Click in the boxes under the header row to easily filter for a particular player or track.
+
+```{r, layout="l-page"}
+racerTrack <- racerResult %>% 
+  select(track, cc, racer, result) %>% 
+  group_by(racer, track) %>% 
+  summarise(avg = mean(result),
+            plays = n()) %>% 
+  arrange(racer, avg)
+
+racerTrackF <- racerTrack %>%
+  mutate(racer = as.factor(racer),
+         track = as.factor(track)) 
+
+racerTrackF %>% 
+  datatable(filter = 'top', 
+            caption = "Average track result for each racer",
+            options = list(autoWidth = FALSE))
+```
+
+Clint's best tracks were Wild Woods, Electrodrome, and Wario's Gold Mine. His worst tracks were Mute City, Yoshi Circuit, and Sunshine Airport. My top tracks were Moo Moo Meadows and Royal Raceway. My worst tracks were Wild Woods, Donut Plains, and Animal Crossing (ironic considering my build).
+
+Note that these best/worst rankings are subject to change as more games are played.
 
 ## Play of the Game
 
@@ -96,15 +171,23 @@ My favorite play was in the 30th race, just after the first lap of Cheep Cheep B
 </iframe>
 :::
 
-<aside>![](images/chat-reaction-01.png){width="172"}</aside>
+<aside>
 
-<p></p>
+![](images/chat-reaction-01.png){width="172"}
+
+</aside>
+
+<p>
+
+</p>
 
 After reviewing the tape, the blue shell looks to be circling Clint before I slowed down, so I probably would've been safe if I continued on. (I also was too close and still got hit by the shell). Still, it was worth it for the laughs.
 
 ## Review & Goals
 
-The unfortunate part of analyzing this data is clearly seeing that I'm not very good compared to the others. But that's okay! I know I can get better. The main reasons I suck at the moment are:
+I suck compared to the other racers. It's hard to deny with the graphs in my face. But that's okay, I know I can get better.
+
+The main reasons I suck at the moment are:
 
 1\. Very little online experience the past four years. Despite knowing the maps well and confidently taking shortcuts, I am out of practice with items. Item lines are different than speedrunning lines. Too often I would miss items because I hugged a corner too close or I wasn't paying attention to the item being taken by the racer in front of me. Items are essential to good online play, so I really need to practice using them. It's also important to know when to use them; too often I would play overly defensive and not let go of items when I was far back in the pack.
 
