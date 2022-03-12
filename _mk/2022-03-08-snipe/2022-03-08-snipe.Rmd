@@ -28,7 +28,9 @@ tracks <- read_csv("../_data/track-abbr.csv")
 
 results <- read_csv("../_data/stream-snipe.csv") %>% 
   left_join(tracks, by = "trk") %>% 
-  select(race, Sarah, Clint, track, trk, cc, everything())
+  select(race, Sarah, Clint, track, trk, cc, cup, type) %>% 
+  filter(!is.na(Sarah)) %>% 
+  mutate(race = row_number(race))
 ```
 
 ## Intro
