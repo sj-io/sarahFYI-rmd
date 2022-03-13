@@ -5,22 +5,22 @@
       "title": "sarahFYI",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-03-09T09:04:42-06:00"
+      "last_modified": "2022-03-11T21:38:28-06:00"
     },
     {
       "path": "index.html",
       "title": "Sarah Johnson",
       "author": [],
       "contents": "\n\n          \n          \n          SJ\n          \n          \n          Mario Kart\n          About\n          \n          \n          \n          ☰\n          \n          \n      \n        \n          \n            Sarah Johnson\n          \n          \n            \n              Hey, I’m Sarah. I’m pretty good at data analysis and\n              okay at video games. I mostly stream Mario Kart and Animal\n              Crossing on Twitch. Come by and say hi!\n            \n            \n              Hey, I’m Sarah. I’m pretty good at data analysis and\n              okay at video games. I mostly stream Mario Kart and Animal\n              Crossing on Twitch. Come by and say hi!\n            \n          \n\n          \n            \n              \n                  \n                    \n                      Twitch\n                    \n                  \n                \n                                \n                  \n                    \n                      Github\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    Twitch\n                  \n                \n                                \n                  \n                    Github\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
-      "last_modified": "2022-03-09T09:42:55-06:00"
+      "last_modified": "2022-03-13T01:23:03-06:00"
     },
     {
       "path": "mk.html",
       "title": "Mario Kart",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-03-09T09:04:42-06:00"
+      "last_modified": "2022-03-12T22:57:10-06:00"
     }
   ],
-  "collections": ["mk/mk.json", "posts/posts.json"]
+  "collections": ["mk/mk.json"]
 }
