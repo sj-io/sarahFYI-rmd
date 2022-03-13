@@ -1,7 +1,7 @@
 ---
 title: "March 8th Stream Snipe"
 description: |
-  Reviewing my stream snipe of Clint Stevens in Mario Kart.
+  Stream sniping Clint Stevens in Mario Kart.
 author:
   - name: Sarah Johnson
 categories:
@@ -47,7 +47,7 @@ A few weeks ago I sent Clint Stevens a friend request on the Switch with little 
 
 ![](images/phoenix-sweat.jpg){width="212"}
 
-Sorry for spamming `ADD SARAH` in chat when you were trying to give an update on Juno. Thanks for the add.
+dang I should finish the third game
 
 </aside>
 
@@ -59,7 +59,7 @@ I knew my online game was rusty---most of my \~7K Elo ranking was from spring 20
 
 After the game I made a spreadsheet of which games I played in and the results for myself and Clint. I'd like to add other members of chat, but it's a bit tedious to go through the VOD and manually enter everyone's results.[^1]
 
-[^1]: If anyone else wants to help collect this data, please let me know!
+[^1]: If anyone else wants to help collect this data, please let me know! (update: JK I did it the next day)
 
 ## Analysis
 
@@ -201,4 +201,4 @@ I've already begun taking steps to improve. I watched some YouTube videos on ite
 
 I also watched some videos on brake drifting and I've been going through the 200cc grand prix (which I'm surprised I never did before). I still don't enjoy 200cc, but I'm running into walls less often.
 
-But I refuse to change my build.
+But I refuse to change my build. (update: JK I changed it two days later)

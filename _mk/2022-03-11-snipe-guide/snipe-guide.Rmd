@@ -1,7 +1,7 @@
 ---
 title: "ᶜˡᶦⁿᵈˢᵗᵉᵇᵉⁿ vs chat Mario Kart guide"
 description: |
-  A short description of the post.
+  Clint's best/worst tracks & ranking stream snipers
 author:
   - name: Sarah Johnson
 categories:
