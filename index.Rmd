@@ -11,4 +11,4 @@ output:
 site: distill::distill_website
 ---
 
-Hey, I'm Sarah. I'm pretty good at data analysis and okay at video games. I mostly stream Mario Kart and Animal Crossing on Twitch. Come by and say hi!
+Hey, I'm Sarah. I'm okay at video games and data analysis. On Twitch I mostly stream Mario Kart and Animal Crossing. Come by and say hi!
