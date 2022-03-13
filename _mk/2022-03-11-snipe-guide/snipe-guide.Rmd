@@ -1,0 +1,187 @@
+---
+title: "ᶜˡᶦⁿᵈˢᵗᵉᵇᵉⁿ vs chat Mario Kart guide"
+description: |
+  A short description of the post.
+author:
+  - name: Sarah Johnson
+categories:
+  - online
+date: 2022-03-11
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(plotly)
+library(DT)
+```
+
+```{r}
+tracks <- read_csv("../_data/track-abbr.csv")
+
+results <- read_csv("../_data/stream-snipe.csv") %>% 
+  left_join(tracks, by = "trk")
+```
+
+In my [last post](https://sarah.fyi/mk/2022-03-08-snipe/) I recapped my stream snipe of Clint Stevens in Mario Kart, including graphs and tables. However, I wanted to expand the data to include all stream snipers. The data may not be too useful until more is added, but it should eventually be handy for betting. Also, the data may not be 100% complete--for instance, the VOD of the final race of the March 11th stream was cut off before results were shown.
+
+All tables can be filtered/narrows using the boxes at the top of each column.
+
+## Clint's Best/Worst Tracks
+
+```{r}
+rslt <- results %>% 
+  pivot_longer(cols = Clint:Goio,
+               names_to = "racer",
+               values_to = "result") %>% 
+  filter(!is.na(result))
+```
+
+Clint has played at least 153 online races in 2022. The table below shows his average result for each track and how many times it has been played. Again, this data may not be reliable until more games are played.
+
+```{r}
+avgTrackClint <- rslt %>% 
+  filter(racer == "Clint") %>% 
+  mutate(track = as.factor(track)) %>% 
+  group_by(track) %>% 
+  summarise(avg = mean(result),
+            plays = n()) %>% 
+  mutate(avg = round(avg, 2)) %>% 
+  arrange(avg)
+
+datatable(avgTrackClint, filter = 'top', caption = "Clint's average result for MK8DX tracks in 2022")
+```
+
+Note: Some tracks go by different names depending on the version of the game. For instance, Neo Bowser City is also known as Koopa City.
+
+## Sniper Data
+
+Because Clint plays online worldwide matches, anyone who is in his friend's list can join a race (if there is a spot available). The table below shows people who have sniped at least 5 races.
+
+```{r}
+racerFq <- rslt %>% 
+  count(racer) %>% 
+  arrange(desc(n)) %>% 
+  filter(racer != "Clint") %>% 
+  filter(n > 4) %>% 
+  mutate(racer = as.factor(racer))
+
+datatable(racerFq, filter = 'top', caption = "Most frequent snipers")
+```
+
+```{r}
+rslt2 <- rslt %>% 
+  group_by(racer) %>% 
+  summarise(avg = mean(result),
+            plays = n()) %>% 
+  filter(plays > 10) %>% 
+  arrange(avg) 
+```
+
+I combined snipers who use multiple aliases under the same account (for instance, Batchest is also known as Moonmoon, Asmongold, Forsen, xqcL, MaxLOL, Bulldog, Nani, and xD).
+
+### Sniper Rankings
+
+The following table shows each racer's average race result. Everyone has been assigned a rank based on their average.
+
+Rankings guide: **S** \<4 \| **A** 4-5.5 \| **B** 5.5-7 \| **C** 7-8.5 \| **D** 8.5-10 \| **F** \>10
+
+```{r}
+ranking <- rslt2 %>% 
+  mutate(rank = case_when(
+    avg < 4 ~ "S",
+    avg < 4.5 ~ "A+",
+    avg < 5 ~ "A",
+    avg < 5.5 ~ "A-",
+    avg < 6 ~ "B+",
+    avg < 6.5 ~ "B",
+    avg < 7 ~ "B-",
+    avg < 7.5 ~ "C+",
+    avg < 8 ~ "C",
+    avg < 8.5 ~ "C-",
+    avg < 9 ~ "D+",
+    avg < 9.5 ~ "D",
+    avg < 10 ~ "D-",
+    TRUE ~ "F"
+  ),
+  avg = round(avg, 2)) %>% 
+  arrange(avg) %>% 
+  mutate(racer = as.factor(racer),
+         rank = as.factor(rank))
+
+datatable(ranking, filter = 'top', caption = "Racer Rankings")
+```
+
+Currently, the best snipers are mooney, Jihyo, and hi chat. Clint currently ranks 12th among the snipers.
+
+### Average result per date
+
+Some days are better than others. This table also shows each player's average score, broken up by date.
+
+```{r}
+avgDateChat <- rslt %>% 
+  mutate(racer = as.factor(racer),
+         date = as.factor(date)) %>% 
+  group_by(racer, date) %>% 
+  summarise(avg = mean(result),
+            plays = n()) %>% 
+  mutate(avg = round(avg, 2)) %>% 
+  filter(plays > 5)
+
+datatable(avgDateChat, filter = 'top')
+```
+
+## Other Data
+
+Clint has streamed Mario Kart with chat 3 times so far in 2022.
+
+```{r}
+results %>% 
+  group_by(date) %>% 
+  summarise(races = max(race)) %>% 
+  datatable()
+```
+
+Reminder: The first round of the new Mario Kart DLC will be released March 18th.
+
+### Most Common Tracks
+
+The table below shows how many times each track has been played, and the frequency of each track compared to the total number of races played.
+
+```{r}
+trackFq <- results %>% 
+  count(track) %>% 
+  arrange(desc(n)) %>% 
+  mutate(fq = round(n/sum(n)*100, 2),
+         track = as.factor(track))
+
+datatable(trackFq, filter = 'top', caption = "Most frequent tracks")
+```
+
+The following tracks have not been played:
+
+```{r}
+notPlayed <- tracks %>% 
+  anti_join(trackFq, by = "track") %>% 
+  select(track)
+
+notPlayed
+```
+
+While most online games are 150cc, some races are randomly 200cc.
+
+```{r}
+results %>% 
+  count(cc)
+```
+
+Tracks can also be mirrored, but I have not been collecting this data.
+
+Thank you for reading! I plan to expand this in the future as more data is available, including adding graphs.
