@@ -1,0 +1,50 @@
+---
+title: "Bittybuggy or bust"
+description: |
+  Learning to love the meta [PB 1:59:02]
+author:
+  - name: Sarah Johnson
+categories:
+  - speedrun
+date: 2022-03-13
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+For years I have stuck with the same Mario Kart build: Isabelle, City Tripper, Leaf Tires, and Paper Glider. I always said I wanted to max out my abilities with that cart before accepting the meta.
+
+Earlier in the day I was setting PB after PB. I could tell a fat PB was on the way.
+
+Around 11 PM I tried to stream a speedrun, but my internet has been having issues recently and I was getting a lot of dropped frames. I decided to just record the speedrun locally and upload it to YouTube.
+
+It quickly became obvious that my predictions were right. I had saved over half a minute before getting to the halfway point.
+
+I'm getting a grasp of the bittybuggy handling.
+
+"This cart is just giving me a confidence I didn't know I was missing."
+
+Reaction was almost upset. Of course I was happy to PB, but I was frustrated for two reasons: 1. why are two carts sooo much better than other carts? 2. Why did I resist playing with it for so long?
+
+I want to analyze my speedrunning data, but I'm trying to do as little manual work as possible on this blog. I know the livesplit file (.lss) saves the data for each run. I even found a [python package](https://pypi.org/project/MK8D/) that is meant to convert LSS files into CSV files. Unfortunately, I've never really used python, but I tried to give it a shot since I know the basics of how to use the terminal. No luck though; I haven't figured out how to troubleshoot the errors that prevented me from converting the file. I'm considering reaching out to the creator of the package to figure out what I'm doing wrong.
+
+Also shout out to that guy; his website has an Animal Crossing passport and he's got multiple blog posts where he analyzes his own Mario Kart speedrunning data. He's in a much higher league than me--in data analysis and Mario Kart.
+
+I'll go for another speedrun very soon.
+
+Below is the full speedrun.
+
+::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
+<iframe src="https://www.youtube.com/embed/pvTrImTUTDY" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+
+</iframe>
+:::
+
+<p></p>
+
+Disclaimer: I'd been awake for about 26-27 hours when I began the run. Be warned that since it was just me, I didn't talk much and I mumbled a lot. When I did talk, I was often cursing out my gameplay or wondering why certain songs weren't playing. While the recorded video contains gameplay audio, I was listening to my own music during the run. If I seem like I'm talking to myself, I was mouthing along lyrics.
