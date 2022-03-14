@@ -2,6 +2,7 @@
 title: "Biddybuggy or bust"
 description: |
   Learning to love the meta [PB 1:59:02]
+preview: images/biddybuggy.JPG
 author:
   - name: Sarah Johnson
 categories:
