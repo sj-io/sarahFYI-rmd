@@ -9,6 +9,7 @@ date,time,cup,track,cc,lap 1,lap 2,lap 3,total
 2022-02-15,12:39 AM,Bell,Big Blue,150,36.600,23.050,36.516,1:36.166
 2022-02-15,12:43 AM,Bell,Big Blue,150,36.433,23.600,35.450,1:35.483
 2022-03-12,3:17 PM,Bell,Big Blue,150,36.366,23.167,35.350,1:34.883
+2022-03-15,4:03 AM,Bell,Big Blue,150,36.166,22.267,35.500,1:33.933
 2022-02-27,8:32 PM,Special,Bone Dry Dunes,150,43.490,41.750,41.640,2:06.880
 2022-02-26,11:43 PM,Special,Bowser's Castle,150,46.877,44.708,44.357,2:15.942
 2022-03-06,10:24 PM,Special,Bowser's Castle,150,46.073,45.020,44.357,2:15.450
@@ -70,6 +71,7 @@ date,time,cup,track,cc,lap 1,lap 2,lap 3,total
 2022-02-03,4:43 PM,Triforce,Ice Ice Outpost,150,41.764,40.530,40.068,2:02.362
 2022-02-03,4:57 PM,Triforce,Ice Ice Outpost,150,41.678,39.784,38.917,2:00.379
 2022-03-12,3:58 PM,Triforce,Ice Ice Outpost,150,41.104,39.342,39.378,1:59.824
+2022-03-14,11:36 PM,Triforce,Ice Ice Outpost,150,40.698,38.981,39.155,1:58.834
 2022-02-14,1:48 AM,Flower,Mario Circuit,150,42.271,39.817,39.541,2:01.629
 2022-02-20,11:20 PM,Shell,Mario Circuit,150,33.892,31.222,31.395,1:36.509
 2022-02-23,12:19 AM,Shell,Mario Circuit,150,33.826,31.297,31.191,1:36.314
@@ -143,6 +145,7 @@ date,time,cup,track,cc,lap 1,lap 2,lap 3,total
 2022-03-12,12:00 AM,Bell,Super Bell Subway,150,41.267,38.508,38.593,1:58.368
 2022-03-12,3:11 PM,Bell,Super Bell Subway,150,40.949,37.910,38.801,1:57.660
 2022-03-12,5:28 PM,Bell,Super Bell Subway,150,40.815,37.562,38.349,1:56.726
+2022-03-15,4:00 PM,Bell,Super Bell Subway,150,40.630,37.368,36.997,1:54.995
 2022-02-14,1:42 AM,Mushroom,Sweet Sweet Canyon,150,41.940,39.149,39.090,2:00.179
 2022-03-06,9:28 PM,Mushroom,Sweet Sweet Canyon,150,41.306,39.066,39.076,1:59.448
 2022-03-12,2:56 PM,Mushroom,Sweet Sweet Canyon,150,40.672,39.340,39.409,1:59.421

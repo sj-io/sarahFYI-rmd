@@ -1,0 +1,57 @@
+---
+title: "2022-03-15-snipe"
+description: |
+  A short description of the post.
+author:
+  - name: Sarah Johnson
+    url: {}
+date: 2022-03-16
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Intro
+
+blah blah
+
+## Analysis
+
+graph graph
+
+## Highlights
+
+### Play of the Game
+
+Cloudtop Cruise is usually one of my least favorite maps, but yesterday I nailed the mirrored version. Halfway through the second lap, Clint was in first and I was in second. A blue shell nailed him just before the jump into the cloud tunnel. I stayed far to the right, avoiding the blast radius, and I zoomed far into first. On the final lap I was blue shelled in nearly the same spot, allowing the pack to catch up with me.
+
+In the final stretch, Dylan's bullet bill pushed him ahead of Clint and then myself. Just before risking the final shortcut, Dylan threw away his entire defense. I let go of my red shell and the timing was perfect, causing Dylan to fall halfway through the jump. I finished third, Clint finished fourth.
+
+::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
+<iframe src="https://streamable.com/e/1b5p8v" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+
+</iframe>
+:::
+
+<p></p>
+
+Sorry Dylan.
+
+### It was me
+
+Only Clint and Moonmoon were ahead of me going into the final turn of the first lap of Ice Ice Outpost. I missed the mushroom skip, but Moonmoon ran into the wall and Clint went far left. I decided to use my sound box before the finish line to give myself a solid first into the second lap. I knew I tapped him, but I didn't realize he'd been hurtled over the side until I caught the replay on his stream.
+
+::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
+<iframe src="https://streamable.com/e/ntwntl" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+
+</iframe>
+:::
+
+## New PB [1:58:38]
+
+blah blah
