@@ -1,7 +1,7 @@
 ---
-title: "2022-03-15-snipe"
+title: "March 15th stream snipe and speedrun PB"
 description: |
-  A short description of the post.
+  Beware the Ides of March.
 author:
   - name: Sarah Johnson
     url: {}
@@ -16,15 +16,215 @@ draft: true
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{r}
+library(tidyverse)
+library(plotly)
+library(DT)
+```
+
+```{r}
+tracks <- read_csv("../_data/track-abbr.csv")
+
+results <- read_csv("../_data/stream-snipe.csv",
+                    col_types = list(.default = col_character()))
+```
+
+```{r}
+err <- results %>% 
+  filter(Clint == "e")
+
+snpAll <- results %>% 
+  filter(Clint != "e") %>% 
+  pivot_longer(cols = Clint:Goio,
+               names_to = "racer",
+               values_to = "result") %>% 
+  filter(!is.na(result)) %>% 
+  mutate(race = as.numeric(race),
+         result = as.numeric(result))
+
+mar15 <- snpAll %>% 
+  filter(date == "2022-03-15")
+```
+
 ## Intro
 
 blah blah
 
-## Analysis
+## Stream Snipe
 
-graph graph
+### Overview
+
+```{r}
+snpAll %>% 
+  group_by(date) %>% 
+  summarise(races = max(race)) %>% 
+  datatable(caption = "Clint's Mario Kart streams",
+            colnames = c("Date", "Races Completed"))
+```
+
+```{r}
+trkFq <- results %>% 
+  filter(date == "2022-03-15") %>%  
+  count(trk) %>% 
+  arrange(desc(n)) %>% 
+  mutate(fq = round(n/sum(n)*100, 2),
+         trk = as.factor(trk))
+
+datatable(trkFq, filter = 'top', caption = "Most frequent tracks")
+```
+
+### Connection errors
+
+The games were unfortunately marred by connection problems. Five times during the stream, Clint was kicked out of the lobby before the race finished.
+
+Connection problems also affected the results of one of the games. During the 48th race, Royal Raceway, I saw Clint pass me in a bullet bill shortly before the finish line. His result originally showed as 6th, but after a long moment of lag his result changed to 8th. However, this is not what I saw during my recording.
+
+![](images/glitched-score.png)
+
+Notice that not only are the results different for those in 5th-11th, but so are the Elo rankings. So I looked back to the Elo rankings for the next race, to see who's screen showed the true results.
+
+![](images/correct-elo.png)
+
+The Elo rankings for the next race matched my results on both of our screens, so I used those for the dataset. The results are: 5th--Moonmoon, 6th--Clint, 7th--Sarah, 8th--gamergirl, 9th--kaleighboo, 10th--Jim, and 11th--Dylan.
+
+### Most Frequent Snipers
+
+```{r}
+snpFq <- mar15 %>% 
+  count(racer) %>% 
+  arrange(desc(n)) %>% 
+  filter(racer != "Clint") %>% 
+  filter(n > 4) %>% 
+  mutate(racer = as.factor(racer))
+
+snpAllFq <- snpAll %>% 
+  count(racer) %>% 
+  arrange(desc(n)) %>% 
+  filter(racer != "Clint") %>% 
+  filter(n > 4) %>% 
+  mutate(racer = as.factor(racer))
+
+snpFq %>% 
+  left_join(snpAllFq, by = "racer") %>% 
+  rename(mar15 = n.x,
+         all = n.y) %>% 
+  datatable(filter = 'top', 
+            caption = "Most frequent snipers",
+            colnames = c("Sniper", "March 15", "YTD"))
+```
+
+### Results
+
+Double click on a name in the legend to isolate the line. Single click to hide/show a racer.
+
+```{r, layout="l-page", fig.height=5}
+snpSel <- c("Sarah", "Clint", "DylanTonn", "Dawn", "pokimane", "BatChest", "Peter", "kaleighboo") %>% str_c(collapse = "|")
+
+ggResult <- mar15 %>% 
+  filter(str_detect(racer, snpSel)) %>% 
+  ggplot(aes(x = race, y = result, color = racer, fill = racer)) +
+  geom_smooth(alpha = 0.15) +
+  scale_y_reverse(breaks = seq(1, 13, by = 4)) +
+  theme_minimal() +
+  labs(title = "Mario Kart online worldwide races. March 15, 2022",
+       x = "Race #",
+       y = "Result",
+       color = "Player",
+       fill = NULL)
+
+ggplotly(ggResult)
+```
+
+### Rankings
+
+```{r}
+snpAvg <- mar15 %>% 
+  group_by(racer) %>% 
+  summarise(avg = mean(result),
+            plays = n()) %>% 
+  filter(plays > 4) %>% 
+  arrange(avg) 
+
+snpRank <- snpAvg %>% 
+  mutate(rank = case_when(
+    avg < 4 ~ "S",
+    avg < 4.5 ~ "A+",
+    avg < 5 ~ "A",
+    avg < 5.5 ~ "A-",
+    avg < 6 ~ "B+",
+    avg < 6.5 ~ "B",
+    avg < 7 ~ "B-",
+    avg < 7.5 ~ "C+",
+    avg < 8 ~ "C",
+    avg < 8.5 ~ "C-",
+    avg < 9 ~ "D+",
+    avg < 9.5 ~ "D",
+    avg < 10 ~ "D-",
+    TRUE ~ "F"
+  ),
+  avg = round(avg, 2)) %>% 
+  arrange(avg) %>% 
+  mutate(racer = as.factor(racer),
+         rank = as.factor(rank))
+```
+
+```{r}
+snpAllAvg <- snpAll %>% 
+  group_by(racer) %>% 
+  summarise(avg = mean(result),
+            plays = n()) %>% 
+  filter(plays > 4) %>% 
+  arrange(avg) 
+
+snpAllRank <- snpAllAvg %>% 
+  mutate(rank = case_when(
+    avg < 4 ~ "S",
+    avg < 4.5 ~ "A+",
+    avg < 5 ~ "A",
+    avg < 5.5 ~ "A-",
+    avg < 6 ~ "B+",
+    avg < 6.5 ~ "B",
+    avg < 7 ~ "B-",
+    avg < 7.5 ~ "C+",
+    avg < 8 ~ "C",
+    avg < 8.5 ~ "C-",
+    avg < 9 ~ "D+",
+    avg < 9.5 ~ "D",
+    avg < 10 ~ "D-",
+    TRUE ~ "F"
+  ),
+  avg = round(avg, 2)) %>% 
+  arrange(avg) %>% 
+  mutate(racer = as.factor(racer),
+         rank = as.factor(rank))
+
+snpRank %>% 
+  left_join(snpAllRank, by = "racer") %>% 
+  select(racer, avg.x, rank.x, avg.y, rank.y) %>% 
+  datatable(filter = 'top', 
+            colnames = c("Racer", "Today's Average", "Today's Rank", "Overall Average", "Overall Rank"),
+            caption = "Racer Rankings")
+
+```
+Change in rankings graph
+
+```{r}
+#' future code here
+```
 
 ## Highlights
+
+There were multiple moments during my last stream sniper where I wish I had recorded my POV and reaction. I don't think my internet could currently handle stream sniping (nor am I sure I want to), so I just recorded it locally. For the record, I forgot to adjust my settings to record at a higher quality, and I'm still figuring out picture-in-picture layouts and when to cut.
+
+### It was me
+
+Only Clint and Moonmoon were ahead of me going into the final turn of the first lap of Ice Ice Outpost. I missed the mushroom skip, but Moonmoon ran into the wall and Clint went far left. I decided to use my sound box before the finish line to give myself a solid first into the second lap. I knew I tapped him, but I didn't realize he'd been hurtled over the side until I caught the replay on his stream.
+
+::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
+<iframe src="https://streamable.com/e/ntwntl?loop=0" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+
+</iframe>
+:::
 
 ### Play of the Game
 
@@ -33,25 +233,59 @@ Cloudtop Cruise is usually one of my least favorite maps, but yesterday I nailed
 In the final stretch, Dylan's bullet bill pushed him ahead of Clint and then myself. Just before risking the final shortcut, Dylan threw away his entire defense. I let go of my red shell and the timing was perfect, causing Dylan to fall halfway through the jump. I finished third, Clint finished fourth.
 
 ::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
-<iframe src="https://streamable.com/e/1b5p8v" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+<iframe src="https://streamable.com/e/1b5p8v?loop=0" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
 
 </iframe>
 :::
 
-<p></p>
+<p>
+
+</p>
 
 Sorry Dylan.
 
-### It was me
+## New PB [1:58:38]
 
-Only Clint and Moonmoon were ahead of me going into the final turn of the first lap of Ice Ice Outpost. I missed the mushroom skip, but Moonmoon ran into the wall and Clint went far left. I decided to use my sound box before the finish line to give myself a solid first into the second lap. I knew I tapped him, but I didn't realize he'd been hurtled over the side until I caught the replay on his stream.
+After some solid online play, I wasn't ready to put away Mario Kart for the day just yet. I decided to start a speedrun around 5AM and it began horrendously.
 
 ::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
-<iframe src="https://streamable.com/e/ntwntl" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+<iframe src="https://player.twitch.tv/?video=1426256042&amp;parent=www.sarah.FYI" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%">
 
 </iframe>
 :::
 
-## New PB [1:58:38]
+### Future time saves
 
-blah blah
+-   Thwomp Ruins: ran into pillar at end of water section on 2nd lap
+
+-   Toad Harbor: 1st lap - ran into wall at end of awning section; 2nd lap - hit every barrel under awning
+
+-   Twisted Mansion: tapped into hammer on 2nd lap
+
+-   Mount Wario: Ran into boulder in cave section
+
+-   Bone Dry Dunes: Got chomped on first lap
+
+-   Rainbow Road: Fall in first turn
+
+-   Cheep Cheep Beach: ran into wall at end of beach section on final lap
+
+-   Toad's Turnpike: ran into railing a lot
+
+-   Dry Dry Dunes: very low on coins entire race
+
+-   Donut Plains 3: gopher run in
+
+-   Royal Raceway: ran off in final turn section
+
+-   Wario Stadium & Dragon Driftway: AI ran me into wall at v beginning
+
+-   Sherbet Land: trouble with columns in underwater section
+
+-   Music Park: made the shortcut but v messy
+
+-   Piranha Plant Slide: ran into goomba
+
+-   Neo Bowser City: fell on tricky turn final lap
+
+-   Ribbon Road: fell on 2nd ramp first lap
