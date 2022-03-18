@@ -1,15 +1,17 @@
 ---
 title: "March 15th stream snipe and speedrun PB"
 description: |
-  Beware the Ides of March.
+  Red shells rain on the Ides of March.
 author:
   - name: Sarah Johnson
-    url: {}
+categories:
+  - online
+  - speedrun
 date: 2022-03-16
 output:
   distill::distill_article:
     self_contained: false
-draft: true
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -28,56 +30,105 @@ tracks <- read_csv("../_data/track-abbr.csv")
 results <- read_csv("../_data/stream-snipe.csv",
                     col_types = list(.default = col_character()))
 ```
+Today was a good day for Mario Kart. The post below summarizes my stream snipe of Clint Stevens and my new speedrunning PB. 
 
 ```{r}
 err <- results %>% 
   filter(Clint == "e")
 
-snpAll <- results %>% 
+overall <- results %>% 
   filter(Clint != "e") %>% 
   pivot_longer(cols = Clint:Goio,
                names_to = "racer",
                values_to = "result") %>% 
   filter(!is.na(result)) %>% 
   mutate(race = as.numeric(race),
-         result = as.numeric(result))
+         result = as.numeric(result),
+         racer = as.factor(racer))
 
-mar15 <- snpAll %>% 
+mar15 <- overall %>% 
   filter(date == "2022-03-15")
+
+snp <- mar15 %>% 
+  filter(racer != "Clint")
+
+clint <- mar15 %>% 
+  filter(racer == "Clint")
 ```
-
-## Intro
-
-blah blah
 
 ## Stream Snipe
 
-### Overview
+### Mario Kart streams to date
+
+Clint hosted his 4th Mario Kart stream of 2022 on March 15th. He played 56 games, his most so far this year.
 
 ```{r}
-snpAll %>% 
+ggYTD <- overall %>% 
   group_by(date) %>% 
   summarise(races = max(race)) %>% 
-  datatable(caption = "Clint's Mario Kart streams",
-            colnames = c("Date", "Races Completed"))
+  ggplot(aes(x=date, y=races, fill=factor(races))) +
+  geom_col() +
+  scale_y_continuous(breaks = seq(0, 60, by = 15)) +
+  scale_fill_brewer(palette = "Greens") +
+  theme_minimal() +
+  labs(x="Stream Date", y="Games Played",
+       fill="# of Games")
+
+ggplotly(ggYTD)
 ```
 
+### Tracks Played
+
+Hyrule Circuit and Mount Wario were the most frequently played tracks of the day, each played 4 times.
+
 ```{r}
-trkFq <- results %>% 
-  filter(date == "2022-03-15") %>%  
+trkFqTYD <- overall %>% 
+  filter(racer == "Clint") %>% 
   count(trk) %>% 
   arrange(desc(n)) %>% 
   mutate(fq = round(n/sum(n)*100, 2),
          trk = as.factor(trk))
 
-datatable(trkFq, filter = 'top', caption = "Most frequent tracks")
+trkFq <- clint %>%  
+  count(trk) %>% 
+  arrange(desc(n)) %>% 
+  mutate(fq = round(n/sum(n)*100, 2),
+         trk = as.factor(trk)) %>% 
+  left_join(trkFqTYD, by = "trk") %>% 
+  left_join(tracks) %>% 
+  select(track, n.x, fq.x, n.y, fq.y) %>% 
+  filter(!is.na(track))
+
+datatable(trkFq, 
+          filter = 'top', 
+          caption = "Most frequent tracks",
+          colnames = c("Track", 
+                       "Races Today", 
+                       "Frequency",
+                       "YTD",
+                       "Fq"),
+          options = list(pageLength = 6))
+
 ```
 
 ### Connection errors
 
-The games were unfortunately marred by connection problems. Five times during the stream, Clint was kicked out of the lobby before the race finished.
+The games were marred by connection problems. Five times during the stream, Clint was kicked out of the lobby before the race finished. Snipers scrambled into the new lobbies, but sometimes it took a few games for spots to open.
 
-Connection problems also affected the results of one of the games. During the 48th race, Royal Raceway, I saw Clint pass me in a bullet bill shortly before the finish line. His result originally showed as 6th, but after a long moment of lag his result changed to 8th. However, this is not what I saw during my recording.
+```{r, fig.width=3, fig.height=2, fig.align='center'}
+snpCtRace <- mar15 %>% 
+  group_by(race) %>% 
+  count()
+
+ggplot(snpCtRace, aes(x=race, y=n)) +
+  geom_step() +
+  theme_minimal() +
+  scale_y_continuous(breaks = seq(0, 12, by = 2)) +
+  labs(x="Race #",
+       y="Snipers in game")
+```
+
+The results of one game were also affected by connection issues. During the 48th race, Royal Raceway, I saw Clint pass me in a bullet bill shortly before the finish line. His result originally showed a 6th place finish, but after a long moment of lag his result changed to 8th. However, this is not what I saw during my recording.
 
 ![](images/glitched-score.png)
 
@@ -85,48 +136,85 @@ Notice that not only are the results different for those in 5th-11th, but so are
 
 ![](images/correct-elo.png)
 
-The Elo rankings for the next race matched my results on both of our screens, so I used those for the dataset. The results are: 5th--Moonmoon, 6th--Clint, 7th--Sarah, 8th--gamergirl, 9th--kaleighboo, 10th--Jim, and 11th--Dylan.
+The Elo rankings for the next race matched my results on both of our screens, so I used those for the dataset. The results are: 5th--Moonmoon (BatChest), 6th--Clint, 7th--Sarah, 8th--gamergirl, 9th--kaleighboo, 10th--Jim, and 11th--Dylan.
 
-### Most Frequent Snipers
+### March 15 Snipers
+
+The following table shows snipers who completed at least 5 races.
 
 ```{r}
-snpFq <- mar15 %>% 
+snpFq <- snp %>% 
   count(racer) %>% 
   arrange(desc(n)) %>% 
-  filter(racer != "Clint") %>% 
-  filter(n > 4) %>% 
-  mutate(racer = as.factor(racer))
+  filter(n > 4) 
 
-snpAllFq <- snpAll %>% 
+snpYTDFq <- overall %>% 
   count(racer) %>% 
   arrange(desc(n)) %>% 
-  filter(racer != "Clint") %>% 
-  filter(n > 4) %>% 
-  mutate(racer = as.factor(racer))
+  filter(n > 4) 
 
 snpFq %>% 
-  left_join(snpAllFq, by = "racer") %>% 
-  rename(mar15 = n.x,
-         all = n.y) %>% 
-  datatable(filter = 'top', 
-            caption = "Most frequent snipers",
-            colnames = c("Sniper", "March 15", "YTD"))
+  left_join(snpYTDFq, by = "racer") %>% 
+  datatable(caption = "March 15 Snipers",
+            colnames = c("Sniper", "Races completed", "YTD"),
+          options = list(pageLength = 13))
 ```
+
+Three racers made their first appearance of 2022: Dylan, kaleighboo, and gamergirl. Dylan also played the most races with Clint, at 36.
 
 ### Results
 
-Double click on a name in the legend to isolate the line. Single click to hide/show a racer.
+The next two graphs show data for Clint and the eight most frequent snipers. I'd like to include more people, but the graphs get busy quickly.
+
+The first graph show the number of nth place finishes for each player.
+
+```{r}
+#' this actually works. need to rearrange stuff.
+vC8 <- c("Clint", 
+         "Dawn", 
+         "pokimane", 
+         "BatChest", 
+         "gamergirl",
+         "Sarah", 
+         "DylanTonn", 
+         "Peter", 
+         "kaleighboo"
+         ) 
+
+vC8c <- vC8 %>% str_c(collapse = "|")
+
+C8 <- mar15 %>% 
+  filter(str_detect(racer, vC8c))
+
+C8$racer <- factor(C8$racer, levels = vC8)
+
+ggC8 <- C8 %>% ggplot(aes(x=result, fill=racer)) +
+  geom_bar(position = "stack") +
+  scale_x_continuous(breaks = seq(1, 12, by = 1)) +
+  scale_fill_brewer(palette = "Set3") +
+  theme_minimal() +
+  labs(x="Result", y="Count", fill="Player")
+
+ggplotly(ggC8)
+```
+
+Dawn had more first place finishes than anyone else, followed by Clint. Dawn, Clint, and pokimane tied for the most top-3 finishes (14).
+
+Overall I was much happier with my placement, especially considering [my first time playing](https://sarah.fyi/mk/2022-03-08-snipe/). In that stream I never placed above 5th; tonight I had 5 top-3 results. I'm also the only sniper to have placed at least once in every result.
+
+#### Average results
+
+The graph below show the smoothed average result for each racer over the course of the night. Double click on a name in the legend to isolate the line. Single click to hide/show a racer.
 
 ```{r, layout="l-page", fig.height=5}
-snpSel <- c("Sarah", "Clint", "DylanTonn", "Dawn", "pokimane", "BatChest", "Peter", "kaleighboo") %>% str_c(collapse = "|")
-
-ggResult <- mar15 %>% 
-  filter(str_detect(racer, snpSel)) %>% 
+ggResult <- C8 %>% 
   ggplot(aes(x = race, y = result, color = racer, fill = racer)) +
   geom_smooth(alpha = 0.15) +
-  scale_y_reverse(breaks = seq(1, 13, by = 4)) +
+  scale_y_reverse(breaks = seq(1, 12, by = 2)) +
+  scale_color_brewer(palette = "Set3") +
+  scale_fill_brewer(palette = "Set3") +
   theme_minimal() +
-  labs(title = "Mario Kart online worldwide races. March 15, 2022",
+  labs(title = "Smoothed average result for racers, March 15, 2022",
        x = "Race #",
        y = "Result",
        color = "Player",
@@ -135,7 +223,13 @@ ggResult <- mar15 %>%
 ggplotly(ggResult)
 ```
 
+Dawn and pokimane consistently averaged above Clint over the night.
+
+In my last game, I averaged between 8th and 9th place, while today I averaged a 7.04, a significant improvement. I had a slow start, but over time my average briefly surpassed Clint. Batchest also overcame Clint in the latter half of the races.
+
 ### Rankings
+
+The table below takes the average score for each player and assigns them a ranking.
 
 ```{r}
 snpAvg <- mar15 %>% 
@@ -169,14 +263,14 @@ snpRank <- snpAvg %>%
 ```
 
 ```{r}
-snpAllAvg <- snpAll %>% 
+overallAvg <- overall %>% 
   group_by(racer) %>% 
   summarise(avg = mean(result),
             plays = n()) %>% 
   filter(plays > 4) %>% 
   arrange(avg) 
 
-snpAllRank <- snpAllAvg %>% 
+overallRank <- overallAvg %>% 
   mutate(rank = case_when(
     avg < 4 ~ "S",
     avg < 4.5 ~ "A+",
@@ -199,24 +293,21 @@ snpAllRank <- snpAllAvg %>%
          rank = as.factor(rank))
 
 snpRank %>% 
-  left_join(snpAllRank, by = "racer") %>% 
+  left_join(overallRank, by = "racer") %>% 
   select(racer, avg.x, rank.x, avg.y, rank.y) %>% 
-  datatable(filter = 'top', 
-            colnames = c("Racer", "Today's Average", "Today's Rank", "Overall Average", "Overall Rank"),
-            caption = "Racer Rankings")
+  datatable(colnames = c("Racer", "Today's Average", "Today's Rank", "Overall Average", "Overall Rank"),
+            caption = "Racer Rankings",
+          options = list(pageLength = 14))
 
 ```
-Change in rankings graph
 
-```{r}
-#' future code here
-```
+After getting [ranked D+](https://sarah.fyi/mk/2022-03-11-snipe-guide/#sniper-rankings) by my own system, I'm happy with my C+ gameplay today.
 
 ## Highlights
 
 There were multiple moments during my last stream sniper where I wish I had recorded my POV and reaction. I don't think my internet could currently handle stream sniping (nor am I sure I want to), so I just recorded it locally. For the record, I forgot to adjust my settings to record at a higher quality, and I'm still figuring out picture-in-picture layouts and when to cut.
 
-### It was me
+### Guilty
 
 Only Clint and Moonmoon were ahead of me going into the final turn of the first lap of Ice Ice Outpost. I missed the mushroom skip, but Moonmoon ran into the wall and Clint went far left. I decided to use my sound box before the finish line to give myself a solid first into the second lap. I knew I tapped him, but I didn't realize he'd been hurtled over the side until I caught the replay on his stream.
 
@@ -244,7 +335,7 @@ In the final stretch, Dylan's bullet bill pushed him ahead of Clint and then mys
 
 Sorry Dylan.
 
-## New PB [1:58:38]
+## Speedrunning PB [1:58:38]
 
 After some solid online play, I wasn't ready to put away Mario Kart for the day just yet. I decided to start a speedrun around 5AM and it began horrendously.
 
