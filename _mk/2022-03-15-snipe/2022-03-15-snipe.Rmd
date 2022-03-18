@@ -7,6 +7,7 @@ author:
 categories:
   - online
   - speedrun
+preview: images/glitched-score.JPG
 date: 2022-03-16
 output:
   distill::distill_article:
@@ -30,7 +31,8 @@ tracks <- read_csv("../_data/track-abbr.csv")
 results <- read_csv("../_data/stream-snipe.csv",
                     col_types = list(.default = col_character()))
 ```
-Today was a good day for Mario Kart. The post below summarizes my stream snipe of Clint Stevens and my new speedrunning PB. 
+
+Today was a good day for Mario Kart. The post below summarizes my stream snipe of Clint Stevens and my new speedrunning PB.
 
 ```{r}
 err <- results %>% 
@@ -337,13 +339,7 @@ Sorry Dylan.
 
 ## Speedrunning PB [1:58:38]
 
-After some solid online play, I wasn't ready to put away Mario Kart for the day just yet. I decided to start a speedrun around 5AM and it began horrendously.
-
-::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
-<iframe src="https://player.twitch.tv/?video=1426256042&amp;parent=www.sarah.FYI" frameborder="0" allowfullscreen="true" scrolling="no" height="100%" width="100%">
-
-</iframe>
-:::
+After some solid online play, I wasn't ready to put away Mario Kart for the day just yet. I decided to start a speedrun around 5AM and it began horrendously. However, massive time saves on Ice Ice Outpost and Animal Crossing saved me huge time. You can watch the speedrun [here](https://www.twitch.tv/videos/1426307055).
 
 ### Future time saves
 
