@@ -1,0 +1,160 @@
+---
+title: "New Tracks!"
+description: |
+  My time trial and speedrun data for the new DLC tracks.
+author:
+  - name: Sarah Johnson
+categories:
+  - time trials
+  - speedrun
+date: 2022-04-04
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(plotly)
+library(DT)
+```
+
+## Intro
+
+Eight new Mario Kart tracks were released on March 18th, part of the first wave of DLC to come out over the next two years. The two new cups, Golden Dash and Lucky Cat, include amazing tracks such as Coconut Mall and Ninja Hideaway, and some less stellar tracks like Toad's Circuit and Choco Mountain.
+
+Since the new tracks were released, I have grinding them in time trials and successfully completed two speedruns.
+
+```{r}
+tt <- read_csv("../_data/time-trials.csv", 
+               col_types = cols(total = "c")) %>% 
+  filter(cup == "Golden Dash" | 
+           cup == "Lucky Cat") %>% 
+  mutate(total = ms(total),
+         yr = year(date),
+         mth = month(date),
+         day = day(date),
+         hour = hour(time),
+         min = minute(time),
+         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min))
+```
+
+## Time Trials
+
+Time trials are the easiest way to learn and practice the new maps, especially before they were available in online play. I mostly practiced 150cc, but I've also begun practicing tracks in 200cc.
+
+```{r}
+cc200 <- tt %>% filter(cc == 200)
+cc150 <- tt %>% filter(cc == 150)
+```
+
+### 150cc
+
+The below graph shows every time trial PB I've set for the new tracks in 150cc.
+
+```{r}
+gg150 <- ggplot(cc150, aes(x= dt, y=total, color = track, group = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+```
+
+```{r}
+ggplotly(gg150)
+```
+
+There were stark drops in my times as I learned and improved at the maps. Sharp drops typically indicate when I discovered a new shortcut that significantly saved time. Ninja Hideaway showed the most improvement, with approximately 15 seconds saved between my first and most recent PB.
+
+As the month went on, it became harder to improve my times and set new PBs. However, some tracks I practice far less than others because they're not as fun (see: Tokyo Blur, Toad Circuit, and Sky Garden).
+
+Overall, my favorite tracks have been Ninja Hideaway, Coconut Mall, and Paris Promenade. I think the shortcuts on these tracks make them particularly fun. My favorite shortcut in all of the new tracks is in Coconut Mall, shown in the clip below.
+
+::: {style="width:100%;height:0px;position:relative;padding-bottom:56.250%;"}
+<iframe src="https://streamable.com/e/1j5ui5?loop=0" frameborder="0" width="100%" height="100%" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden;">
+
+</iframe>
+:::
+
+<p></p>
+
+While most people know the shortcut through the shop, I've seen little mention of the extension of the shortcut. I wasn't able to actually save time on it and because the path is so narrow I still often run into the railing trying to complete it. Still, it is very satisfying when I'm able to nail it correctly.
+
+### 200cc
+
+Since online play randomly selects some courses to be played at 200cc, I've been trying to incorporate it into my practice more often. The below graph shows 200cc PBs I've set on the new tracks.
+
+```{r}
+gg200 <- ggplot(cc200, aes(x= dt, y=total, color = track, group = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+```
+
+```{r}
+ggplotly(gg200)
+```
+
+I clearly still have a lot of practice to complete for 200cc.
+
+## Speedrun
+
+I have set two PBs for the first wave of new tracks, both set on the same day. The graph below might be the most useless graph so far on this blog, but this format might be useful for graphing my 48 track speedruns.
+
+```{r}
+runs <- read_csv("../_data/sr-w1-tracks.csv") %>% 
+  rename("track" = `Segment name`,
+         "run-1" = `Attempt #1's Duration (ms)`,
+         "run-2" = `Attempt #2's Duration (ms)`) %>% 
+  mutate(trkno = row_number(), .before = track)
+```
+
+```{r}
+runsL <- runs %>% 
+  pivot_longer(
+    cols = 3:4,
+    names_to = "run",
+    names_prefix = "run-",
+    values_to = "ms"
+  )
+```
+
+```{r}
+sr2 <- runsL %>% 
+  group_by(run) %>% 
+  mutate(cumms = cumsum(ms)/1000) %>% 
+  ungroup() %>% 
+  separate(cumms, into = c("seconds", "milli")) %>% 
+  mutate(seconds = as.numeric(seconds),
+         cumms = seconds_to_period(seconds))
+```
+
+```{r}
+gg <- ggplot(sr2, aes(x = trkno, y = cumms, color = run)) +
+  geom_line() +
+  geom_point(aes(text = track)) +
+  scale_y_time() +
+  labs(x="Track Number",
+       y="Cumulative Time",
+       color="Run") +
+  theme_minimal()
+```
+
+```{r}
+ggplotly(gg)
+```
+
+Because my time saves were very small overall, the two runs basically overlap each other. Tokyo Blur and Ninja Hideaway were the only tracks where the time saves were somewhat noticeable.

@@ -1,0 +1,111 @@
+---
+title: "new-tracks"
+description: |
+  A short description of the post.
+author:
+  - name: Sarah Johnson
+date: 2022-03-20
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(plotly)
+library(DT)
+```
+
+```{r}
+tracks <- read_csv("../_data/track-abbr.csv")
+
+snipe <- read_csv("../_data/stream-snipe.csv",
+                    col_types = list(.default = col_character()))
+```
+
+## March 18th/19th stream
+
+Per [my](https://sarah.fyi/mk/2022-03-08-snipe/) [previous](https://sarah.fyi/mk/2022-03-11-snipe-guide/) [posts](https://sarah.fyi/mk/2022-03-15-snipe/), I've been tracking data on who plays in Clint Steven's online Mario Kart games. He played on release day for a few hours, and unfortunately I wasn't able to get into a room to play. However, another streamer, [swushwoi](https://www.twitch.tv/swushwoi), played later that day and many of the players in her lobby overlapped with Clint's. They were kind enough to let me play so I got my MK fix, and I collected results from her games as well.[^1]
+
+[^1]: Thus begins the Clint Stevens Mario Kart extended universe
+
+```{r}
+#' Remove errors
+err <- snipe %>% 
+  filter(Clint == "e" |
+           swushwoi == "e")
+
+overallW <- snipe %>% 
+  anti_join(err)
+
+#' Pivot longer, remove NAs, convert race and result to numerics, factor players
+overallL <- overallW %>% 
+  pivot_longer(cols = swushwoi:Goio,
+               names_to = "player",
+               values_to = "result") %>% 
+  filter(!is.na(result)) %>% 
+  mutate(race = as.numeric(race),
+         result = as.numeric(result),
+         player = as.factor(player))
+```
+
+Clint typically plays online in worldwide mode, usually joining a full lobby and requiring snipers to wait for a spot to open. Once in, there is no limit to how many games a person can play. This day, Clint created a room to play with people on his friends list, and he reset the room after eight games, allowing more people the chance to play. Creating a private room also allowed the options for team games and 200cc Grand Prix.
+
+```{r}
+#' Filter by date
+mar18 <- overallL %>% 
+  filter(date == "2022-03-18")
+
+before <- overallL %>% 
+  filter(date < "2022-03-18")
+```
+
+```{r}
+#' Games per host
+mar18 %>% 
+  group_by(host) %>% 
+  summarise(races = max(race))
+
+#' CC of games per host
+overallW %>% 
+  filter(date == "2022-03-18") %>% 
+  group_by(host) %>% 
+  count(cc)
+
+#' Team games per host
+overallW %>% 
+  filter(date == "2022-03-18") %>% 
+  group_by(host) %>% 
+  count(team)
+```
+
+On March 18th, Clint played 40 games with chat. There were 16 games played with teams, 24 without; 16 games were 150cc, 8 were 150cc mirrored, and 16 were 200cc.
+
+In swushwoi's stream, 41 races were played, 24 on teams and 17 without. Of the races, 25 were 150cc and 16 were 200cc.
+
+```{r}
+#' Clint games
+hostCS <- mar18 %>% 
+  filter(host == "Clint") %>% 
+  select(-c(date, room, host))
+
+#' Clint players
+playerCSO <- distinct(overallL, player)
+
+#' swushwoi games
+hostSW <- mar18 %>% 
+  filter(host == "swushwoi") %>% 
+  select(-c(date, room, host))
+
+#' swushwoi players
+playerSW <- distinct(hostSW,  player)
+```
+
+```{r}
+semi_join(playerCSO, playerSW)
+```
