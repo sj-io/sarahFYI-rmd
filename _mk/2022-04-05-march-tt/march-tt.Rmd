@@ -1,0 +1,134 @@
+---
+title: "march-tt"
+description: |
+  A short description of the post.
+author:
+  - name: Sarah Johnson
+    url: {}
+date: 2022-04-05
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(plotly)
+library(lubridate)
+```
+
+```{r}
+tt <- read_csv("../_data/time-trials.csv", 
+               col_types = cols(total = "c")) %>% 
+  filter(date < "2022-04-01") %>% 
+  mutate(total = ms(total),
+         yr = year(date),
+         mth = month(date),
+         day = day(date),
+         hour = hour(time),
+         min = minute(time),
+         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min)) 
+
+tt3 <- tt %>% 
+  filter(mth == 3)
+```
+
+```{r}
+tt150 <- tt %>% 
+  filter(cc == "150")
+
+tt3150 <- tt3 %>% 
+  filter(cc == "150")
+```
+
+```{r}
+nitro <- tt150 %>% 
+  filter(str_detect(cup, "Mushroom|Flower|Star|Special"))
+
+nitro %>% count(track) %>% arrange(desc(n))
+```
+
+```{r}
+ggNitro <- ggplot(nitro, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+```
+
+```{r, layout="l-page", fig.height=6}
+ggplotly(ggNitro)
+```
+
+```{r}
+retro <- tt150 %>% 
+  filter(str_detect(cup, "Shell|Banana|Leaf|Lightning"))
+
+retro %>% count(track) %>% arrange(desc(n))
+```
+
+Donut Plains saw the most PBs of any track, by far. This was the first month I began taking the underwater shortcuts, so I practiced them extensively.
+
+```{r}
+ggRetro <- ggplot(retro, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+```
+
+```{r, layout="l-page", fig.height=6}
+ggplotly(ggRetro)
+```
+
+```{r}
+bonus <- tt %>% 
+  filter(str_detect(cup, "Egg|Crossing|Triforce|Bell"))
+
+bonus %>% count(track) %>% arrange(desc(n))
+```
+
+SNES Rainbow Road saw the most PBs, followed by Big Blue.
+
+```{r}
+ggBonus <- ggplot(bonus, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal()
+```
+
+```{r, layout="l-page", fig.height=6}
+ggplotly(ggBonus)
+```
+
+
+```{r, layout="l-page", fig.height=8}
+gg <- ggplot(tt150, aes(x= dt, y=total, color = cup, group = track)) +
+  geom_point() +
+  geom_line() +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Cup") +
+  theme_minimal()
+
+ggplotly(gg)
+```
+
+

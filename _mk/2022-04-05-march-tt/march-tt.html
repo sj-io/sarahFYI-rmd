@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+
+  <!--radix_placeholder_meta_tags-->
+  <title>march-tt</title>
+
+  <meta property="description" itemprop="description" content="A short description of the post."/>
+
+
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-04-05"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-04-05"/>
+  <meta name="article:author" content="Sarah Johnson"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="march-tt"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="A short description of the post."/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="march-tt"/>
+  <meta property="twitter:description" content="A short description of the post."/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["march-tt"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Sarah Johnson"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-04-05"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["march-tt_files/anchor-4.2.2/anchor.min.js","march-tt_files/bowser-1.9.3/bowser.min.js","march-tt_files/crosstalk-1.2.0/css/crosstalk.min.css","march-tt_files/crosstalk-1.2.0/js/crosstalk.js","march-tt_files/crosstalk-1.2.0/js/crosstalk.js.map","march-tt_files/crosstalk-1.2.0/js/crosstalk.min.js","march-tt_files/crosstalk-1.2.0/js/crosstalk.min.js.map","march-tt_files/crosstalk-1.2.0/scss/crosstalk.scss","march-tt_files/distill-2.2.21/template.v2.js","march-tt_files/header-attrs-2.13/header-attrs.js","march-tt_files/htmlwidgets-1.5.4/htmlwidgets.js","march-tt_files/jquery-3.6.0/jquery-3.6.0.js","march-tt_files/jquery-3.6.0/jquery-3.6.0.min.js","march-tt_files/jquery-3.6.0/jquery-3.6.0.min.map","march-tt_files/plotly-binding-4.10.0/plotly.js","march-tt_files/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css","march-tt_files/plotly-main-2.5.1/plotly-latest.min.js","march-tt_files/popper-2.6.0/popper.min.js","march-tt_files/tippy-6.2.7/tippy-bundle.umd.min.js","march-tt_files/tippy-6.2.7/tippy-light-border.css","march-tt_files/tippy-6.2.7/tippy.css","march-tt_files/tippy-6.2.7/tippy.umd.min.js","march-tt_files/typedarray-0.1/typedarray.min.js","march-tt_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="march-tt_files/header-attrs-2.13/header-attrs.js"></script>
+  <script src="march-tt_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+  <script src="march-tt_files/plotly-binding-4.10.0/plotly.js"></script>
+  <script src="march-tt_files/typedarray-0.1/typedarray.min.js"></script>
+  <script src="march-tt_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="march-tt_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+  <script src="march-tt_files/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <link href="march-tt_files/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+  <script src="march-tt_files/plotly-main-2.5.1/plotly-latest.min.js"></script>
+  <script src="march-tt_files/popper-2.6.0/popper.min.js"></script>
+  <link href="march-tt_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="march-tt_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="march-tt_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="march-tt_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="march-tt_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="march-tt_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="march-tt_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"march-tt","description":"A short description of the post.","authors":[{"author":"Sarah Johnson","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-04-05T00:00:00.000-05:00","citationText":"Johnson, 2022"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>march-tt</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>A short description of the post.</p></p>
+</div>
+
+<div class="d-byline">
+  Sarah Johnson true 
+  
+<br/>2022-04-05
+</div>
+
+<div class="d-article">
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code># A tibble: 16 × 2
+   track                  n
+   &lt;chr&gt;              &lt;int&gt;
+ 1 Water Park             8
+ 2 Mario Circuit          7
+ 3 Thwomp Ruins           7
+ 4 Dolphin Shoals         6
+ 5 Twisted Mansion        6
+ 6 Rainbow Road           5
+ 7 Sunshine Airport       5
+ 8 Sweet Sweet Canyon     5
+ 9 Electrodrome           4
+10 Bowser&#39;s Castle        3
+11 Mario Kart Stadium     3
+12 Mount Wario            3
+13 Shy Guy Falls          3
+14 Bone Dry Dunes         2
+15 Cloudtop Cruise        2
+16 Toad Harbor            2</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-page">
+<div id="htmlwidget-e0f7a9aedeb9472de7a1" style="width:624px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e0f7a9aedeb9472de7a1">{"x":{"data":[{"x":[1645993920,1648064940],"y":[126.88,126.222],"text":["dt: 2022-02-27 20:32:00<br />total: 2M 6.88S<br />track: Bone Dry Dunes","dt: 2022-03-23 19:49:00<br />total: 2M 6.222S<br />track: Bone Dry Dunes"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Bone Dry Dunes","legendgroup":"Bone Dry Dunes","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1645918980,1646605440,1648253460],"y":[135.942,135.45,133.611],"text":["dt: 2022-02-26 23:43:00<br />total: 2M 15.942S<br />track: Bowser's Castle","dt: 2022-03-06 22:24:00<br />total: 2M 15.45S<br />track: Bowser's Castle","dt: 2022-03-26 00:11:00<br />total: 2M 13.611S<br />track: Bowser's Castle"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(230,134,19,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(230,134,19,1)"}},"hoveron":"points","name":"Bowser's Castle","legendgroup":"Bowser's Castle","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(230,134,19,1)","dash":"solid"},"frame":null},{"x":[1644366180,1648063500],"y":[135.947,134.889],"text":["dt: 2022-02-09 00:23:00<br />total: 2M 15.947S<br />track: Cloudtop Cruise","dt: 2022-03-23 19:25:00<br />total: 2M 14.889S<br />track: Cloudtop Cruise"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(205,150,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(205,150,0,1)"}},"hoveron":"points","name":"Cloudtop Cruise","legendgroup":"Cloudtop Cruise","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(205,150,0,1)","dash":"solid"},"frame":null},{"x":[1644699180,1645919220,1646609160,1647123420,1647863400,1648335960],"y":[131.919,131.401,130.307,129.702,129.396,129.082],"text":["dt: 2022-02-12 20:53:00<br />total: 2M 11.919S<br />track: Dolphin Shoals","dt: 2022-02-26 23:47:00<br />total: 2M 11.401S<br />track: Dolphin Shoals","dt: 2022-03-06 23:26:00<br />total: 2M 10.307S<br />track: Dolphin Shoals","dt: 2022-03-12 22:17:00<br />total: 2M 9.702S<br />track: Dolphin Shoals","dt: 2022-03-21 11:50:00<br />total: 2M 9.396S<br />track: Dolphin Shoals","dt: 2022-03-26 23:06:00<br />total: 2M 9.082S<br />track: Dolphin Shoals"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(171,163,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(171,163,0,1)"}},"hoveron":"points","name":"Dolphin Shoals","legendgroup":"Dolphin Shoals","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(171,163,0,1)","dash":"solid"},"frame":null},{"x":[1645919400,1646598660,1646875260,1647106980],"y":[133.655,132.422,132.332,131.286],"text":["dt: 2022-02-26 23:50:00<br />total: 2M 13.655S<br />track: Electrodrome","dt: 2022-03-06 20:31:00<br />total: 2M 12.422S<br />track: Electrodrome","dt: 2022-03-10 01:21:00<br />total: 2M 12.332S<br />track: Electrodrome","dt: 2022-03-12 17:43:00<br />total: 2M 11.286S<br />track: Electrodrome"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)"}},"hoveron":"points","name":"Electrodrome","legendgroup":"Electrodrome","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)","dash":"solid"},"frame":null},{"x":[1644803280,1645579200,1645579500,1645853160,1647101820,1647862860,1647863040],"y":[121.629,121.044,120.522,120.153,119.936,117.162,116.803],"text":["dt: 2022-02-14 01:48:00<br />total: 2M 1.629S<br />track: Mario Circuit","dt: 2022-02-23 01:20:00<br />total: 2M 1.044S<br />track: Mario Circuit","dt: 2022-02-23 01:25:00<br />total: 2M 0.522S<br />track: Mario Circuit","dt: 2022-02-26 05:26:00<br />total: 2M 0.153S<br />track: Mario Circuit","dt: 2022-03-12 16:17:00<br />total: 1M 59.936S<br />track: Mario Circuit","dt: 2022-03-21 11:41:00<br />total: 1M 57.162S<br />track: Mario Circuit","dt: 2022-03-21 11:44:00<br />total: 1M 56.803S<br />track: Mario Circuit"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(12,183,2,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(12,183,2,1)"}},"hoveron":"points","name":"Mario Circuit","legendgroup":"Mario Circuit","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(12,183,2,1)","dash":"solid"},"frame":null},{"x":[1644802200,1644802500,1644811980],"y":[109.501,109.426,109.008],"text":["dt: 2022-02-14 01:30:00<br />total: 1M 49.501S<br />track: Mario Kart Stadium","dt: 2022-02-14 01:35:00<br />total: 1M 49.426S<br />track: Mario Kart Stadium","dt: 2022-02-14 04:13:00<br />total: 1M 49.008S<br />track: Mario Kart Stadium"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,190,103,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,190,103,1)"}},"hoveron":"points","name":"Mario Kart Stadium","legendgroup":"Mario Kart Stadium","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,190,103,1)","dash":"solid"},"frame":null},{"x":[1643915820,1646598240,1647123120],"y":[119.883,118.55,117.95],"text":["dt: 2022-02-03 19:17:00<br />total: 1M 59.883S<br />track: Mount Wario","dt: 2022-03-06 20:24:00<br />total: 1M 58.55S<br />track: Mount Wario","dt: 2022-03-12 22:12:00<br />total: 1M 57.95S<br />track: Mount Wario"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,193,154,1)"}},"hoveron":"points","name":"Mount Wario","legendgroup":"Mount Wario","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,193,154,1)","dash":"solid"},"frame":null},{"x":[1645918740,1645993680,1646608860,1647045660,1648252860],"y":[136.008,135.21,135.028,134.453,133.432],"text":["dt: 2022-02-26 23:39:00<br />total: 2M 16.008S<br />track: Rainbow Road","dt: 2022-02-27 20:28:00<br />total: 2M 15.21S<br />track: Rainbow Road","dt: 2022-03-06 23:21:00<br />total: 2M 15.028S<br />track: Rainbow Road","dt: 2022-03-12 00:41:00<br />total: 2M 14.453S<br />track: Rainbow Road","dt: 2022-03-26 00:01:00<br />total: 2M 13.432S<br />track: Rainbow Road"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"Rainbow Road","legendgroup":"Rainbow Road","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1647042840,1647469020,1648249260],"y":[131.93,131.705,131.387],"text":["dt: 2022-03-11 23:54:00<br />total: 2M 11.93S<br />track: Shy Guy Falls","dt: 2022-03-16 22:17:00<br />total: 2M 11.705S<br />track: Shy Guy Falls","dt: 2022-03-25 23:01:00<br />total: 2M 11.387S<br />track: Shy Guy Falls"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,184,231,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,184,231,1)"}},"hoveron":"points","name":"Shy Guy Falls","legendgroup":"Shy Guy Falls","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,184,231,1)","dash":"solid"},"frame":null},{"x":[1644813300,1646598960,1647469200,1647469620,1648248840],"y":[133.897,133.231,132.842,132.014,131.666],"text":["dt: 2022-02-14 04:35:00<br />total: 2M 13.897S<br />track: Sunshine Airport","dt: 2022-03-06 20:36:00<br />total: 2M 13.231S<br />track: Sunshine Airport","dt: 2022-03-16 22:20:00<br />total: 2M 12.842S<br />track: Sunshine Airport","dt: 2022-03-16 22:27:00<br />total: 2M 12.014S<br />track: Sunshine Airport","dt: 2022-03-25 22:54:00<br />total: 2M 11.666S<br />track: Sunshine Airport"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,169,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,169,255,1)"}},"hoveron":"points","name":"Sunshine Airport","legendgroup":"Sunshine Airport","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,169,255,1)","dash":"solid"},"frame":null},{"x":[1644802920,1646602080,1647096960,1647211680,1648247040],"y":[120.179,119.448,119.421,118.766,118.067],"text":["dt: 2022-02-14 01:42:00<br />total: 2M 0.179S<br />track: Sweet Sweet Canyon","dt: 2022-03-06 21:28:00<br />total: 1M 59.448S<br />track: Sweet Sweet Canyon","dt: 2022-03-12 14:56:00<br />total: 1M 59.421S<br />track: Sweet Sweet Canyon","dt: 2022-03-13 22:48:00<br />total: 1M 58.766S<br />track: Sweet Sweet Canyon","dt: 2022-03-25 22:24:00<br />total: 1M 58.067S<br />track: Sweet Sweet Canyon"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(132,148,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(132,148,255,1)"}},"hoveron":"points","name":"Sweet Sweet Canyon","legendgroup":"Sweet Sweet Canyon","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(132,148,255,1)","dash":"solid"},"frame":null},{"x":[1644023580,1644445560,1644446520,1644365640,1646602500,1647212100,1648248060],"y":[124.354,123.39,123.006,123.72,121.766,121.519,120.767],"text":["dt: 2022-02-05 01:13:00<br />total: 2M 4.354S<br />track: Thwomp Ruins","dt: 2022-02-09 22:26:00<br />total: 2M 3.39S<br />track: Thwomp Ruins","dt: 2022-02-09 22:42:00<br />total: 2M 3.006S<br />track: Thwomp Ruins","dt: 2022-02-09 00:14:00<br />total: 2M 3.72S<br />track: Thwomp Ruins","dt: 2022-03-06 21:35:00<br />total: 2M 1.766S<br />track: Thwomp Ruins","dt: 2022-03-13 22:55:00<br />total: 2M 1.519S<br />track: Thwomp Ruins","dt: 2022-03-25 22:41:00<br />total: 2M 0.767S<br />track: Thwomp Ruins"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)"}},"hoveron":"points","name":"Thwomp Ruins","legendgroup":"Thwomp Ruins","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1643915220,1647212580],"y":[137.327,136.585],"text":["dt: 2022-02-03 19:07:00<br />total: 2M 17.327S<br />track: Toad Harbor","dt: 2022-03-13 23:03:00<br />total: 2M 16.585S<br />track: Toad Harbor"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(237,104,237,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(237,104,237,1)"}},"hoveron":"points","name":"Toad Harbor","legendgroup":"Toad Harbor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(237,104,237,1)","dash":"solid"},"frame":null},{"x":[1643698020,1644803580,1645578720,1645579020,1647099660,1648335240],"y":[128.814,128.236,127.285,126.619,126.6,125.546],"text":["dt: 2022-02-01 06:47:00<br />total: 2M 8.814S<br />track: Twisted Mansion","dt: 2022-02-14 01:53:00<br />total: 2M 8.236S<br />track: Twisted Mansion","dt: 2022-02-23 01:12:00<br />total: 2M 7.285S<br />track: Twisted Mansion","dt: 2022-02-23 01:17:00<br />total: 2M 6.619S<br />track: Twisted Mansion","dt: 2022-03-12 15:41:00<br />total: 2M 6.6S<br />track: Twisted Mansion","dt: 2022-03-26 22:54:00<br />total: 2M 5.546S<br />track: Twisted Mansion"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,97,204,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,97,204,1)"}},"hoveron":"points","name":"Twisted Mansion","legendgroup":"Twisted Mansion","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,97,204,1)","dash":"solid"},"frame":null},{"x":[1645994280,1646602680,1647087720,1647093300,1647864240,1647864360,1648250280,1648335000],"y":[112.693,112.264,112.235,112.031,111.895,110.681,110.611,110.524],"text":["dt: 2022-02-27 20:38:00<br />total: 1M 52.693S<br />track: Water Park","dt: 2022-03-06 21:38:00<br />total: 1M 52.264S<br />track: Water Park","dt: 2022-03-12 12:22:00<br />total: 1M 52.235S<br />track: Water Park","dt: 2022-03-12 13:55:00<br />total: 1M 52.031S<br />track: Water Park","dt: 2022-03-21 12:04:00<br />total: 1M 51.895S<br />track: Water Park","dt: 2022-03-21 12:06:00<br />total: 1M 50.681S<br />track: Water Park","dt: 2022-03-25 23:18:00<br />total: 1M 50.611S<br />track: Water Park","dt: 2022-03-26 22:50:00<br />total: 1M 50.524S<br />track: Water Park"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,104,161,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,104,161,1)"}},"hoveron":"points","name":"Water Park","legendgroup":"Water Park","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,104,161,1)","dash":"solid"},"frame":null},{"x":[1644023580,1644365640,1644445560,1644446520,1646602500,1647212100,1648248060],"y":[124.354,123.72,123.39,123.006,121.766,121.519,120.767],"text":["dt: 2022-02-05 01:13:00<br />total: 2M 4.354S<br />track: Thwomp Ruins","dt: 2022-02-09 00:14:00<br />total: 2M 3.72S<br />track: Thwomp Ruins","dt: 2022-02-09 22:26:00<br />total: 2M 3.39S<br />track: Thwomp Ruins","dt: 2022-02-09 22:42:00<br />total: 2M 3.006S<br />track: Thwomp Ruins","dt: 2022-03-06 21:35:00<br />total: 2M 1.766S<br />track: Thwomp Ruins","dt: 2022-03-13 22:55:00<br />total: 2M 1.519S<br />track: Thwomp Ruins","dt: 2022-03-25 22:41:00<br />total: 2M 0.767S<br />track: Thwomp Ruins"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)","dash":"solid"},"hoveron":"points","name":"Thwomp Ruins","legendgroup":"Thwomp Ruins","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.9147640791476,"r":7.30593607305936,"b":23.2572298325723,"l":57.716894977169},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1643466123,1648567857],"tickmode":"array","ticktext":["Feb 01","Feb 15","Mar 01","Mar 15"],"tickvals":[1643673600,1644883200,1646092800,1647302400],"categoryorder":"array","categoryarray":["Feb 01","Feb 15","Mar 01","Mar 15"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[107.59205,138.74295],"tickmode":"array","ticktext":["00:01:50","00:02:00","00:02:10"],"tickvals":[110,120,130],"categoryorder":"array","categoryarray":["00:01:50","00:02:00","00:02:10"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Track","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"15794a76c3c8":{"x":{},"y":{},"colour":{},"type":"scatter"},"15793b2fa5a9":{"x":{},"y":{},"colour":{}}},"cur_data":"15794a76c3c8","visdat":{"15794a76c3c8":["function (y) ","x"],"15793b2fa5a9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code># A tibble: 16 × 2
+   track                   n
+   &lt;chr&gt;               &lt;int&gt;
+ 1 Donut Plains           15
+ 2 Dry Dry Desert          6
+ 3 Mario Circuit GBA       6
+ 4 Moo Moo Meadows         6
+ 5 Music Park              6
+ 6 Royal Raceway           6
+ 7 Yoshi Valley            6
+ 8 Cheep Cheep Beach       5
+ 9 DK Jungle               5
+10 Piranha Plant Slide     5
+11 Grumble Volcano         4
+12 Sherbert Land           4
+13 Wario Stadium           4
+14 Rainbow Road (N64)      3
+15 Tick Tock Clock         3
+16 Toad&#39;s Turnpike         2</code></pre>
+</div>
+<p>Donut Plains saw the most PBs of any track, by far. This was the
+first month I began taking the underwater shortcuts, so I practiced them
+extensively.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-page">
+<div id="htmlwidget-06b5d17bca901bc1be01" style="width:624px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-06b5d17bca901bc1be01">{"x":{"data":[{"x":[1644576000,1644576180,1644576540,1645921080,1648221180],"y":[120.884,120.557,120.408,119.53,118.943],"text":["dt: 2022-02-11 10:40:00<br />total: 2M 0.884S<br />track: Cheep Cheep Beach","dt: 2022-02-11 10:43:00<br />total: 2M 0.557S<br />track: Cheep Cheep Beach","dt: 2022-02-11 10:49:00<br />total: 2M 0.408S<br />track: Cheep Cheep Beach","dt: 2022-02-27 00:18:00<br />total: 1M 59.53S<br />track: Cheep Cheep Beach","dt: 2022-03-25 15:13:00<br />total: 1M 58.943S<br />track: Cheep Cheep Beach"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Cheep Cheep Beach","legendgroup":"Cheep Cheep Beach","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1643779200,1644563160,1645577520,1648220160,1648220700],"y":[137.621,136.652,136.542,136.124,135.899],"text":["dt: 2022-02-02 05:20:00<br />total: 2M 17.621S<br />track: DK Jungle","dt: 2022-02-11 07:06:00<br />total: 2M 16.652S<br />track: DK Jungle","dt: 2022-02-23 00:52:00<br />total: 2M 16.542S<br />track: DK Jungle","dt: 2022-03-25 14:56:00<br />total: 2M 16.124S<br />track: DK Jungle","dt: 2022-03-25 15:05:00<br />total: 2M 15.899S<br />track: DK Jungle"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(230,134,19,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(230,134,19,1)"}},"hoveron":"points","name":"DK Jungle","legendgroup":"DK Jungle","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(230,134,19,1)","dash":"solid"},"frame":null},{"x":[1643700660,1643702700,1643778960,1643908380,1643911920,1643912340,1643912880,1644117060,1644367620,1644434820,1644577140,1644809460,1645576200,1645576680,1648066740],"y":[93.14,92.465,92.317,91.687,91.527,91.33,90.958,89.622,89.58,88.655,88.557,88.361,87.613,86.838,86.356],"text":["dt: 2022-02-01 07:31:00<br />total: 1M 33.14S<br />track: Donut Plains","dt: 2022-02-01 08:05:00<br />total: 1M 32.465S<br />track: Donut Plains","dt: 2022-02-02 05:16:00<br />total: 1M 32.317S<br />track: Donut Plains","dt: 2022-02-03 17:13:00<br />total: 1M 31.687S<br />track: Donut Plains","dt: 2022-02-03 18:12:00<br />total: 1M 31.527S<br />track: Donut Plains","dt: 2022-02-03 18:19:00<br />total: 1M 31.33S<br />track: Donut Plains","dt: 2022-02-03 18:28:00<br />total: 1M 30.958S<br />track: Donut Plains","dt: 2022-02-06 03:11:00<br />total: 1M 29.622S<br />track: Donut Plains","dt: 2022-02-09 00:47:00<br />total: 1M 29.58S<br />track: Donut Plains","dt: 2022-02-09 19:27:00<br />total: 1M 28.655S<br />track: Donut Plains","dt: 2022-02-11 10:59:00<br />total: 1M 28.557S<br />track: Donut Plains","dt: 2022-02-14 03:31:00<br />total: 1M 28.361S<br />track: Donut Plains","dt: 2022-02-23 00:30:00<br />total: 1M 27.613S<br />track: Donut Plains","dt: 2022-02-23 00:38:00<br />total: 1M 26.838S<br />track: Donut Plains","dt: 2022-03-23 20:19:00<br />total: 1M 26.356S<br />track: Donut Plains"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(205,150,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(205,150,0,1)"}},"hoveron":"points","name":"Donut Plains","legendgroup":"Donut Plains","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(205,150,0,1)","dash":"solid"},"frame":null},{"x":[1644368820,1644369960,1644370380,1644434280,1644434520,1648219800],"y":[139.257,137.156,136.447,135.927,134.367,134.014],"text":["dt: 2022-02-09 01:07:00<br />total: 2M 19.257S<br />track: Dry Dry Desert","dt: 2022-02-09 01:26:00<br />total: 2M 17.156S<br />track: Dry Dry Desert","dt: 2022-02-09 01:33:00<br />total: 2M 16.447S<br />track: Dry Dry Desert","dt: 2022-02-09 19:18:00<br />total: 2M 15.927S<br />track: Dry Dry Desert","dt: 2022-02-09 19:22:00<br />total: 2M 14.367S<br />track: Dry Dry Desert","dt: 2022-03-25 14:50:00<br />total: 2M 14.014S<br />track: Dry Dry Desert"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(171,163,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(171,163,0,1)"}},"hoveron":"points","name":"Dry Dry Desert","legendgroup":"Dry Dry Desert","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(171,163,0,1)","dash":"solid"},"frame":null},{"x":[1645995180,1646600820,1647123120,1647106380],"y":[130.49,130.013,128.782,129.477],"text":["dt: 2022-02-27 20:53:00<br />total: 2M 10.49S<br />track: Grumble Volcano","dt: 2022-03-06 21:07:00<br />total: 2M 10.013S<br />track: Grumble Volcano","dt: 2022-03-12 22:12:00<br />total: 2M 8.782S<br />track: Grumble Volcano","dt: 2022-03-12 17:33:00<br />total: 2M 9.477S<br />track: Grumble Volcano"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)"}},"hoveron":"points","name":"Grumble Volcano","legendgroup":"Grumble Volcano","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1645399200,1645575540,1645917720,1645918140,1645840980,1645847040],"y":[96.509,96.314,95.246,94.691,95.989,95.71],"text":["dt: 2022-02-20 23:20:00<br />total: 1M 36.509S<br />track: Mario Circuit GBA","dt: 2022-02-23 00:19:00<br />total: 1M 36.314S<br />track: Mario Circuit GBA","dt: 2022-02-26 23:22:00<br />total: 1M 35.246S<br />track: Mario Circuit GBA","dt: 2022-02-26 23:29:00<br />total: 1M 34.691S<br />track: Mario Circuit GBA","dt: 2022-02-26 02:03:00<br />total: 1M 35.989S<br />track: Mario Circuit GBA","dt: 2022-02-26 03:44:00<br />total: 1M 35.71S<br />track: Mario Circuit GBA"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(12,183,2,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(12,183,2,1)"}},"hoveron":"points","name":"Mario Circuit GBA","legendgroup":"Mario Circuit GBA","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644444840,1644809220,1647041640,1647047700,1647105480,1647730920],"y":[96.705,96.651,96.347,95.439,95.248,91.712],"text":["dt: 2022-02-09 22:14:00<br />total: 1M 36.705S<br />track: Moo Moo Meadows","dt: 2022-02-14 03:27:00<br />total: 1M 36.651S<br />track: Moo Moo Meadows","dt: 2022-03-11 23:34:00<br />total: 1M 36.347S<br />track: Moo Moo Meadows","dt: 2022-03-12 01:15:00<br />total: 1M 35.439S<br />track: Moo Moo Meadows","dt: 2022-03-12 17:18:00<br />total: 1M 35.248S<br />track: Moo Moo Meadows","dt: 2022-03-19 23:02:00<br />total: 1M 31.712S<br />track: Moo Moo Meadows"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,190,103,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,190,103,1)"}},"hoveron":"points","name":"Moo Moo Meadows","legendgroup":"Moo Moo Meadows","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,190,103,1)","dash":"solid"},"frame":null},{"x":[1644559320,1644559560,1644561240,1644561600,1645581720,1648675740],"y":[134.047,132.541,131.871,131.307,131.246,129.509],"text":["dt: 2022-02-11 06:02:00<br />total: 2M 14.047S<br />track: Music Park","dt: 2022-02-11 06:06:00<br />total: 2M 12.541S<br />track: Music Park","dt: 2022-02-11 06:34:00<br />total: 2M 11.871S<br />track: Music Park","dt: 2022-02-11 06:40:00<br />total: 2M 11.307S<br />track: Music Park","dt: 2022-02-23 02:02:00<br />total: 2M 11.246S<br />track: Music Park","dt: 2022-03-30 21:29:00<br />total: 2M 9.509S<br />track: Music Park"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,193,154,1)"}},"hoveron":"points","name":"Music Park","legendgroup":"Music Park","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,193,154,1)","dash":"solid"},"frame":null},{"x":[1644435060,1644435420,1644436020,1647122760,1648222800],"y":[138.498,138.491,135.59,134.453,131.891],"text":["dt: 2022-02-09 19:31:00<br />total: 2M 18.498S<br />track: Piranha Plant Slide","dt: 2022-02-09 19:37:00<br />total: 2M 18.491S<br />track: Piranha Plant Slide","dt: 2022-02-09 19:47:00<br />total: 2M 15.59S<br />track: Piranha Plant Slide","dt: 2022-03-12 22:06:00<br />total: 2M 14.453S<br />track: Piranha Plant Slide","dt: 2022-03-25 15:40:00<br />total: 2M 11.891S<br />track: Piranha Plant Slide"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"Piranha Plant Slide","legendgroup":"Piranha Plant Slide","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1643692260,1647049800,1648252560],"y":[88.769,88.365,87.947],"text":["dt: 2022-02-01 05:11:00<br />total: 1M 28.769S<br />track: Rainbow Road (N64)","dt: 2022-03-12 01:50:00<br />total: 1M 28.365S<br />track: Rainbow Road (N64)","dt: 2022-03-25 23:56:00<br />total: 1M 27.947S<br />track: Rainbow Road (N64)"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,184,231,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,184,231,1)"}},"hoveron":"points","name":"Rainbow Road (N64)","legendgroup":"Rainbow Road (N64)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,184,231,1)","dash":"solid"},"frame":null},{"x":[1643779860,1643910420,1643911260,1645577760,1646696760,1648244940],"y":[132.65,132.017,131.434,131.017,130.832,129.145],"text":["dt: 2022-02-02 05:31:00<br />total: 2M 12.65S<br />track: Royal Raceway","dt: 2022-02-03 17:47:00<br />total: 2M 12.017S<br />track: Royal Raceway","dt: 2022-02-03 18:01:00<br />total: 2M 11.434S<br />track: Royal Raceway","dt: 2022-02-23 00:56:00<br />total: 2M 11.017S<br />track: Royal Raceway","dt: 2022-03-07 23:46:00<br />total: 2M 10.832S<br />track: Royal Raceway","dt: 2022-03-25 21:49:00<br />total: 2M 9.145S<br />track: Royal Raceway"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,169,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,169,255,1)"}},"hoveron":"points","name":"Royal Raceway","legendgroup":"Royal Raceway","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,169,255,1)","dash":"solid"},"frame":null},{"x":[1645995840,1646602320,1647051540,1648244700],"y":[126.777,126.553,124.393,123.539],"text":["dt: 2022-02-27 21:04:00<br />total: 2M 6.777S<br />track: Sherbert Land","dt: 2022-03-06 21:32:00<br />total: 2M 6.553S<br />track: Sherbert Land","dt: 2022-03-12 02:19:00<br />total: 2M 4.393S<br />track: Sherbert Land","dt: 2022-03-25 21:45:00<br />total: 2M 3.539S<br />track: Sherbert Land"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(132,148,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(132,148,255,1)"}},"hoveron":"points","name":"Sherbert Land","legendgroup":"Sherbert Land","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(132,148,255,1)","dash":"solid"},"frame":null},{"x":[1645994640,1646599260,1648248480],"y":[123.429,122.627,120.893],"text":["dt: 2022-02-27 20:44:00<br />total: 2M 3.429S<br />track: Tick Tock Clock","dt: 2022-03-06 20:41:00<br />total: 2M 2.627S<br />track: Tick Tock Clock","dt: 2022-03-25 22:48:00<br />total: 2M 0.893S<br />track: Tick Tock Clock"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)"}},"hoveron":"points","name":"Tick Tock Clock","legendgroup":"Tick Tock Clock","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)","dash":"solid"},"frame":null},{"x":[1645918500,1646602920],"y":[119.824,119.455],"text":["dt: 2022-02-26 23:35:00<br />total: 1M 59.824S<br />track: Toad's Turnpike","dt: 2022-03-06 21:42:00<br />total: 1M 59.455S<br />track: Toad's Turnpike"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(237,104,237,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(237,104,237,1)"}},"hoveron":"points","name":"Toad's Turnpike","legendgroup":"Toad's Turnpike","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(237,104,237,1)","dash":"solid"},"frame":null},{"x":[1644024240,1644024480,1644026100,1644026700],"y":[127.785,126.561,125.963,125.819],"text":["dt: 2022-02-05 01:24:00<br />total: 2M 7.785S<br />track: Wario Stadium","dt: 2022-02-05 01:28:00<br />total: 2M 6.561S<br />track: Wario Stadium","dt: 2022-02-05 01:55:00<br />total: 2M 5.963S<br />track: Wario Stadium","dt: 2022-02-05 02:05:00<br />total: 2M 5.819S<br />track: Wario Stadium"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,97,204,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,97,204,1)"}},"hoveron":"points","name":"Wario Stadium","legendgroup":"Wario Stadium","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,97,204,1)","dash":"solid"},"frame":null},{"x":[1645057560,1645579680,1645920120,1645996800,1647864060,1648244460],"y":[132.888,132.719,130.33,128.809,127.821,127.585],"text":["dt: 2022-02-17 00:26:00<br />total: 2M 12.888S<br />track: Yoshi Valley","dt: 2022-02-23 01:28:00<br />total: 2M 12.719S<br />track: Yoshi Valley","dt: 2022-02-27 00:02:00<br />total: 2M 10.33S<br />track: Yoshi Valley","dt: 2022-02-27 21:20:00<br />total: 2M 8.809S<br />track: Yoshi Valley","dt: 2022-03-21 12:01:00<br />total: 2M 7.821S<br />track: Yoshi Valley","dt: 2022-03-25 21:41:00<br />total: 2M 7.585S<br />track: Yoshi Valley"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,104,161,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,104,161,1)"}},"hoveron":"points","name":"Yoshi Valley","legendgroup":"Yoshi Valley","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,104,161,1)","dash":"solid"},"frame":null},{"x":[1645995180,1646600820,1647106380,1647123120],"y":[130.49,130.013,129.477,128.782],"text":["dt: 2022-02-27 20:53:00<br />total: 2M 10.49S<br />track: Grumble Volcano","dt: 2022-03-06 21:07:00<br />total: 2M 10.013S<br />track: Grumble Volcano","dt: 2022-03-12 17:33:00<br />total: 2M 9.477S<br />track: Grumble Volcano","dt: 2022-03-12 22:12:00<br />total: 2M 8.782S<br />track: Grumble Volcano"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)","dash":"solid"},"hoveron":"points","name":"Grumble Volcano","legendgroup":"Grumble Volcano","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1645399200,1645575540,1645840980,1645847040,1645917720,1645918140],"y":[96.509,96.314,95.989,95.71,95.246,94.691],"text":["dt: 2022-02-20 23:20:00<br />total: 1M 36.509S<br />track: Mario Circuit GBA","dt: 2022-02-23 00:19:00<br />total: 1M 36.314S<br />track: Mario Circuit GBA","dt: 2022-02-26 02:03:00<br />total: 1M 35.989S<br />track: Mario Circuit GBA","dt: 2022-02-26 03:44:00<br />total: 1M 35.71S<br />track: Mario Circuit GBA","dt: 2022-02-26 23:22:00<br />total: 1M 35.246S<br />track: Mario Circuit GBA","dt: 2022-02-26 23:29:00<br />total: 1M 34.691S<br />track: Mario Circuit GBA"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(12,183,2,1)","dash":"solid"},"hoveron":"points","name":"Mario Circuit GBA","legendgroup":"Mario Circuit GBA","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.9147640791476,"r":7.30593607305936,"b":23.2572298325723,"l":57.716894977169},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1643443086,1648924914],"tickmode":"array","ticktext":["Feb 01","Feb 15","Mar 01","Mar 15","Apr 01"],"tickvals":[1643673600,1644883200,1646092800,1647302400,1648771200],"categoryorder":"array","categoryarray":["Feb 01","Feb 15","Mar 01","Mar 15","Apr 01"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[83.71095,141.90205],"tickmode":"array","ticktext":["00:01:40","00:02:00","00:02:20"],"tickvals":[100,120,140],"categoryorder":"array","categoryarray":["00:01:40","00:02:00","00:02:20"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Track","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1579132d5245":{"x":{},"y":{},"colour":{},"type":"scatter"},"157947439d9":{"x":{},"y":{},"colour":{}}},"cur_data":"1579132d5245","visdat":{"1579132d5245":["function (y) ","x"],"157947439d9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code># A tibble: 16 × 2
+   track                   n
+   &lt;chr&gt;               &lt;int&gt;
+ 1 Rainbow Road (SNES)    10
+ 2 Yoshi Circuit           9
+ 3 Super Bell Subway       8
+ 4 Big Blue                7
+ 5 Ice Ice Outpost         6
+ 6 Ribbon Road             6
+ 7 Hyrule Circuit          5
+ 8 Wild Woods              5
+ 9 Animal Crossing         4
+10 Cheese Land             4
+11 Excitebike Arena        4
+12 Neo Bowser City         4
+13 Dragon Driftway         3
+14 Mute City               3
+15 Wario&#39;s Gold Mine       3
+16 Baby Park               1</code></pre>
+</div>
+<p>SNES Rainbow Road saw the most PBs, followed by Big Blue.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-page">
+<div id="htmlwidget-e541264fb68c7de5b7a5" style="width:624px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e541264fb68c7de5b7a5">{"x":{"data":[{"x":[1643916840,1643917140,1646608620,1648251000],"y":[110.077,108.931,108.554,107.479],"text":["dt: 2022-02-03 19:34:00<br />total: 1M 50.077S<br />track: Animal Crossing","dt: 2022-02-03 19:39:00<br />total: 1M 48.931S<br />track: Animal Crossing","dt: 2022-03-06 23:17:00<br />total: 1M 48.554S<br />track: Animal Crossing","dt: 2022-03-25 23:30:00<br />total: 1M 47.479S<br />track: Animal Crossing"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Animal Crossing","legendgroup":"Animal Crossing","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1644812160],"y":[72.252],"text":"dt: 2022-02-14 04:16:00<br />total: 1M 12.252S<br />track: Baby Park","type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(230,134,19,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(230,134,19,1)"}},"hoveron":"points","name":"Baby Park","legendgroup":"Baby Park","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(230,134,19,1)","dash":"solid"},"frame":null},{"x":[1644095520,1644804780,1644805860,1644885540,1644885780,1647098220,1647316980],"y":[96.533,96.4,96.2,96.166,95.483,94.883,93.933],"text":["dt: 2022-02-05 21:12:00<br />total: 1M 36.533S<br />track: Big Blue","dt: 2022-02-14 02:13:00<br />total: 1M 36.4S<br />track: Big Blue","dt: 2022-02-14 02:31:00<br />total: 1M 36.2S<br />track: Big Blue","dt: 2022-02-15 00:39:00<br />total: 1M 36.166S<br />track: Big Blue","dt: 2022-02-15 00:43:00<br />total: 1M 35.483S<br />track: Big Blue","dt: 2022-03-12 15:17:00<br />total: 1M 34.883S<br />track: Big Blue","dt: 2022-03-15 04:03:00<br />total: 1M 33.933S<br />track: Big Blue"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(205,150,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(205,150,0,1)"}},"hoveron":"points","name":"Big Blue","legendgroup":"Big Blue","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(205,150,0,1)","dash":"solid"},"frame":null},{"x":[1644602340,1644810720,1645123380,1647121860],"y":[122.884,121.979,120.217,119.563],"text":["dt: 2022-02-11 17:59:00<br />total: 2M 2.884S<br />track: Cheese Land","dt: 2022-02-14 03:52:00<br />total: 2M 1.979S<br />track: Cheese Land","dt: 2022-02-17 18:43:00<br />total: 2M 0.217S<br />track: Cheese Land","dt: 2022-03-12 21:51:00<br />total: 1M 59.563S<br />track: Cheese Land"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(171,163,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(171,163,0,1)"}},"hoveron":"points","name":"Cheese Land","legendgroup":"Cheese Land","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(171,163,0,1)","dash":"solid"},"frame":null},{"x":[1644698520,1645915020,1647467760],"y":[118.313,117.441,116.722],"text":["dt: 2022-02-12 20:42:00<br />total: 1M 58.313S<br />track: Dragon Driftway","dt: 2022-02-26 22:37:00<br />total: 1M 57.441S<br />track: Dragon Driftway","dt: 2022-03-16 21:56:00<br />total: 1M 56.722S<br />track: Dragon Driftway"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)"}},"hoveron":"points","name":"Dragon Driftway","legendgroup":"Dragon Driftway","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)","dash":"solid"},"frame":null},{"x":[1643697480,1643916180,1644809820,1647106740],"y":[113.241,112.762,112.061,111.782],"text":["dt: 2022-02-01 06:38:00<br />total: 1M 53.241S<br />track: Excitebike Arena","dt: 2022-02-03 19:23:00<br />total: 1M 52.762S<br />track: Excitebike Arena","dt: 2022-02-14 03:37:00<br />total: 1M 52.061S<br />track: Excitebike Arena","dt: 2022-03-12 17:39:00<br />total: 1M 51.782S<br />track: Excitebike Arena"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(12,183,2,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(12,183,2,1)"}},"hoveron":"points","name":"Excitebike Arena","legendgroup":"Excitebike Arena","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(12,183,2,1)","dash":"solid"},"frame":null},{"x":[1643907720,1644029160,1646692440,1647101340,1647467520],"y":[127.735,126.33,123.741,122.347,122.342],"text":["dt: 2022-02-03 17:02:00<br />total: 2M 7.735S<br />track: Hyrule Circuit","dt: 2022-02-05 02:46:00<br />total: 2M 6.33S<br />track: Hyrule Circuit","dt: 2022-03-07 22:34:00<br />total: 2M 3.741S<br />track: Hyrule Circuit","dt: 2022-03-12 16:09:00<br />total: 2M 2.347S<br />track: Hyrule Circuit","dt: 2022-03-16 21:52:00<br />total: 2M 2.342S<br />track: Hyrule Circuit"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,190,103,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,190,103,1)"}},"hoveron":"points","name":"Hyrule Circuit","legendgroup":"Hyrule Circuit","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,190,103,1)","dash":"solid"},"frame":null},{"x":[1643785200,1643906580,1643907420,1647100680,1647300960,1647466800],"y":[124.755,122.362,120.379,119.824,118.834,118.572],"text":["dt: 2022-02-02 07:00:00<br />total: 2M 4.755S<br />track: Ice Ice Outpost","dt: 2022-02-03 16:43:00<br />total: 2M 2.362S<br />track: Ice Ice Outpost","dt: 2022-02-03 16:57:00<br />total: 2M 0.379S<br />track: Ice Ice Outpost","dt: 2022-03-12 15:58:00<br />total: 1M 59.824S<br />track: Ice Ice Outpost","dt: 2022-03-14 23:36:00<br />total: 1M 58.834S<br />track: Ice Ice Outpost","dt: 2022-03-16 21:40:00<br />total: 1M 58.572S<br />track: Ice Ice Outpost"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,193,154,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,193,154,1)"}},"hoveron":"points","name":"Ice Ice Outpost","legendgroup":"Ice Ice Outpost","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,193,154,1)","dash":"solid"},"frame":null},{"x":[1643904600,1646604300,1647122940],"y":[122.734,122.691,122.434],"text":["dt: 2022-02-03 16:10:00<br />total: 2M 2.734S<br />track: Mute City","dt: 2022-03-06 22:05:00<br />total: 2M 2.691S<br />track: Mute City","dt: 2022-03-12 22:09:00<br />total: 2M 2.434S<br />track: Mute City"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"Mute City","legendgroup":"Mute City","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null},{"x":[1645995480,1646603280,1646696100,1648675260],"y":[120.448,120.386,119.683,118.94],"text":["dt: 2022-02-27 20:58:00<br />total: 2M 0.448S<br />track: Neo Bowser City","dt: 2022-03-06 21:48:00<br />total: 2M 0.386S<br />track: Neo Bowser City","dt: 2022-03-07 23:35:00<br />total: 1M 59.683S<br />track: Neo Bowser City","dt: 2022-03-30 21:21:00<br />total: 1M 58.94S<br />track: Neo Bowser City"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,184,231,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,184,231,1)"}},"hoveron":"points","name":"Neo Bowser City","legendgroup":"Neo Bowser City","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,184,231,1)","dash":"solid"},"frame":null},{"x":[1644806520,1645836420,1645836840,1645837260,1645837560,1645838160,1646604900,1647054000,1648227240,1648227960],"y":[99.058,98.779,98.464,98.292,98.156,97.512,97.482,97.246,96.62,96.017],"text":["dt: 2022-02-14 02:42:00<br />total: 1M 39.058S<br />track: Rainbow Road (SNES)","dt: 2022-02-26 00:47:00<br />total: 1M 38.779S<br />track: Rainbow Road (SNES)","dt: 2022-02-26 00:54:00<br />total: 1M 38.464S<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:01:00<br />total: 1M 38.292S<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:06:00<br />total: 1M 38.156S<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:16:00<br />total: 1M 37.512S<br />track: Rainbow Road (SNES)","dt: 2022-03-06 22:15:00<br />total: 1M 37.482S<br />track: Rainbow Road (SNES)","dt: 2022-03-12 03:00:00<br />total: 1M 37.246S<br />track: Rainbow Road (SNES)","dt: 2022-03-25 16:54:00<br />total: 1M 36.62S<br />track: Rainbow Road (SNES)","dt: 2022-03-25 17:06:00<br />total: 1M 36.017S<br />track: Rainbow Road (SNES)"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,169,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,169,255,1)"}},"hoveron":"points","name":"Rainbow Road (SNES)","legendgroup":"Rainbow Road (SNES)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,169,255,1)","dash":"solid"},"frame":null},{"x":[1643690040,1643690520,1643905200,1647054900,1647100440,1648224180],"y":[120.245,118.987,118.884,118.735,117.914,117.74],"text":["dt: 2022-02-01 04:34:00<br />total: 2M 0.245S<br />track: Ribbon Road","dt: 2022-02-01 04:42:00<br />total: 1M 58.987S<br />track: Ribbon Road","dt: 2022-02-03 16:20:00<br />total: 1M 58.884S<br />track: Ribbon Road","dt: 2022-03-12 03:15:00<br />total: 1M 58.735S<br />track: Ribbon Road","dt: 2022-03-12 15:54:00<br />total: 1M 57.914S<br />track: Ribbon Road","dt: 2022-03-25 16:03:00<br />total: 1M 57.74S<br />track: Ribbon Road"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(132,148,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(132,148,255,1)"}},"hoveron":"points","name":"Ribbon Road","legendgroup":"Ribbon Road","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(132,148,255,1)","dash":"solid"},"frame":null},{"x":[1643907960,1646603640,1647043200,1647097860,1647106080,1647360000,1648245660,1648246380],"y":[119.268,119.167,118.368,117.66,116.726,114.995,114.494,113.323],"text":["dt: 2022-02-03 17:06:00<br />total: 1M 59.268S<br />track: Super Bell Subway","dt: 2022-03-06 21:54:00<br />total: 1M 59.167S<br />track: Super Bell Subway","dt: 2022-03-12 00:00:00<br />total: 1M 58.368S<br />track: Super Bell Subway","dt: 2022-03-12 15:11:00<br />total: 1M 57.66S<br />track: Super Bell Subway","dt: 2022-03-12 17:28:00<br />total: 1M 56.726S<br />track: Super Bell Subway","dt: 2022-03-15 16:00:00<br />total: 1M 54.995S<br />track: Super Bell Subway","dt: 2022-03-25 22:01:00<br />total: 1M 54.494S<br />track: Super Bell Subway","dt: 2022-03-25 22:13:00<br />total: 1M 53.323S<br />track: Super Bell Subway"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)"}},"hoveron":"points","name":"Super Bell Subway","legendgroup":"Super Bell Subway","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)","dash":"solid"},"frame":null},{"x":[1645118280,1647470160,1647864780],"y":[135.958,135.559,134.985],"text":["dt: 2022-02-17 17:18:00<br />total: 2M 15.958S<br />track: Wario's Gold Mine","dt: 2022-03-16 22:36:00<br />total: 2M 15.559S<br />track: Wario's Gold Mine","dt: 2022-03-21 12:13:00<br />total: 2M 14.985S<br />track: Wario's Gold Mine"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(237,104,237,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(237,104,237,1)"}},"hoveron":"points","name":"Wario's Gold Mine","legendgroup":"Wario's Gold Mine","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(237,104,237,1)","dash":"solid"},"frame":null},{"x":[1645059660,1646604600,1647122220,1647906780,1648250640],"y":[118.571,118.518,118.363,117.682,117.251],"text":["dt: 2022-02-17 01:01:00<br />total: 1M 58.571S<br />track: Wild Woods","dt: 2022-03-06 22:10:00<br />total: 1M 58.518S<br />track: Wild Woods","dt: 2022-03-12 21:57:00<br />total: 1M 58.363S<br />track: Wild Woods","dt: 2022-03-21 23:53:00<br />total: 1M 57.682S<br />track: Wild Woods","dt: 2022-03-25 23:24:00<br />total: 1M 57.251S<br />track: Wild Woods"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,97,204,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,97,204,1)"}},"hoveron":"points","name":"Wild Woods","legendgroup":"Wild Woods","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,97,204,1)","dash":"solid"},"frame":null},{"x":[1643904120,1644023340,1644679920,1644697200,1644810360,1647863820,1648066020,1648243380,1648243860],"y":[119.235,119.053,118.403,118.978,118.593,116.861,116.692,116.633,114.721],"text":["dt: 2022-02-03 16:02:00<br />total: 1M 59.235S<br />track: Yoshi Circuit","dt: 2022-02-05 01:09:00<br />total: 1M 59.053S<br />track: Yoshi Circuit","dt: 2022-02-12 15:32:00<br />total: 1M 58.403S<br />track: Yoshi Circuit","dt: 2022-02-12 20:20:00<br />total: 1M 58.978S<br />track: Yoshi Circuit","dt: 2022-02-14 03:46:00<br />total: 1M 58.593S<br />track: Yoshi Circuit","dt: 2022-03-21 11:57:00<br />total: 1M 56.861S<br />track: Yoshi Circuit","dt: 2022-03-23 20:07:00<br />total: 1M 56.692S<br />track: Yoshi Circuit","dt: 2022-03-25 21:23:00<br />total: 1M 56.633S<br />track: Yoshi Circuit","dt: 2022-03-25 21:31:00<br />total: 1M 54.721S<br />track: Yoshi Circuit"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,104,161,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,104,161,1)"}},"hoveron":"points","name":"Yoshi Circuit","legendgroup":"Yoshi Circuit","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,104,161,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":23.9147640791476,"r":7.30593607305936,"b":23.2572298325723,"l":57.716894977169},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1643440779,1648924521],"tickmode":"array","ticktext":["Feb 01","Feb 15","Mar 01","Mar 15","Apr 01"],"tickvals":[1643673600,1644883200,1646092800,1647302400,1648771200],"categoryorder":"array","categoryarray":["Feb 01","Feb 15","Mar 01","Mar 15","Apr 01"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[69.0667,139.1433],"tickmode":"array","ticktext":["00:01:20","00:01:40","00:02:00"],"tickvals":[80,100,120],"categoryorder":"array","categoryarray":["00:01:20","00:01:40","00:02:00"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Track","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"15797199d150":{"x":{},"y":{},"colour":{},"type":"scatter"},"1579297d1574":{"x":{},"y":{},"colour":{}}},"cur_data":"15797199d150","visdat":{"15797199d150":["function (y) ","x"],"1579297d1574":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="layout-chunk" data-layout="l-page">
+<div id="htmlwidget-10fc1c7f814a9fe968c3" style="width:624px;height:768px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-10fc1c7f814a9fe968c3">{"x":{"data":[{"x":[1643779200,1644563160,1645577520,1648220160,1648220700,1643700660,1643702700,1643778960,1643908380,1643911920,1643912340,1643912880,1644117060,1644367620,1644434820,1644577140,1644809460,1645576200,1645576680,1648066740,1644368820,1644369960,1644370380,1644434280,1644434520,1648219800,1643779860,1643910420,1643911260,1645577760,1646696760,1648244940],"y":[137.621,136.652,136.542,136.124,135.899,93.14,92.465,92.317,91.687,91.527,91.33,90.958,89.622,89.58,88.655,88.557,88.361,87.613,86.838,86.356,139.257,137.156,136.447,135.927,134.367,134.014,132.65,132.017,131.434,131.017,130.832,129.145],"text":["dt: 2022-02-02 05:20:00<br />total: 2M 17.621S<br />cup: Banana<br />track: DK Jungle","dt: 2022-02-11 07:06:00<br />total: 2M 16.652S<br />cup: Banana<br />track: DK Jungle","dt: 2022-02-23 00:52:00<br />total: 2M 16.542S<br />cup: Banana<br />track: DK Jungle","dt: 2022-03-25 14:56:00<br />total: 2M 16.124S<br />cup: Banana<br />track: DK Jungle","dt: 2022-03-25 15:05:00<br />total: 2M 15.899S<br />cup: Banana<br />track: DK Jungle","dt: 2022-02-01 07:31:00<br />total: 1M 33.14S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-01 08:05:00<br />total: 1M 32.465S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-02 05:16:00<br />total: 1M 32.317S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 17:13:00<br />total: 1M 31.687S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 18:12:00<br />total: 1M 31.527S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 18:19:00<br />total: 1M 31.33S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 18:28:00<br />total: 1M 30.958S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-06 03:11:00<br />total: 1M 29.622S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-09 00:47:00<br />total: 1M 29.58S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-09 19:27:00<br />total: 1M 28.655S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-11 10:59:00<br />total: 1M 28.557S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-14 03:31:00<br />total: 1M 28.361S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-23 00:30:00<br />total: 1M 27.613S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-23 00:38:00<br />total: 1M 26.838S<br />cup: Banana<br />track: Donut Plains","dt: 2022-03-23 20:19:00<br />total: 1M 26.356S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-09 01:07:00<br />total: 2M 19.257S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 01:26:00<br />total: 2M 17.156S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 01:33:00<br />total: 2M 16.447S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 19:18:00<br />total: 2M 15.927S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 19:22:00<br />total: 2M 14.367S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-03-25 14:50:00<br />total: 2M 14.014S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-02 05:31:00<br />total: 2M 12.65S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-02-03 17:47:00<br />total: 2M 12.017S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-02-03 18:01:00<br />total: 2M 11.434S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-02-23 00:56:00<br />total: 2M 11.017S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-03-07 23:46:00<br />total: 2M 10.832S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-03-25 21:49:00<br />total: 2M 9.145S<br />cup: Banana<br />track: Royal Raceway"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Banana","legendgroup":"Banana","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644095520,1644804780,1644805860,1644885540,1644885780,1647098220,1647316980,1645995480,1646603280,1646696100,1648675260,1643690040,1643690520,1643905200,1647054900,1647100440,1648224180,1643907960,1646603640,1647043200,1647097860,1647106080,1647360000,1648245660,1648246380],"y":[96.533,96.4,96.2,96.166,95.483,94.883,93.933,120.448,120.386,119.683,118.94,120.245,118.987,118.884,118.735,117.914,117.74,119.268,119.167,118.368,117.66,116.726,114.995,114.494,113.323],"text":["dt: 2022-02-05 21:12:00<br />total: 1M 36.533S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-14 02:13:00<br />total: 1M 36.4S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-14 02:31:00<br />total: 1M 36.2S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-15 00:39:00<br />total: 1M 36.166S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-15 00:43:00<br />total: 1M 35.483S<br />cup: Bell<br />track: Big Blue","dt: 2022-03-12 15:17:00<br />total: 1M 34.883S<br />cup: Bell<br />track: Big Blue","dt: 2022-03-15 04:03:00<br />total: 1M 33.933S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-27 20:58:00<br />total: 2M 0.448S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-03-06 21:48:00<br />total: 2M 0.386S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-03-07 23:35:00<br />total: 1M 59.683S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-03-30 21:21:00<br />total: 1M 58.94S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-02-01 04:34:00<br />total: 2M 0.245S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-02-01 04:42:00<br />total: 1M 58.987S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-02-03 16:20:00<br />total: 1M 58.884S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-03-12 03:15:00<br />total: 1M 58.735S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-03-12 15:54:00<br />total: 1M 57.914S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-03-25 16:03:00<br />total: 1M 57.74S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-02-03 17:06:00<br />total: 1M 59.268S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-06 21:54:00<br />total: 1M 59.167S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-12 00:00:00<br />total: 1M 58.368S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-12 15:11:00<br />total: 1M 57.66S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-12 17:28:00<br />total: 1M 56.726S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-15 16:00:00<br />total: 1M 54.995S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-25 22:01:00<br />total: 1M 54.494S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-25 22:13:00<br />total: 1M 53.323S<br />cup: Bell<br />track: Super Bell Subway"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(227,137,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(227,137,0,1)"}},"hoveron":"points","name":"Bell","legendgroup":"Bell","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1643916840,1643917140,1646608620,1648251000,1644812160,1644602340,1644810720,1645123380,1647121860,1645059660,1646604600,1647122220,1647906780,1648250640],"y":[110.077,108.931,108.554,107.479,72.252,122.884,121.979,120.217,119.563,118.571,118.518,118.363,117.682,117.251],"text":["dt: 2022-02-03 19:34:00<br />total: 1M 50.077S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-02-03 19:39:00<br />total: 1M 48.931S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-03-06 23:17:00<br />total: 1M 48.554S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-03-25 23:30:00<br />total: 1M 47.479S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-02-14 04:16:00<br />total: 1M 12.252S<br />cup: Crossing<br />track: Baby Park","dt: 2022-02-11 17:59:00<br />total: 2M 2.884S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-02-14 03:52:00<br />total: 2M 1.979S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-02-17 18:43:00<br />total: 2M 0.217S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-03-12 21:51:00<br />total: 1M 59.563S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-02-17 01:01:00<br />total: 1M 58.571S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-06 22:10:00<br />total: 1M 58.518S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-12 21:57:00<br />total: 1M 58.363S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-21 23:53:00<br />total: 1M 57.682S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-25 23:24:00<br />total: 1M 57.251S<br />cup: Crossing<br />track: Wild Woods"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(196,154,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(196,154,0,1)"}},"hoveron":"points","name":"Crossing","legendgroup":"Crossing","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644698520,1645915020,1647467760,1643697480,1643916180,1644809820,1647106740,1643904600,1646604300,1647122940,1643904120,1644023340,1644679920,1644697200,1644810360,1647863820,1648066020,1648243380,1648243860],"y":[118.313,117.441,116.722,113.241,112.762,112.061,111.782,122.734,122.691,122.434,119.235,119.053,118.403,118.978,118.593,116.861,116.692,116.633,114.721],"text":["dt: 2022-02-12 20:42:00<br />total: 1M 58.313S<br />cup: Egg<br />track: Dragon Driftway","dt: 2022-02-26 22:37:00<br />total: 1M 57.441S<br />cup: Egg<br />track: Dragon Driftway","dt: 2022-03-16 21:56:00<br />total: 1M 56.722S<br />cup: Egg<br />track: Dragon Driftway","dt: 2022-02-01 06:38:00<br />total: 1M 53.241S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-02-03 19:23:00<br />total: 1M 52.762S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-02-14 03:37:00<br />total: 1M 52.061S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-03-12 17:39:00<br />total: 1M 51.782S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-02-03 16:10:00<br />total: 2M 2.734S<br />cup: Egg<br />track: Mute City","dt: 2022-03-06 22:05:00<br />total: 2M 2.691S<br />cup: Egg<br />track: Mute City","dt: 2022-03-12 22:09:00<br />total: 2M 2.434S<br />cup: Egg<br />track: Mute City","dt: 2022-02-03 16:02:00<br />total: 1M 59.235S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-05 01:09:00<br />total: 1M 59.053S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-12 15:32:00<br />total: 1M 58.403S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-12 20:20:00<br />total: 1M 58.978S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-14 03:46:00<br />total: 1M 58.593S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-21 11:57:00<br />total: 1M 56.861S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-23 20:07:00<br />total: 1M 56.692S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-25 21:23:00<br />total: 1M 56.633S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-25 21:31:00<br />total: 1M 54.721S<br />cup: Egg<br />track: Yoshi Circuit"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(153,168,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(153,168,0,1)"}},"hoveron":"points","name":"Egg","legendgroup":"Egg","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644803280,1645579200,1645579500,1645853160,1647101820,1647862860,1647863040,1647042840,1647469020,1648249260,1643915220,1647212580,1643698020,1644803580,1645578720,1645579020,1647099660,1648335240],"y":[121.629,121.044,120.522,120.153,119.936,117.162,116.803,131.93,131.705,131.387,137.327,136.585,128.814,128.236,127.285,126.619,126.6,125.546],"text":["dt: 2022-02-14 01:48:00<br />total: 2M 1.629S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-02-23 01:20:00<br />total: 2M 1.044S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-02-23 01:25:00<br />total: 2M 0.522S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-02-26 05:26:00<br />total: 2M 0.153S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-12 16:17:00<br />total: 1M 59.936S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-21 11:41:00<br />total: 1M 57.162S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-21 11:44:00<br />total: 1M 56.803S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-11 23:54:00<br />total: 2M 11.93S<br />cup: Flower<br />track: Shy Guy Falls","dt: 2022-03-16 22:17:00<br />total: 2M 11.705S<br />cup: Flower<br />track: Shy Guy Falls","dt: 2022-03-25 23:01:00<br />total: 2M 11.387S<br />cup: Flower<br />track: Shy Guy Falls","dt: 2022-02-03 19:07:00<br />total: 2M 17.327S<br />cup: Flower<br />track: Toad Harbor","dt: 2022-03-13 23:03:00<br />total: 2M 16.585S<br />cup: Flower<br />track: Toad Harbor","dt: 2022-02-01 06:47:00<br />total: 2M 8.814S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-02-14 01:53:00<br />total: 2M 8.236S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-02-23 01:12:00<br />total: 2M 7.285S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-02-23 01:17:00<br />total: 2M 6.619S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-03-12 15:41:00<br />total: 2M 6.6S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-03-26 22:54:00<br />total: 2M 5.546S<br />cup: Flower<br />track: Twisted Mansion"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(83,180,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(83,180,0,1)"}},"hoveron":"points","name":"Flower","legendgroup":"Flower","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1647566760,1647576720,1647668400,1647866460,1648062840,1647600900,1647567120,1647576120,1647732000,1647733680,1647652380,1647658260,1647660300,1648218120,1647563580,1647571800,1647572040,1647583260,1647597300,1647731520,1647651240,1647657480,1647662160,1647662640,1647662940,1648218360,1647597900,1647565080,1647574080,1647576420,1647651420,1647680280],"y":[127.516,126.901,126.889,125.823,125.007,117.566,119.509,118.815,115.069,113.687,116.918,116.757,115.377,113.434,129.417,129.284,128.184,127.567,126.617,122.201,125.384,125.101,124.084,123.417,123.067,121.534,90.283,91.881,91.532,91.033,90.065,89.922],"text":["dt: 2022-03-18 01:26:00<br />total: 2M 7.516S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-18 04:12:00<br />total: 2M 6.901S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-19 05:40:00<br />total: 2M 6.889S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-21 12:41:00<br />total: 2M 5.823S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-23 19:14:00<br />total: 2M 5.007S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-18 10:55:00<br />total: 1M 57.566S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-18 01:32:00<br />total: 1M 59.509S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-18 04:02:00<br />total: 1M 58.815S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 23:20:00<br />total: 1M 55.069S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 23:48:00<br />total: 1M 53.687S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 01:13:00<br />total: 1M 56.918S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 02:51:00<br />total: 1M 56.757S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 03:25:00<br />total: 1M 55.377S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-25 14:22:00<br />total: 1M 53.434S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-18 00:33:00<br />total: 2M 9.417S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 02:50:00<br />total: 2M 9.284S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 02:54:00<br />total: 2M 8.184S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 06:01:00<br />total: 2M 7.567S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 09:55:00<br />total: 2M 6.617S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 23:12:00<br />total: 2M 2.201S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 00:54:00<br />total: 2M 5.384S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 02:38:00<br />total: 2M 5.101S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 03:56:00<br />total: 2M 4.084S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 04:04:00<br />total: 2M 3.417S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 04:09:00<br />total: 2M 3.067S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-25 14:26:00<br />total: 2M 1.534S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 10:05:00<br />total: 1M 30.283S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-18 00:58:00<br />total: 1M 31.881S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-18 03:28:00<br />total: 1M 31.532S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-18 04:07:00<br />total: 1M 31.033S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-19 00:57:00<br />total: 1M 30.065S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-19 08:58:00<br />total: 1M 29.922S<br />cup: Golden Dash<br />track: Toad Circuit 3DS"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,188,86,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,188,86,1)"}},"hoveron":"points","name":"Golden Dash","legendgroup":"Golden Dash","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644559320,1644559560,1644561240,1644561600,1645581720,1648675740,1645995840,1646602320,1647051540,1648244700,1644024240,1644024480,1644026100,1644026700,1645057560,1645579680,1645920120,1645996800,1647864060,1648244460],"y":[134.047,132.541,131.871,131.307,131.246,129.509,126.777,126.553,124.393,123.539,127.785,126.561,125.963,125.819,132.888,132.719,130.33,128.809,127.821,127.585],"text":["dt: 2022-02-11 06:02:00<br />total: 2M 14.047S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-11 06:06:00<br />total: 2M 12.541S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-11 06:34:00<br />total: 2M 11.871S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-11 06:40:00<br />total: 2M 11.307S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-23 02:02:00<br />total: 2M 11.246S<br />cup: Leaf<br />track: Music Park","dt: 2022-03-30 21:29:00<br />total: 2M 9.509S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-27 21:04:00<br />total: 2M 6.777S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-03-06 21:32:00<br />total: 2M 6.553S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-03-12 02:19:00<br />total: 2M 4.393S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-03-25 21:45:00<br />total: 2M 3.539S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-02-05 01:24:00<br />total: 2M 7.785S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-05 01:28:00<br />total: 2M 6.561S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-05 01:55:00<br />total: 2M 5.963S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-05 02:05:00<br />total: 2M 5.819S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-17 00:26:00<br />total: 2M 12.888S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-02-23 01:28:00<br />total: 2M 12.719S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-02-27 00:02:00<br />total: 2M 10.33S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-02-27 21:20:00<br />total: 2M 8.809S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-03-21 12:01:00<br />total: 2M 7.821S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-03-25 21:41:00<br />total: 2M 7.585S<br />cup: Leaf<br />track: Yoshi Valley"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,148,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,192,148,1)"}},"hoveron":"points","name":"Leaf","legendgroup":"Leaf","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1645995180,1646600820,1647123120,1647106380,1644435060,1644435420,1644436020,1647122760,1648222800,1643692260,1647049800,1648252560,1645994640,1646599260,1648248480],"y":[130.49,130.013,128.782,129.477,138.498,138.491,135.59,134.453,131.891,88.769,88.365,87.947,123.429,122.627,120.893],"text":["dt: 2022-02-27 20:53:00<br />total: 2M 10.49S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-03-06 21:07:00<br />total: 2M 10.013S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-03-12 22:12:00<br />total: 2M 8.782S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-03-12 17:33:00<br />total: 2M 9.477S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-02-09 19:31:00<br />total: 2M 18.498S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-02-09 19:37:00<br />total: 2M 18.491S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-02-09 19:47:00<br />total: 2M 15.59S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-03-12 22:06:00<br />total: 2M 14.453S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-03-25 15:40:00<br />total: 2M 11.891S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-02-01 05:11:00<br />total: 1M 28.769S<br />cup: Lightning<br />track: Rainbow Road (N64)","dt: 2022-03-12 01:50:00<br />total: 1M 28.365S<br />cup: Lightning<br />track: Rainbow Road (N64)","dt: 2022-03-25 23:56:00<br />total: 1M 27.947S<br />cup: Lightning<br />track: Rainbow Road (N64)","dt: 2022-02-27 20:44:00<br />total: 2M 3.429S<br />cup: Lightning<br />track: Tick Tock Clock","dt: 2022-03-06 20:41:00<br />total: 2M 2.627S<br />cup: Lightning<br />track: Tick Tock Clock","dt: 2022-03-25 22:48:00<br />total: 2M 0.893S<br />cup: Lightning<br />track: Tick Tock Clock"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"Lightning","legendgroup":"Lightning","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1647600300,1647562980,1647567540,1647570480,1647575460,1647653520,1647653760,1647654240,1647654900,1647670800,1647670980,1647820740,1647740100,1647857640,1647858000,1647856260,1647569040,1647570720,1647570960,1647571560,1647664020,1647664440,1647737820,1647858420,1647601500,1647562200,1647564360,1647575880,1647579660,1647653100,1647667080,1647599820,1647569640,1647574920,1647575220,1647579480],"y":[133.305,137.821,135.765,134.727,133.862,132.904,129.52,128.643,127.948,127.853,127.536,125.922,126.655,124.424,123.994,125.048,125.473,123.001,120.117,117.938,117.915,117.373,117.17,116.858,101.495,106.275,104.522,102.825,101.536,100.738,98.195,95.143,95.892,95.573,95.506,95.379],"text":["dt: 2022-03-18 10:45:00<br />total: 2M 13.305S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 00:23:00<br />total: 2M 17.821S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 01:39:00<br />total: 2M 15.765S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 02:28:00<br />total: 2M 14.727S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 03:51:00<br />total: 2M 13.862S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:32:00<br />total: 2M 12.904S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:36:00<br />total: 2M 9.52S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:44:00<br />total: 2M 8.643S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:55:00<br />total: 2M 7.948S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 06:20:00<br />total: 2M 7.853S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 06:23:00<br />total: 2M 7.536S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-20 23:59:00<br />total: 2M 5.922S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-20 01:35:00<br />total: 2M 6.655S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-21 10:14:00<br />total: 2M 4.424S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-21 10:20:00<br />total: 2M 3.994S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-21 09:51:00<br />total: 2M 5.048S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 02:04:00<br />total: 2M 5.473S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 02:32:00<br />total: 2M 3.001S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 02:36:00<br />total: 2M 0.117S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 02:46:00<br />total: 1M 57.938S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-19 04:27:00<br />total: 1M 57.915S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-19 04:34:00<br />total: 1M 57.373S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-20 00:57:00<br />total: 1M 57.17S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-21 10:27:00<br />total: 1M 56.858S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 11:05:00<br />total: 1M 41.495S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 00:10:00<br />total: 1M 46.275S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 00:46:00<br />total: 1M 44.522S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 03:58:00<br />total: 1M 42.825S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 05:01:00<br />total: 1M 41.536S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-19 01:25:00<br />total: 1M 40.738S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-19 05:18:00<br />total: 1M 38.195S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 10:37:00<br />total: 1M 35.143S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 02:14:00<br />total: 1M 35.892S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 03:42:00<br />total: 1M 35.573S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 03:47:00<br />total: 1M 35.506S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 04:58:00<br />total: 1M 35.379S<br />cup: Lucky Cat<br />track: Tokyo Blur"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,182,235,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,182,235,1)"}},"hoveron":"points","name":"Lucky Cat","legendgroup":"Lucky Cat","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644802200,1644802500,1644811980,1644802920,1646602080,1647096960,1647211680,1648247040,1644023580,1644445560,1644446520,1644365640,1646602500,1647212100,1648248060,1645994280,1646602680,1647087720,1647093300,1647864240,1647864360,1648250280,1648335000],"y":[109.501,109.426,109.008,120.179,119.448,119.421,118.766,118.067,124.354,123.39,123.006,123.72,121.766,121.519,120.767,112.693,112.264,112.235,112.031,111.895,110.681,110.611,110.524],"text":["dt: 2022-02-14 01:30:00<br />total: 1M 49.501S<br />cup: Mushroom<br />track: Mario Kart Stadium","dt: 2022-02-14 01:35:00<br />total: 1M 49.426S<br />cup: Mushroom<br />track: Mario Kart Stadium","dt: 2022-02-14 04:13:00<br />total: 1M 49.008S<br />cup: Mushroom<br />track: Mario Kart Stadium","dt: 2022-02-14 01:42:00<br />total: 2M 0.179S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-06 21:28:00<br />total: 1M 59.448S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-12 14:56:00<br />total: 1M 59.421S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-13 22:48:00<br />total: 1M 58.766S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-25 22:24:00<br />total: 1M 58.067S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-02-05 01:13:00<br />total: 2M 4.354S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-09 22:26:00<br />total: 2M 3.39S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-09 22:42:00<br />total: 2M 3.006S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-09 00:14:00<br />total: 2M 3.72S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-03-06 21:35:00<br />total: 2M 1.766S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-03-13 22:55:00<br />total: 2M 1.519S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-03-25 22:41:00<br />total: 2M 0.767S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-27 20:38:00<br />total: 1M 52.693S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-06 21:38:00<br />total: 1M 52.264S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-12 12:22:00<br />total: 1M 52.235S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-12 13:55:00<br />total: 1M 52.031S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-21 12:04:00<br />total: 1M 51.895S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-21 12:06:00<br />total: 1M 50.681S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-25 23:18:00<br />total: 1M 50.611S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-26 22:50:00<br />total: 1M 50.524S<br />cup: Mushroom<br />track: Water Park"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(6,164,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(6,164,255,1)"}},"hoveron":"points","name":"Mushroom","legendgroup":"Mushroom","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644576000,1644576180,1644576540,1645921080,1648221180,1645399200,1645575540,1645917720,1645918140,1645840980,1645847040,1644444840,1644809220,1647041640,1647047700,1647105480,1647730920,1645918500,1646602920],"y":[120.884,120.557,120.408,119.53,118.943,96.509,96.314,95.246,94.691,95.989,95.71,96.705,96.651,96.347,95.439,95.248,91.712,119.824,119.455],"text":["dt: 2022-02-11 10:40:00<br />total: 2M 0.884S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-11 10:43:00<br />total: 2M 0.557S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-11 10:49:00<br />total: 2M 0.408S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-27 00:18:00<br />total: 1M 59.53S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-03-25 15:13:00<br />total: 1M 58.943S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-20 23:20:00<br />total: 1M 36.509S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-23 00:19:00<br />total: 1M 36.314S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 23:22:00<br />total: 1M 35.246S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 23:29:00<br />total: 1M 34.691S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 02:03:00<br />total: 1M 35.989S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 03:44:00<br />total: 1M 35.71S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-09 22:14:00<br />total: 1M 36.705S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-02-14 03:27:00<br />total: 1M 36.651S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-11 23:34:00<br />total: 1M 36.347S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-12 01:15:00<br />total: 1M 35.439S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-12 17:18:00<br />total: 1M 35.248S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-19 23:02:00<br />total: 1M 31.712S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-02-26 23:35:00<br />total: 1M 59.824S<br />cup: Shell<br />track: Toad's Turnpike","dt: 2022-03-06 21:42:00<br />total: 1M 59.455S<br />cup: Shell<br />track: Toad's Turnpike"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(165,138,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(165,138,255,1)"}},"hoveron":"points","name":"Shell","legendgroup":"Shell","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1645993920,1648064940,1645918980,1646605440,1648253460,1644366180,1648063500,1645918740,1645993680,1646608860,1647045660,1648252860],"y":[126.88,126.222,135.942,135.45,133.611,135.947,134.889,136.008,135.21,135.028,134.453,133.432],"text":["dt: 2022-02-27 20:32:00<br />total: 2M 6.88S<br />cup: Special<br />track: Bone Dry Dunes","dt: 2022-03-23 19:49:00<br />total: 2M 6.222S<br />cup: Special<br />track: Bone Dry Dunes","dt: 2022-02-26 23:43:00<br />total: 2M 15.942S<br />cup: Special<br />track: Bowser's Castle","dt: 2022-03-06 22:24:00<br />total: 2M 15.45S<br />cup: Special<br />track: Bowser's Castle","dt: 2022-03-26 00:11:00<br />total: 2M 13.611S<br />cup: Special<br />track: Bowser's Castle","dt: 2022-02-09 00:23:00<br />total: 2M 15.947S<br />cup: Special<br />track: Cloudtop Cruise","dt: 2022-03-23 19:25:00<br />total: 2M 14.889S<br />cup: Special<br />track: Cloudtop Cruise","dt: 2022-02-26 23:39:00<br />total: 2M 16.008S<br />cup: Special<br />track: Rainbow Road","dt: 2022-02-27 20:28:00<br />total: 2M 15.21S<br />cup: Special<br />track: Rainbow Road","dt: 2022-03-06 23:21:00<br />total: 2M 15.028S<br />cup: Special<br />track: Rainbow Road","dt: 2022-03-12 00:41:00<br />total: 2M 14.453S<br />cup: Special<br />track: Rainbow Road","dt: 2022-03-26 00:01:00<br />total: 2M 13.432S<br />cup: Special<br />track: Rainbow Road"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(223,112,248,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(223,112,248,1)"}},"hoveron":"points","name":"Special","legendgroup":"Special","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644699180,1645919220,1646609160,1647123420,1647863400,1648335960,1645919400,1646598660,1646875260,1647106980,1643915820,1646598240,1647123120,1644813300,1646598960,1647469200,1647469620,1648248840],"y":[131.919,131.401,130.307,129.702,129.396,129.082,133.655,132.422,132.332,131.286,119.883,118.55,117.95,133.897,133.231,132.842,132.014,131.666],"text":["dt: 2022-02-12 20:53:00<br />total: 2M 11.919S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-02-26 23:47:00<br />total: 2M 11.401S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-06 23:26:00<br />total: 2M 10.307S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-12 22:17:00<br />total: 2M 9.702S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-21 11:50:00<br />total: 2M 9.396S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-26 23:06:00<br />total: 2M 9.082S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-02-26 23:50:00<br />total: 2M 13.655S<br />cup: Star<br />track: Electrodrome","dt: 2022-03-06 20:31:00<br />total: 2M 12.422S<br />cup: Star<br />track: Electrodrome","dt: 2022-03-10 01:21:00<br />total: 2M 12.332S<br />cup: Star<br />track: Electrodrome","dt: 2022-03-12 17:43:00<br />total: 2M 11.286S<br />cup: Star<br />track: Electrodrome","dt: 2022-02-03 19:17:00<br />total: 1M 59.883S<br />cup: Star<br />track: Mount Wario","dt: 2022-03-06 20:24:00<br />total: 1M 58.55S<br />cup: Star<br />track: Mount Wario","dt: 2022-03-12 22:12:00<br />total: 1M 57.95S<br />cup: Star<br />track: Mount Wario","dt: 2022-02-14 04:35:00<br />total: 2M 13.897S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-06 20:36:00<br />total: 2M 13.231S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-16 22:20:00<br />total: 2M 12.842S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-16 22:27:00<br />total: 2M 12.014S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-25 22:54:00<br />total: 2M 11.666S<br />cup: Star<br />track: Sunshine Airport"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(251,97,215,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(251,97,215,1)"}},"hoveron":"points","name":"Star","legendgroup":"Star","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1643907720,1644029160,1646692440,1647101340,1647467520,1643785200,1643906580,1643907420,1647100680,1647300960,1647466800,1644806520,1645836420,1645836840,1645837260,1645837560,1645838160,1646604900,1647054000,1648227240,1648227960,1645118280,1647470160,1647864780],"y":[127.735,126.33,123.741,122.347,122.342,124.755,122.362,120.379,119.824,118.834,118.572,99.058,98.779,98.464,98.292,98.156,97.512,97.482,97.246,96.62,96.017,135.958,135.559,134.985],"text":["dt: 2022-02-03 17:02:00<br />total: 2M 7.735S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-02-05 02:46:00<br />total: 2M 6.33S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-03-07 22:34:00<br />total: 2M 3.741S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-03-12 16:09:00<br />total: 2M 2.347S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-03-16 21:52:00<br />total: 2M 2.342S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-02-02 07:00:00<br />total: 2M 4.755S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-02-03 16:43:00<br />total: 2M 2.362S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-02-03 16:57:00<br />total: 2M 0.379S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-03-12 15:58:00<br />total: 1M 59.824S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-03-14 23:36:00<br />total: 1M 58.834S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-03-16 21:40:00<br />total: 1M 58.572S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-02-14 02:42:00<br />total: 1M 39.058S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 00:47:00<br />total: 1M 38.779S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 00:54:00<br />total: 1M 38.464S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:01:00<br />total: 1M 38.292S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:06:00<br />total: 1M 38.156S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:16:00<br />total: 1M 37.512S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-06 22:15:00<br />total: 1M 37.482S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-12 03:00:00<br />total: 1M 37.246S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-25 16:54:00<br />total: 1M 36.62S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-25 17:06:00<br />total: 1M 36.017S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-17 17:18:00<br />total: 2M 15.958S<br />cup: Triforce<br />track: Wario's Gold Mine","dt: 2022-03-16 22:36:00<br />total: 2M 15.559S<br />cup: Triforce<br />track: Wario's Gold Mine","dt: 2022-03-21 12:13:00<br />total: 2M 14.985S<br />cup: Triforce<br />track: Wario's Gold Mine"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,102,168,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,102,168,1)"}},"hoveron":"points","name":"Triforce","legendgroup":"Triforce","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1643779200,1644563160,1645577520,1648220160,1648220700,null,1643700660,1643702700,1643778960,1643908380,1643911920,1643912340,1643912880,1644117060,1644367620,1644434820,1644577140,1644809460,1645576200,1645576680,1648066740,null,1644368820,1644369960,1644370380,1644434280,1644434520,1648219800,null,1643779860,1643910420,1643911260,1645577760,1646696760,1648244940],"y":[137.621,136.652,136.542,136.124,135.899,null,93.14,92.465,92.317,91.687,91.527,91.33,90.958,89.622,89.58,88.655,88.557,88.361,87.613,86.838,86.356,null,139.257,137.156,136.447,135.927,134.367,134.014,null,132.65,132.017,131.434,131.017,130.832,129.145],"text":["dt: 2022-02-02 05:20:00<br />total: 2M 17.621S<br />cup: Banana<br />track: DK Jungle","dt: 2022-02-11 07:06:00<br />total: 2M 16.652S<br />cup: Banana<br />track: DK Jungle","dt: 2022-02-23 00:52:00<br />total: 2M 16.542S<br />cup: Banana<br />track: DK Jungle","dt: 2022-03-25 14:56:00<br />total: 2M 16.124S<br />cup: Banana<br />track: DK Jungle","dt: 2022-03-25 15:05:00<br />total: 2M 15.899S<br />cup: Banana<br />track: DK Jungle",null,"dt: 2022-02-01 07:31:00<br />total: 1M 33.14S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-01 08:05:00<br />total: 1M 32.465S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-02 05:16:00<br />total: 1M 32.317S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 17:13:00<br />total: 1M 31.687S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 18:12:00<br />total: 1M 31.527S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 18:19:00<br />total: 1M 31.33S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-03 18:28:00<br />total: 1M 30.958S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-06 03:11:00<br />total: 1M 29.622S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-09 00:47:00<br />total: 1M 29.58S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-09 19:27:00<br />total: 1M 28.655S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-11 10:59:00<br />total: 1M 28.557S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-14 03:31:00<br />total: 1M 28.361S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-23 00:30:00<br />total: 1M 27.613S<br />cup: Banana<br />track: Donut Plains","dt: 2022-02-23 00:38:00<br />total: 1M 26.838S<br />cup: Banana<br />track: Donut Plains","dt: 2022-03-23 20:19:00<br />total: 1M 26.356S<br />cup: Banana<br />track: Donut Plains",null,"dt: 2022-02-09 01:07:00<br />total: 2M 19.257S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 01:26:00<br />total: 2M 17.156S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 01:33:00<br />total: 2M 16.447S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 19:18:00<br />total: 2M 15.927S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-02-09 19:22:00<br />total: 2M 14.367S<br />cup: Banana<br />track: Dry Dry Desert","dt: 2022-03-25 14:50:00<br />total: 2M 14.014S<br />cup: Banana<br />track: Dry Dry Desert",null,"dt: 2022-02-02 05:31:00<br />total: 2M 12.65S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-02-03 17:47:00<br />total: 2M 12.017S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-02-03 18:01:00<br />total: 2M 11.434S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-02-23 00:56:00<br />total: 2M 11.017S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-03-07 23:46:00<br />total: 2M 10.832S<br />cup: Banana<br />track: Royal Raceway","dt: 2022-03-25 21:49:00<br />total: 2M 9.145S<br />cup: Banana<br />track: Royal Raceway"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"Banana","legendgroup":"Banana","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644095520,1644804780,1644805860,1644885540,1644885780,1647098220,1647316980,null,1645995480,1646603280,1646696100,1648675260,null,1643690040,1643690520,1643905200,1647054900,1647100440,1648224180,null,1643907960,1646603640,1647043200,1647097860,1647106080,1647360000,1648245660,1648246380],"y":[96.533,96.4,96.2,96.166,95.483,94.883,93.933,null,120.448,120.386,119.683,118.94,null,120.245,118.987,118.884,118.735,117.914,117.74,null,119.268,119.167,118.368,117.66,116.726,114.995,114.494,113.323],"text":["dt: 2022-02-05 21:12:00<br />total: 1M 36.533S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-14 02:13:00<br />total: 1M 36.4S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-14 02:31:00<br />total: 1M 36.2S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-15 00:39:00<br />total: 1M 36.166S<br />cup: Bell<br />track: Big Blue","dt: 2022-02-15 00:43:00<br />total: 1M 35.483S<br />cup: Bell<br />track: Big Blue","dt: 2022-03-12 15:17:00<br />total: 1M 34.883S<br />cup: Bell<br />track: Big Blue","dt: 2022-03-15 04:03:00<br />total: 1M 33.933S<br />cup: Bell<br />track: Big Blue",null,"dt: 2022-02-27 20:58:00<br />total: 2M 0.448S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-03-06 21:48:00<br />total: 2M 0.386S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-03-07 23:35:00<br />total: 1M 59.683S<br />cup: Bell<br />track: Neo Bowser City","dt: 2022-03-30 21:21:00<br />total: 1M 58.94S<br />cup: Bell<br />track: Neo Bowser City",null,"dt: 2022-02-01 04:34:00<br />total: 2M 0.245S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-02-01 04:42:00<br />total: 1M 58.987S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-02-03 16:20:00<br />total: 1M 58.884S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-03-12 03:15:00<br />total: 1M 58.735S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-03-12 15:54:00<br />total: 1M 57.914S<br />cup: Bell<br />track: Ribbon Road","dt: 2022-03-25 16:03:00<br />total: 1M 57.74S<br />cup: Bell<br />track: Ribbon Road",null,"dt: 2022-02-03 17:06:00<br />total: 1M 59.268S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-06 21:54:00<br />total: 1M 59.167S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-12 00:00:00<br />total: 1M 58.368S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-12 15:11:00<br />total: 1M 57.66S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-12 17:28:00<br />total: 1M 56.726S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-15 16:00:00<br />total: 1M 54.995S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-25 22:01:00<br />total: 1M 54.494S<br />cup: Bell<br />track: Super Bell Subway","dt: 2022-03-25 22:13:00<br />total: 1M 53.323S<br />cup: Bell<br />track: Super Bell Subway"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(227,137,0,1)","dash":"solid"},"hoveron":"points","name":"Bell","legendgroup":"Bell","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1643916840,1643917140,1646608620,1648251000,null,1644812160,null,1644602340,1644810720,1645123380,1647121860,null,1645059660,1646604600,1647122220,1647906780,1648250640],"y":[110.077,108.931,108.554,107.479,null,72.252,null,122.884,121.979,120.217,119.563,null,118.571,118.518,118.363,117.682,117.251],"text":["dt: 2022-02-03 19:34:00<br />total: 1M 50.077S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-02-03 19:39:00<br />total: 1M 48.931S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-03-06 23:17:00<br />total: 1M 48.554S<br />cup: Crossing<br />track: Animal Crossing","dt: 2022-03-25 23:30:00<br />total: 1M 47.479S<br />cup: Crossing<br />track: Animal Crossing",null,"dt: 2022-02-14 04:16:00<br />total: 1M 12.252S<br />cup: Crossing<br />track: Baby Park",null,"dt: 2022-02-11 17:59:00<br />total: 2M 2.884S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-02-14 03:52:00<br />total: 2M 1.979S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-02-17 18:43:00<br />total: 2M 0.217S<br />cup: Crossing<br />track: Cheese Land","dt: 2022-03-12 21:51:00<br />total: 1M 59.563S<br />cup: Crossing<br />track: Cheese Land",null,"dt: 2022-02-17 01:01:00<br />total: 1M 58.571S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-06 22:10:00<br />total: 1M 58.518S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-12 21:57:00<br />total: 1M 58.363S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-21 23:53:00<br />total: 1M 57.682S<br />cup: Crossing<br />track: Wild Woods","dt: 2022-03-25 23:24:00<br />total: 1M 57.251S<br />cup: Crossing<br />track: Wild Woods"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(196,154,0,1)","dash":"solid"},"hoveron":"points","name":"Crossing","legendgroup":"Crossing","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644698520,1645915020,1647467760,null,1643697480,1643916180,1644809820,1647106740,null,1643904600,1646604300,1647122940,null,1643904120,1644023340,1644679920,1644697200,1644810360,1647863820,1648066020,1648243380,1648243860],"y":[118.313,117.441,116.722,null,113.241,112.762,112.061,111.782,null,122.734,122.691,122.434,null,119.235,119.053,118.403,118.978,118.593,116.861,116.692,116.633,114.721],"text":["dt: 2022-02-12 20:42:00<br />total: 1M 58.313S<br />cup: Egg<br />track: Dragon Driftway","dt: 2022-02-26 22:37:00<br />total: 1M 57.441S<br />cup: Egg<br />track: Dragon Driftway","dt: 2022-03-16 21:56:00<br />total: 1M 56.722S<br />cup: Egg<br />track: Dragon Driftway",null,"dt: 2022-02-01 06:38:00<br />total: 1M 53.241S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-02-03 19:23:00<br />total: 1M 52.762S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-02-14 03:37:00<br />total: 1M 52.061S<br />cup: Egg<br />track: Excitebike Arena","dt: 2022-03-12 17:39:00<br />total: 1M 51.782S<br />cup: Egg<br />track: Excitebike Arena",null,"dt: 2022-02-03 16:10:00<br />total: 2M 2.734S<br />cup: Egg<br />track: Mute City","dt: 2022-03-06 22:05:00<br />total: 2M 2.691S<br />cup: Egg<br />track: Mute City","dt: 2022-03-12 22:09:00<br />total: 2M 2.434S<br />cup: Egg<br />track: Mute City",null,"dt: 2022-02-03 16:02:00<br />total: 1M 59.235S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-05 01:09:00<br />total: 1M 59.053S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-12 15:32:00<br />total: 1M 58.403S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-12 20:20:00<br />total: 1M 58.978S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-02-14 03:46:00<br />total: 1M 58.593S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-21 11:57:00<br />total: 1M 56.861S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-23 20:07:00<br />total: 1M 56.692S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-25 21:23:00<br />total: 1M 56.633S<br />cup: Egg<br />track: Yoshi Circuit","dt: 2022-03-25 21:31:00<br />total: 1M 54.721S<br />cup: Egg<br />track: Yoshi Circuit"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(153,168,0,1)","dash":"solid"},"hoveron":"points","name":"Egg","legendgroup":"Egg","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644803280,1645579200,1645579500,1645853160,1647101820,1647862860,1647863040,null,1647042840,1647469020,1648249260,null,1643915220,1647212580,null,1643698020,1644803580,1645578720,1645579020,1647099660,1648335240],"y":[121.629,121.044,120.522,120.153,119.936,117.162,116.803,null,131.93,131.705,131.387,null,137.327,136.585,null,128.814,128.236,127.285,126.619,126.6,125.546],"text":["dt: 2022-02-14 01:48:00<br />total: 2M 1.629S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-02-23 01:20:00<br />total: 2M 1.044S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-02-23 01:25:00<br />total: 2M 0.522S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-02-26 05:26:00<br />total: 2M 0.153S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-12 16:17:00<br />total: 1M 59.936S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-21 11:41:00<br />total: 1M 57.162S<br />cup: Flower<br />track: Mario Circuit","dt: 2022-03-21 11:44:00<br />total: 1M 56.803S<br />cup: Flower<br />track: Mario Circuit",null,"dt: 2022-03-11 23:54:00<br />total: 2M 11.93S<br />cup: Flower<br />track: Shy Guy Falls","dt: 2022-03-16 22:17:00<br />total: 2M 11.705S<br />cup: Flower<br />track: Shy Guy Falls","dt: 2022-03-25 23:01:00<br />total: 2M 11.387S<br />cup: Flower<br />track: Shy Guy Falls",null,"dt: 2022-02-03 19:07:00<br />total: 2M 17.327S<br />cup: Flower<br />track: Toad Harbor","dt: 2022-03-13 23:03:00<br />total: 2M 16.585S<br />cup: Flower<br />track: Toad Harbor",null,"dt: 2022-02-01 06:47:00<br />total: 2M 8.814S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-02-14 01:53:00<br />total: 2M 8.236S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-02-23 01:12:00<br />total: 2M 7.285S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-02-23 01:17:00<br />total: 2M 6.619S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-03-12 15:41:00<br />total: 2M 6.6S<br />cup: Flower<br />track: Twisted Mansion","dt: 2022-03-26 22:54:00<br />total: 2M 5.546S<br />cup: Flower<br />track: Twisted Mansion"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(83,180,0,1)","dash":"solid"},"hoveron":"points","name":"Flower","legendgroup":"Flower","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1647566760,1647576720,1647668400,1647866460,1648062840,null,1647567120,1647576120,1647600900,1647652380,1647658260,1647660300,1647732000,1647733680,1648218120,null,1647563580,1647571800,1647572040,1647583260,1647597300,1647651240,1647657480,1647662160,1647662640,1647662940,1647731520,1648218360,null,1647565080,1647574080,1647576420,1647597900,1647651420,1647680280],"y":[127.516,126.901,126.889,125.823,125.007,null,119.509,118.815,117.566,116.918,116.757,115.377,115.069,113.687,113.434,null,129.417,129.284,128.184,127.567,126.617,125.384,125.101,124.084,123.417,123.067,122.201,121.534,null,91.881,91.532,91.033,90.283,90.065,89.922],"text":["dt: 2022-03-18 01:26:00<br />total: 2M 7.516S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-18 04:12:00<br />total: 2M 6.901S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-19 05:40:00<br />total: 2M 6.889S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-21 12:41:00<br />total: 2M 5.823S<br />cup: Golden Dash<br />track: Choco Mountain","dt: 2022-03-23 19:14:00<br />total: 2M 5.007S<br />cup: Golden Dash<br />track: Choco Mountain",null,"dt: 2022-03-18 01:32:00<br />total: 1M 59.509S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-18 04:02:00<br />total: 1M 58.815S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-18 10:55:00<br />total: 1M 57.566S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 01:13:00<br />total: 1M 56.918S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 02:51:00<br />total: 1M 56.757S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 03:25:00<br />total: 1M 55.377S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 23:20:00<br />total: 1M 55.069S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-19 23:48:00<br />total: 1M 53.687S<br />cup: Golden Dash<br />track: Coconut Mall","dt: 2022-03-25 14:22:00<br />total: 1M 53.434S<br />cup: Golden Dash<br />track: Coconut Mall",null,"dt: 2022-03-18 00:33:00<br />total: 2M 9.417S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 02:50:00<br />total: 2M 9.284S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 02:54:00<br />total: 2M 8.184S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 06:01:00<br />total: 2M 7.567S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-18 09:55:00<br />total: 2M 6.617S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 00:54:00<br />total: 2M 5.384S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 02:38:00<br />total: 2M 5.101S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 03:56:00<br />total: 2M 4.084S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 04:04:00<br />total: 2M 3.417S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 04:09:00<br />total: 2M 3.067S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-19 23:12:00<br />total: 2M 2.201S<br />cup: Golden Dash<br />track: Paris Promenade","dt: 2022-03-25 14:26:00<br />total: 2M 1.534S<br />cup: Golden Dash<br />track: Paris Promenade",null,"dt: 2022-03-18 00:58:00<br />total: 1M 31.881S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-18 03:28:00<br />total: 1M 31.532S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-18 04:07:00<br />total: 1M 31.033S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-18 10:05:00<br />total: 1M 30.283S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-19 00:57:00<br />total: 1M 30.065S<br />cup: Golden Dash<br />track: Toad Circuit 3DS","dt: 2022-03-19 08:58:00<br />total: 1M 29.922S<br />cup: Golden Dash<br />track: Toad Circuit 3DS"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,188,86,1)","dash":"solid"},"hoveron":"points","name":"Golden Dash","legendgroup":"Golden Dash","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644559320,1644559560,1644561240,1644561600,1645581720,1648675740,null,1645995840,1646602320,1647051540,1648244700,null,1644024240,1644024480,1644026100,1644026700,null,1645057560,1645579680,1645920120,1645996800,1647864060,1648244460],"y":[134.047,132.541,131.871,131.307,131.246,129.509,null,126.777,126.553,124.393,123.539,null,127.785,126.561,125.963,125.819,null,132.888,132.719,130.33,128.809,127.821,127.585],"text":["dt: 2022-02-11 06:02:00<br />total: 2M 14.047S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-11 06:06:00<br />total: 2M 12.541S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-11 06:34:00<br />total: 2M 11.871S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-11 06:40:00<br />total: 2M 11.307S<br />cup: Leaf<br />track: Music Park","dt: 2022-02-23 02:02:00<br />total: 2M 11.246S<br />cup: Leaf<br />track: Music Park","dt: 2022-03-30 21:29:00<br />total: 2M 9.509S<br />cup: Leaf<br />track: Music Park",null,"dt: 2022-02-27 21:04:00<br />total: 2M 6.777S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-03-06 21:32:00<br />total: 2M 6.553S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-03-12 02:19:00<br />total: 2M 4.393S<br />cup: Leaf<br />track: Sherbert Land","dt: 2022-03-25 21:45:00<br />total: 2M 3.539S<br />cup: Leaf<br />track: Sherbert Land",null,"dt: 2022-02-05 01:24:00<br />total: 2M 7.785S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-05 01:28:00<br />total: 2M 6.561S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-05 01:55:00<br />total: 2M 5.963S<br />cup: Leaf<br />track: Wario Stadium","dt: 2022-02-05 02:05:00<br />total: 2M 5.819S<br />cup: Leaf<br />track: Wario Stadium",null,"dt: 2022-02-17 00:26:00<br />total: 2M 12.888S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-02-23 01:28:00<br />total: 2M 12.719S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-02-27 00:02:00<br />total: 2M 10.33S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-02-27 21:20:00<br />total: 2M 8.809S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-03-21 12:01:00<br />total: 2M 7.821S<br />cup: Leaf<br />track: Yoshi Valley","dt: 2022-03-25 21:41:00<br />total: 2M 7.585S<br />cup: Leaf<br />track: Yoshi Valley"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,192,148,1)","dash":"solid"},"hoveron":"points","name":"Leaf","legendgroup":"Leaf","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1645995180,1646600820,1647106380,1647123120,null,1644435060,1644435420,1644436020,1647122760,1648222800,null,1643692260,1647049800,1648252560,null,1645994640,1646599260,1648248480],"y":[130.49,130.013,129.477,128.782,null,138.498,138.491,135.59,134.453,131.891,null,88.769,88.365,87.947,null,123.429,122.627,120.893],"text":["dt: 2022-02-27 20:53:00<br />total: 2M 10.49S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-03-06 21:07:00<br />total: 2M 10.013S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-03-12 17:33:00<br />total: 2M 9.477S<br />cup: Lightning<br />track: Grumble Volcano","dt: 2022-03-12 22:12:00<br />total: 2M 8.782S<br />cup: Lightning<br />track: Grumble Volcano",null,"dt: 2022-02-09 19:31:00<br />total: 2M 18.498S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-02-09 19:37:00<br />total: 2M 18.491S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-02-09 19:47:00<br />total: 2M 15.59S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-03-12 22:06:00<br />total: 2M 14.453S<br />cup: Lightning<br />track: Piranha Plant Slide","dt: 2022-03-25 15:40:00<br />total: 2M 11.891S<br />cup: Lightning<br />track: Piranha Plant Slide",null,"dt: 2022-02-01 05:11:00<br />total: 1M 28.769S<br />cup: Lightning<br />track: Rainbow Road (N64)","dt: 2022-03-12 01:50:00<br />total: 1M 28.365S<br />cup: Lightning<br />track: Rainbow Road (N64)","dt: 2022-03-25 23:56:00<br />total: 1M 27.947S<br />cup: Lightning<br />track: Rainbow Road (N64)",null,"dt: 2022-02-27 20:44:00<br />total: 2M 3.429S<br />cup: Lightning<br />track: Tick Tock Clock","dt: 2022-03-06 20:41:00<br />total: 2M 2.627S<br />cup: Lightning<br />track: Tick Tock Clock","dt: 2022-03-25 22:48:00<br />total: 2M 0.893S<br />cup: Lightning<br />track: Tick Tock Clock"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"Lightning","legendgroup":"Lightning","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1647562980,1647567540,1647570480,1647575460,1647600300,1647653520,1647653760,1647654240,1647654900,1647670800,1647670980,1647740100,1647820740,1647856260,1647857640,1647858000,null,1647569040,1647570720,1647570960,1647571560,1647664020,1647664440,1647737820,1647858420,null,1647562200,1647564360,1647575880,1647579660,1647601500,1647653100,1647667080,null,1647569640,1647574920,1647575220,1647579480,1647599820],"y":[137.821,135.765,134.727,133.862,133.305,132.904,129.52,128.643,127.948,127.853,127.536,126.655,125.922,125.048,124.424,123.994,null,125.473,123.001,120.117,117.938,117.915,117.373,117.17,116.858,null,106.275,104.522,102.825,101.536,101.495,100.738,98.195,null,95.892,95.573,95.506,95.379,95.143],"text":["dt: 2022-03-18 00:23:00<br />total: 2M 17.821S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 01:39:00<br />total: 2M 15.765S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 02:28:00<br />total: 2M 14.727S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 03:51:00<br />total: 2M 13.862S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-18 10:45:00<br />total: 2M 13.305S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:32:00<br />total: 2M 12.904S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:36:00<br />total: 2M 9.52S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:44:00<br />total: 2M 8.643S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 01:55:00<br />total: 2M 7.948S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 06:20:00<br />total: 2M 7.853S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-19 06:23:00<br />total: 2M 7.536S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-20 01:35:00<br />total: 2M 6.655S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-20 23:59:00<br />total: 2M 5.922S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-21 09:51:00<br />total: 2M 5.048S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-21 10:14:00<br />total: 2M 4.424S<br />cup: Lucky Cat<br />track: Ninja Hideaway","dt: 2022-03-21 10:20:00<br />total: 2M 3.994S<br />cup: Lucky Cat<br />track: Ninja Hideaway",null,"dt: 2022-03-18 02:04:00<br />total: 2M 5.473S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 02:32:00<br />total: 2M 3.001S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 02:36:00<br />total: 2M 0.117S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-18 02:46:00<br />total: 1M 57.938S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-19 04:27:00<br />total: 1M 57.915S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-19 04:34:00<br />total: 1M 57.373S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-20 00:57:00<br />total: 1M 57.17S<br />cup: Lucky Cat<br />track: Shroom Ridge DS","dt: 2022-03-21 10:27:00<br />total: 1M 56.858S<br />cup: Lucky Cat<br />track: Shroom Ridge DS",null,"dt: 2022-03-18 00:10:00<br />total: 1M 46.275S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 00:46:00<br />total: 1M 44.522S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 03:58:00<br />total: 1M 42.825S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 05:01:00<br />total: 1M 41.536S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-18 11:05:00<br />total: 1M 41.495S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-19 01:25:00<br />total: 1M 40.738S<br />cup: Lucky Cat<br />track: Sky Garden GBA","dt: 2022-03-19 05:18:00<br />total: 1M 38.195S<br />cup: Lucky Cat<br />track: Sky Garden GBA",null,"dt: 2022-03-18 02:14:00<br />total: 1M 35.892S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 03:42:00<br />total: 1M 35.573S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 03:47:00<br />total: 1M 35.506S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 04:58:00<br />total: 1M 35.379S<br />cup: Lucky Cat<br />track: Tokyo Blur","dt: 2022-03-18 10:37:00<br />total: 1M 35.143S<br />cup: Lucky Cat<br />track: Tokyo Blur"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,182,235,1)","dash":"solid"},"hoveron":"points","name":"Lucky Cat","legendgroup":"Lucky Cat","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644802200,1644802500,1644811980,null,1644802920,1646602080,1647096960,1647211680,1648247040,null,1644023580,1644365640,1644445560,1644446520,1646602500,1647212100,1648248060,null,1645994280,1646602680,1647087720,1647093300,1647864240,1647864360,1648250280,1648335000],"y":[109.501,109.426,109.008,null,120.179,119.448,119.421,118.766,118.067,null,124.354,123.72,123.39,123.006,121.766,121.519,120.767,null,112.693,112.264,112.235,112.031,111.895,110.681,110.611,110.524],"text":["dt: 2022-02-14 01:30:00<br />total: 1M 49.501S<br />cup: Mushroom<br />track: Mario Kart Stadium","dt: 2022-02-14 01:35:00<br />total: 1M 49.426S<br />cup: Mushroom<br />track: Mario Kart Stadium","dt: 2022-02-14 04:13:00<br />total: 1M 49.008S<br />cup: Mushroom<br />track: Mario Kart Stadium",null,"dt: 2022-02-14 01:42:00<br />total: 2M 0.179S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-06 21:28:00<br />total: 1M 59.448S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-12 14:56:00<br />total: 1M 59.421S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-13 22:48:00<br />total: 1M 58.766S<br />cup: Mushroom<br />track: Sweet Sweet Canyon","dt: 2022-03-25 22:24:00<br />total: 1M 58.067S<br />cup: Mushroom<br />track: Sweet Sweet Canyon",null,"dt: 2022-02-05 01:13:00<br />total: 2M 4.354S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-09 00:14:00<br />total: 2M 3.72S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-09 22:26:00<br />total: 2M 3.39S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-02-09 22:42:00<br />total: 2M 3.006S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-03-06 21:35:00<br />total: 2M 1.766S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-03-13 22:55:00<br />total: 2M 1.519S<br />cup: Mushroom<br />track: Thwomp Ruins","dt: 2022-03-25 22:41:00<br />total: 2M 0.767S<br />cup: Mushroom<br />track: Thwomp Ruins",null,"dt: 2022-02-27 20:38:00<br />total: 1M 52.693S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-06 21:38:00<br />total: 1M 52.264S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-12 12:22:00<br />total: 1M 52.235S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-12 13:55:00<br />total: 1M 52.031S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-21 12:04:00<br />total: 1M 51.895S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-21 12:06:00<br />total: 1M 50.681S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-25 23:18:00<br />total: 1M 50.611S<br />cup: Mushroom<br />track: Water Park","dt: 2022-03-26 22:50:00<br />total: 1M 50.524S<br />cup: Mushroom<br />track: Water Park"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(6,164,255,1)","dash":"solid"},"hoveron":"points","name":"Mushroom","legendgroup":"Mushroom","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644576000,1644576180,1644576540,1645921080,1648221180,null,1645399200,1645575540,1645840980,1645847040,1645917720,1645918140,null,1644444840,1644809220,1647041640,1647047700,1647105480,1647730920,null,1645918500,1646602920],"y":[120.884,120.557,120.408,119.53,118.943,null,96.509,96.314,95.989,95.71,95.246,94.691,null,96.705,96.651,96.347,95.439,95.248,91.712,null,119.824,119.455],"text":["dt: 2022-02-11 10:40:00<br />total: 2M 0.884S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-11 10:43:00<br />total: 2M 0.557S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-11 10:49:00<br />total: 2M 0.408S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-02-27 00:18:00<br />total: 1M 59.53S<br />cup: Shell<br />track: Cheep Cheep Beach","dt: 2022-03-25 15:13:00<br />total: 1M 58.943S<br />cup: Shell<br />track: Cheep Cheep Beach",null,"dt: 2022-02-20 23:20:00<br />total: 1M 36.509S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-23 00:19:00<br />total: 1M 36.314S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 02:03:00<br />total: 1M 35.989S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 03:44:00<br />total: 1M 35.71S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 23:22:00<br />total: 1M 35.246S<br />cup: Shell<br />track: Mario Circuit GBA","dt: 2022-02-26 23:29:00<br />total: 1M 34.691S<br />cup: Shell<br />track: Mario Circuit GBA",null,"dt: 2022-02-09 22:14:00<br />total: 1M 36.705S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-02-14 03:27:00<br />total: 1M 36.651S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-11 23:34:00<br />total: 1M 36.347S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-12 01:15:00<br />total: 1M 35.439S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-12 17:18:00<br />total: 1M 35.248S<br />cup: Shell<br />track: Moo Moo Meadows","dt: 2022-03-19 23:02:00<br />total: 1M 31.712S<br />cup: Shell<br />track: Moo Moo Meadows",null,"dt: 2022-02-26 23:35:00<br />total: 1M 59.824S<br />cup: Shell<br />track: Toad's Turnpike","dt: 2022-03-06 21:42:00<br />total: 1M 59.455S<br />cup: Shell<br />track: Toad's Turnpike"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(165,138,255,1)","dash":"solid"},"hoveron":"points","name":"Shell","legendgroup":"Shell","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1645993920,1648064940,null,1645918980,1646605440,1648253460,null,1644366180,1648063500,null,1645918740,1645993680,1646608860,1647045660,1648252860],"y":[126.88,126.222,null,135.942,135.45,133.611,null,135.947,134.889,null,136.008,135.21,135.028,134.453,133.432],"text":["dt: 2022-02-27 20:32:00<br />total: 2M 6.88S<br />cup: Special<br />track: Bone Dry Dunes","dt: 2022-03-23 19:49:00<br />total: 2M 6.222S<br />cup: Special<br />track: Bone Dry Dunes",null,"dt: 2022-02-26 23:43:00<br />total: 2M 15.942S<br />cup: Special<br />track: Bowser's Castle","dt: 2022-03-06 22:24:00<br />total: 2M 15.45S<br />cup: Special<br />track: Bowser's Castle","dt: 2022-03-26 00:11:00<br />total: 2M 13.611S<br />cup: Special<br />track: Bowser's Castle",null,"dt: 2022-02-09 00:23:00<br />total: 2M 15.947S<br />cup: Special<br />track: Cloudtop Cruise","dt: 2022-03-23 19:25:00<br />total: 2M 14.889S<br />cup: Special<br />track: Cloudtop Cruise",null,"dt: 2022-02-26 23:39:00<br />total: 2M 16.008S<br />cup: Special<br />track: Rainbow Road","dt: 2022-02-27 20:28:00<br />total: 2M 15.21S<br />cup: Special<br />track: Rainbow Road","dt: 2022-03-06 23:21:00<br />total: 2M 15.028S<br />cup: Special<br />track: Rainbow Road","dt: 2022-03-12 00:41:00<br />total: 2M 14.453S<br />cup: Special<br />track: Rainbow Road","dt: 2022-03-26 00:01:00<br />total: 2M 13.432S<br />cup: Special<br />track: Rainbow Road"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(223,112,248,1)","dash":"solid"},"hoveron":"points","name":"Special","legendgroup":"Special","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1644699180,1645919220,1646609160,1647123420,1647863400,1648335960,null,1645919400,1646598660,1646875260,1647106980,null,1643915820,1646598240,1647123120,null,1644813300,1646598960,1647469200,1647469620,1648248840],"y":[131.919,131.401,130.307,129.702,129.396,129.082,null,133.655,132.422,132.332,131.286,null,119.883,118.55,117.95,null,133.897,133.231,132.842,132.014,131.666],"text":["dt: 2022-02-12 20:53:00<br />total: 2M 11.919S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-02-26 23:47:00<br />total: 2M 11.401S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-06 23:26:00<br />total: 2M 10.307S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-12 22:17:00<br />total: 2M 9.702S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-21 11:50:00<br />total: 2M 9.396S<br />cup: Star<br />track: Dolphin Shoals","dt: 2022-03-26 23:06:00<br />total: 2M 9.082S<br />cup: Star<br />track: Dolphin Shoals",null,"dt: 2022-02-26 23:50:00<br />total: 2M 13.655S<br />cup: Star<br />track: Electrodrome","dt: 2022-03-06 20:31:00<br />total: 2M 12.422S<br />cup: Star<br />track: Electrodrome","dt: 2022-03-10 01:21:00<br />total: 2M 12.332S<br />cup: Star<br />track: Electrodrome","dt: 2022-03-12 17:43:00<br />total: 2M 11.286S<br />cup: Star<br />track: Electrodrome",null,"dt: 2022-02-03 19:17:00<br />total: 1M 59.883S<br />cup: Star<br />track: Mount Wario","dt: 2022-03-06 20:24:00<br />total: 1M 58.55S<br />cup: Star<br />track: Mount Wario","dt: 2022-03-12 22:12:00<br />total: 1M 57.95S<br />cup: Star<br />track: Mount Wario",null,"dt: 2022-02-14 04:35:00<br />total: 2M 13.897S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-06 20:36:00<br />total: 2M 13.231S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-16 22:20:00<br />total: 2M 12.842S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-16 22:27:00<br />total: 2M 12.014S<br />cup: Star<br />track: Sunshine Airport","dt: 2022-03-25 22:54:00<br />total: 2M 11.666S<br />cup: Star<br />track: Sunshine Airport"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(251,97,215,1)","dash":"solid"},"hoveron":"points","name":"Star","legendgroup":"Star","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1643907720,1644029160,1646692440,1647101340,1647467520,null,1643785200,1643906580,1643907420,1647100680,1647300960,1647466800,null,1644806520,1645836420,1645836840,1645837260,1645837560,1645838160,1646604900,1647054000,1648227240,1648227960,null,1645118280,1647470160,1647864780],"y":[127.735,126.33,123.741,122.347,122.342,null,124.755,122.362,120.379,119.824,118.834,118.572,null,99.058,98.779,98.464,98.292,98.156,97.512,97.482,97.246,96.62,96.017,null,135.958,135.559,134.985],"text":["dt: 2022-02-03 17:02:00<br />total: 2M 7.735S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-02-05 02:46:00<br />total: 2M 6.33S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-03-07 22:34:00<br />total: 2M 3.741S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-03-12 16:09:00<br />total: 2M 2.347S<br />cup: Triforce<br />track: Hyrule Circuit","dt: 2022-03-16 21:52:00<br />total: 2M 2.342S<br />cup: Triforce<br />track: Hyrule Circuit",null,"dt: 2022-02-02 07:00:00<br />total: 2M 4.755S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-02-03 16:43:00<br />total: 2M 2.362S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-02-03 16:57:00<br />total: 2M 0.379S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-03-12 15:58:00<br />total: 1M 59.824S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-03-14 23:36:00<br />total: 1M 58.834S<br />cup: Triforce<br />track: Ice Ice Outpost","dt: 2022-03-16 21:40:00<br />total: 1M 58.572S<br />cup: Triforce<br />track: Ice Ice Outpost",null,"dt: 2022-02-14 02:42:00<br />total: 1M 39.058S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 00:47:00<br />total: 1M 38.779S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 00:54:00<br />total: 1M 38.464S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:01:00<br />total: 1M 38.292S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:06:00<br />total: 1M 38.156S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-02-26 01:16:00<br />total: 1M 37.512S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-06 22:15:00<br />total: 1M 37.482S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-12 03:00:00<br />total: 1M 37.246S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-25 16:54:00<br />total: 1M 36.62S<br />cup: Triforce<br />track: Rainbow Road (SNES)","dt: 2022-03-25 17:06:00<br />total: 1M 36.017S<br />cup: Triforce<br />track: Rainbow Road (SNES)",null,"dt: 2022-02-17 17:18:00<br />total: 2M 15.958S<br />cup: Triforce<br />track: Wario's Gold Mine","dt: 2022-03-16 22:36:00<br />total: 2M 15.559S<br />cup: Triforce<br />track: Wario's Gold Mine","dt: 2022-03-21 12:13:00<br />total: 2M 14.985S<br />cup: Triforce<br />track: Wario's Gold Mine"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(255,102,168,1)","dash":"solid"},"hoveron":"points","name":"Triforce","legendgroup":"Triforce","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":21.9360730593607,"r":7.30593607305936,"b":21.2785388127854,"l":57.716894977169},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1643440755,1648925025],"tickmode":"array","ticktext":["Feb 01","Feb 15","Mar 01","Mar 15","Apr 01"],"tickvals":[1643673600,1644883200,1646092800,1647302400,1648771200],"categoryorder":"array","categoryarray":["Feb 01","Feb 15","Mar 01","Mar 15","Apr 01"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[68.90175,142.60725],"tickmode":"array","ticktext":["00:01:20","00:01:40","00:02:00","00:02:20"],"tickvals":[80,100,120,140],"categoryorder":"array","categoryarray":["00:01:20","00:01:40","00:02:00","00:02:20"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Cup","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"15797d2961aa":{"x":{},"y":{},"colour":{},"type":"scatter"},"157927cb2018":{"x":{},"y":{},"colour":{}}},"cur_data":"15797d2961aa","visdat":{"15797d2961aa":["function (y) ","x"],"157927cb2018":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
