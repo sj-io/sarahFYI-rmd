@@ -44,7 +44,7 @@ tt <- read_csv("../_data/time-trials.csv",
 gg <- ggplot(tt, aes(x= dt, y=total, color = track)) +
   geom_point() +
   geom_line() +
-  facet_grid(cols = vars(type)) +
+  facet_grid(cols = vars(cup)) +
   scale_y_time() +
   labs(x = "",
        y = "",
@@ -149,22 +149,60 @@ days
 ggplotly(ggWk)
 ```
 
-```{r, layout="l-page", fig.height=4}
+```{r violin-48, layout="l-body-outset", fig.height=4}
 tt %>% 
+  filter(trkNO < 49) %>% 
   group_by(track) %>% 
   mutate(sd = sd(total)) %>% 
   ungroup() %>% 
   ggplot(aes(factor(track), total)) +
   geom_violin(draw_quantiles = 0.5, 
               scale = "width",
-              aes(fill = sd),
+              aes(fill = sd, color=sd),
               alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
   scale_y_time() +
   labs(x = "",
-       y = "PB Time") +
+       y = "PB Time",
+       title = "Time Trial Distributions - 48 Tracks",
+       subtitle = "February-April 2022") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 0.98,
+                                   vjust = 0.5),
         axis.text = element_text(size = 6),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+```
+
+```{r violin-w1, fig.height=5}
+tt %>% 
+  filter(trkNO > 48) %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7,
+              adjust = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  labs(x = "",
+       y = "PB Time",
+       title = "Time Trial Distributions - Wave 1",
+       subtitle = "February-April 2022") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90,
+                                   hjust = 0.98,
+                                   vjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 ```
 
