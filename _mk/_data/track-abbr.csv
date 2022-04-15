@@ -1,57 +1,57 @@
-trk,track,cup,type
-dAC,Animal Crossing,Crossing,DLC
-dBP,Baby Park GCN,Crossing,DLC
-dBB,Big Blue,Bell,DLC
-BDD,Bone-Dry Dunes,Special,nitro
-BC,Bowser's Castle,Special,nitro
-rCCB,Cheep Cheep Beach DS,Shell,retro
-dCL,Cheese Land GBA,Crossing,DLC
-wChM,Choco Mountain,Golden Dash,wave1
-CC,Cloudtop Cruise,Special,nitro
-wCoM,Coconut Mall,Golden Dash,wave1
-rDKJ,DK Jungle 3DS ,Banana,retro
-DS,Dolphin Shoals,Star,nitro
-rDP3,Donut Plains 3 SNES ,Banana,retro
-dDD,Dragon Driftway,Egg,DLC
-rDDD,Dry Dry Desert GCN,Banana,retro
-Ed,Electrodrome,Star,nitro
-dEA,Excitebike Arena,Egg,DLC
-rGV,Grumble Volcano Wii,Lightning,retro
-dHC,Hyrule Circuit,Triforce,DLC
-dIIO,Ice Ice Outpost,Triforce,DLC
-MC,Mario Circuit,Flower,nitro
-rMC,Mario Circuit GBA,Shell,retro
-MKS,Mario Kart Stadium,Mushroom,nitro
-rMMM,Moo Moo Meadows,Shell,retro
-MW,Mount Wario,Star,nitro
-rMP,Music Park 3DS ,Leaf,retro
-dMC,Mute City,Egg,DLC
-dNBC,Neo Bowser City 3DS,Bell,DLC
-wNH,Ninja Hideaway,Lucky Cat,wave1
-wPP,Paris Promenade,Golden Dash,wave1
-rPPS,Piranha Plant Slide 3DS ,Lightning,retro
-RR,Rainbow Road,Special,nitro
-rRRd,Rainbow Road N64,Lightning,retro
-dRR,Rainbow Road SNES,Triforce,DLC
-dRiR,Ribbon Road GBA,Bell,DLC
-rRRy,Royal Raceway N64 ,Banana,retro
-rSL,Sherbet Land GCN,Leaf,retro
-wSR,Shroom Ridge,Lucky Cat,wave1
-SGF,Shy Guy Falls,Flower,nitro
-wSG,Sky Garden,Lucky Cat,wave1
-SA,Sunshine Airport,Star,nitro
-dSBS,Super Bell Subway,Bell,DLC
-SSC,Sweet Sweet Canyon,Mushroom,nitro
-TR,Thwomp Ruins,Mushroom,nitro
-rTTC,Tick-Tock Clock DS,Lightning,retro
-wTC,Toad Circuit 3DS,Golden Dash,wave1
-TH,Toad Harbor,Flower,nitro
-rTT,Toad's Turnpike N64 ,Shell,retro
-wTB,Tokyo Blur,Lucky Cat,wave1
-TM,Twisted Mansion,Flower,nitro
-rWS,Wario Stadium DS,Leaf,retro
-dWGM,Wario's Gold Mine Wii,Triforce,DLC
-WP,Water Park,Mushroom,nitro
-dWW,Wild Woods,Crossing,DLC
-dYC,Yoshi Circuit GCN,Egg,DLC
-rYV,Yoshi Valley N64 ,Leaf,retro
+trkNO,trk,track,cup,type
+1,MKS,Mario Kart Stadium,Mushroom,nitro
+2,WP,Water Park,Mushroom,nitro
+3,SSC,Sweet Sweet Canyon,Mushroom,nitro
+4,TR,Thwomp Ruins,Mushroom,nitro
+5,MC,Mario Circuit,Flower,nitro
+6,TH,Toad Harbor,Flower,nitro
+7,TM,Twisted Mansion,Flower,nitro
+8,SGF,Shy Guy Falls,Flower,nitro
+9,SA,Sunshine Airport,Star,nitro
+10,DS,Dolphin Shoals,Star,nitro
+11,Ed,Electrodrome,Star,nitro
+12,MW,Mount Wario,Star,nitro
+13,CC,Cloudtop Cruise,Special,nitro
+14,BDD,Bone-Dry Dunes,Special,nitro
+15,BC,Bowser's Castle,Special,nitro
+16,RR,Rainbow Road,Special,nitro
+17,rMMM,Moo Moo Meadows,Shell,retro
+18,rMC,Mario Circuit GBA,Shell,retro
+19,rCCB,Cheep Cheep Beach DS,Shell,retro
+20,rTT,Toad's Turnpike N64 ,Shell,retro
+21,rDDD,Dry Dry Desert GCN,Banana,retro
+22,rDP3,Donut Plains 3 SNES ,Banana,retro
+23,rRRy,Royal Raceway N64 ,Banana,retro
+24,rDKJ,DK Jungle 3DS ,Banana,retro
+25,rWS,Wario Stadium DS,Leaf,retro
+26,rSL,Sherbet Land GCN,Leaf,retro
+27,rMP,Music Park 3DS ,Leaf,retro
+28,rYV,Yoshi Valley N64 ,Leaf,retro
+29,rTTC,Tick-Tock Clock DS,Lightning,retro
+30,rPPS,Piranha Plant Slide 3DS ,Lightning,retro
+31,rGV,Grumble Volcano Wii,Lightning,retro
+32,rRRd,Rainbow Road N64,Lightning,retro
+33,dYC,Yoshi Circuit GCN,Egg,DLC
+34,dEA,Excitebike Arena,Egg,DLC
+35,dDD,Dragon Driftway,Egg,DLC
+36,dMC,Mute City,Egg,DLC
+37,dWGM,Wario's Gold Mine Wii,Triforce,DLC
+38,dRR,Rainbow Road SNES,Triforce,DLC
+39,dIIO,Ice Ice Outpost,Triforce,DLC
+40,dHC,Hyrule Circuit,Triforce,DLC
+41,dBP,Baby Park GCN,Crossing,DLC
+42,dCL,Cheese Land GBA,Crossing,DLC
+43,dWW,Wild Woods,Crossing,DLC
+44,dAC,Animal Crossing,Crossing,DLC
+45,dNBC,Neo Bowser City 3DS,Bell,DLC
+46,dRiR,Ribbon Road GBA,Bell,DLC
+47,dSBS,Super Bell Subway,Bell,DLC
+48,dBB,Big Blue,Bell,DLC
+49,wPP,Paris Promenade,Golden Dash,wave1
+50,wTC,Toad Circuit 3DS,Golden Dash,wave1
+51,wChM,Choco Mountain,Golden Dash,wave1
+52,wCoM,Coconut Mall,Golden Dash,wave1
+53,wTB,Tokyo Blur,Lucky Cat,wave1
+54,wSR,Shroom Ridge,Lucky Cat,wave1
+55,wSG,Sky Garden,Lucky Cat,wave1
+56,wNH,Ninja Hideaway,Lucky Cat,wave1

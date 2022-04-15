@@ -1,0 +1,174 @@
+---
+title: "waluigi"
+description: |
+  A short description of the post.
+author:
+  - name: Sarah Johnson
+    url: {}
+date: 2022-04-14
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(plotly)
+library(lubridate)
+```
+
+```{r}
+abr <- read_csv("../_data/track-abbr.csv") 
+
+tt <- read_csv("../_data/time-trials.csv", 
+               col_types = cols(total = "c")) %>% 
+  filter(cc == 150) %>% 
+  mutate(total = ms(total),
+         yr = year(date),
+         mth = month(date),
+         day = day(date),
+         hour = hour(time),
+         min = minute(time),
+         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min)) %>% 
+  left_join(abr) %>%
+  mutate(track = fct_reorder(track, trkNO))
+```
+
+```{r, layout="l-screen", fig.height=10}
+gg <- ggplot(tt, aes(x= dt, y=total, color = track)) +
+  geom_point() +
+  geom_line() +
+  facet_grid(cols = vars(type)) +
+  scale_y_time() +
+  labs(x = "",
+       y = "",
+       color = "Track") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg)
+```
+
+```{r}
+test <- tt %>% 
+  arrange(trk, dt) %>% 
+  group_by(trk) %>% 
+  mutate(prev = lag(total), .after = total,
+         diff = as.double(prev - total, units = "secs"),
+         diff = replace_na(diff, 0)
+         ) %>% 
+  mutate(cumsum = cumsum(diff), .after = diff)
+```
+
+```{r, layout="l-page", fig.height=5}
+ggT <- test %>% 
+  filter(type == "nitro") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  facet_grid(cols = vars(cup)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none") 
+
+ggplotly(ggT)
+```
+
+```{r, layout="l-page", fig.height=5}
+ggT2 <- test %>% 
+  filter(type == "retro") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  facet_grid(cols = vars(cup)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none") 
+
+ggplotly(ggT2)
+```
+
+```{r, layout="l-page", fig.height=5}
+ggT3 <- test %>% 
+  filter(type == "DLC") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  facet_grid(cols = vars(cup)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none") 
+
+ggplotly(ggT3)
+```
+
+```{r, layout="l-page", fig.height=5}
+ggT4 <- test %>% 
+  filter(type == "wave1") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  facet_grid(cols = vars(cup)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none") 
+
+ggplotly(ggT4)
+```
+
+
+```{r}
+days <- test %>% 
+  filter(!is.na(prev)) %>% 
+  ungroup() %>% 
+  mutate(week = week(date)) %>% 
+  group_by(week) %>% 
+  summarise(mean = mean(diff), n = n())
+
+ggWk <- days %>% 
+  ggplot(aes(x=week, y=mean)) +
+  geom_line()
+
+days
+
+ggplotly(ggWk)
+```
+
+```{r, layout="l-page", fig.height=4}
+tt %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd),
+              alpha = .7) + 
+  scale_y_time() +
+  labs(x = "",
+       y = "PB Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        axis.text = element_text(size = 6),
+        legend.position = "none")
+```
+
+```{r eval=FALSE, include=FALSE}
+sr <- read_csv("../_data/48-NI-tracks.csv")
+```
+
