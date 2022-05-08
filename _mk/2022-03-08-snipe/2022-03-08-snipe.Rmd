@@ -11,6 +11,7 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
+draft: true
 ---
 
 ```{r setup, include=FALSE}
@@ -76,7 +77,7 @@ racerResult <- results %>%
 
 The below graph shows how Clint and I placed in every race. The graph is interactive, so feel free to hover over any point to see more details. Clicking on a line in the legend will isolate it and hide the other line.
 
-```{r, layout="l-page", fig.height=2}
+```{r eval=FALSE, fig.height=2, include=FALSE, layout="l-page"}
 ggResult <- racerResult %>% 
   ggplot(aes(x = race, y = result, color = racer)) +
   geom_line() +
@@ -95,7 +96,7 @@ Clint was able to snag twelve top-3 finishes (31%), including two wins. Unfortun
 
 To better understand how the results trended throughout the game, the below graph shows the same data as above but smoothed out.
 
-```{r, layout="l-page", fig.height=6}
+```{r eval=FALSE, fig.height=6, include=FALSE, layout="l-page"}
 ggSmooth <- racerResult %>% ggplot(aes(x = race, y = result, color = racer, fill = racer)) +
   geom_smooth() +
   scale_y_reverse(breaks = seq(1, 13, by = 4)) +
@@ -116,7 +117,7 @@ Despite my poor results, I had one of the lowest Elo ratings in the lobby and co
 
 Over the course of the 39 races, 25 unique tracks were played. The most frequently played tracks were Cheep Cheep Beach and Mario Circuit.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 trackPopular <- results %>% 
   count(track) %>% 
   arrange(desc(n)) 
@@ -128,7 +129,7 @@ datatable(trackPopular,
 
 There were 23 tracks not played at all.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 notPlayed <- tracks %>% 
   anti_join(trackPopular, by = "track")
 
@@ -141,7 +142,7 @@ datatable(notPlayed,
 
 What are each racer's best and worst tracks? The table below shows the average result for each racer on each map, along with the number of times they've played the map. Click in the boxes under the header row to easily filter for a particular player or track.
 
-```{r, layout="l-page"}
+```{r eval=FALSE, include=FALSE, layout="l-page"}
 racerTrack <- racerResult %>% 
   select(track, cc, racer, result) %>% 
   group_by(racer, track) %>% 

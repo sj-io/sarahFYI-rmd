@@ -13,6 +13,7 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
+draft: true
 ---
 
 ```{r setup, include=FALSE}
@@ -34,7 +35,7 @@ results <- read_csv("../_data/stream-snipe.csv",
 
 Today was a good day for Mario Kart. The post below summarizes my stream snipe of Clint Stevens and my new speedrunning PB.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 err <- results %>% 
   filter(Clint == "e")
 
@@ -64,7 +65,7 @@ clint <- mar15 %>%
 
 Clint hosted his 4th Mario Kart stream of 2022 on March 15th. He played 56 games, his most so far this year.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ggYTD <- overall %>% 
   group_by(date) %>% 
   summarise(races = max(race)) %>% 
@@ -83,7 +84,7 @@ ggplotly(ggYTD)
 
 Hyrule Circuit and Mount Wario were the most frequently played tracks of the day, each played 4 times.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 trkFqTYD <- overall %>% 
   filter(racer == "Clint") %>% 
   count(trk) %>% 
@@ -117,7 +118,7 @@ datatable(trkFq,
 
 The games were marred by connection problems. Five times during the stream, Clint was kicked out of the lobby before the race finished. Snipers scrambled into the new lobbies, but sometimes it took a few games for spots to open.
 
-```{r, fig.width=3, fig.height=2, fig.align='center'}
+```{r eval=FALSE, fig.align='center', fig.height=2, fig.width=3, include=FALSE}
 snpCtRace <- mar15 %>% 
   group_by(race) %>% 
   count()
@@ -144,7 +145,7 @@ The Elo rankings for the next race matched my results on both of our screens, so
 
 The following table shows snipers who completed at least 5 races.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 snpFq <- snp %>% 
   count(racer) %>% 
   arrange(desc(n)) %>% 
@@ -170,7 +171,7 @@ The next two graphs show data for Clint and the eight most frequent snipers. I'd
 
 The first graph show the number of nth place finishes for each player.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 #' this actually works. need to rearrange stuff.
 vC8 <- c("Clint", 
          "Dawn", 
@@ -208,7 +209,7 @@ Overall I was much happier with my placement, especially considering [my first t
 
 The graph below show the smoothed average result for each racer over the course of the night. Double click on a name in the legend to isolate the line. Single click to hide/show a racer.
 
-```{r, layout="l-page", fig.height=5}
+```{r eval=FALSE, fig.height=5, include=FALSE, layout="l-page"}
 ggResult <- C8 %>% 
   ggplot(aes(x = race, y = result, color = racer, fill = racer)) +
   geom_smooth(alpha = 0.15) +
@@ -233,7 +234,7 @@ In my last game, I averaged between 8th and 9th place, while today I averaged a 
 
 The table below takes the average score for each player and assigns them a ranking.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 snpAvg <- mar15 %>% 
   group_by(racer) %>% 
   summarise(avg = mean(result),
@@ -264,7 +265,7 @@ snpRank <- snpAvg %>%
          rank = as.factor(rank))
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 overallAvg <- overall %>% 
   group_by(racer) %>% 
   summarise(avg = mean(result),
