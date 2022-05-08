@@ -1861,12 +1861,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
-          $(this).html(fn.shadowRoot.querySelector("sup"))
-          $(this).id = fn.id
-          fn.remove()
-        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -2041,7 +2035,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2229,7 +2223,9 @@ function init_posts_list() {
 <div class="dt-author">Sarah Johnson</div>
 </div>
 </div>
-<div class="thumbnail"></div>
+<div class="thumbnail">
+<img/>
+</div>
 <div class="description">
 <h2>March Time Trials</h2>
 <div class="dt-tags">
@@ -2258,45 +2254,6 @@ function init_posts_list() {
 <p>My time trial and speedrun data for the new DLC tracks.</p>
 </div>
 </a>
-<a href="mk/2022-03-20-new-tracks/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["online"]}</script>
-<div class="metadata">
-<div class="publishedDate">April 4, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Sarah Johnson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>Clint Stevens Mario Kart extended universe</h2>
-<div class="dt-tags">
-<div class="dt-tag">online</div>
-</div>
-<p>Clint plays the new tracks with chat.</p>
-</div>
-</a>
-<a href="mk/2022-03-15-snipe/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["online","speedrun"]}</script>
-<div class="metadata">
-<div class="publishedDate">March 16, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Sarah Johnson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="mk/2022-03-15-snipe/2022-03-15-snipe_files/figure-html5/unnamed-chunk-6-1.png"/>
-</div>
-<div class="description">
-<h2>March 15th stream snipe and speedrun PB</h2>
-<div class="dt-tags">
-<div class="dt-tag">online</div>
-<div class="dt-tag">speedrun</div>
-</div>
-<p>Red shells rain on the Ides of March.</p>
-</div>
-</a>
 <a href="mk/2022-03-13-bittybuggy/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["speedrun","online"]}</script>
 <div class="metadata">
@@ -2315,44 +2272,6 @@ function init_posts_list() {
 <div class="dt-tag">online</div>
 </div>
 <p>Learning to love the meta [PB 1:59:02]</p>
-</div>
-</a>
-<a href="mk/2022-03-11-snipe-guide/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["online"]}</script>
-<div class="metadata">
-<div class="publishedDate">March 11, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Sarah Johnson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>ᶜˡᶦⁿᵈˢᵗᵉᵇᵉⁿ vs chat Mario Kart guide</h2>
-<div class="dt-tags">
-<div class="dt-tag">online</div>
-</div>
-<p>Clint's best/worst tracks &amp; ranking stream snipers</p>
-</div>
-</a>
-<a href="mk/2022-03-08-snipe/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["online"]}</script>
-<div class="metadata">
-<div class="publishedDate">March 10, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Sarah Johnson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="mk/2022-03-08-snipe/images/phoenix-sweat.jpg"/>
-</div>
-<div class="description">
-<h2>March 8th Stream Snipe</h2>
-<div class="dt-tags">
-<div class="dt-tag">online</div>
-</div>
-<p>Stream sniping Clint Stevens in Mario Kart.</p>
 </div>
 </a>
 <a href="mk/2022-02-tt/" class="post-preview">
@@ -2381,15 +2300,15 @@ function init_posts_list() {
 <ul>
 <li>
 <a href="#category:articles">articles</a>
-<span class="category-count">(8)</span>
+<span class="category-count">(4)</span>
 </li>
 <li>
 <a href="#category:online">online</a>
-<span class="category-count">(5)</span>
+<span class="category-count">(1)</span>
 </li>
 <li>
 <a href="#category:speedrun">speedrun</a>
-<span class="category-count">(3)</span>
+<span class="category-count">(2)</span>
 </li>
 <li>
 <a href="#category:time_trials">time trials</a>
