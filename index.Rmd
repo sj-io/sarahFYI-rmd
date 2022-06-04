@@ -3,7 +3,7 @@ title: "Sarah Johnson"
 image: "me.jpg"
 links:
   - label: Twitch
-    url: https://www.twitch.tv/hsgsarah
+    url: https://www.twitch.tv/sarahFYI
   - label: Github
     url: https://github.com/sj-io
 output:
