@@ -1,5 +1,5 @@
 ---
-title: "Mario Kart Time Trial PBs"
+title: "Mario Kart 150cc Time Trial PBs"
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -35,10 +35,10 @@ tt <- read_csv("_data/time-trials.csv",
 
 ## Column 1
 
-### Violin Plot
+### Violin Plot of PB Distributions
 
 ```{r fig.height=10}
-tt %>% 
+ggtt <- tt %>% 
   filter(trk != "dBP") %>% 
   group_by(track) %>% 
   mutate(sd = sd(total)) %>% 
@@ -53,9 +53,7 @@ tt %>%
   scale_x_discrete(limits = rev(levels(tt$track))) +
   coord_flip() +
   labs(x = "",
-       y = "PB Time",
-       title = "Time Trial PB Distributions (150cc)",
-       subtitle = "February-April 2022") +
+       y = "PB Time") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 0.98,
@@ -65,11 +63,11 @@ tt %>%
         panel.grid = element_line(size = .2),
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
+
+ggplotly(ggtt)
 ```
 
 ## Column 2
-
-### Average Time Save by Week
 
 ```{r}
 ttDiff <- tt %>% 
@@ -87,16 +85,10 @@ wk <- ttDiff %>%
   mutate(week = week(date)) %>% 
   group_by(week) %>% 
   summarise(mean = mean(diff), n = n())
-
-ggWk <- wk %>% 
-  ggplot(aes(x=week, y=mean)) +
-  geom_line() +
-  theme_minimal()
-
-ggplotly(ggWk)
 ```
 
-### Number of PBs Each Week
+
+### Number of PBs by Week
 
 ```{r}
 ggN <- wk %>% 
@@ -107,7 +99,16 @@ ggN <- wk %>%
 ggplotly(ggN)
 ```
 
+### Average Time Save by Week
 
+```{r}
+ggWk <- wk %>% 
+  ggplot(aes(x=week, y=mean)) +
+  geom_line() +
+  theme_minimal()
+
+ggplotly(ggWk)
+```
 
 # Nitro Cups
 
@@ -115,21 +116,70 @@ ggplotly(ggN)
 
 ### Mushroom Cup
 
-sfs
+```{r}
+ggM <- ttDiff %>% 
+  filter(cup == "Mushroom") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(ggM)
+```
+
 
 ### Flower Cup
 
-dsfs
+```{r}
+gg2 <- ttDiff %>% 
+  filter(cup == "Flower") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg2)
+```
 
 ## Column 2
 
 ### Star Cup
 
-sdfs
+```{r}
+gg3 <- ttDiff %>% 
+  filter(cup == "Star") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg3)
+```
 
 ### Special cup
 
-sdfsdf
+```{r}
+gg4 <- ttDiff %>% 
+  filter(cup == "Special") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg4)
+```
 
 # Retro Cups
 
@@ -137,21 +187,69 @@ sdfsdf
 
 ### Shell Cup
 
-sdfsd
+```{r}
+gg5 <- ttDiff %>% 
+  filter(cup == "Shell") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg5)
+```
 
 ### Banana Cup
 
-dfsd
+```{r}
+gg6 <- ttDiff %>% 
+  filter(cup == "Banana") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg6)
+```
 
 ## Column 2
 
 ### Leaf Cup
 
-sfsd
+```{r}
+gg7 <- ttDiff %>% 
+  filter(cup == "Leaf") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg7)
+```
 
 ### Lightning Cup
 
-sdfsdf
+```{r}
+gg8 <- ttDiff %>% 
+  filter(cup == "Lightning") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg8)
+```
 
 # Bonus Cups
 
@@ -159,21 +257,69 @@ sdfsdf
 
 ### Egg Cup
 
-sdfd
+```{r}
+gg9 <- ttDiff %>% 
+  filter(cup == "Egg") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg9)
+```
 
 ### Triforce Cup
 
-sfsdf
+```{r}
+gg10 <- ttDiff %>% 
+  filter(cup == "Triforce") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg10)
+```
 
 ## Crossing Cup
 
 ### Crossing Cup
 
-sdfsd
+```{r}
+gg11 <- ttDiff %>% 
+  filter(cup == "Crossing") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg11)
+```
 
 ### Bell Cup
 
-sdfds
+```{r}
+gg12 <- ttDiff %>% 
+  filter(cup == "Bell") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg12)
+```
 
 # DLC Cups
 
@@ -181,10 +327,61 @@ sdfds
 
 ### Golden Dash Cup
 
-sdfs
+```{r}
+gg13 <- ttDiff %>% 
+  filter(cup == "Golden Dash") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg13)
+```
 
 ## Column 2
 
 ### Lucky Cat Cup
 
-dfsdf
+```{r}
+gg14 <- ttDiff %>% 
+  filter(cup == "Lucky Cat") %>% 
+  ggplot(aes(x=dt, y=cumsum, color=track)) +
+  geom_point() +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(gg14)
+```
+
+# Other Data
+
+## Column 1
+
+### PBs by Time of Day by Month
+
+```{r}
+ct <- tt %>% group_by(mth) %>% count(hour) %>% 
+  rename(month = mth)
+
+ggTime <- ct %>% 
+  ggplot(aes(x = month, y=hour, fill=n)) +
+  geom_tile() +
+  theme_minimal() +
+  scale_y_reverse() +
+  labs(x = "",
+       y = "") +
+  theme(legend.position = "none",
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        panel.background = element_blank(),
+        panel.grid = element_blank())
+
+ggplotly(ggTime)
+```
