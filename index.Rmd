@@ -1,14 +1,5 @@
 ---
 title: "Sarah Johnson"
-image: "me.jpg"
-links:
-  - label: Twitch
-    url: https://www.twitch.tv/sarahFYI
-  - label: Github
-    url: https://github.com/sj-io
-output:
-  postcards::jolla
-site: distill::distill_website
 ---
 
 Hey, I'm Sarah. I'm okay at video games and data analysis.

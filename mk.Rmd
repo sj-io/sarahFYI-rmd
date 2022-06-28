@@ -1,5 +1,105 @@
 ---
-title: "Mario Kart"
-site: distill::distill_website
-listing: mk
+title: "Mario Kart Time Trial PBs"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: sandstone
+    navbar:
+      - { icon: "fas fa-home", href: "https://sarah.fyi/index", align: right}
 ---
+
+```{r}
+library(tidyverse)
+```
+
+# All Tracks
+
+## Column 1
+
+### Violin plot
+
+this is folorisjklfd
+
+violin plot here
+
+sdfkjsd
+
+# Nitro Cups
+
+## Column 1
+
+### Mushroom Cup
+
+sfs
+
+### Flower Cup
+
+dsfs
+
+## Column 2
+
+### Star Cup
+
+sdfs
+
+### Special cup
+
+sdfsdf
+
+# Retro Cups
+
+## Column 1
+
+### Shell Cup
+
+sdfsd
+
+### Banana Cup
+
+dfsd
+
+## Column 2
+
+### Leaf Cup
+
+sfsd
+
+### Lightning Cup
+
+sdfsdf
+
+# Bonus Cups
+
+## Column 1
+
+### Egg Cup
+
+sdfd
+
+### Triforce Cup
+
+sfsdf
+
+## Crossing Cup
+
+### Crossing Cup
+
+sdfsd
+
+### Bell Cup
+
+sdfds
+
+# DLC Cups
+
+## Column 1
+
+### Golden Dash Cup
+
+sdfs
+
+## Column 2
+
+### Lucky Cat Cup
+
+dfsdf
