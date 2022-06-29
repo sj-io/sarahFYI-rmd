@@ -128,7 +128,7 @@ ggWk <- wk %>%
        y = "Average Time Save (secs)")
 
 ggWk <- ggWk +
-  annotate("text", x = 7, y = 1.1, alpha = .70,
+  annotate("text", x = 6.5, y = 1.12, alpha = .70,
            label = "Switch to Meta\nCharacter", parse = TRUE)
 
 ggplotly(ggWk)
