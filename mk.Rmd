@@ -527,30 +527,3 @@ gg14 <- ttDiff %>%
 
 ggplotly(gg14)
 ```
-
-# Other Data
-
-## Column 1
-
-### PBs by Time of Day by Month
-
-```{r}
-ct <- tt %>% group_by(mth) %>% count(hour) %>% 
-  rename(month = mth)
-
-ggTime <- ct %>% 
-  ggplot(aes(x = month, y=hour, fill=n)) +
-  geom_tile() +
-  theme_minimal() +
-  scale_y_reverse() +
-  labs(x = "",
-       y = "") +
-  theme(legend.position = "none",
-        axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.line = element_blank(),
-        panel.background = element_blank(),
-        panel.grid = element_blank())
-
-ggplotly(ggTime)
-```
