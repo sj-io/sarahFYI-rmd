@@ -1,5 +1,5 @@
 ---
-title: "Mario Kart 150cc Time Trial PBs"
+title: "Mario Kart Time Trial PBs 150cc"
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -27,23 +27,33 @@ tt <- read_csv("_data/time-trials.csv",
          day = day(date),
          hour = hour(time),
          min = minute(time),
-         dt = make_datetime(year = yr, month = mth, day = day, hour = hour, min = min)) %>% 
-  left_join(abr) %>%
-  mutate(track = fct_reorder(track, trkNO))
+         dt = make_datetime(year = yr, month = mth, day = day, 
+                            hour = hour, min = min)) %>% 
+  left_join(abr) 
 
 ttwr <- read_csv("_data/tt-wr.csv",
                  col_types = cols(total = "c")) %>% 
   mutate(total = ms(total))
 ```
 
-# All Tracks
+```{r}
+tt48 <- tt %>% 
+  filter(trkNO <= 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+
+tt96 <- tt %>% 
+  filter(trkNO > 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+```
+
+# Tracks 1-48
 
 ## Column 1
 
 ### Time Trial PB Distributions, Feb 01, 2022 - Present
 
 ```{r fig.height=10}
-ggtt <- tt %>% 
+ggtt <- tt48 %>% 
   filter(trk != "dBP") %>% 
   group_by(track) %>% 
   mutate(sd = sd(total)) %>% 
@@ -55,7 +65,7 @@ ggtt <- tt %>%
               alpha = .7) + 
   stat_summary(fun = "median", geom = "point", size = .4) +
   scale_y_time() +
-  scale_x_discrete(limits = rev(levels(tt$track))) +
+  scale_x_discrete(limits = rev(levels(tt48$track))) +
   coord_flip() +
   labs(x = "",
        y = "PB Time") +
@@ -490,9 +500,90 @@ gg12 <- ttDiff %>%
 ggplotly(gg12)
 ```
 
-# DLC Cups
+# Tracks 49-96
 
 ## Column 1
+
+### Time Trial PB Distributions, March 18, 2022 - Present
+
+```{r fig.height=10}
+gg96tt <- tt96 %>% 
+  filter(trk != "dBP") %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(tt96$track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "PB Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(gg96tt)
+```
+
+## Column 2
+
+### Worst Tracks
+
+```{r}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  gt() %>% 
+  cols_label(
+    'track' = 'Track',
+    'diff' = 'WR Diff.'
+    )
+```
+
+### Best Tracks
+
+```{r}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, diff) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  gt() %>% 
+  cols_label(
+    'track' = 'Track',
+    'diff' = 'WR Diff.'
+    )
+```
+
+### Most Improved
+
+```{r}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  gt() %>% 
+  cols_label(
+    'track' = 'Track',
+    'cumsum' = 'Improvement'
+    )
+```
+
+## Column 3
 
 ### Golden Dash Cup
 
@@ -510,8 +601,6 @@ gg13 <- ttDiff %>%
 ggplotly(gg13)
 ```
 
-## Column 2
-
 ### Lucky Cat Cup
 
 ```{r}
@@ -527,3 +616,5 @@ gg14 <- ttDiff %>%
 
 ggplotly(gg14)
 ```
+
+
