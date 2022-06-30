@@ -5,7 +5,7 @@ output:
     orientation: columns
     theme: sandstone
     navbar:
-      - { icon: "fas fa-home", href: "https://sarah.fyi/index", align: right}
+      - { icon: "fas fa-home", href: "index.html", align: right}
 ---
 
 <script>
@@ -23,23 +23,30 @@ library(kableExtra)
 ```
 
 ```{r}
-abr <- read_csv("_data/track-abbr.csv") 
+abr <- read_csv("_data/track-abbr.csv")
 
-tt <- read_csv("_data/time-trials.csv", 
-               col_types = cols(total = "c")) %>% 
-  filter(cc == 150) %>% 
-  mutate(total = ms(total),
-         yr = year(date),
-         mth = month(date),
-         day = day(date),
-         hour = hour(time),
-         min = minute(time),
-         dt = make_datetime(year = yr, month = mth, day = day, 
-                            hour = hour, min = min)) %>% 
-  left_join(abr) 
+tt <- read_csv("_data/time-trials.csv",
+               col_types = cols(total = "c")) %>%
+  filter(cc == 150) %>%
+  mutate(
+    total = ms(total),
+    yr = year(date),
+    mth = month(date),
+    day = day(date),
+    hour = hour(time),
+    min = minute(time),
+    dt = make_datetime(
+      year = yr,
+      month = mth,
+      day = day,
+      hour = hour,
+      min = min
+    )
+  ) %>%
+  left_join(abr)
 
 ttwr <- read_csv("_data/tt-wr.csv",
-                 col_types = cols(total = "c")) %>% 
+                 col_types = cols(total = "c")) %>%
   mutate(total = ms(total))
 ```
 
