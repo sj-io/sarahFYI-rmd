@@ -8,11 +8,18 @@ output:
       - { icon: "fas fa-home", href: "https://sarah.fyi/index", align: right}
 ---
 
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+
 ```{r}
 library(tidyverse)
 library(plotly)
 library(lubridate)
-library(gt)
+library(knitr)
+library(kableExtra)
 ```
 
 ```{r}
@@ -110,7 +117,6 @@ wr <- ttDiff %>%
   mutate(diff = as.double(total.x - total.y, units = "secs"))
 ```
 
-
 ### Number of PBs by Week
 
 ```{r}
@@ -144,34 +150,36 @@ ggWk <- ggWk +
 ggplotly(ggWk)
 ```
 
-## Column 3
+## Column 3 {data-width="320"}
 
 ### Worst Tracks
 
 ```{r}
 wr %>% 
+  filter(type != "wave1") %>% 
   select(track, diff) %>% 
   arrange(desc(diff)) %>% 
   head(7) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'diff' = 'WR Diff.'
-    )
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
 ```
 
 ### Best Tracks
 
 ```{r}
 wr %>% 
+  filter(type != "wave1") %>% 
   select(track, diff) %>% 
   arrange(diff) %>% 
   head(7) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'diff' = 'WR Diff.'
-    )
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
 ```
 
 ### Most Improved since Feb. 2022
@@ -182,13 +190,13 @@ wr %>%
   select(track, cumsum) %>% 
   arrange(desc(cumsum)) %>% 
   head(7) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'cumsum' = 'Improvement'
-    )
-```
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
+  ) %>% 
+  kable_styling()
 
+```
 
 # Nitro Cups
 
@@ -197,32 +205,38 @@ wr %>%
 ### Current PBs vs. WR
 
 ```{r}
-wr %>% 
-  filter(type == "nitro") %>% 
-  select(track, cumsum, date, total.x, total.y, diff, cup) %>% 
-  group_by(cup) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'cumsum' = 'Cum. Time Save',
-    'date' = 'Last PB',
-    'total.x' = 'PB',
-    'total.y' = 'WR',
-    'diff' = 'WR Diff.'
-    ) %>% 
-  tab_style(
-    style = cell_text(size = px(12)),
-    locations = cells_body(
-      columns = c(total.x, total.y, date)
-    )
-  ) %>% 
-  fmt_date(
-    columns = date,
-    date_style = 6
-  ) %>% 
-  tab_options(
-    row_group.as_column = TRUE
-  ) 
+PBn <- wr %>%
+  filter(type == "nitro") %>%
+  select(cup, track, date, total.x, total.y, cumsum, diff)
+```
+
+```{r}
+PBn %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    align = "c"
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    7,
+    color = "white",
+    background = spec_color(
+      PBn$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", PBn$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
 ```
 
 ## Column 2
@@ -300,32 +314,38 @@ ggplotly(gg4)
 ### Current PBs vs. WR
 
 ```{r}
-wr %>% 
-  filter(type == "retro") %>% 
-  select(track, cumsum, date, total.x, total.y, diff, cup) %>% 
-  group_by(cup) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'cumsum' = 'Cum. Time Save',
-    'date' = 'Last PB',
-    'total.x' = 'PB',
-    'total.y' = 'WR',
-    'diff' = 'WR Diff.'
-    ) %>% 
-  tab_style(
-    style = cell_text(size = px(12)),
-    locations = cells_body(
-      columns = c(total.x, total.y, date)
-    )
-  ) %>% 
-  fmt_date(
-    columns = date,
-    date_style = 6
-  ) %>% 
-  tab_options(
-    row_group.as_column = TRUE
-  ) 
+PBr <- wr %>%
+  filter(type == "retro") %>%
+  select(cup, track, date, total.x, total.y, cumsum, diff)
+```
+
+```{r}
+PBr %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    align = "c"
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    7,
+    color = "white",
+    background = spec_color(
+      PBn$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", PBr$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
 ```
 
 ## Column 2
@@ -403,33 +423,39 @@ ggplotly(gg8)
 ### Current PBs vs. WR
 
 ```{r}
-wr %>% 
-  filter(type == "DLC") %>% 
-  select(track, cumsum, date, total.x, total.y, diff, cup) %>% 
-  distinct() %>% 
-  group_by(cup) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'cumsum' = 'Cum. Time Save',
-    'date' = 'Last PB',
-    'total.x' = 'PB',
-    'total.y' = 'WR',
-    'diff' = 'WR Diff.'
-    ) %>% 
-  tab_style(
-    style = cell_text(size = px(12)),
-    locations = cells_body(
-      columns = c(total.x, total.y, date)
-    )
-  ) %>% 
-  fmt_date(
-    columns = date,
-    date_style = 6
-  ) %>% 
-  tab_options(
-    row_group.as_column = TRUE
-  ) 
+PBb <- wr %>%
+  filter(type == "DLC") %>%
+  select(cup, track, date, total.x, total.y, cumsum, diff) %>% 
+  unique() 
+```
+
+```{r}
+PBb %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    align = "c"
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    7,
+    color = "white",
+    background = spec_color(
+      PBn$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", PBb$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
 ```
 
 ## Column 2
@@ -536,7 +562,7 @@ gg96tt <- tt96 %>%
 ggplotly(gg96tt)
 ```
 
-## Column 2
+## Column 2 {data-width="320"}
 
 ### Worst Tracks
 
@@ -546,11 +572,11 @@ wr %>%
   select(track, diff) %>% 
   arrange(desc(diff)) %>% 
   head(7) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'diff' = 'WR Diff.'
-    )
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
 ```
 
 ### Best Tracks
@@ -561,11 +587,11 @@ wr %>%
   select(track, diff) %>% 
   arrange(diff) %>% 
   head(7) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'diff' = 'WR Diff.'
-    )
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
 ```
 
 ### Most Improved
@@ -576,11 +602,11 @@ wr %>%
   select(track, cumsum) %>% 
   arrange(desc(cumsum)) %>% 
   head(7) %>% 
-  gt() %>% 
-  cols_label(
-    'track' = 'Track',
-    'cumsum' = 'Improvement'
-    )
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
 ```
 
 ## Column 3
@@ -616,5 +642,3 @@ gg14 <- ttDiff %>%
 
 ggplotly(gg14)
 ```
-
-
