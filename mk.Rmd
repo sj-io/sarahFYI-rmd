@@ -230,13 +230,13 @@ wr %>%
 ```{r}
 PBn <- wr %>%
   filter(type == "nitro") %>%
-  select(cup, track, date, total.x, total.y, cumsum, diff)
+  select(cup, track, date, total.x, total.y, diff)
 ```
 
 ```{r}
 PBn %>%
   kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c"
   ) %>%
   kable_styling(full_width = TRUE) %>%
@@ -245,7 +245,7 @@ PBn %>%
   column_spec(3:4,
               extra_css = 'font-size: 80%;') %>%
   column_spec(
-    7,
+    6,
     color = "white",
     background = spec_color(
       PBn$diff,
@@ -339,13 +339,13 @@ ggplotly(gg4)
 ```{r}
 PBr <- wr %>%
   filter(type == "retro") %>%
-  select(cup, track, date, total.x, total.y, cumsum, diff)
+  select(cup, track, date, total.x, total.y, diff)
 ```
 
 ```{r}
 PBr %>%
   kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c"
   ) %>%
   kable_styling(full_width = TRUE) %>%
@@ -354,7 +354,7 @@ PBr %>%
   column_spec(3:4,
               extra_css = 'font-size: 80%;') %>%
   column_spec(
-    7,
+    6,
     color = "white",
     background = spec_color(
       PBr$diff,
@@ -448,14 +448,14 @@ ggplotly(gg8)
 ```{r}
 PBb <- wr %>%
   filter(type == "DLC") %>%
-  select(cup, track, date, total.x, total.y, cumsum, diff) %>% 
+  select(cup, track, date, total.x, total.y, diff) %>% 
   unique() 
 ```
 
 ```{r}
 PBb %>%
   kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c"
   ) %>%
   kable_styling(full_width = TRUE) %>%
@@ -464,7 +464,7 @@ PBb %>%
   column_spec(3:4,
               extra_css = 'font-size: 80%;') %>%
   column_spec(
-    7,
+    6,
     color = "white",
     background = spec_color(
       PBb$diff,
