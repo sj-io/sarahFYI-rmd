@@ -334,7 +334,7 @@ PBr %>%
     7,
     color = "white",
     background = spec_color(
-      PBn$diff,
+      PBr$diff,
       begin = 0.3,
       end = 0.7,
       alpha = 0.7,
@@ -444,7 +444,7 @@ PBb %>%
     7,
     color = "white",
     background = spec_color(
-      PBn$diff,
+      PBb$diff,
       begin = 0.3,
       end = 0.7,
       alpha = 0.7,
