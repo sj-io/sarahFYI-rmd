@@ -122,19 +122,35 @@ wr <- ttDiff %>%
   left_join(ttwr, by = "trk") %>% 
   select(date, track, total.x, cumsum, cup, type, player, total.y) %>% 
   mutate(diff = as.double(total.x - total.y, units = "secs"))
+
+tt48Diff <- tt48 %>% 
+  arrange(trk, dt) %>% 
+  group_by(trk) %>% 
+  mutate(prev = lag(total), .after = total,
+         diff = as.double(prev - total, units = "secs"),
+         diff = replace_na(diff, 0)
+         ) %>% 
+  mutate(cumsum = cumsum(diff), .after = diff) 
+
+wk48 <- tt48Diff %>% 
+  filter(!is.na(prev)) %>% 
+  ungroup() %>% 
+  mutate(week = (week(date)-4)) %>% 
+  group_by(week) %>% 
+  summarise(mean = mean(diff), n = n())
 ```
 
 ### Number of PBs by Week
 
 ```{r}
 ggN <- ggplot() +
-  geom_line(data = wk, aes(x=week, y=n)) +
+  geom_line(data = wk48, aes(x=week, y=n)) +
   theme_minimal() +
   labs(y = "PBs",
        x = "Week")
 
 ggN <- ggN + 
-  annotate("text", x = 5, y = 67, alpha = .70, label = "Wave 1\nRelease",
+  annotate("text", x = 5, y = 45, alpha = .70, label = "Wave 1\nRelease",
            parse = TRUE)
 
 ggplotly(ggN)
@@ -143,7 +159,7 @@ ggplotly(ggN)
 ### Average Improvement by Week
 
 ```{r}
-ggWk <- wk %>% 
+ggWk <- wk48 %>% 
   ggplot(aes(x=week, y=mean)) +
   geom_line() +
   theme_minimal() + 
@@ -214,13 +230,13 @@ wr %>%
 ```{r}
 PBn <- wr %>%
   filter(type == "nitro") %>%
-  select(cup, track, date, total.x, total.y, cumsum, diff)
+  select(cup, track, date, total.x, total.y, diff)
 ```
 
 ```{r}
 PBn %>%
   kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c"
   ) %>%
   kable_styling(full_width = TRUE) %>%
@@ -229,7 +245,7 @@ PBn %>%
   column_spec(3:4,
               extra_css = 'font-size: 80%;') %>%
   column_spec(
-    7,
+    6,
     color = "white",
     background = spec_color(
       PBn$diff,
@@ -323,13 +339,13 @@ ggplotly(gg4)
 ```{r}
 PBr <- wr %>%
   filter(type == "retro") %>%
-  select(cup, track, date, total.x, total.y, cumsum, diff)
+  select(cup, track, date, total.x, total.y, diff)
 ```
 
 ```{r}
 PBr %>%
   kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c"
   ) %>%
   kable_styling(full_width = TRUE) %>%
@@ -338,7 +354,7 @@ PBr %>%
   column_spec(3:4,
               extra_css = 'font-size: 80%;') %>%
   column_spec(
-    7,
+    6,
     color = "white",
     background = spec_color(
       PBr$diff,
@@ -432,14 +448,14 @@ ggplotly(gg8)
 ```{r}
 PBb <- wr %>%
   filter(type == "DLC") %>%
-  select(cup, track, date, total.x, total.y, cumsum, diff) %>% 
+  select(cup, track, date, total.x, total.y, diff) %>% 
   unique() 
 ```
 
 ```{r}
 PBb %>%
   kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "Cum. Time Save", "WR Diff"),
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c"
   ) %>%
   kable_styling(full_width = TRUE) %>%
@@ -448,7 +464,7 @@ PBb %>%
   column_spec(3:4,
               extra_css = 'font-size: 80%;') %>%
   column_spec(
-    7,
+    6,
     color = "white",
     background = spec_color(
       PBb$diff,
@@ -535,41 +551,7 @@ ggplotly(gg12)
 
 # Tracks 49-96
 
-## Column 1
-
-### Time Trial PB Distributions, March 18, 2022 - Present
-
-```{r fig.height=10}
-gg96tt <- tt96 %>% 
-  filter(trk != "dBP") %>% 
-  group_by(track) %>% 
-  mutate(sd = sd(total)) %>% 
-  ungroup() %>% 
-  ggplot(aes(factor(track), total)) +
-  geom_violin(draw_quantiles = 0.5, 
-              scale = "width",
-              aes(fill = sd, color=sd),
-              alpha = .7) + 
-  stat_summary(fun = "median", geom = "point", size = .4) +
-  scale_y_time() +
-  scale_x_discrete(limits = rev(levels(tt96$track))) +
-  coord_flip() +
-  labs(x = "",
-       y = "PB Time") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45,
-                                   hjust = 0.98,
-                                   vjust = 0.9),
-        axis.text = element_text(size = 8),
-        axis.ticks = element_line(size = .2),
-        panel.grid = element_line(size = .2),
-        panel.border = element_rect(fill = NA, size = .2),
-        legend.position = "none")
-
-ggplotly(gg96tt)
-```
-
-## Column 2 {data-width="320"}
+## Column 1 {data-width="320"}
 
 ### Worst Tracks
 
@@ -616,7 +598,127 @@ wr %>%
   kable_styling()
 ```
 
+## Column 2
+
+### Time Trial PB Distributions, March 18, 2022 - Present
+
+```{r fig.height=10}
+gg96tt <- tt96 %>% 
+  filter(trk != "dBP") %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(tt96$track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "PB Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(gg96tt)
+```
+
 ## Column 3
+
+```{r}
+tt96Diff <- tt96 %>% 
+  arrange(trk, dt) %>% 
+  group_by(trk) %>% 
+  mutate(prev = lag(total), .after = total,
+         diff = as.double(prev - total, units = "secs"),
+         diff = replace_na(diff, 0)
+         ) %>% 
+  mutate(cumsum = cumsum(diff), .after = diff) 
+
+wk96 <- tt96Diff %>% 
+  filter(!is.na(prev)) %>% 
+  ungroup() %>% 
+  mutate(week = (week(date)-4)) %>% 
+  group_by(week) %>% 
+  summarise(mean = mean(diff), n = n())
+```
+
+### Number of PBs by Week
+
+```{r}
+ggN <- ggplot() +
+  geom_line(data = wk96, aes(x=week, y=n)) +
+  theme_minimal() +
+  labs(y = "PBs",
+       x = "Week")
+
+ggplotly(ggN)
+```
+
+### Average Improvement by Week
+
+```{r}
+ggWk <- wk96 %>% 
+  ggplot(aes(x=week, y=mean)) +
+  geom_line() +
+  theme_minimal() + 
+  labs(x = "Week",
+       y = "Average Time Save (secs)")
+
+ggplotly(ggWk)
+```
+
+# Wave 1
+
+## Column 1
+
+### Current PBs vs. WR
+
+```{r}
+PBw <- wr %>%
+  filter(type == "wave1") %>%
+  select(cup, track, date, total.x, total.y, diff)
+```
+
+```{r}
+PBw %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
+    align = "c"
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    6,
+    color = "white",
+    background = spec_color(
+      PBn$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", PBw$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
+```
+
+## Column 2
 
 ### Golden Dash Cup
 
@@ -649,3 +751,4 @@ gg14 <- ttDiff %>%
 
 ggplotly(gg14)
 ```
+
