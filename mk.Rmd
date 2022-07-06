@@ -14,7 +14,7 @@ $(document).ready(function(){
 });
 </script>
 
-```{r}
+```{r lib}
 library(tidyverse)
 library(plotly)
 library(lubridate)
@@ -22,7 +22,7 @@ library(knitr)
 library(kableExtra)
 ```
 
-```{r}
+```{r import}
 abr <- read_csv("_data/track-abbr.csv")
 
 tt <- read_csv("_data/time-trials.csv",
@@ -50,23 +50,92 @@ ttwr <- read_csv("_data/tt-wr.csv",
   mutate(total = ms(total))
 ```
 
-```{r}
-tt48 <- tt %>% 
-  filter(trkNO <= 48) %>%
-  mutate(track = fct_reorder(track, trkNO))
 
-tt96 <- tt %>% 
-  filter(trkNO > 48) %>%
-  mutate(track = fct_reorder(track, trkNO))
+```{r makeVars}
+ttDiff <- tt %>% 
+  arrange(trk, dt) %>% 
+  group_by(trk) %>% 
+  mutate(prev = lag(total), .after = total,
+         diff = as.double(prev - total, units = "secs"),
+         diff = replace_na(diff, 0)
+         ) %>% 
+  mutate(cumsum = cumsum(diff), .after = diff) 
+
+wk <- ttDiff %>% 
+  filter(!is.na(prev)) %>% 
+  ungroup() %>% 
+  mutate(week = (week(date)-4)) %>% 
+  group_by(week) %>% 
+  summarise(mean = mean(diff), n = n()) %>% 
+  add_row(week=16, mean=0, n=0, .after = 15)
+
+wr <- ttDiff %>% 
+  slice_max(dt) %>% 
+  ungroup() %>% 
+  arrange(trkNO) %>% 
+  left_join(ttwr, by = "trk") %>% 
+  select(date, track, total.x, cumsum, cup, type, player, total.y) %>% 
+  mutate(diff = as.double(total.x - total.y, units = "secs"))
 ```
 
 # Tracks 1-48
 
-## Column 1
+## Column 1 {data-width="320"}
+
+### Worst Tracks
+
+```{r worst48}
+wr %>% 
+  filter(type != "wave1") %>% 
+  select(track, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Best Tracks
+
+```{r best48}
+wr %>% 
+  filter(type != "wave1") %>% 
+  select(track, diff) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Most Improved since Feb. 2022
+
+```{r mostImprv48}
+wr %>% 
+  filter(type != "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 2
 
 ### Time Trial PB Distributions, Feb 01, 2022 - Present
 
-```{r fig.height=10}
+```{r violin48, fig.height=10}
+tt48 <- tt %>% 
+  filter(trkNO <= 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+
 ggtt <- tt48 %>% 
   filter(trk != "dBP") %>% 
   group_by(track) %>% 
@@ -94,131 +163,6 @@ ggtt <- tt48 %>%
         legend.position = "none")
 
 ggplotly(ggtt)
-```
-
-## Column 2
-
-```{r}
-ttDiff <- tt %>% 
-  arrange(trk, dt) %>% 
-  group_by(trk) %>% 
-  mutate(prev = lag(total), .after = total,
-         diff = as.double(prev - total, units = "secs"),
-         diff = replace_na(diff, 0)
-         ) %>% 
-  mutate(cumsum = cumsum(diff), .after = diff) 
-
-wk <- ttDiff %>% 
-  filter(!is.na(prev)) %>% 
-  ungroup() %>% 
-  mutate(week = (week(date)-4)) %>% 
-  group_by(week) %>% 
-  summarise(mean = mean(diff), n = n())
-
-wr <- ttDiff %>% 
-  slice_max(dt) %>% 
-  ungroup() %>% 
-  arrange(trkNO) %>% 
-  left_join(ttwr, by = "trk") %>% 
-  select(date, track, total.x, cumsum, cup, type, player, total.y) %>% 
-  mutate(diff = as.double(total.x - total.y, units = "secs"))
-
-tt48Diff <- tt48 %>% 
-  arrange(trk, dt) %>% 
-  group_by(trk) %>% 
-  mutate(prev = lag(total), .after = total,
-         diff = as.double(prev - total, units = "secs"),
-         diff = replace_na(diff, 0)
-         ) %>% 
-  mutate(cumsum = cumsum(diff), .after = diff) 
-
-wk48 <- tt48Diff %>% 
-  filter(!is.na(prev)) %>% 
-  ungroup() %>% 
-  mutate(week = (week(date)-4)) %>% 
-  group_by(week) %>% 
-  summarise(mean = mean(diff), n = n())
-```
-
-### Number of PBs by Week
-
-```{r}
-ggN <- ggplot() +
-  geom_line(data = wk48, aes(x=week, y=n)) +
-  theme_minimal() +
-  labs(y = "PBs",
-       x = "Week")
-
-ggN <- ggN + 
-  annotate("text", x = 5, y = 45, alpha = .70, label = "Wave 1\nRelease",
-           parse = TRUE)
-
-ggplotly(ggN)
-```
-
-### Average Improvement by Week
-
-```{r}
-ggWk <- wk48 %>% 
-  ggplot(aes(x=week, y=mean)) +
-  geom_line() +
-  theme_minimal() + 
-  labs(x = "Week",
-       y = "Average Time Save (secs)")
-
-ggWk <- ggWk +
-  annotate("text", x = 6.5, y = 1.12, alpha = .70,
-           label = "Switch to Meta\nCharacter", parse = TRUE)
-
-ggplotly(ggWk)
-```
-
-## Column 3 {data-width="320"}
-
-### Worst Tracks
-
-```{r}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(desc(diff)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Best Tracks
-
-```{r}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(diff) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Most Improved since Feb. 2022
-
-```{r}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'cumsum' = 'Improvement')
-  ) %>% 
-  kable_styling()
-
 ```
 
 # Nitro Cups
@@ -551,6 +495,12 @@ ggplotly(gg12)
 
 # Tracks 49-96
 
+```{r tt96}
+tt96 <- tt %>% 
+  filter(trkNO > 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+```
+
 ## Column 1 {data-width="320"}
 
 ### Worst Tracks
@@ -632,51 +582,6 @@ gg96tt <- tt96 %>%
 ggplotly(gg96tt)
 ```
 
-## Column 3
-
-```{r}
-tt96Diff <- tt96 %>% 
-  arrange(trk, dt) %>% 
-  group_by(trk) %>% 
-  mutate(prev = lag(total), .after = total,
-         diff = as.double(prev - total, units = "secs"),
-         diff = replace_na(diff, 0)
-         ) %>% 
-  mutate(cumsum = cumsum(diff), .after = diff) 
-
-wk96 <- tt96Diff %>% 
-  filter(!is.na(prev)) %>% 
-  ungroup() %>% 
-  mutate(week = (week(date)-4)) %>% 
-  group_by(week) %>% 
-  summarise(mean = mean(diff), n = n())
-```
-
-### Number of PBs by Week
-
-```{r}
-ggN <- ggplot() +
-  geom_line(data = wk96, aes(x=week, y=n)) +
-  theme_minimal() +
-  labs(y = "PBs",
-       x = "Week")
-
-ggplotly(ggN)
-```
-
-### Average Improvement by Week
-
-```{r}
-ggWk <- wk96 %>% 
-  ggplot(aes(x=week, y=mean)) +
-  geom_line() +
-  theme_minimal() + 
-  labs(x = "Week",
-       y = "Average Time Save (secs)")
-
-ggplotly(ggWk)
-```
-
 # Wave 1
 
 ## Column 1
@@ -752,3 +657,160 @@ gg14 <- ttDiff %>%
 ggplotly(gg14)
 ```
 
+
+# All Tracks
+
+## Column 1
+
+### Number of PBs by Week
+
+```{r ggPBwk}
+ggN <- wk %>% 
+  ggplot() +
+  geom_line(aes(x=week, y=n)) +
+  theme_minimal() +
+  labs(y = "PBs",
+       x = "Week")
+
+ggN <- ggN + 
+  annotate("text", x = 5, y = 65, alpha = .70, label = "Wave 1\nRelease",
+           parse = TRUE)
+
+ggplotly(ggN)
+```
+
+### Average Improvement by Week
+
+```{r ggAvgImprv}
+ggWk <- wk %>% 
+  ggplot(aes(x=week, y=mean)) +
+  geom_line() +
+  theme_minimal() + 
+  labs(x = "Week",
+       y = "Average Time Save (secs)")
+
+ggWk <- ggWk +
+  annotate("text", x = 6.5, y = 1.10, alpha = .70,
+           label = "Switch to Meta\nBuild", parse = TRUE)
+
+ggplotly(ggWk)
+```
+
+### Cumulative Time Save
+
+```{r}
+CTS <- ttDiff %>% 
+  ungroup() %>% 
+  filter(!is.na(prev)) %>% 
+  arrange(dt) %>% 
+  mutate(cumsum = cumsum(diff))
+  
+ggCTS <- CTS %>% 
+  ggplot(aes(x=dt, y=cumsum)) +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="Cumulative Time Saved (secs)") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(ggCTS)
+```
+
+
+## Column 2 {data-width="420"}
+
+### Newest PBs
+
+```{r newest}
+ttDiff %>%
+  ungroup() %>% 
+  select(track, date, diff) %>% 
+  arrange(desc(date)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c(
+      'track' = 'Track',
+      'date' = 'Date',
+      'diff' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+### Largest PBs
+
+```{r}
+ttDiff %>%
+  ungroup() %>% 
+  select(track, date, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c(
+      'track' = 'Track',
+      'date' = 'Date',
+      'diff' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+### Smallest PBs
+
+```{r}
+ttDiff %>%
+  ungroup() %>% 
+  select(track, date, diff) %>% 
+  filter(diff != 0) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c(
+      'track' = 'Track',
+      'date' = 'Date',
+      'diff' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 3 {data-width="320"}
+
+### Oldest PBs
+
+```{r old}
+wr %>% 
+  select(track, date) %>% 
+  arrange(date) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'date' = 'PB Date')
+  ) %>% 
+  kable_styling()
+```
+
+### Best Tracks
+
+```{r best}
+wr %>% 
+  select(track, diff) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Worst Tracks
+
+```{r worst}
+wr %>% 
+  select(track, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
