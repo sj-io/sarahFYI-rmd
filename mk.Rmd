@@ -14,7 +14,7 @@ $(document).ready(function(){
 });
 </script>
 
-```{r}
+```{r lib}
 library(tidyverse)
 library(plotly)
 library(lubridate)
@@ -22,7 +22,7 @@ library(knitr)
 library(kableExtra)
 ```
 
-```{r}
+```{r import}
 abr <- read_csv("_data/track-abbr.csv")
 
 tt <- read_csv("_data/time-trials.csv",
@@ -50,23 +50,257 @@ ttwr <- read_csv("_data/tt-wr.csv",
   mutate(total = ms(total))
 ```
 
+
+```{r makeVars}
+ttDiff <- tt %>% 
+  arrange(trk, dt) %>% 
+  group_by(trk) %>% 
+  mutate(prev = lag(total), .after = total,
+         diff = as.double(prev - total, units = "secs"),
+         diff = replace_na(diff, 0)
+         ) %>% 
+  mutate(cumsum = cumsum(diff), .after = diff) 
+
+wk <- ttDiff %>% 
+  filter(!is.na(prev)) %>% 
+  ungroup() %>% 
+  mutate(week = (week(date)-4)) %>% 
+  group_by(week) %>% 
+  summarise(mean = mean(diff), n = n()) %>% 
+  add_row(week=16, mean=0, n=0, .after = 15)
+
+wr <- ttDiff %>% 
+  slice_max(dt) %>% 
+  ungroup() %>% 
+  arrange(trkNO) %>% 
+  left_join(ttwr, by = "trk") %>% 
+  select(date, track, total.x, cumsum, cup, type, player, total.y) %>% 
+  mutate(diff = as.double(total.x - total.y, units = "secs"))
+```
+
+# Overall
+
+## Column 1
+
+### Number of PBs by Week
+
+```{r ggPBwk}
+ggN <- wk %>% 
+  ggplot() +
+  geom_line(aes(x=week, y=n)) +
+  theme_minimal() +
+  labs(y = "PBs",
+       x = "Week")
+
+ggN <- ggN + 
+  annotate("text", x = 5, y = 65, alpha = .70, label = "Wave 1\nRelease",
+           parse = TRUE)
+
+ggplotly(ggN)
+```
+
+### Average Improvement by Week
+
+```{r ggAvgImprv}
+ggWk <- wk %>% 
+  ggplot(aes(x=week, y=mean)) +
+  geom_line() +
+  theme_minimal() + 
+  labs(x = "Week",
+       y = "Average Time Save (secs)")
+
+ggWk <- ggWk +
+  annotate("text", x = 6.5, y = 1.10, alpha = .70,
+           label = "Switch to Meta\nBuild", parse = TRUE)
+
+ggplotly(ggWk)
+```
+
+### Cumulative Time Save
+
 ```{r}
+CTS <- ttDiff %>% 
+  ungroup() %>% 
+  filter(!is.na(prev)) %>% 
+  arrange(dt) %>% 
+  mutate(cumsum = cumsum(diff))
+  
+ggCTS <- CTS %>% 
+  ggplot(aes(x=dt, y=cumsum)) +
+  geom_step() +
+  theme_minimal() +
+  labs(x="", y="Cumulative Time Saved (secs)") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+
+ggplotly(ggCTS)
+```
+
+
+## Column 2 {data-width="420"}
+
+### Newest PBs
+
+```{r newest}
+ttDiff %>%
+  ungroup() %>% 
+  select(track, date, diff) %>% 
+  arrange(desc(date)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c(
+      'track' = 'Track',
+      'date' = 'Date',
+      'diff' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+### Largest PBs
+
+```{r}
+ttDiff %>%
+  ungroup() %>% 
+  select(track, date, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c(
+      'track' = 'Track',
+      'date' = 'Date',
+      'diff' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+### Smallest PBs
+
+```{r}
+ttDiff %>%
+  ungroup() %>% 
+  select(track, date, diff) %>% 
+  filter(diff != 0) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c(
+      'track' = 'Track',
+      'date' = 'Date',
+      'diff' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 3 {data-width="320"}
+
+### Oldest PBs
+
+```{r old}
+wr %>% 
+  select(track, date) %>% 
+  arrange(date) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'date' = 'PB Date')
+  ) %>% 
+  kable_styling()
+```
+
+### Best Tracks
+
+```{r best}
+wr %>% 
+  select(track, diff) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Worst Tracks
+
+```{r worst}
+wr %>% 
+  select(track, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+# Tracks 1-48 
+
+## Column 1 tbl 
+
+### PBs vs WRs
+
+```{r}
+#' NTS: Nitro, Retro, DLC, Wave 1
+
+wr2 <- wr %>%
+  filter(type != "wave1") %>% 
+  select(cup, track, date, total.x, total.y, diff) 
+
+wr2 %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
+    align = "c",
+    escape = FALSE
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    6,
+    color = "white",
+    background = spec_color(
+      wr2$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", wr2$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
+```
+ 
+### Most Improved since Feb. 2022
+
+```{r mostImprv48, fig.height=2}
+wr %>% 
+  filter(type != "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 2 violin
+
+### PB Time Distributions, Feb 01, 2022 - Present
+
+```{r violin48, fig.height=10}
 tt48 <- tt %>% 
   filter(trkNO <= 48) %>%
   mutate(track = fct_reorder(track, trkNO))
 
-tt96 <- tt %>% 
-  filter(trkNO > 48) %>%
-  mutate(track = fct_reorder(track, trkNO))
-```
-
-# Tracks 1-48
-
-## Column 1
-
-### Time Trial PB Distributions, Feb 01, 2022 - Present
-
-```{r fig.height=10}
 ggtt <- tt48 %>% 
   filter(trk != "dBP") %>% 
   group_by(track) %>% 
@@ -96,600 +330,17 @@ ggtt <- tt48 %>%
 ggplotly(ggtt)
 ```
 
-## Column 2
+# Tracks 49-96 
 
-```{r}
-ttDiff <- tt %>% 
-  arrange(trk, dt) %>% 
-  group_by(trk) %>% 
-  mutate(prev = lag(total), .after = total,
-         diff = as.double(prev - total, units = "secs"),
-         diff = replace_na(diff, 0)
-         ) %>% 
-  mutate(cumsum = cumsum(diff), .after = diff) 
+## Column 2 tbl 
 
-wk <- ttDiff %>% 
-  filter(!is.na(prev)) %>% 
-  ungroup() %>% 
-  mutate(week = (week(date)-4)) %>% 
-  group_by(week) %>% 
-  summarise(mean = mean(diff), n = n())
-
-wr <- ttDiff %>% 
-  slice_max(dt) %>% 
-  ungroup() %>% 
-  arrange(trkNO) %>% 
-  left_join(ttwr, by = "trk") %>% 
-  select(date, track, total.x, cumsum, cup, type, player, total.y) %>% 
-  mutate(diff = as.double(total.x - total.y, units = "secs"))
-
-tt48Diff <- tt48 %>% 
-  arrange(trk, dt) %>% 
-  group_by(trk) %>% 
-  mutate(prev = lag(total), .after = total,
-         diff = as.double(prev - total, units = "secs"),
-         diff = replace_na(diff, 0)
-         ) %>% 
-  mutate(cumsum = cumsum(diff), .after = diff) 
-
-wk48 <- tt48Diff %>% 
-  filter(!is.na(prev)) %>% 
-  ungroup() %>% 
-  mutate(week = (week(date)-4)) %>% 
-  group_by(week) %>% 
-  summarise(mean = mean(diff), n = n())
-```
-
-### Number of PBs by Week
-
-```{r}
-ggN <- ggplot() +
-  geom_line(data = wk48, aes(x=week, y=n)) +
-  theme_minimal() +
-  labs(y = "PBs",
-       x = "Week")
-
-ggN <- ggN + 
-  annotate("text", x = 5, y = 45, alpha = .70, label = "Wave 1\nRelease",
-           parse = TRUE)
-
-ggplotly(ggN)
-```
-
-### Average Improvement by Week
-
-```{r}
-ggWk <- wk48 %>% 
-  ggplot(aes(x=week, y=mean)) +
-  geom_line() +
-  theme_minimal() + 
-  labs(x = "Week",
-       y = "Average Time Save (secs)")
-
-ggWk <- ggWk +
-  annotate("text", x = 6.5, y = 1.12, alpha = .70,
-           label = "Switch to Meta\nCharacter", parse = TRUE)
-
-ggplotly(ggWk)
-```
-
-## Column 3 {data-width="320"}
-
-### Worst Tracks
-
-```{r}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(desc(diff)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Best Tracks
-
-```{r}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(diff) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Most Improved since Feb. 2022
-
-```{r}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'cumsum' = 'Improvement')
-  ) %>% 
-  kable_styling()
-
-```
-
-# Nitro Cups
-
-## Column 1
-
-### Current PBs vs. WR
-
-```{r}
-PBn <- wr %>%
-  filter(type == "nitro") %>%
-  select(cup, track, date, total.x, total.y, diff)
-```
-
-```{r}
-PBn %>%
-  kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
-    align = "c"
-  ) %>%
-  kable_styling(full_width = TRUE) %>%
-  column_spec(column = 1,
-              extra_css = 'transform: rotate(270deg);') %>%
-  column_spec(3:4,
-              extra_css = 'font-size: 80%;') %>%
-  column_spec(
-    6,
-    color = "white",
-    background = spec_color(
-      PBn$diff,
-      begin = 0.3,
-      end = 0.7,
-      alpha = 0.7,
-      option = "A"
-    ),
-    popover = paste0("WR: ", PBn$total.y)
-  ) %>%
-  remove_column(5) %>%
-  collapse_rows(columns = 1,
-                row_group_label_position = 'stack') %>%
-  row_spec(0, align = "c")
-```
-
-## Column 2
-
-### Mushroom Cup
-
-```{r}
-ggM <- ttDiff %>% 
-  filter(cup == "Mushroom") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(ggM)
-```
-
-### Flower Cup
-
-```{r}
-gg2 <- ttDiff %>% 
-  filter(cup == "Flower") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg2)
-```
-
-## Column 3
-
-### Star Cup
-
-```{r}
-gg3 <- ttDiff %>% 
-  filter(cup == "Star") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg3)
-```
-
-### Special Cup
-
-```{r}
-gg4 <- ttDiff %>% 
-  filter(cup == "Special") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg4)
-```
-
-# Retro Cups
-
-## Column 1
-
-### Current PBs vs. WR
-
-```{r}
-PBr <- wr %>%
-  filter(type == "retro") %>%
-  select(cup, track, date, total.x, total.y, diff)
-```
-
-```{r}
-PBr %>%
-  kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
-    align = "c"
-  ) %>%
-  kable_styling(full_width = TRUE) %>%
-  column_spec(column = 1,
-              extra_css = 'transform: rotate(270deg);') %>%
-  column_spec(3:4,
-              extra_css = 'font-size: 80%;') %>%
-  column_spec(
-    6,
-    color = "white",
-    background = spec_color(
-      PBr$diff,
-      begin = 0.3,
-      end = 0.7,
-      alpha = 0.7,
-      option = "A"
-    ),
-    popover = paste0("WR: ", PBr$total.y)
-  ) %>%
-  remove_column(5) %>%
-  collapse_rows(columns = 1,
-                row_group_label_position = 'stack') %>%
-  row_spec(0, align = "c")
-```
-
-## Column 2
-
-### Shell Cup
-
-```{r}
-gg5 <- ttDiff %>% 
-  filter(cup == "Shell") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg5)
-```
-
-### Banana Cup
-
-```{r}
-gg6 <- ttDiff %>% 
-  filter(cup == "Banana") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg6)
-```
-
-## Column 3
-
-### Leaf Cup
-
-```{r}
-gg7 <- ttDiff %>% 
-  filter(cup == "Leaf") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg7)
-```
-
-### Lightning Cup
-
-```{r}
-gg8 <- ttDiff %>% 
-  filter(cup == "Lightning") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg8)
-```
-
-# Bonus Cups
-
-## Column 1
-
-### Current PBs vs. WR
-
-```{r}
-PBb <- wr %>%
-  filter(type == "DLC") %>%
-  select(cup, track, date, total.x, total.y, diff) %>% 
-  unique() 
-```
-
-```{r}
-PBb %>%
-  kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
-    align = "c"
-  ) %>%
-  kable_styling(full_width = TRUE) %>%
-  column_spec(column = 1,
-              extra_css = 'transform: rotate(270deg);') %>%
-  column_spec(3:4,
-              extra_css = 'font-size: 80%;') %>%
-  column_spec(
-    6,
-    color = "white",
-    background = spec_color(
-      PBb$diff,
-      begin = 0.3,
-      end = 0.7,
-      alpha = 0.7,
-      option = "A"
-    ),
-    popover = paste0("WR: ", PBb$total.y)
-  ) %>%
-  remove_column(5) %>%
-  collapse_rows(columns = 1,
-                row_group_label_position = 'stack') %>%
-  row_spec(0, align = "c")
-```
-
-## Column 2
-
-### Egg Cup
-
-```{r}
-gg9 <- ttDiff %>% 
-  filter(cup == "Egg") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg9)
-```
-
-### Triforce Cup
-
-```{r}
-gg10 <- ttDiff %>% 
-  filter(cup == "Triforce") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg10)
-```
-
-## Column 3
-
-### Crossing Cup
-
-```{r}
-gg11 <- ttDiff %>% 
-  filter(cup == "Crossing") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg11)
-```
-
-### Bell Cup
-
-```{r}
-gg12 <- ttDiff %>% 
-  filter(cup == "Bell") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg12)
-```
-
-# Tracks 49-96
-
-## Column 1 {data-width="320"}
-
-### Worst Tracks
-
-```{r}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(desc(diff)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Best Tracks
-
-```{r}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(diff) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Most Improved
-
-```{r}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-## Column 2
-
-### Time Trial PB Distributions, March 18, 2022 - Present
-
-```{r fig.height=10}
-gg96tt <- tt96 %>% 
-  filter(trk != "dBP") %>% 
-  group_by(track) %>% 
-  mutate(sd = sd(total)) %>% 
-  ungroup() %>% 
-  ggplot(aes(factor(track), total)) +
-  geom_violin(draw_quantiles = 0.5, 
-              scale = "width",
-              aes(fill = sd, color=sd),
-              alpha = .7) + 
-  stat_summary(fun = "median", geom = "point", size = .4) +
-  scale_y_time() +
-  scale_x_discrete(limits = rev(levels(tt96$track))) +
-  coord_flip() +
-  labs(x = "",
-       y = "PB Time") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45,
-                                   hjust = 0.98,
-                                   vjust = 0.9),
-        axis.text = element_text(size = 8),
-        axis.ticks = element_line(size = .2),
-        panel.grid = element_line(size = .2),
-        panel.border = element_rect(fill = NA, size = .2),
-        legend.position = "none")
-
-ggplotly(gg96tt)
-```
-
-## Column 3
-
-```{r}
-tt96Diff <- tt96 %>% 
-  arrange(trk, dt) %>% 
-  group_by(trk) %>% 
-  mutate(prev = lag(total), .after = total,
-         diff = as.double(prev - total, units = "secs"),
-         diff = replace_na(diff, 0)
-         ) %>% 
-  mutate(cumsum = cumsum(diff), .after = diff) 
-
-wk96 <- tt96Diff %>% 
-  filter(!is.na(prev)) %>% 
-  ungroup() %>% 
-  mutate(week = (week(date)-4)) %>% 
-  group_by(week) %>% 
-  summarise(mean = mean(diff), n = n())
-```
-
-### Number of PBs by Week
-
-```{r}
-ggN <- ggplot() +
-  geom_line(data = wk96, aes(x=week, y=n)) +
-  theme_minimal() +
-  labs(y = "PBs",
-       x = "Week")
-
-ggplotly(ggN)
-```
-
-### Average Improvement by Week
-
-```{r}
-ggWk <- wk96 %>% 
-  ggplot(aes(x=week, y=mean)) +
-  geom_line() +
-  theme_minimal() + 
-  labs(x = "Week",
-       y = "Average Time Save (secs)")
-
-ggplotly(ggWk)
-```
-
-# Wave 1
-
-## Column 1
-
-### Current PBs vs. WR
+### PBs vs WRs
 
 ```{r}
 PBw <- wr %>%
   filter(type == "wave1") %>%
   select(cup, track, date, total.x, total.y, diff)
-```
 
-```{r}
 PBw %>%
   kbl(
     col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
@@ -718,37 +369,55 @@ PBw %>%
   row_spec(0, align = "c")
 ```
 
-## Column 2
+### Most Improved 
 
-### Golden Dash Cup
-
-```{r}
-gg13 <- ttDiff %>% 
-  filter(cup == "Golden Dash") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
-  theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
-        legend.position = "none")
-
-ggplotly(gg13)
+```{r mostImprv96, fig.height=2}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
+  ) %>% 
+  kable_styling()
 ```
 
-### Lucky Cat Cup
+## Column 1 violin
 
-```{r}
-gg14 <- ttDiff %>% 
-  filter(cup == "Lucky Cat") %>% 
-  ggplot(aes(x=dt, y=cumsum, color=track)) +
-  geom_point() +
-  geom_step() +
+### PB Time Distributions, March 18, 2022 - Present
+
+```{r fig.height=10}
+tt96 <- tt %>% 
+  filter(trkNO > 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+
+gg96tt <- tt96 %>% 
+  filter(trk != "dBP") %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(tt96$track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "PB Time") +
   theme_minimal() +
-  labs(x="", y="") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(gg14)
+ggplotly(gg96tt)
 ```
-
