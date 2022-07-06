@@ -127,6 +127,7 @@ wr %>%
   kable_styling()
 ```
 
+
 ## Column 2
 
 ### Time Trial PB Distributions, Feb 01, 2022 - Present
@@ -165,7 +166,97 @@ ggtt <- tt48 %>%
 ggplotly(ggtt)
 ```
 
-# Nitro Cups
+# Tracks 49-96
+
+```{r tt96}
+tt96 <- tt %>% 
+  filter(trkNO > 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+```
+
+## Column 1 {data-width="320"}
+
+### Worst Tracks
+
+```{r}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, diff) %>% 
+  arrange(desc(diff)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Best Tracks
+
+```{r}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, diff) %>% 
+  arrange(diff) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Most Improved
+
+```{r}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 2
+
+### Time Trial PB Distributions, March 18, 2022 - Present
+
+```{r fig.height=10}
+gg96tt <- tt96 %>% 
+  filter(trk != "dBP") %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(tt96$track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "PB Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(gg96tt)
+```
+
+
+# Nitro Cups {data-navmenu="Cups"}
 
 ## Column 1
 
@@ -274,7 +365,7 @@ gg4 <- ttDiff %>%
 ggplotly(gg4)
 ```
 
-# Retro Cups
+# Retro Cups {data-navmenu="Cups"}
 
 ## Column 1
 
@@ -383,7 +474,7 @@ gg8 <- ttDiff %>%
 ggplotly(gg8)
 ```
 
-# Bonus Cups
+# Bonus Cups {data-navmenu="Cups"}
 
 ## Column 1
 
@@ -493,96 +584,7 @@ gg12 <- ttDiff %>%
 ggplotly(gg12)
 ```
 
-# Tracks 49-96
-
-```{r tt96}
-tt96 <- tt %>% 
-  filter(trkNO > 48) %>%
-  mutate(track = fct_reorder(track, trkNO))
-```
-
-## Column 1 {data-width="320"}
-
-### Worst Tracks
-
-```{r}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(desc(diff)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Best Tracks
-
-```{r}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, diff) %>% 
-  arrange(diff) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-### Most Improved
-
-```{r}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'diff' = 'WR Diff.')
-  ) %>% 
-  kable_styling()
-```
-
-## Column 2
-
-### Time Trial PB Distributions, March 18, 2022 - Present
-
-```{r fig.height=10}
-gg96tt <- tt96 %>% 
-  filter(trk != "dBP") %>% 
-  group_by(track) %>% 
-  mutate(sd = sd(total)) %>% 
-  ungroup() %>% 
-  ggplot(aes(factor(track), total)) +
-  geom_violin(draw_quantiles = 0.5, 
-              scale = "width",
-              aes(fill = sd, color=sd),
-              alpha = .7) + 
-  stat_summary(fun = "median", geom = "point", size = .4) +
-  scale_y_time() +
-  scale_x_discrete(limits = rev(levels(tt96$track))) +
-  coord_flip() +
-  labs(x = "",
-       y = "PB Time") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45,
-                                   hjust = 0.98,
-                                   vjust = 0.9),
-        axis.text = element_text(size = 8),
-        axis.ticks = element_line(size = .2),
-        panel.grid = element_line(size = .2),
-        panel.border = element_rect(fill = NA, size = .2),
-        legend.position = "none")
-
-ggplotly(gg96tt)
-```
-
-# Wave 1
+# Wave 1 {data-navmenu="Cups"}
 
 ## Column 1
 
