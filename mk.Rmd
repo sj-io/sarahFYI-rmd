@@ -78,193 +78,6 @@ wr <- ttDiff %>%
   mutate(diff = as.double(total.x - total.y, units = "secs"))
 ```
 
-# Tracks 1-48 
-
-## Column 1 violin
-
-### PB Time Distributions, Feb 01, 2022 - Present
-
-```{r violin48, fig.height=10}
-tt48 <- tt %>% 
-  filter(trkNO <= 48) %>%
-  mutate(track = fct_reorder(track, trkNO))
-
-ggtt <- tt48 %>% 
-  filter(trk != "dBP") %>% 
-  group_by(track) %>% 
-  mutate(sd = sd(total)) %>% 
-  ungroup() %>% 
-  ggplot(aes(factor(track), total)) +
-  geom_violin(draw_quantiles = 0.5, 
-              scale = "width",
-              aes(fill = sd, color=sd),
-              alpha = .7) + 
-  stat_summary(fun = "median", geom = "point", size = .4) +
-  scale_y_time() +
-  scale_x_discrete(limits = rev(levels(tt48$track))) +
-  coord_flip() +
-  labs(x = "",
-       y = "PB Time") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45,
-                                   hjust = 0.98,
-                                   vjust = 0.9),
-        axis.text = element_text(size = 8),
-        axis.ticks = element_line(size = .2),
-        panel.grid = element_line(size = .2),
-        panel.border = element_rect(fill = NA, size = .2),
-        legend.position = "none")
-
-ggplotly(ggtt)
-```
-
-## Column 2 tbl 
-
-### PBs vs WRs
-
-```{r}
-#' NTS: Nitro, Retro, DLC, Wave 1
-
-wr2 <- wr %>%
-  filter(type != "wave1") %>% 
-  select(cup, track, date, total.x, total.y, diff)
-
-wr2 %>%
-  kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
-    align = "c"
-  ) %>%
-  kable_styling(full_width = TRUE) %>%
-  column_spec(column = 1,
-              extra_css = 'transform: rotate(270deg);') %>%
-  column_spec(3:4,
-              extra_css = 'font-size: 80%;') %>%
-  column_spec(
-    6,
-    color = "white",
-    background = spec_color(
-      wr2$diff,
-      begin = 0.3,
-      end = 0.7,
-      alpha = 0.7,
-      option = "A"
-    ),
-    popover = paste0("WR: ", wr2$total.y)
-  ) %>%
-  remove_column(5) %>%
-  collapse_rows(columns = 1,
-                row_group_label_position = 'stack') %>%
-  row_spec(0, align = "c")
-```
-
-### Most Improved since Feb. 2022
-
-```{r mostImprv48, fig.height=2}
-wr %>% 
-  filter(type != "wave1") %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'cumsum' = 'Improvement')
-  ) %>% 
-  kable_styling()
-```
-
-
-# Tracks 49-96 
-
-## Column 1 violin
-
-### PB Time Distributions, March 18, 2022 - Present
-
-```{r fig.height=10}
-tt96 <- tt %>% 
-  filter(trkNO > 48) %>%
-  mutate(track = fct_reorder(track, trkNO))
-
-gg96tt <- tt96 %>% 
-  filter(trk != "dBP") %>% 
-  group_by(track) %>% 
-  mutate(sd = sd(total)) %>% 
-  ungroup() %>% 
-  ggplot(aes(factor(track), total)) +
-  geom_violin(draw_quantiles = 0.5, 
-              scale = "width",
-              aes(fill = sd, color=sd),
-              alpha = .7) + 
-  stat_summary(fun = "median", geom = "point", size = .4) +
-  scale_y_time() +
-  scale_x_discrete(limits = rev(levels(tt96$track))) +
-  coord_flip() +
-  labs(x = "",
-       y = "PB Time") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45,
-                                   hjust = 0.98,
-                                   vjust = 0.9),
-        axis.text = element_text(size = 8),
-        axis.ticks = element_line(size = .2),
-        panel.grid = element_line(size = .2),
-        panel.border = element_rect(fill = NA, size = .2),
-        legend.position = "none")
-
-ggplotly(gg96tt)
-```
-
-## Column 2 tbl 
-
-### PBs vs WRs
-
-```{r}
-PBw <- wr %>%
-  filter(type == "wave1") %>%
-  select(cup, track, date, total.x, total.y, diff)
-
-PBw %>%
-  kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
-    align = "c"
-  ) %>%
-  kable_styling(full_width = TRUE) %>%
-  column_spec(column = 1,
-              extra_css = 'transform: rotate(270deg);') %>%
-  column_spec(3:4,
-              extra_css = 'font-size: 80%;') %>%
-  column_spec(
-    6,
-    color = "white",
-    background = spec_color(
-      PBw$diff,
-      begin = 0.3,
-      end = 0.7,
-      alpha = 0.7,
-      option = "A"
-    ),
-    popover = paste0("WR: ", PBw$total.y)
-  ) %>%
-  remove_column(5) %>%
-  collapse_rows(columns = 1,
-                row_group_label_position = 'stack') %>%
-  row_spec(0, align = "c")
-```
-
-### Most Improved 
-
-```{r mostImprv96, fig.height=2}
-wr %>% 
-  filter(type == "wave1") %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'cumsum' = 'Improvement')
-  ) %>% 
-  kable_styling()
-```
-
 # Overall
 
 ## Column 1
@@ -420,4 +233,191 @@ wr %>%
     'diff' = 'WR Diff.')
   ) %>% 
   kable_styling()
+```
+
+# Tracks 1-48 
+
+## Column 1 tbl 
+
+### PBs vs WRs
+
+```{r}
+#' NTS: Nitro, Retro, DLC, Wave 1
+
+wr2 <- wr %>%
+  filter(type != "wave1") %>% 
+  select(cup, track, date, total.x, total.y, diff) 
+
+wr2 %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
+    align = "c",
+    escape = FALSE
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    6,
+    color = "white",
+    background = spec_color(
+      wr2$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", wr2$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
+```
+ 
+### Most Improved since Feb. 2022
+
+```{r mostImprv48, fig.height=2}
+wr %>% 
+  filter(type != "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 2 violin
+
+### PB Time Distributions, Feb 01, 2022 - Present
+
+```{r violin48, fig.height=10}
+tt48 <- tt %>% 
+  filter(trkNO <= 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+
+ggtt <- tt48 %>% 
+  filter(trk != "dBP") %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(tt48$track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "PB Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(ggtt)
+```
+
+# Tracks 49-96 
+
+## Column 2 tbl 
+
+### PBs vs WRs
+
+```{r}
+PBw <- wr %>%
+  filter(type == "wave1") %>%
+  select(cup, track, date, total.x, total.y, diff)
+
+PBw %>%
+  kbl(
+    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
+    align = "c"
+  ) %>%
+  kable_styling(full_width = TRUE) %>%
+  column_spec(column = 1,
+              extra_css = 'transform: rotate(270deg);') %>%
+  column_spec(3:4,
+              extra_css = 'font-size: 80%;') %>%
+  column_spec(
+    6,
+    color = "white",
+    background = spec_color(
+      PBw$diff,
+      begin = 0.3,
+      end = 0.7,
+      alpha = 0.7,
+      option = "A"
+    ),
+    popover = paste0("WR: ", PBw$total.y)
+  ) %>%
+  remove_column(5) %>%
+  collapse_rows(columns = 1,
+                row_group_label_position = 'stack') %>%
+  row_spec(0, align = "c")
+```
+
+### Most Improved 
+
+```{r mostImprv96, fig.height=2}
+wr %>% 
+  filter(type == "wave1") %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
+  ) %>% 
+  kable_styling()
+```
+
+## Column 1 violin
+
+### PB Time Distributions, March 18, 2022 - Present
+
+```{r fig.height=10}
+tt96 <- tt %>% 
+  filter(trkNO > 48) %>%
+  mutate(track = fct_reorder(track, trkNO))
+
+gg96tt <- tt96 %>% 
+  filter(trk != "dBP") %>% 
+  group_by(track) %>% 
+  mutate(sd = sd(total)) %>% 
+  ungroup() %>% 
+  ggplot(aes(factor(track), total)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) + 
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(tt96$track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "PB Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(gg96tt)
 ```
