@@ -443,8 +443,9 @@ ttDiff %>%
 ```{r newest}
 ttDiff %>%
   ungroup() %>% 
-  select(track, date, diff) %>% 
-  arrange(desc(date)) %>% 
+  select(track, date, diff, dt) %>% 
+  slice_max(dt, n=50) %>% 
+  select(-dt) %>% 
   kable(
     col.names = c(
       'track' = 'Track',
