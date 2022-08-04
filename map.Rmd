@@ -1,0 +1,50 @@
+---
+title: "Map"
+output:
+  flexdashboard::flex_dashboard:
+    vertical_layout: fill
+    theme: sandstone
+    navbar:
+      - { icon: "fas fa-home", href: "index.html", align: right}
+---
+
+# plot
+
+### Annexation
+
+```{r}
+library(tidyverse)
+library(sf)
+library(leaflet)
+```
+
+```{r}
+raw <- "_data/annex.geojson"
+annex <- st_read(raw)
+```
+
+```{r}
+plot(annex["annexyr"], key.pos = 1, axes = TRUE)
+```
+
+# ggplot
+
+### ggplot
+
+```{r}
+ggplot() +
+  geom_sf(data = annex, aes(fill = annexyr)) 
+```
+
+# Leaflet
+
+### leaflet
+
+```{r}
+leaflet(annex) %>% 
+  addProviderTiles(providers$CartoDB.Positron, group = "CartoDB (default)") %>%
+  addTiles(group = "OSM") %>%
+  addProviderTiles(providers$Esri.WorldImagery, group = "ESRI World Imagery") %>%
+  addPolygons(stroke = FALSE)
+```
+
