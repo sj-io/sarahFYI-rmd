@@ -86,7 +86,7 @@ wr <- ttDiff %>%
 
 ```{r worst48}
 wr %>% 
-  filter(type != "wave1") %>% 
+  filter(!str_starts(type, "wave")) %>% 
   select(track, diff) %>% 
   arrange(desc(diff)) %>% 
   head(7) %>% 
@@ -101,7 +101,7 @@ wr %>%
 
 ```{r best48}
 wr %>% 
-  filter(type != "wave1") %>% 
+  filter(!str_starts(type, "wave")) %>% 
   select(track, diff) %>% 
   arrange(diff) %>% 
   head(7) %>% 
@@ -116,7 +116,7 @@ wr %>%
 
 ```{r mostImprv48}
 wr %>% 
-  filter(type != "wave1") %>% 
+  filter(!str_starts(type, "wave")) %>% 
   select(track, cumsum) %>% 
   arrange(desc(cumsum)) %>% 
   head(7) %>% 
@@ -133,7 +133,7 @@ wr %>%
 
 ```{r}
 wr2 <- wr %>%
-  filter(type != "wave1") %>% 
+  filter(!str_starts(type, "wave")) %>% 
   select(cup, track, date, total.x, total.y, diff) 
 
 wr2 %>%
@@ -211,7 +211,7 @@ ggplotly(ggtt)
 
 ```{r worst96}
 wr %>% 
-  filter(type == "wave1") %>% 
+  filter(str_starts(type, "wave")) %>% 
   select(track, diff) %>% 
   arrange(desc(diff)) %>% 
   head(7) %>% 
@@ -226,7 +226,7 @@ wr %>%
 
 ```{r best96}
 wr %>% 
-  filter(type == "wave1") %>% 
+  filter(str_starts(type, "wave")) %>% 
   select(track, diff) %>% 
   arrange(diff) %>% 
   head(7) %>% 
@@ -243,7 +243,7 @@ wr %>%
 
 ```{r}
 PBw <- wr %>%
-  filter(type == "wave1") %>%
+  filter(str_starts(type, "wave")) %>%
   select(cup, track, date, total.x, total.y, diff)
 
 PBw %>%
@@ -278,7 +278,7 @@ PBw %>%
 
 ```{r mostImprv96}
 wr %>% 
-  filter(type == "wave1") %>% 
+  filter(str_starts(type, "wave")) %>% 
   select(track, cumsum) %>% 
   arrange(desc(cumsum)) %>% 
   head(7) %>% 
@@ -299,7 +299,6 @@ tt96 <- tt %>%
   mutate(track = fct_reorder(track, trkNO))
 
 gg96tt <- tt96 %>% 
-  filter(trk != "dBP") %>% 
   group_by(track) %>% 
   mutate(sd = sd(total)) %>% 
   ungroup() %>% 
