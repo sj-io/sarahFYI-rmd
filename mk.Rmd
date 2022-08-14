@@ -74,7 +74,7 @@ wr <- ttDiff %>%
   ungroup() %>% 
   arrange(trkNO) %>% 
   left_join(ttwr, by = "trk") %>% 
-  select(date, track, total.x, cumsum, cup, type, player, total.y) %>% 
+  select(date, track, total.x, cumsum, cup, type, total.y) %>% 
   mutate(diff = as.double(total.x - total.y, units = "secs"))
 ```
 
@@ -205,7 +205,7 @@ ggplotly(ggtt)
 
 # Tracks 49-96 
 
-## Column 1 tbl 
+## Column 1 tbl {data-width="320"}
 
 ### Worst Tracks
 
@@ -233,6 +233,21 @@ wr %>%
   kable(
     col.names = c('track' = 'Track',
     'diff' = 'WR Diff.')
+  ) %>% 
+  kable_styling()
+```
+
+### Most Improved 
+
+```{r mostImprv96}
+wr %>% 
+  filter(str_starts(type, "wave")) %>% 
+  select(track, cumsum) %>% 
+  arrange(desc(cumsum)) %>% 
+  head(7) %>% 
+  kable(
+    col.names = c('track' = 'Track',
+    'cumsum' = 'Improvement')
   ) %>% 
   kable_styling()
 ```
@@ -272,21 +287,6 @@ PBw %>%
   collapse_rows(columns = 1,
                 row_group_label_position = 'stack') %>%
   row_spec(0, align = "c")
-```
-
-### Most Improved 
-
-```{r mostImprv96}
-wr %>% 
-  filter(str_starts(type, "wave")) %>% 
-  select(track, cumsum) %>% 
-  arrange(desc(cumsum)) %>% 
-  head(7) %>% 
-  kable(
-    col.names = c('track' = 'Track',
-    'cumsum' = 'Improvement')
-  ) %>% 
-  kable_styling()
 ```
 
 ## Column 3 violin
@@ -340,10 +340,6 @@ ggN <- wk %>%
   labs(y = "PBs",
        x = "Week")
 
-ggN <- ggN + 
-  annotate("text", x = 5, y = 65, alpha = .70, label = "Wave 1\nRelease",
-           parse = TRUE)
-
 ggplotly(ggN)
 ```
 
@@ -356,10 +352,6 @@ ggWk <- wk %>%
   theme_minimal() + 
   labs(x = "Week",
        y = "Average Time Save (secs)")
-
-ggWk <- ggWk +
-  annotate("text", x = 6.5, y = 1.10, alpha = .70,
-           label = "Switch to Meta\nBuild", parse = TRUE)
 
 ggplotly(ggWk)
 ```

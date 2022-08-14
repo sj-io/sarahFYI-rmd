@@ -1,65 +1,65 @@
-trk,player,country,total
-MKS,Byron ,[Australia] ,1:34.737
-WP,Alberto ,[Spain] ,1:40.184 
-SSC,Alberto ,[Spain] ,1:48.845 
-TR,Alberto ,[Spain] ,1:48.975 
-MC,Alberto ,[Spain] ,1:45.409
-TH,Nasuno ,[Japan] ,2:02.404 
-TM,Alberto ,[Spain] ,1:54.622 
-SGF,Prometheus ,[Australia] ,1:56.235 
-SA,Alberto ,[Spain] ,1:58.194 
-DS,StervtL ,[Netherlands] ,1:53.438 
-Ed,Alberto ,[Spain] ,1:55.965 
-MW,StervtL ,[Netherlands] ,1:41.983 
-CC,Army ,[France] ,1:59.786 
-BDD,Army ,[France] ,1:46.912 
-BC,Vincent ,[United States] ,1:58.995 
-RR,Alberto ,[Spain] ,1:59.314 
-rMMM,Alberto ,[Spain] ,1:24.642 
-rMC,クローリン ,[Japan] ,1:23.837 
-rCCB,Alberto ,[Spain] ,1:47.048 
-rTT,えぢから ,[Japan] ,1:46.373 
-rDDD,Army ,[France] ,1:53.624 
-rDP3,Alpaco ,[Netherlands] ,1:12.833 
-rRRy,そうめん ,[Japan] ,1:55.654 
-rDKJ,StervtL ,[Netherlands] ,2:01.176 
-rWS,StervtL ,[Netherlands] ,1:50.994
-rSL,Alberto ,[Spain] ,1:47.092 
-rMP,Alberto ,[Spain] ,1:50.979 
-rYV,Alberto ,[Spain] ,1:58.541 
-rTTC,Alberto ,[Spain] ,1:42.484 
-rPPS,しらぬい ,[Japan] ,1:59.427 
-rGV,Panda ,[Australia] ,1:53.188 
-rRRd,Vincent ,[United States] ,1:19.989 
-dYC,Ronny ,[Japan] ,1:42.138 
-dEA,しらぬい ,[Japan] ,1:40.129 
-dDD,Alberto ,[Spain] ,1:40.620 
-dMC,StervtL ,[Netherlands] ,1:51.278 
-dWGM,Panda ,[Australia] ,2:02.542 
-dRR,Vincent ,[United States] ,1:26.323 
-dIIO,Army ,[France] ,1:45.216 
-dHC,エル ,[Japan] ,1:47.780 
-dBP,JenZua & しののめ,[Spain] & [Japan],1:02.142 
-dCL,Panda ,[Australia] ,1:41.936 
-dWW,きなこもち ,[Japan] ,1:46.357 
-dAC,Army ,[France] ,1:36.931 
-dNBC,Alberto ,[Spain] ,1:42.571 
-dRiR,Army ,[France] ,1:45.387
-dSBS,Army ,[France] ,1:40.490
-dBB,StervtL ,[Netherlands] ,1:23.583 
-wPP,Army ,France,1:50.567
-wTC,Army ,France,1:20.607
-wChM,Panda ,Australia,1:52.670
-wCoM,Alberto ,Spain,1:41.959 
-wTB,Alberto ,Spain,1:25.984
-wSR,Alberto ,Spain,1:44.992
-wSG,ささゆき ,Japan,1:27.385
-wNH,Army ,France,1:52.714
-wNYM,Alpaco,Netherlands,1:23.942
-wMC3,いたくら,Japan,1:32.295
-wKD,Play,France,1:30.980
-wWP,ths,Belgium,2:21.295
-wSS,¥146,Japan,2:03.167
-wSL,Alberto,Spain,1:29.412
-wMG,Danny,Netherlands,1:30.003
-wSHS,K4I,Japan,1:56.790
+trk,total
+MKS,1:34.712  
+WP,1:40.184  
+SSC,1:48.845 
+TR,1:48.975  
+MC,1:45.331  
+TH,2:02.338 
+TM,1:54.614  
+SGF,1:56.208 
+SA,1:58.194  
+DS,1:53.406  
+Ed,1:55.965  
+MW,1:41.983  
+CC,1:59.786  
+BDD,1:46.912  
+BC,1:58.995  
+RR,1:59.314  
+rMMM,1:24.460 
+rMC,1:23.837 
+rCCB,1:47.048  
+rTT,1:46.373 
+rDDD,1:53.624 
+rDP3,1:12.833 
+rRRy,1:55.654  
+rDKJ,2:01.176  
+rWS,1:50.994  
+rSL,1:46.998 
+rMP,1:50.979 
+rYV,1:58.431 
+rTTC,1:42.345 
+rPPS,1:59.407  
+rGV,1:53.188  
+rRRd,1:19.989  
+dYC,1:42.138 
+dEA,1:40.129 
+dDD,1:40.620 
+dMC,1:51.278 
+dWGM,2:02.542 
+dRR,1:26.268 
+dIIO,1:45.216  
+dHC,1:47.675  
+dBP,1:02.142 
+dCL,1:41.936  
+dWW,1:46.013  
+dAC,1:36.702  
+dNBC,1:42.571  
+dRiR,1:45.387  
+dSBS,1:40.490 
+dBB,1:23.583  
+wPP,1:50.367  
+wTC,1:20.417  
+wChM,1:52.670  
+wCoM,1:41.767 
+wTB,1:25.833  
+wSR,1:44.992  
+wSG,1:27.223  
+wNH,1:52.714  
+wNYM,1:23.367 
+wMC3,1:31.359 
+wKD,1:29.865  
+wWP,2:19.521 
+wSS,2:01.284  
+wSL,1:27.030 
+wMG,1:28.538 
+wSHS,1:55.906  
