@@ -10,8 +10,6 @@ navbar:
     - text: "Home"
       href: index.html
   right:
-    - text: "Art"
-      href: art.html
     - text: "Mario Kart"
       href: mk.html
     - icon: fa fa-twitch
