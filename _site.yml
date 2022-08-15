@@ -13,6 +13,8 @@ navbar:
       href: index.html
     - icon: fa fa-twitch
       href: https://www.twitch.tv/sarahFYI
+    - icon: fa fa-twitter
+      href: https://twitter.com/sarah_fyi
     - icon: fa fa-github
       href: https://github.com/sj-io
 
