@@ -1,16 +1,19 @@
 name: "sarahFYI"
 title: "SJ"
 description: |
-  Sarah Johnson gaming
+  Sarah Johnson
 output_dir: "_site"
 exclude: ["*.csv"]
 base_url: https://sarah.fyi
 navbar:
+  left:
+    - text: "Home"
+      href: index.html
   right:
+    - text: "Art"
+      href: art.html
     - text: "Mario Kart"
       href: mk.html
-    - text: "About"
-      href: index.html
     - icon: fa fa-twitch
       href: https://www.twitch.tv/sarahFYI
     - icon: fa fa-twitter
