@@ -2,6 +2,7 @@
 title: "Art"
 output: 
   ioslides_presentation:
+    self_contained: false
     widescreen: true
     smaller: true
 ---
