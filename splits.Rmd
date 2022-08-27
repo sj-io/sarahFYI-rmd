@@ -31,7 +31,7 @@ write_csv(t48, "_data/splits/trks_48.csv")
 ```
 
 ```{bash eval=FALSE, include=FALSE}
-MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs.csv max
+MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs.csv mean
 ```
 
 ```{r}
@@ -40,9 +40,9 @@ runs <- read_csv("_data/splits/MK8D_runs.csv")
 
 # 48 Tracks
 
-## Col 1
+## Col 1 {data-width="375"}
 
-### Violin
+### Violin Plot
 
 ```{r}
 t0 <- t48 %>% 
@@ -82,5 +82,42 @@ gg48 <- t0 %>%
         legend.position = "none")
 
 ggplotly(gg48)
+```
+
+## Col 2
+
+### Traces Plot
+
+```{r}
+r0 <- runs %>% 
+  mutate(Time = seconds(Time),
+         `Center mean` = seconds(`Center mean`),
+         `Center offset` = seconds(`Center offset`),
+         Track = fct_inorder(Track),
+         date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
+         date = ymd(date),
+         Track = recode(Track, "Start" = " "))
+```
+
+```{r}
+ggTrace <- r0 %>% ggplot(aes(factor(Track), `Center offset`, group = ID, 
+                  color = date, alpha = date)) +
+  geom_line() +
+  scale_y_time() +
+  scale_color_date(low = "plum", high = "darkcyan") +
+  scale_alpha_date(range = c(.35, .9)) +
+  labs(x = "",
+       y = "Offset Time from Mean") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(ggTrace)
 ```
 
