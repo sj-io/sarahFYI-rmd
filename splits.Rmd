@@ -1,0 +1,86 @@
+---
+title: "Mario Kart Speedruns"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    navbar:
+      - { icon: "fas fa-home", href: "index.html", align: right}
+---
+
+```{bash eval=FALSE, include=FALSE}
+MK8D_trk2csv ./_data/splits ./_data/splits MK8D_trks.csv
+```
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+```{r}
+trks <- read_csv("_data/splits/MK8D_trks.csv")
+abr <- read_csv("_data/track-abbr.csv")
+
+t48 <- trks %>% 
+  filter(Category == "48 Tracks") %>% 
+  left_join(abr, by = c("Track" = "split")) %>% 
+  select(ID, lss, Time:Category) %>% 
+  mutate(lss = replace_na(lss,"Start")) %>% 
+  rename("Track" = "lss")
+
+write_csv(t48, "_data/splits/trks_48.csv")
+```
+
+```{bash eval=FALSE, include=FALSE}
+MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs.csv max
+```
+
+```{r}
+runs <- read_csv("_data/splits/MK8D_runs.csv")
+```
+
+# 48 Tracks
+
+## Col 1
+
+### Violin
+
+```{r}
+t0 <- t48 %>% 
+  filter(Track != "Start") %>% 
+  mutate(Time = seconds(Time),
+         Track = fct_inorder(Track)) %>% 
+  group_by(Track) %>% 
+  mutate(sd = sd(Time)) %>% 
+  ungroup()
+```
+
+```{r}
+library(plotly)
+```
+
+```{r}
+gg48 <- t0 %>% 
+  ggplot(aes(factor(Track), Time)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev(levels(t0$Track))) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(gg48)
+```
+
