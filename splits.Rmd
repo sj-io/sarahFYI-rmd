@@ -8,6 +8,7 @@ output:
 ---
 
 ```{bash eval=FALSE, include=FALSE}
+# Convert all lss files in folder to csv
 MK8D_trk2csv ./_data/splits ./_data/splits MK8D_trks.csv
 ```
 
@@ -17,30 +18,34 @@ library(lubridate)
 ```
 
 ```{r}
-trks <- read_csv("_data/splits/MK8D_trks.csv")
+# Correct inconsistencies in track names between my splits & the MK8D python package (required to run the next method).
+# Better option would've been to assign track NOs join/recode that way.
+raw <- read_csv("_data/splits/MK8D_trks.csv")
 abr <- read_csv("_data/track-abbr.csv")
 
-t48 <- trks %>% 
+t48 <- raw %>% 
   filter(Category == "48 Tracks") %>% 
   left_join(abr, by = c("Track" = "split")) %>% 
   select(ID, lss, Time:Category) %>% 
-  mutate(lss = replace_na(lss,"Start")) %>% 
+  mutate(lss = replace_na(lss,"Start"),
+         Version = "Cartridge",
+         Items = "No Items") %>% 
   rename("Track" = "lss")
 
 write_csv(t48, "_data/splits/trks_48.csv")
 ```
 
 ```{bash eval=FALSE, include=FALSE}
-MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs.csv mean
-```
-
-```{r}
-runs <- read_csv("_data/splits/MK8D_runs.csv")
+# Adds center line (mean, median, max), offset for each run, and split time columns.
+# Could be done easily in R to reduce number of files in folder.
+MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_max.csv max
+MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_mean.csv mean
+MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_med.csv median
 ```
 
 # 48 Tracks
 
-## Col 1 {data-width="375"}
+## Col 1 Tracks {data-width="350"}
 
 ### Violin Plot
 
@@ -84,30 +89,201 @@ gg48 <- t0 %>%
 ggplotly(gg48)
 ```
 
-## Col 2
+## Col 2 Runs {.tabset}
 
-### Traces Plot
+```{r message=FALSE, warning=FALSE}
+# Add column identifying stat, rename all files to have matching column names.
+runMean <- read_csv("_data/splits/MK8D_runs_mean.csv") %>% 
+  mutate(center = "mean", .before = `Center mean`) %>% 
+  rename(c_time = `Center mean`,
+         offset = `Center offset`)
 
-```{r}
-r0 <- runs %>% 
-  mutate(Time = seconds(Time),
-         `Center mean` = seconds(`Center mean`),
-         `Center offset` = seconds(`Center offset`),
-         Track = fct_inorder(Track),
-         date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
-         date = ymd(date),
-         Track = recode(Track, "Start" = " "))
+runMax <- read_csv("_data/splits/MK8D_runs_max.csv") %>% 
+  mutate(center = "max", .before = `Center amax`) %>% 
+  rename(c_time = `Center amax`,
+         offset = `Center offset`)
+
+runMed <- read_csv("_data/splits/MK8D_runs_med.csv") %>% 
+  mutate(center = "median", .before = `Center median`) %>% 
+  rename(c_time = `Center median`,
+         offset = `Center offset`)
+
+# Combine files so defining col_types w/ lubridate will be quicker.
+r0 <- rbind(runMean, runMax, runMed) %>%
+  mutate(
+    Time = seconds(Time),
+    c_time = seconds(c_time),
+    offset = seconds(offset),
+    Track = fct_inorder(Track),
+    date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
+    date = ymd(date),
+    Track = recode(Track, "Start" = " ")
+  ) %>% 
+  group_by(ID) %>% 
+  mutate(runNO = cur_group_id()) %>% 
+  ungroup()
 ```
 
+### Max
+
 ```{r}
-ggTrace <- r0 %>% ggplot(aes(factor(Track), `Center offset`, group = ID, 
-                  color = date, alpha = date)) +
+ggMax <- r0 %>% 
+  filter(center == "max") %>%
+  ggplot(aes(
+    factor(Track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
   geom_line() +
   scale_y_time() +
-  scale_color_date(low = "plum", high = "darkcyan") +
-  scale_alpha_date(range = c(.35, .9)) +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.35, .9)) +
+  labs(x = "",
+       y = "Offset Time from Max") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggMax)
+```
+
+### Mean
+
+```{r}
+ggMean <- r0 %>% 
+  filter(center == "mean") %>%
+  ggplot(aes(
+    factor(Track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.35, .9)) +
   labs(x = "",
        y = "Offset Time from Mean") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggMean)
+```
+
+### Median
+
+```{r}
+ggMed <- r0 %>% 
+  filter(center == "median") %>%
+  ggplot(aes(
+    factor(Track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.35, .9)) +
+  labs(x = "",
+       y = "Offset Time from Median") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggMed)
+```
+
+
+# Nitro Cups {data-navmenu="Cups"}
+
+```{r}
+lvl <- paste(abr$cup, "Cup") %>% unique() %>% fct_inorder()
+
+cups <- raw %>% 
+  filter(str_detect(Category, "Cups")) %>% 
+  mutate(Track = str_replace(Track, "^b", "w")) %>% 
+  left_join(abr, by = c("Track" = "trk")) %>% 
+  select(ID, trkNO, track, Time:Category) %>% 
+  mutate(track = replace_na(track, "Start"),
+         trkNO = replace_na(trkNO, 0),
+         Version = "Cartridge",
+         cup = Speed,
+         Speed = "150cc",
+         Items = "No Items",
+         runID = str_extract(ID, "\\(.+\\)"),
+         date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
+         date = ymd(date),
+         cup = factor(cup, levels = lvl)) %>% 
+  filter(!is.na(date)) %>% 
+  group_by(runID) %>% 
+  mutate(cumtime = cumsum(Time)) %>% 
+  ungroup() %>% 
+  arrange(trkNO) %>% 
+  mutate(track = fct_inorder(track)) 
+```
+
+## Col 1 Tracks {data-width="350"}
+
+```{r}
+cnV <- cups %>% 
+  filter(Category == "Nitro Cups" & track != "Start") %>% 
+  group_by(track) %>% 
+  mutate(Time = seconds(Time),
+         sd = sd(Time)) %>% 
+  ungroup()
+```
+
+### Violin Plot
+
+```{r}
+ggCNV <- cnV %>% 
+  ggplot(aes(factor(track), Time)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 0.98,
@@ -118,6 +294,636 @@ ggTrace <- r0 %>% ggplot(aes(factor(Track), `Center offset`, group = ID,
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(ggTrace)
+ggplotly(ggCNV)
 ```
 
+## Col 2 Runs {.tabset}
+
+```{r}
+# Get max run
+c2 <- cups %>% 
+  group_by(cup) %>% 
+  slice_max(cumtime) %>% 
+  ungroup() %>% 
+  select(runID) %>% 
+  left_join(cups, by = "runID") %>% 
+  select(cup, track, cumtime) %>% 
+  rename(max = cumtime)
+
+# Add max run to respective cup
+c3 <- cups %>% 
+  left_join(c2, by = c("cup", "track")) %>% 
+  group_by(track) %>% 
+  mutate(mean = mean(cumtime),
+         median = median(cumtime)) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = max:median, names_to = "stat", values_to = "ctime") %>% 
+  mutate(
+    offset = cumtime - ctime,
+    cumtime = seconds(cumtime),
+    Time = seconds(Time),
+    ctime = seconds(ctime),
+    offset = seconds(offset)) %>%
+  group_by(cup) %>%
+  mutate(runNO = dense_rank(runID)) %>%
+  ungroup()
+```
+
+```{r}
+cnT <- c3 %>%
+  filter(Category == "Nitro Cups") %>% 
+  mutate(track = recode(track, "Start" = " ")) 
+```
+
+### Max
+
+```{r}
+ggCNMax <- cnT %>% 
+  filter(stat == "max") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cnT$track, cnT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.35, .9)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCNMax)
+```
+
+### Mean
+
+```{r}
+ggCNMean <- cnT %>% 
+  filter(stat == "mean") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cnT$track, cnT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.35, .9)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCNMean)
+```
+
+### Median
+
+```{r}
+ggCNMed <- cnT %>% 
+  filter(stat == "median") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cnT$track, cnT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.35, .9)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCNMed)
+```
+
+# Retro Cups {data-navmenu="Cups"}
+
+## Col 1 Tracks {data-width="350"}
+
+```{r}
+crV <- cups %>% 
+  filter(Category == "Retro Cups" & track != "Start") %>% 
+  group_by(track) %>% 
+  mutate(Time = seconds(Time),
+         sd = sd(Time)) %>% 
+  ungroup()
+```
+
+### Violin Plot
+
+```{r}
+ggCRV <- crV %>% 
+  ggplot(aes(factor(track), Time)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(ggCRV)
+```
+
+## Col 2 Runs {.tabset}
+
+```{r}
+crT <- c3 %>%
+  filter(Category == "Retro Cups") %>% 
+  mutate(track = recode(track, "Start" = " ")) 
+```
+
+### Max
+
+```{r}
+ggCRMax <- crT %>% 
+  filter(stat == "max") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(crT$track, crT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.1, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCRMax)
+```
+
+### Mean
+
+```{r}
+ggCRMean <- crT %>% 
+  filter(stat == "mean") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(crT$track, crT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.1, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCRMean)
+```
+
+### Median
+
+```{r}
+ggCRMed <- crT %>% 
+  filter(stat == "median") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(crT$track, crT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.2, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCRMed)
+```
+
+
+# Bonus Cups {data-navmenu="Cups"}
+
+## Col 1 Tracks {data-width="350"}
+
+```{r}
+cbV <- cups %>% 
+  filter(Category == "Bonus Cups" & track != "Start") %>% 
+  group_by(track) %>% 
+  mutate(Time = seconds(Time),
+         sd = sd(Time)) %>% 
+  ungroup()
+```
+
+### Violin Plot
+
+```{r}
+ggCbV <- cbV %>% 
+  ggplot(aes(factor(track), Time)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(ggCbV)
+```
+
+## Col 2 Runs {.tabset}
+
+```{r}
+cbT <- c3 %>%
+  filter(Category == "Bonus Cups") %>% 
+  mutate(track = recode(track, "Start" = " ")) 
+```
+
+### Max
+
+```{r}
+ggCbMax <- cbT %>% 
+  filter(stat == "max") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cbT$track, cbT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.1, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCbMax)
+```
+
+### Mean
+
+```{r}
+ggCbMean <- cbT %>% 
+  filter(stat == "mean") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cbT$track, cbT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.1, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCbMean)
+```
+
+### Median
+
+```{r}
+ggCbMed <- cbT %>% 
+  filter(stat == "median") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cbT$track, cbT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.2, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCbMed)
+```
+
+
+# DLC Cups {data-navmenu="Cups"}
+
+## Col 1 Tracks {data-width="350"}
+
+```{r}
+cdV <- cups %>% 
+  filter(Category == "DLC Cups" & track != "Start") %>% 
+  group_by(track) %>% 
+  mutate(Time = seconds(Time),
+         sd = sd(Time)) %>% 
+  ungroup()
+```
+
+### Violin Plot
+
+```{r}
+ggCdV <- cdV %>% 
+  ggplot(aes(factor(track), Time)) +
+  geom_violin(draw_quantiles = 0.5, 
+              scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(ggCdV)
+```
+
+## Col 2 Runs {.tabset}
+
+```{r}
+cdT <- c3 %>%
+  filter(Category == "DLC Cups") %>% 
+  mutate(track = recode(track, "Start" = " ")) 
+```
+
+### Max
+
+```{r}
+ggCdMax <- cdT %>% 
+  filter(stat == "max") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cdT$track, cdT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.1, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCdMax)
+```
+
+### Mean
+
+```{r}
+ggCdMean <- cdT %>% 
+  filter(stat == "mean") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cdT$track, cdT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.1, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCdMean)
+```
+
+### Median
+
+```{r}
+ggCdMed <- cdT %>% 
+  filter(stat == "median") %>%
+  ggplot(aes(
+    factor(track),
+    offset,
+    group = ID,
+    color = runNO,
+    alpha = runNO
+  )) +
+  geom_line() +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_discrete(labels = setNames(cdT$track, cdT$trkNO)) +
+  scale_y_time() +
+  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_alpha_continuous(range = c(.2, .5)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(ggCdMed)
+```
