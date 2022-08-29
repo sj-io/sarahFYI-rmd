@@ -275,16 +275,27 @@ c2 <- cups %>%
   ungroup() %>% 
   left_join(cups, by = c("cup", "ID")) 
 
+c3 <- cups %>% 
+  select(cup, ID) %>% 
+  group_by(cup) %>% 
+  distinct() %>% 
+  mutate(runNO = dense_rank(ID)) %>% 
+  anti_join(c2, by = "ID") %>% 
+  mutate(alph = 1) %>% 
+  ungroup() %>% 
+  left_join(cups, by = c("cup", "ID")) %>% 
+  rbind(c2)
+
 # Get max run
-c4 <- c2 %>% 
+c4 <- c3 %>% 
   group_by(cup) %>% 
   slice_max(cumtime) %>% 
   ungroup() %>% 
   select(runID) %>% 
-  left_join(c2, by = "runID") %>% 
+  left_join(c3, by = "runID") %>% 
   select(cup, track, cumtime) %>% 
   rename(max = cumtime) %>% 
-  left_join(c2, by = c("cup", "track")) %>% 
+  left_join(c3, by = c("cup", "track")) %>% 
   group_by(track) %>% 
   mutate(mean = mean(cumtime)) %>% 
   ungroup() %>% 
