@@ -7,7 +7,7 @@ output:
       - { icon: "fas fa-home", href: "index.html", align: right}
 ---
 
-```{bash eval=FALSE, include=FALSE}
+```{bash include=FALSE}
 # Convert all lss files in folder to csv
 MK8D_trk2csv ./_data/splits ./_data/splits MK8D_trks.csv
 ```
@@ -40,7 +40,6 @@ write_csv(t48, "_data/splits/trks_48.csv")
 # Could be done easily in R to reduce number of files in folder.
 MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_max.csv max
 MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_mean.csv mean
-MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_med.csv median
 ```
 
 # 48 Tracks
@@ -139,7 +138,7 @@ ggMax <- r0 %>%
   geom_line() +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.35, .9)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "Offset Time from Max") +
   theme_minimal() +
@@ -174,7 +173,7 @@ ggMean <- r0 %>%
   geom_line() +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.35, .9)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "Offset Time from Mean") +
   theme_minimal() +
@@ -192,41 +191,6 @@ ggMean <- r0 %>%
   )
 
 ggplotly(ggMean)
-```
-
-### Median
-
-```{r}
-ggMed <- r0 %>% 
-  filter(center == "median") %>%
-  ggplot(aes(
-    factor(Track),
-    offset,
-    group = ID,
-    color = runNO,
-    alpha = runNO
-  )) +
-  geom_line() +
-  scale_y_time() +
-  scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.35, .9)) +
-  labs(x = "",
-       y = "Offset Time from Median") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 0.98,
-      vjust = 0.9
-    ),
-    axis.text = element_text(size = 8),
-    axis.ticks = element_line(size = .2),
-    panel.grid = element_line(size = .2),
-    panel.border = element_rect(fill = NA, size = .2),
-    legend.position = "none"
-  )
-
-ggplotly(ggMed)
 ```
 
 
@@ -300,37 +264,42 @@ ggplotly(ggCNV)
 ## Col 2 Runs {.tabset}
 
 ```{r}
-# Get max run
+# Slice 10 most recent runs, add alpha value
 c2 <- cups %>% 
+  select(cup, ID) %>% 
+  group_by(cup) %>% 
+  distinct() %>% 
+  mutate(runNO = dense_rank(ID)) %>%
+  slice_max(runNO, n = 10) %>% 
+  mutate(alph = dense_rank(runNO)) %>% 
+  ungroup() %>% 
+  left_join(cups, by = c("cup", "ID")) 
+
+# Get max run
+c4 <- c2 %>% 
   group_by(cup) %>% 
   slice_max(cumtime) %>% 
   ungroup() %>% 
   select(runID) %>% 
-  left_join(cups, by = "runID") %>% 
+  left_join(c2, by = "runID") %>% 
   select(cup, track, cumtime) %>% 
-  rename(max = cumtime)
-
-# Add max run to respective cup
-c3 <- cups %>% 
+  rename(max = cumtime) %>% 
   left_join(c2, by = c("cup", "track")) %>% 
   group_by(track) %>% 
-  mutate(mean = mean(cumtime),
-         median = median(cumtime)) %>% 
+  mutate(mean = mean(cumtime)) %>% 
   ungroup() %>% 
-  pivot_longer(cols = max:median, names_to = "stat", values_to = "ctime") %>% 
+  pivot_longer(cols = c(max, mean), names_to = "stat", values_to = "ctime") %>% 
   mutate(
     offset = cumtime - ctime,
     cumtime = seconds(cumtime),
     Time = seconds(Time),
     ctime = seconds(ctime),
-    offset = seconds(offset)) %>%
-  group_by(cup) %>%
-  mutate(runNO = dense_rank(runID)) %>%
-  ungroup()
+    offset = seconds(offset))
+  
 ```
 
 ```{r}
-cnT <- c3 %>%
+cnT <- c4 %>%
   filter(Category == "Nitro Cups") %>% 
   mutate(track = recode(track, "Start" = " ")) 
 ```
@@ -344,15 +313,15 @@ ggCNMax <- cnT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(cnT$track, cnT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.35, .9)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -381,15 +350,15 @@ ggCNMean <- cnT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(cnT$track, cnT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.35, .9)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -407,43 +376,6 @@ ggCNMean <- cnT %>%
   )
 
 ggplotly(ggCNMean)
-```
-
-### Median
-
-```{r}
-ggCNMed <- cnT %>% 
-  filter(stat == "median") %>%
-  ggplot(aes(
-    factor(track),
-    offset,
-    group = ID,
-    color = runNO,
-    alpha = runNO
-  )) +
-  geom_line() +
-  facet_wrap(~cup, scales = "free") +
-  scale_x_discrete(labels = setNames(cnT$track, cnT$trkNO)) +
-  scale_y_time() +
-  scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.35, .9)) +
-  labs(x = "",
-       y = "") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 0.98,
-      vjust = 0.9
-    ),
-    axis.text = element_text(size = 8),
-    axis.ticks = element_line(size = .2),
-    panel.grid = element_line(size = .2),
-    panel.border = element_rect(fill = NA, size = .2),
-    legend.position = "none"
-  )
-
-ggplotly(ggCNMed)
 ```
 
 # Retro Cups {data-navmenu="Cups"}
@@ -490,7 +422,7 @@ ggplotly(ggCRV)
 ## Col 2 Runs {.tabset}
 
 ```{r}
-crT <- c3 %>%
+crT <- c4 %>%
   filter(Category == "Retro Cups") %>% 
   mutate(track = recode(track, "Start" = " ")) 
 ```
@@ -504,15 +436,15 @@ ggCRMax <- crT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(crT$track, crT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.1, .5)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -541,15 +473,15 @@ ggCRMean <- crT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(crT$track, crT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.1, .5)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -567,43 +499,6 @@ ggCRMean <- crT %>%
   )
 
 ggplotly(ggCRMean)
-```
-
-### Median
-
-```{r}
-ggCRMed <- crT %>% 
-  filter(stat == "median") %>%
-  ggplot(aes(
-    factor(track),
-    offset,
-    group = ID,
-    color = runNO,
-    alpha = runNO
-  )) +
-  geom_line() +
-  facet_wrap(~cup, scales = "free") +
-  scale_x_discrete(labels = setNames(crT$track, crT$trkNO)) +
-  scale_y_time() +
-  scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.2, .5)) +
-  labs(x = "",
-       y = "") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 0.98,
-      vjust = 0.9
-    ),
-    axis.text = element_text(size = 8),
-    axis.ticks = element_line(size = .2),
-    panel.grid = element_line(size = .2),
-    panel.border = element_rect(fill = NA, size = .2),
-    legend.position = "none"
-  )
-
-ggplotly(ggCRMed)
 ```
 
 
@@ -651,7 +546,7 @@ ggplotly(ggCbV)
 ## Col 2 Runs {.tabset}
 
 ```{r}
-cbT <- c3 %>%
+cbT <- c4 %>%
   filter(Category == "Bonus Cups") %>% 
   mutate(track = recode(track, "Start" = " ")) 
 ```
@@ -665,21 +560,21 @@ ggCbMax <- cbT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(cbT$track, cbT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.1, .5)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
   theme(
     axis.text.x = element_text(
-      angle = 45,
+      angle = 30,
       hjust = 0.98,
       vjust = 0.9
     ),
@@ -693,6 +588,8 @@ ggCbMax <- cbT %>%
 ggplotly(ggCbMax)
 ```
 
+> Ten most recent runs.
+
 ### Mean
 
 ```{r}
@@ -702,15 +599,15 @@ ggCbMean <- cbT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(cbT$track, cbT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.1, .5)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -728,43 +625,6 @@ ggCbMean <- cbT %>%
   )
 
 ggplotly(ggCbMean)
-```
-
-### Median
-
-```{r}
-ggCbMed <- cbT %>% 
-  filter(stat == "median") %>%
-  ggplot(aes(
-    factor(track),
-    offset,
-    group = ID,
-    color = runNO,
-    alpha = runNO
-  )) +
-  geom_line() +
-  facet_wrap(~cup, scales = "free") +
-  scale_x_discrete(labels = setNames(cbT$track, cbT$trkNO)) +
-  scale_y_time() +
-  scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.2, .5)) +
-  labs(x = "",
-       y = "") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 0.98,
-      vjust = 0.9
-    ),
-    axis.text = element_text(size = 8),
-    axis.ticks = element_line(size = .2),
-    panel.grid = element_line(size = .2),
-    panel.border = element_rect(fill = NA, size = .2),
-    legend.position = "none"
-  )
-
-ggplotly(ggCbMed)
 ```
 
 
@@ -812,7 +672,7 @@ ggplotly(ggCdV)
 ## Col 2 Runs {.tabset}
 
 ```{r}
-cdT <- c3 %>%
+cdT <- c4 %>%
   filter(Category == "DLC Cups") %>% 
   mutate(track = recode(track, "Start" = " ")) 
 ```
@@ -826,15 +686,15 @@ ggCdMax <- cdT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(cdT$track, cdT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.1, .5)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -863,15 +723,15 @@ ggCdMean <- cdT %>%
     factor(track),
     offset,
     group = ID,
-    color = runNO,
-    alpha = runNO
+    color = alph,
+    alpha = alph
   )) +
   geom_line() +
   facet_wrap(~cup, scales = "free") +
   scale_x_discrete(labels = setNames(cdT$track, cdT$trkNO)) +
   scale_y_time() +
   scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.1, .5)) +
+  scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -889,41 +749,4 @@ ggCdMean <- cdT %>%
   )
 
 ggplotly(ggCdMean)
-```
-
-### Median
-
-```{r}
-ggCdMed <- cdT %>% 
-  filter(stat == "median") %>%
-  ggplot(aes(
-    factor(track),
-    offset,
-    group = ID,
-    color = runNO,
-    alpha = runNO
-  )) +
-  geom_line() +
-  facet_wrap(~cup, scales = "free") +
-  scale_x_discrete(labels = setNames(cdT$track, cdT$trkNO)) +
-  scale_y_time() +
-  scale_color_continuous(low = "plum", high = "darkcyan") +
-  scale_alpha_continuous(range = c(.2, .5)) +
-  labs(x = "",
-       y = "") +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 0.98,
-      vjust = 0.9
-    ),
-    axis.text = element_text(size = 8),
-    axis.ticks = element_line(size = .2),
-    panel.grid = element_line(size = .2),
-    panel.border = element_rect(fill = NA, size = .2),
-    legend.position = "none"
-  )
-
-ggplotly(ggCdMed)
 ```
