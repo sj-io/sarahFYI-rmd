@@ -338,7 +338,10 @@ ggCNMax <- cnT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCNMax)
+m <- list(b = 110)
+
+ggplotly(ggCNMax) %>% 
+  layout(margin = m)
 ```
 
 ### Mean
@@ -375,7 +378,8 @@ ggCNMean <- cnT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCNMean)
+ggplotly(ggCNMean) %>% 
+  layout(margin = m)
 ```
 
 # Retro Cups {data-navmenu="Cups"}
@@ -416,7 +420,7 @@ ggCRV <- crV %>%
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(ggCRV)
+ggplotly(ggCRV) 
 ```
 
 ## Col 2 Runs {.tabset}
@@ -461,7 +465,8 @@ ggCRMax <- crT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCRMax)
+ggplotly(ggCRMax) %>% 
+  layout(margin = m)
 ```
 
 ### Mean
@@ -498,7 +503,8 @@ ggCRMean <- crT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCRMean)
+ggplotly(ggCRMean) %>% 
+  layout(margin = m)
 ```
 
 
@@ -574,7 +580,7 @@ ggCbMax <- cbT %>%
   theme_minimal() +
   theme(
     axis.text.x = element_text(
-      angle = 30,
+      angle = 45,
       hjust = 0.98,
       vjust = 0.9
     ),
@@ -585,10 +591,9 @@ ggCbMax <- cbT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCbMax)
+ggplotly(ggCbMax) %>% 
+  layout(margin = m)
 ```
-
-> Ten most recent runs.
 
 ### Mean
 
@@ -624,7 +629,8 @@ ggCbMean <- cbT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCbMean)
+ggplotly(ggCbMean) %>% 
+  layout(margin = m)
 ```
 
 
@@ -711,7 +717,8 @@ ggCdMax <- cdT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCdMax)
+ggplotly(ggCdMax) %>% 
+  layout(margin = m)
 ```
 
 ### Mean
@@ -748,5 +755,6 @@ ggCdMean <- cdT %>%
     legend.position = "none"
   )
 
-ggplotly(ggCdMean)
+ggplotly(ggCdMean) %>% 
+  layout(margin = m)
 ```
