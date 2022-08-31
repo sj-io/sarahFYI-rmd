@@ -7,17 +7,18 @@ output:
       - { icon: "fas fa-home", href: "index.html", align: right}
 ---
 
-```{bash include=FALSE}
+```{bash llstocsv, include=FALSE}
 # Convert all lss files in folder to csv
 MK8D_trk2csv ./_data/splits ./_data/splits MK8D_trks.csv
 ```
 
-```{r}
+```{r libs}
 library(tidyverse)
 library(lubridate)
+library(plotly)
 ```
 
-```{r}
+```{r import}
 # Correct inconsistencies in track names between my splits & the MK8D python package (required to run the next method).
 # Better option would've been to assign track NOs join/recode that way.
 raw <- read_csv("_data/splits/MK8D_trks.csv")
@@ -35,7 +36,7 @@ t48 <- raw %>%
 write_csv(t48, "_data/splits/trks_48.csv")
 ```
 
-```{bash eval=FALSE, include=FALSE}
+```{bash runs48, eval=FALSE, include=FALSE}
 # Adds center line (mean, median, max), offset for each run, and split time columns.
 # Could be done easily in R to reduce number of files in folder.
 MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_max.csv max
@@ -48,21 +49,35 @@ MK8D_run2csv ./_data/splits/trks_48.csv ./_data/splits MK8D_runs_mean.csv mean
 
 ### Violin Plot
 
-```{r}
+```{r t0}
 t0 <- t48 %>% 
   filter(Track != "Start") %>% 
   mutate(Time = seconds(Time),
          Track = fct_inorder(Track)) %>% 
   group_by(Track) %>% 
   mutate(sd = sd(Time)) %>% 
-  ungroup()
+  ungroup() %>% 
+  mutate(
+    date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
+    date = ymd(date)
+  ) %>% 
+  filter(!is.na(date)) %>% 
+  arrange(date) 
+
+# Create ID for finished runs to make joining b/w tracks and runs easier
+rg <- t0 %>% 
+  group_by(ID) %>% 
+  filter(any(Track == "Big Blue")) %>% 
+  mutate(runNO = cur_group_id()) %>% 
+  ungroup() %>% 
+  select(date, runNO, ID) %>% 
+  distinct()
+
+t0 <- t0 %>% 
+  left_join(rg, by = c("ID", "date"))
 ```
 
-```{r}
-library(plotly)
-```
-
-```{r}
+```{r gg48Violin}
 gg48 <- t0 %>% 
   ggplot(aes(factor(Track), Time)) +
   geom_violin(draw_quantiles = 0.5, 
@@ -90,7 +105,7 @@ ggplotly(gg48)
 
 ## Col 2 Runs {.tabset}
 
-```{r message=FALSE, warning=FALSE}
+```{r r0, message=FALSE, warning=FALSE}
 # Add column identifying stat, rename all files to have matching column names.
 runMean <- read_csv("_data/splits/MK8D_runs_mean.csv") %>% 
   mutate(center = "mean", .before = `Center mean`) %>% 
@@ -102,13 +117,8 @@ runMax <- read_csv("_data/splits/MK8D_runs_max.csv") %>%
   rename(c_time = `Center amax`,
          offset = `Center offset`)
 
-runMed <- read_csv("_data/splits/MK8D_runs_med.csv") %>% 
-  mutate(center = "median", .before = `Center median`) %>% 
-  rename(c_time = `Center median`,
-         offset = `Center offset`)
-
 # Combine files so defining col_types w/ lubridate will be quicker.
-r0 <- rbind(runMean, runMax, runMed) %>%
+r0 <- rbind(runMean, runMax) %>%
   mutate(
     Time = seconds(Time),
     c_time = seconds(c_time),
@@ -123,21 +133,102 @@ r0 <- rbind(runMean, runMax, runMed) %>%
   ungroup()
 ```
 
+```{r}
+mm48 <- r0 %>% 
+  select(Track, center, c_time) %>% 
+  filter(center == "max") %>% 
+  distinct() 
+
+# Shortest tracks (track PB)
+min48 <- t0 %>% 
+  select(-c(Version:sd)) %>% 
+  group_by(Track) %>% 
+  slice_min(Time) %>% 
+  ungroup() %>% 
+  rename(PBdate = date,
+         PBtime = Time)
+
+# Sum of bests & labels
+sob48 <- min48 %>% 
+  mutate(Time = cumsum(PBtime),
+         Time = seconds(Time)) %>% 
+  select(Track, Time) %>% 
+  add_row(Track = " ", Time = seconds(0), .before = 1) %>% 
+  mutate(runNO = 0, ptss = seconds(NA)) %>% 
+  left_join(mm48, by = "Track") %>% 
+  mutate(offset = Time - c_time,
+         label = paste0("<b>Sum of Best</b><br>", 
+                        "Track: ", Track,
+                        "<br>Offset: ", 
+                        round(seconds_to_period(offset),2)
+                        ))
+
+# Detour: Possible time save for newest run
+# find PB run, get track times
+pb <- r0 %>% 
+  filter(Track == "Big Blue" & center == "max") %>% 
+  slice_min(Time) %>% 
+  select(runNO) %>% 
+  left_join(t0, by = "runNO")
+
+# Join with minimum possible time and subtract
+pts <- pb %>% 
+  select(-c(Version:sd)) %>%
+  left_join(min48 %>% select(Track, PBtime, PBdate), by = "Track") %>% 
+  mutate(ptss = Time - PBtime) 
+  
+
+# Also adding labels for plotly
+max48 <- r0 %>%
+  filter(center == "max") %>%
+  left_join(t0 %>% select(Track, Time, runNO), by = c("Track", "runNO")) %>% 
+  left_join(pts %>% select(runNO, Track, ptss), by = c("runNO", "Track")) %>%
+  mutate(label = paste0("Run #", runNO, " ", date, 
+                        "<br>Track: ", Track,
+                        "<br>Split Time: ", round(seconds_to_period(Time.y), 2),
+                        "<br>Cumulative Offset: ", round(seconds_to_period(offset), 2)
+                        ),
+         label = case_when(
+           ptss == 0 ~ label,
+           is.na(ptss) ~ label,
+           !is.na(ptss) ~ paste0(label, 
+                                "<br>Possible Time Save: ", 
+                                round(seconds_to_period(ptss), 3))
+         )) %>%
+  rename(Time = Time.x) %>% 
+  select(Track, Time, runNO, ptss, center, c_time, offset, label) %>%
+  rbind(sob48)
+
+# Add color scale
+color_range <- colorRampPalette(c("plum", "darkcyan"))
+
+my_colors <- color_range(length(unique(max48$runNO)))
+
+max49 <- max48 %>%
+  mutate(clr = ifelse(runNO == 0, "grey", my_colors[max48$runNO]))
+```
+
 ### Max
 
-```{r}
-ggMax <- r0 %>% 
-  filter(center == "max") %>%
-  ggplot(aes(
+```{r gg48Max}
+ggMax <- ggplot() +
+  geom_line(data = max49, aes(
     factor(Track),
     offset,
-    group = ID,
-    color = runNO,
-    alpha = runNO
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
   )) +
-  geom_line() +
+  geom_point(data = max49[which(max49$ptss > 0),], aes(
+    factor(Track), 
+    offset, 
+    size = ptss,
+    color = "tomato",
+    text = label)) +
   scale_y_time() +
-  scale_color_continuous(low = "plum", high = "darkcyan") +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
        y = "Offset Time from Max") +
@@ -155,12 +246,17 @@ ggMax <- r0 %>%
     legend.position = "none"
   )
 
-ggplotly(ggMax)
+ggplotly(ggMax, tooltip = "text") %>% 
+  layout(margin = list(t = 60),
+    title = list(text = paste0('Improvement from Slowest Run',
+                                    '<br><sup>48 Tracks, 150cc, No Items</sup>')))
 ```
+
+> Points indicate possible time save from PB run.
 
 ### Mean
 
-```{r}
+```{r gg48Mean}
 ggMean <- r0 %>% 
   filter(center == "mean") %>%
   ggplot(aes(
@@ -192,7 +288,6 @@ ggMean <- r0 %>%
 
 ggplotly(ggMean)
 ```
-
 
 # Nitro Cups {data-navmenu="Cups"}
 
