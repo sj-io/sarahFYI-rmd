@@ -139,7 +139,7 @@ mm48 <- r0 %>%
   filter(center == "max") %>% 
   distinct() 
 
-# Shortest tracks (track PB)
+# Tracks PBs
 min48 <- t0 %>% 
   select(-c(Version:sd)) %>% 
   group_by(Track) %>% 
@@ -148,20 +148,24 @@ min48 <- t0 %>%
   rename(PBdate = date,
          PBtime = Time)
 
-# Sum of bests & labels
+# Best possible time & labels
 sob48 <- min48 %>% 
   mutate(Time = cumsum(PBtime),
          Time = seconds(Time)) %>% 
-  select(Track, Time) %>% 
+  select(Track, Time, PBtime, PBdate) %>% 
   add_row(Track = " ", Time = seconds(0), .before = 1) %>% 
   mutate(runNO = 0, ptss = seconds(NA)) %>% 
   left_join(mm48, by = "Track") %>% 
   mutate(offset = Time - c_time,
-         label = paste0("<b>Sum of Best</b><br>", 
-                        "Track: ", Track,
-                        "<br>Offset: ", 
-                        round(seconds_to_period(offset),2)
-                        ))
+         label = paste0("<b>Best Possible Time</b>", 
+                        "<br><b>Track:</b> ", Track,
+                        "<br><b>PB Date:</b> ", PBdate,
+                        "<br><b>PB Time:</b> ", 
+                        round(seconds_to_period(PBtime), 2),
+                        "<br><b>Run Time:</b> ",
+                        round(seconds_to_period(Time), 2)
+                        )) %>% 
+  select(-c(PBtime, PBdate))
 
 # Detour: Possible time save for newest run
 # find PB run, get track times
@@ -183,16 +187,16 @@ max48 <- r0 %>%
   filter(center == "max") %>%
   left_join(t0 %>% select(Track, Time, runNO), by = c("Track", "runNO")) %>% 
   left_join(pts %>% select(runNO, Track, ptss), by = c("runNO", "Track")) %>%
-  mutate(label = paste0("Run #", runNO, " ", date, 
-                        "<br>Track: ", Track,
-                        "<br>Split Time: ", round(seconds_to_period(Time.y), 2),
-                        "<br>Cumulative Offset: ", round(seconds_to_period(offset), 2)
+  mutate(label = paste0("<b>", "Run #", runNO, " ", date, "</b>", 
+                        "<br><b>Track:</b> ", Track,
+                        "<br><b>Split Time:</b> ", round(seconds_to_period(Time.y), 2),
+                        "<br><b>Run Time:</b> ", round(seconds_to_period(Time.x), 2)
                         ),
          label = case_when(
            ptss == 0 ~ label,
            is.na(ptss) ~ label,
            !is.na(ptss) ~ paste0(label, 
-                                "<br>Possible Time Save: ", 
+                                "<br><b>Possible Time Save:</b> ", 
                                 round(seconds_to_period(ptss), 3))
          )) %>%
   rename(Time = Time.x) %>% 
@@ -231,7 +235,7 @@ ggMax <- ggplot() +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
-       y = "Offset Time from Max") +
+       y = "") +
   theme_minimal() +
   theme(
     axis.text.x = element_text(
