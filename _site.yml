@@ -11,7 +11,11 @@ navbar:
       href: index.html
   right:
     - text: "Mario Kart"
-      href: mk.html
+      menu: 
+        - text: "Speedruns"
+          href: sr.html
+        - text: "Time Trials"
+          href: tt.html
     - icon: fa fa-twitch
       href: https://www.twitch.tv/sarahFYI
     - icon: fa fa-twitter

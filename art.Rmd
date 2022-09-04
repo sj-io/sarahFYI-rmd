@@ -11,9 +11,9 @@ output:
 
 ## {data-background="../../_img/IMG_1308.png" data-background-size="contain"}
 
-## {data-background="_img/IMG_0939.JPG" data-background-size="contain"}
+## {data-background="~/_img/IMG_0939.JPG" data-background-size="contain"}
 
-## {data-background="_img/IMG_1328.JPG" data-background-size="contain"}
+## {data-background="/_img/IMG_1328.JPG" data-background-size="contain"}
 
 ## {data-background="_img/IMG_1202.png" data-background-size="contain"}
 
