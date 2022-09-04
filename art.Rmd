@@ -7,24 +7,22 @@ output:
     smaller: true
 ---
 
-## {data-background="../img/IMG_0007.jpg" data-background-size="contain"}
+## {data-background="img/BTS_RM.jpg" data-background-size="contain"}
 
-## {data-background="../../img/IMG_1308.png" data-background-size="contain"}
+## {data-background="img/RGD-2.png" data-background-size="contain"}
 
-## {data-background="~/img/IMG_0939.JPG" data-background-size="contain"}
+## {data-background="img/drive-my-car.JPG" data-background-size="contain"}
 
-## {data-background="/img/IMG_1328.JPG" data-background-size="contain"}
+## {data-background="img/RGD-1.png" data-background-size="contain"}
 
-## {data-background="img/IMG_1202.png" data-background-size="contain"}
+## {data-background="img/drew-gooden.JPG" data-background-size="contain"}
 
-## {data-background="img/IMG_1182.JPG" data-background-size="contain"}
+## {data-background="img/BTS_j-hope.JPG" data-background-size="contain"}
 
-## {data-background="img/IMG_1185.JPG" data-background-size="contain"}
+## {data-background="img/RGD-3.JPG" data-background-size="contain"}
 
-## {data-background="img/IMG_1210.JPG" data-background-size="contain"}
+## {data-background="img/RGD-4.JPG" data-background-size="contain"}
 
-## {data-background="img/IMG_1310.JPG" data-background-size="contain"}
+## {data-background="img/julia-louie-dreyfus.JPG" data-background-size="contain"}
 
-## {data-background="img/IMG_1201.JPG" data-background-size="contain"}
-
-## {data-background="../img/IMG_1335.png" data-background-size="contain"}
+## {data-background="img/GF-request.JPG" data-background-size="contain"}
