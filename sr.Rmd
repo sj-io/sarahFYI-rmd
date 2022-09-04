@@ -68,7 +68,7 @@ clean <- clean0 %>%
 
 ## Col 1 {data-width="350"}
 
-### Violin Plot
+### Track Time Distributions
 
 ```{r}
 violin48 <- clean %>% 
@@ -191,9 +191,9 @@ runs_full <- runs %>%
 color_range <- colorRampPalette(c("plum", "darkcyan"))
 ```
 
-## Col 2
+## Col 2 {.tabset}
 
-### Max
+### Improvement
 
 ```{r}
 runs_48 <- runs_full %>% 
@@ -247,11 +247,40 @@ ggplotly(traces_48, tooltip = "text") %>%
                                     '<br><sup>48 Tracks, 150cc, No Items</sup>')))
 ```
 
+### Run Time
+
+```{r}
+run_time <- runs %>% 
+  group_by(ID) %>% 
+  slice_max(track) %>% 
+  ungroup() %>% 
+  select(runNO, category, cup, date, cumsum)
+```
+
+```{r}
+run_time_48 <- run_time %>% 
+  filter(category == "48 Tracks") %>% 
+  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
+                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
+  ggplot(aes(date, cumsum)) +
+  geom_line() +
+  geom_point(aes(text = label)) +
+  scale_x_date() +
+  scale_y_time() +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(size = .2), 
+        panel.border = element_rect(fill = NA, size = .2))
+
+ggplotly(run_time_48, tooltip = "text")
+```
+
+
 # Nitro Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Violin Plot
+### Track Time Distributions
 
 ```{r}
 violinnitro <- clean %>% 
@@ -280,9 +309,9 @@ violinnitro <- clean %>%
 ggplotly(violinnitro)
 ```
 
-## Col 2
+## Col 2 {.tabset}
 
-### Max
+### Improvement
 
 ```{r}
 runs_nitro <- runs_full %>% 
@@ -335,11 +364,32 @@ ggplotly(traces_nitro, tooltip = "text") %>%
   layout(margin = list(b = 110))
 ```
 
+### Run Time
+
+```{r}
+run_time_n <- run_time %>% 
+  filter(category == "Nitro Cups") %>% 
+  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
+                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
+  ggplot(aes(date, cumsum)) +
+  geom_line() +
+  geom_point(aes(text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_date() +
+  scale_y_time() +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(size = .2), 
+        panel.border = element_rect(fill = NA, size = .2))
+
+ggplotly(run_time_n, tooltip = "text")
+```
+
 # Retro Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Violin Plot
+### Track Time Distribution
 
 ```{r}
 violinretro <- clean %>% 
@@ -368,9 +418,9 @@ violinretro <- clean %>%
 ggplotly(violinretro)
 ```
 
-## Col 2
+## Col 2 {.tabset}
 
-### Max
+### Improvement
 
 ```{r}
 runs_retro <- runs_full %>% 
@@ -423,11 +473,32 @@ ggplotly(traces_retro, tooltip = "text") %>%
   layout(margin = list(b = 110))
 ```
 
+### Run Time
+
+```{r}
+run_time_r <- run_time %>% 
+  filter(category == "Retro Cups") %>% 
+  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
+                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
+  ggplot(aes(date, cumsum)) +
+  geom_line() +
+  geom_point(aes(text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_date() +
+  scale_y_time() +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(size = .2), 
+        panel.border = element_rect(fill = NA, size = .2))
+
+ggplotly(run_time_r, tooltip = "text")
+```
+
 # Bonus Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Violin Plot
+### Track Time Distribution
 
 ```{r}
 violinbonus <- clean %>% 
@@ -456,9 +527,9 @@ violinbonus <- clean %>%
 ggplotly(violinbonus)
 ```
 
-## Col 2
+## Col 2 {.tabset}
 
-### Max
+### Improvement
 
 ```{r}
 runs_bonus <- runs_full %>% 
@@ -511,11 +582,32 @@ ggplotly(traces_bonus, tooltip = "text") %>%
   layout(margin = list(b = 110))
 ```
 
+### Run Time
+
+```{r}
+run_time_b <- run_time %>% 
+  filter(category == "Bonus Cups") %>% 
+  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
+                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
+  ggplot(aes(date, cumsum)) +
+  geom_line() +
+  geom_point(aes(text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_date() +
+  scale_y_time() +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(size = .2), 
+        panel.border = element_rect(fill = NA, size = .2))
+
+ggplotly(run_time_b, tooltip = "text")
+```
+
 # DLC Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Violin Plot
+### Track Time Distribution
 
 ```{r}
 violindlc <- clean %>% 
@@ -544,9 +636,9 @@ violindlc <- clean %>%
 ggplotly(violindlc)
 ```
 
-## Col 2
+## Col 2 {.tabset}
 
-### Max
+### Improvement
 
 ```{r}
 runs_dlc <- runs_full %>% 
@@ -597,4 +689,25 @@ traces_dlc <- ggplot() +
 
 ggplotly(traces_dlc, tooltip = "text") %>% 
   layout(margin = list(b = 110))
+```
+
+### Run Time
+
+```{r}
+run_time_d <- run_time %>% 
+  filter(category == "DLC Cups") %>% 
+  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
+                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
+  ggplot(aes(date, cumsum)) +
+  geom_line() +
+  geom_point(aes(text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_x_date() +
+  scale_y_time() +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(size = .2), 
+        panel.border = element_rect(fill = NA, size = .2))
+
+ggplotly(run_time_d, tooltip = "text")
 ```
