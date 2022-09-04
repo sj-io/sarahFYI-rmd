@@ -47,19 +47,19 @@ trkNO,trk,track,split,lss,cup,type
 46,dRiR,Ribbon Road GBA,(GBA) Ribbon Road,GBA Ribbon Road,Bell,DLC
 47,dSBS,Super Bell Subway,Super Bell Subway,Super Bell Subway,Bell,DLC
 48,dBB,Big Blue,Big Blue,Big Blue,Bell,DLC
-49,wPP,Paris Promenade,NA,NA,Golden Dash,wave1
-50,wTC,Toad Circuit 3DS,NA,NA,Golden Dash,wave1
-51,wChM,Choco Mountain,NA,NA,Golden Dash,wave1
-52,wCoM,Coconut Mall,NA,NA,Golden Dash,wave1
-53,wTB,Tokyo Blur,NA,NA,Lucky Cat,wave1
-54,wSR,Shroom Ridge,NA,NA,Lucky Cat,wave1
-55,wSG,Sky Garden,NA,NA,Lucky Cat,wave1
-56,wNH,Ninja Hideaway,NA,NA,Lucky Cat,wave1
-57,wNYM,New York Minute,NA,NA,Turnip,wave2
-58,wMC3,Mario Circuit 3,NA,NA,Turnip,wave2
-59,wKD,Kalimari Desert,NA,NA,Turnip,wave2
-60,wWP,Waluigi Pinball,NA,NA,Turnip,wave2
-61,wSS,Sydney Sprint,NA,NA,Propeller,wave2
-62,wSL,Snow Land,NA,NA,Propeller,wave2
-63,wMG,Mushroom Gorge,NA,NA,Propeller,wave2
-64,wSHS,Sky-High Sundae,NA,NA,Propeller,wave2
+49,wPP,Paris Promenade,Paris Promenade,Paris Promenade,Golden Dash,wave1
+50,wTC,Toad Circuit 3DS,Toad Circuit 3DS,3DS Toad Circuit,Golden Dash,wave1
+51,wChM,Choco Mountain,Choco Mountain,Choco Mountain,Golden Dash,wave1
+52,wCoM,Coconut Mall,Coconut Mall,Coconut Mall,Golden Dash,wave1
+53,wTB,Tokyo Blur,Tokyo Blur,Tokyo Blur,Lucky Cat,wave1
+54,wSR,Shroom Ridge,Shroom Ridge,Shroom Ridge,Lucky Cat,wave1
+55,wSG,Sky Garden,Sky Garden,Sky Garden,Lucky Cat,wave1
+56,wNH,Ninja Hideaway,Ninja Hideaway,Ninja Hideaway,Lucky Cat,wave1
+57,wNYM,New York Minute,New York Minute,New York Minute,Turnip,wave2
+58,wMC3,Mario Circuit 3,Mario Circuit 3,Mario Circuit 3,Turnip,wave2
+59,wKD,Kalimari Desert,Kalimari Desert,Kalimari Desert,Turnip,wave2
+60,wWP,Waluigi Pinball,Waluigi Pinball,Waluigi Pinball,Turnip,wave2
+61,wSS,Sydney Sprint,Sydney Sprint,Sydney Sprint,Propeller,wave2
+62,wSL,Snow Land,Snow Land,Snow Land,Propeller,wave2
+63,wMG,Mushroom Gorge,Mushroom Gorge,Mushroom Gorge,Propeller,wave2
+64,wSHS,Sky-High Sundae,Sky-High Sundae,Sky-High Sundae,Propeller,wave2

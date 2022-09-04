@@ -1,0 +1,594 @@
+---
+title: "Mario Kart Speedruns"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    navbar:
+      - { icon: "fas fa-home", href: "index.html", align: right}
+---
+
+```{bash llstocsv, include=FALSE}
+# Convert all lss files in folder to csv
+MK8D_trk2csv ./_data/splits ./_data/splits MK8D_trks.csv
+```
+
+```{r libs}
+library(tidyverse)
+library(lubridate)
+library(plotly)
+```
+
+```{r}
+raw <- read_csv("_data/splits/MK8D_trks.csv") %>% rename_with(tolower, 2:7)
+abr <- read_csv("_data/track-abbr.csv") %>% 
+  pivot_longer(cols = c(trk, split, track), names_to = "ref", values_to = "og") %>% 
+  select(trkNO, og, lss, cup, type) %>% 
+  distinct() %>% 
+  add_row(trkNO = 0, og = "Start", lss = "Start", cup = " ", type = " ", .before = 1) %>% 
+  mutate(lss = fct_inorder(lss),
+         cup = fct_inorder(cup))
+```
+
+```{r}
+clean0 <- raw %>% 
+  filter(str_detect(ID, "/")) %>% 
+  mutate(track = str_replace_all(track, "^b", "w")) %>% 
+  left_join(abr, by = c("track" = "og")) %>% 
+  select(ID, track = lss, time, cup, category) %>% 
+  mutate(date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
+         date = ymd(date),
+         time = seconds(time)) %>% 
+  group_by(ID) %>% 
+  mutate(trkNO = row_number(ID)) %>% 
+  ungroup() %>% 
+  group_by(category, track) %>% 
+  mutate(sd = sd(time), .after = time) %>% 
+  ungroup()
+
+cupID <- clean0 %>%
+  filter(track != "Start") %>% 
+  select(ID, category, cup) %>% 
+  filter(str_detect(category, "Cups")) %>% 
+  select(-category) %>% 
+  distinct()
+
+clean <- clean0 %>% 
+  left_join(cupID, by = "ID") %>% 
+  mutate(cup = case_when(
+    category == "48 Tracks" ~ cup.x,
+    category != "48 Tracks" ~ cup.y
+  )) %>% 
+  select(-c(cup.x, cup.y)) %>% 
+  mutate(cup = str_replace_all(cup, "^ $", "Mushroom"))
+```
+
+# 48 Tracks
+
+## Col 1 {data-width="350"}
+
+### Violin Plot
+
+```{r}
+violin48 <- clean %>% 
+  filter(category == "48 Tracks" & track != "Start") %>% 
+  ggplot(aes(factor(track), time)) +
+  geom_violin(scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(violin48)
+```
+
+
+```{r}
+finished_runs <- clean %>%
+  filter(str_detect(category, "Cups") & trkNO == 5 |
+           category == "48 Tracks" & trkNO == 49) %>% 
+  arrange(ID) %>% 
+  group_by(category, cup) %>% 
+  mutate(runNO = row_number()) %>% 
+  ungroup() %>% 
+  select(ID, runNO)
+
+PBs <- clean %>% 
+  filter(track != "Start") %>% 
+  group_by(category, track) %>% 
+  slice_min(time) %>% 
+  ungroup() %>% 
+  select(category, cup, track, PBtime = time, PBdate = date)
+
+PB48 <- PBs %>% 
+  filter(category == "48 Tracks") %>% 
+  mutate(cumsum = cumsum(PBtime))
+
+PBcups <- PBs %>% 
+  filter(str_detect(category, "Cups")) %>% 
+  group_by(cup) %>% 
+  mutate(cumsum = cumsum(PBtime)) %>% 
+  ungroup()
+
+runs <- clean %>% 
+  left_join(finished_runs, by = "ID") %>% 
+  left_join(PBs, by = c("category", "cup", "track"), copy = TRUE) %>% 
+  filter(!is.na(runNO)) %>% 
+  group_by(ID) %>% 
+  mutate(cumsum = cumsum(time)) %>% 
+  ungroup()
+
+slowest_run <- runs %>% 
+  filter(str_detect(category, "Cups") & trkNO == 5 |
+           category == "48 Tracks" & trkNO == 49) %>% 
+  group_by(category, cup) %>% 
+  slice_max(cumsum) %>% 
+  ungroup() %>% 
+  select(ID) %>% 
+  left_join(runs) %>% 
+  select(track, cup, category, max = cumsum)
+
+recent_run <- runs %>% 
+  filter(str_detect(category, "Cups") & trkNO == 5 |
+           category == "48 Tracks" & trkNO == 49) %>% 
+  group_by(category, cup) %>% 
+  slice_max(ID) %>% 
+  ungroup() %>% 
+  select(ID) %>% 
+  left_join(runs) %>% 
+  mutate(pts = time - PBtime) %>% 
+  select(ID, track, pts)
+
+PBruns <- rbind(PB48, PBcups) %>% 
+  mutate(time = PBtime, date = PBdate, runNO = 0, ID = "Best Possible Time",
+         label = paste0("<b>Best Possible Time</b>",
+                        "<br><b>Track:</b> ", track,
+                        "<br><b>PB Date:</b> ", PBdate,
+                        "<br><b>PB Time:</b> ", round(seconds_to_period(PBtime), 2),
+                        "<br><b>Run Time:</b> ", round(seconds_to_period(cumsum), 2)))
+
+lvl <- abr$cup %>% unique() %>% fct_inorder()
+
+runs_full <- runs %>% 
+  select(-c(sd, trkNO)) %>% 
+  mutate(label = paste0("<b>", "Run #", runNO, " ", date, "</b>", 
+                        "<br><b>Track:</b> ", track,
+                        "<br><b>Split Time:</b> ", round(seconds_to_period(time), 2),
+                        "<br><b>Run Time:</b> ", round(seconds_to_period(cumsum), 2))) %>% 
+  rbind(PBruns) %>% 
+  left_join(slowest_run, by = c("category", "cup", "track")) %>% 
+  left_join(recent_run, by = c("ID", "track")) %>% 
+  mutate(maxdiff = cumsum - max,
+         cumsum = seconds(cumsum),
+         max = seconds(max),
+         maxdiff = seconds(maxdiff),
+         label = if_else(pts > 0, 
+                         paste0(label, "<br><b>Possible Time Save:</b> ", round(seconds_to_period(pts), 3)), 
+                         label, 
+                         missing = label),
+         cup = factor(cup, levels = lvl),
+         track = recode(track, "Start" = " ")) 
+
+color_range <- colorRampPalette(c("plum", "darkcyan"))
+```
+
+## Col 2
+
+### Max
+
+```{r}
+runs_48 <- runs_full %>% 
+  filter(category == "48 Tracks")
+
+colors_48 <- color_range(length(unique(runs_48$runNO)))
+
+runs_48 <- runs_48 %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_48[runs_48$runNO]))
+```
+
+```{r}
+traces_48 <- ggplot() +
+  geom_line(data = runs_48, aes(
+    factor(track),
+    maxdiff,
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
+  )) +
+  geom_point(data = runs_48[which(runs_48$pts > 0),], aes(
+    factor(track), 
+    maxdiff, 
+    size = pts,
+    color = "tomato",
+    text = label)) +
+  scale_y_time() +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
+  scale_alpha_continuous(range = c(.35, .8)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(traces_48, tooltip = "text") %>% 
+  layout(margin = list(t = 60),
+    title = list(text = paste0('Improvement from Slowest Run',
+                                    '<br><sup>48 Tracks, 150cc, No Items</sup>')))
+```
+
+# Nitro Cups {data-navmenu="Cups"}
+
+## Col 1 {data-width="350"}
+
+### Violin Plot
+
+```{r}
+violinnitro <- clean %>% 
+  filter(category == "Nitro Cups" & track != "Start") %>% 
+  ggplot(aes(factor(track), time)) +
+  geom_violin(scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(violinnitro)
+```
+
+## Col 2
+
+### Max
+
+```{r}
+runs_nitro <- runs_full %>% 
+  filter(category == "Nitro Cups")
+
+colors_nitro <- color_range(length(unique(runs_nitro$runNO)))
+
+runs_nitro <- runs_nitro %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_nitro[runs_nitro$runNO]))
+```
+
+```{r}
+traces_nitro <- ggplot() +
+  geom_line(data = runs_nitro, aes(
+    factor(track),
+    maxdiff,
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
+  )) +
+  geom_point(data = runs_nitro[which(runs_nitro$pts > 0),], aes(
+    factor(track), 
+    maxdiff, 
+    size = pts,
+    color = "tomato",
+    text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_y_time() +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
+  scale_alpha_continuous(range = c(.35, .8)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(traces_nitro, tooltip = "text") %>% 
+  layout(margin = list(b = 110))
+```
+
+# Retro Cups {data-navmenu="Cups"}
+
+## Col 1 {data-width="350"}
+
+### Violin Plot
+
+```{r}
+violinretro <- clean %>% 
+  filter(category == "Retro Cups" & track != "Start") %>% 
+  ggplot(aes(factor(track), time)) +
+  geom_violin(scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(violinretro)
+```
+
+## Col 2
+
+### Max
+
+```{r}
+runs_retro <- runs_full %>% 
+  filter(category == "Retro Cups")
+
+colors_retro <- color_range(length(unique(runs_retro$runNO)))
+
+runs_retro <- runs_retro %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_nitro[runs_retro$runNO]))
+```
+
+```{r}
+traces_retro <- ggplot() +
+  geom_line(data = runs_retro, aes(
+    factor(track),
+    maxdiff,
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
+  )) +
+  geom_point(data = runs_retro[which(runs_retro$pts > 0),], aes(
+    factor(track), 
+    maxdiff, 
+    size = pts,
+    color = "tomato",
+    text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_y_time() +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
+  scale_alpha_continuous(range = c(.35, .8)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(traces_retro, tooltip = "text") %>% 
+  layout(margin = list(b = 110))
+```
+
+# Bonus Cups {data-navmenu="Cups"}
+
+## Col 1 {data-width="350"}
+
+### Violin Plot
+
+```{r}
+violinbonus <- clean %>% 
+  filter(category == "Bonus Cups" & track != "Start") %>% 
+  ggplot(aes(factor(track), time)) +
+  geom_violin(scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(violinbonus)
+```
+
+## Col 2
+
+### Max
+
+```{r}
+runs_bonus <- runs_full %>% 
+  filter(category == "Bonus Cups")
+
+colors_bonus <- color_range(length(unique(runs_bonus$runNO)))
+
+runs_bonus <- runs_bonus %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_bonus[runs_bonus$runNO]))
+```
+
+```{r}
+traces_bonus <- ggplot() +
+  geom_line(data = runs_bonus, aes(
+    factor(track),
+    maxdiff,
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
+  )) +
+  geom_point(data = runs_bonus[which(runs_bonus$pts > 0),], aes(
+    factor(track), 
+    maxdiff, 
+    size = pts,
+    color = "tomato",
+    text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_y_time() +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
+  scale_alpha_continuous(range = c(.35, .8)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(traces_bonus, tooltip = "text") %>% 
+  layout(margin = list(b = 110))
+```
+
+# DLC Cups {data-navmenu="Cups"}
+
+## Col 1 {data-width="350"}
+
+### Violin Plot
+
+```{r}
+violindlc <- clean %>% 
+  filter(category == "DLC Cups" & track != "Start") %>% 
+  ggplot(aes(factor(track), time)) +
+  geom_violin(scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(violindlc)
+```
+
+## Col 2
+
+### Max
+
+```{r}
+runs_dlc <- runs_full %>% 
+  filter(category == "DLC Cups")
+
+colors_dlc <- color_range(length(unique(runs_dlc$runNO)))
+
+runs_dlc <- runs_dlc %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_dlc[runs_dlc$runNO]))
+```
+
+```{r}
+traces_dlc <- ggplot() +
+  geom_line(data = runs_dlc, aes(
+    factor(track),
+    maxdiff,
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
+  )) +
+  geom_point(data = runs_dlc[which(runs_dlc$pts > 0),], aes(
+    factor(track), 
+    maxdiff, 
+    size = pts,
+    color = "tomato",
+    text = label)) +
+  facet_wrap(~cup, scales = "free") +
+  scale_y_time() +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
+  scale_alpha_continuous(range = c(.35, .8)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+ggplotly(traces_dlc, tooltip = "text") %>% 
+  layout(margin = list(b = 110))
+```
