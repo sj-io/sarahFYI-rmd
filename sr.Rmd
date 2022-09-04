@@ -21,10 +21,12 @@ library(plotly)
 ```{r}
 raw <- read_csv("_data/splits/MK8D_trks.csv") %>% rename_with(tolower, 2:7)
 abr <- read_csv("_data/track-abbr.csv") %>% 
-  pivot_longer(cols = c(trk, split, track), names_to = "ref", values_to = "og") %>% 
+  pivot_longer(cols = c(trk, split, track), 
+               names_to = "ref", values_to = "og") %>% 
   select(trkNO, og, lss, cup, type) %>% 
   distinct() %>% 
-  add_row(trkNO = 0, og = "Start", lss = "Start", cup = " ", type = " ", .before = 1) %>% 
+  add_row(trkNO = 0, og = "Start", lss = "Start", 
+          cup = " ", type = " ", .before = 1) %>% 
   mutate(lss = fct_inorder(lss),
          cup = fct_inorder(cup))
 ```
@@ -106,18 +108,18 @@ finished_runs <- clean %>%
   ungroup() %>% 
   select(ID, runNO)
 
-PBs <- clean %>% 
-  filter(track != "Start") %>% 
-  group_by(category, track) %>% 
-  slice_min(time) %>% 
+PB_tracks <- clean %>% 
+  group_by(category, cup, track) %>% 
+  slice_min(time, with_ties = FALSE) %>% 
   ungroup() %>% 
-  select(category, cup, track, PBtime = time, PBdate = date)
+  select(category, cup, track, PBtime = time, PBdate = date) %>% 
+  arrange(track)
 
-PB48 <- PBs %>% 
+PB_48 <- PB_tracks %>% 
   filter(category == "48 Tracks") %>% 
   mutate(cumsum = cumsum(PBtime))
 
-PBcups <- PBs %>% 
+PB_cups <- PB_tracks %>% 
   filter(str_detect(category, "Cups")) %>% 
   group_by(cup) %>% 
   mutate(cumsum = cumsum(PBtime)) %>% 
@@ -125,13 +127,14 @@ PBcups <- PBs %>%
 
 runs <- clean %>% 
   left_join(finished_runs, by = "ID") %>% 
-  left_join(PBs, by = c("category", "cup", "track"), copy = TRUE) %>% 
+  left_join(PB_tracks, by = c("category", "cup", "track"), copy = TRUE) %>% 
   filter(!is.na(runNO)) %>% 
   group_by(ID) %>% 
+  arrange(track) %>% 
   mutate(cumsum = cumsum(time)) %>% 
   ungroup()
 
-slowest_run <- runs %>% 
+slowest_runs <- runs %>% 
   filter(str_detect(category, "Cups") & trkNO == 5 |
            category == "48 Tracks" & trkNO == 49) %>% 
   group_by(category, cup) %>% 
@@ -141,19 +144,20 @@ slowest_run <- runs %>%
   left_join(runs) %>% 
   select(track, cup, category, max = cumsum)
 
-recent_run <- runs %>% 
+PB_runs <- runs %>% 
   filter(str_detect(category, "Cups") & trkNO == 5 |
            category == "48 Tracks" & trkNO == 49) %>% 
   group_by(category, cup) %>% 
-  slice_max(ID) %>% 
+  slice_min(cumsum) %>% 
   ungroup() %>% 
   select(ID) %>% 
   left_join(runs) %>% 
   mutate(pts = time - PBtime) %>% 
   select(ID, track, pts)
 
-PBruns <- rbind(PB48, PBcups) %>% 
-  mutate(time = PBtime, date = PBdate, runNO = 0, ID = "Best Possible Time",
+BPT <- rbind(PB_48, PB_cups) %>% 
+  mutate(time = PBtime, date = PBdate, runNO = 0, 
+         ID = "Best Possible Time",
          label = paste0("<b>Best Possible Time</b>",
                         "<br><b>Track:</b> ", track,
                         "<br><b>PB Date:</b> ", PBdate,
@@ -168,15 +172,17 @@ runs_full <- runs %>%
                         "<br><b>Track:</b> ", track,
                         "<br><b>Split Time:</b> ", round(seconds_to_period(time), 2),
                         "<br><b>Run Time:</b> ", round(seconds_to_period(cumsum), 2))) %>% 
-  rbind(PBruns) %>% 
-  left_join(slowest_run, by = c("category", "cup", "track")) %>% 
-  left_join(recent_run, by = c("ID", "track")) %>% 
+  rbind(BPT) %>% 
+  left_join(slowest_runs, by = c("category", "cup", "track")) %>% 
+  left_join(PB_runs, by = c("ID", "track")) %>% 
   mutate(maxdiff = cumsum - max,
          cumsum = seconds(cumsum),
          max = seconds(max),
          maxdiff = seconds(maxdiff),
          label = if_else(pts > 0, 
-                         paste0(label, "<br><b>Possible Time Save:</b> ", round(seconds_to_period(pts), 3)), 
+                         paste0(label, 
+                                "<br><b>Possible Time Save:</b> ", 
+                                round(seconds_to_period(pts), 3)), 
                          label, 
                          missing = label),
          cup = factor(cup, levels = lvl),
@@ -306,7 +312,7 @@ traces_nitro <- ggplot() +
     text = label)) +
   facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_size_continuous(range = c(.05, 2.25)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
@@ -373,7 +379,7 @@ runs_retro <- runs_full %>%
 colors_retro <- color_range(length(unique(runs_retro$runNO)))
 
 runs_retro <- runs_retro %>% 
-  mutate(clr = ifelse(runNO == 0, "grey", colors_nitro[runs_retro$runNO]))
+  mutate(clr = ifelse(runNO == 0, "grey", colors_retro[runs_retro$runNO]))
 ```
 
 ```{r}
@@ -394,7 +400,7 @@ traces_retro <- ggplot() +
     text = label)) +
   facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_size_continuous(range = c(.05, 2.25)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
@@ -482,7 +488,7 @@ traces_bonus <- ggplot() +
     text = label)) +
   facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_size_continuous(range = c(.05, 2.25)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
@@ -570,7 +576,7 @@ traces_dlc <- ggplot() +
     text = label)) +
   facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_size_continuous(range = c(.05, 2.25)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
   labs(x = "",
