@@ -262,12 +262,11 @@ run_time_48 <- run_time %>%
   filter(category == "48 Tracks") %>% 
   mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
                         "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(date, cumsum)) +
+  ggplot(aes(runNO, cumsum)) +
   geom_line() +
   geom_point(aes(text = label)) +
-  scale_x_date() +
   scale_y_time() +
-  labs(x = "", y = "") +
+  labs(x = "Run Number", y = "") +
   theme_minimal() +
   theme(axis.ticks = element_line(size = .2), 
         panel.border = element_rect(fill = NA, size = .2))
@@ -371,11 +370,10 @@ run_time_n <- run_time %>%
   filter(category == "Nitro Cups") %>% 
   mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
                         "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(date, cumsum)) +
+  ggplot(aes(runNO, cumsum)) +
   geom_line() +
   geom_point(aes(text = label)) +
   facet_wrap(~cup, scales = "free") +
-  scale_x_date() +
   scale_y_time() +
   labs(x = "", y = "") +
   theme_minimal() +
@@ -480,11 +478,10 @@ run_time_r <- run_time %>%
   filter(category == "Retro Cups") %>% 
   mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
                         "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(date, cumsum)) +
+  ggplot(aes(runNO, cumsum)) +
   geom_line() +
   geom_point(aes(text = label)) +
   facet_wrap(~cup, scales = "free") +
-  scale_x_date() +
   scale_y_time() +
   labs(x = "", y = "") +
   theme_minimal() +
@@ -589,11 +586,10 @@ run_time_b <- run_time %>%
   filter(category == "Bonus Cups") %>% 
   mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
                         "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(date, cumsum)) +
+  ggplot(aes(runNO, cumsum)) +
   geom_line() +
   geom_point(aes(text = label)) +
   facet_wrap(~cup, scales = "free") +
-  scale_x_date() +
   scale_y_time() +
   labs(x = "", y = "") +
   theme_minimal() +
@@ -698,11 +694,10 @@ run_time_d <- run_time %>%
   filter(category == "DLC Cups") %>% 
   mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
                         "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(date, cumsum)) +
+  ggplot(aes(runNO, cumsum)) +
   geom_line() +
   geom_point(aes(text = label)) +
   facet_wrap(~cup, scales = "free") +
-  scale_x_date() +
   scale_y_time() +
   labs(x = "", y = "") +
   theme_minimal() +
