@@ -1,0 +1,12 @@
+
+```{r}
+library(tidyverse)
+library(rvest)
+```
+
+```{r}
+html <- read_html("http://www.mkwrs.com/mk8dx/wrs.php")
+
+wr <- html %>% html_elements(".wr") %>% html_table() %>% .[[1]]
+```
+

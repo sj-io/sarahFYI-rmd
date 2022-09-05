@@ -254,7 +254,8 @@ run_time <- runs %>%
   group_by(ID) %>% 
   slice_max(track) %>% 
   ungroup() %>% 
-  select(runNO, category, cup, date, cumsum)
+  select(runNO, category, cup, date, cumsum) %>% 
+  mutate(cup = factor(cup, levels = lvl))
 ```
 
 ```{r}

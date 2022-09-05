@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Sarah Johnson" />
+
+
+<title>Graph Guide</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Mario Kart
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="sr.html">Speedruns</a>
+    </li>
+    <li>
+      <a href="tt.html">Time Trials</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="art.html">Art</a>
+</li>
+<li>
+  <a href="https://www.twitch.tv/sarahFYI">
+    <span class="fa fa-twitch"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/sarah_fyi">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/sj-io">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Graph Guide</h1>
+<h4 class="author">Sarah Johnson</h4>
+
+</div>
+
+
+<div id="credits" class="section level2">
+<h2>Credits</h2>
+<p>I would like to give a huge shoutout to <a
+href="https://chipdelmal.github.io/">Héctor M. Sánchez C.</a>
+(chipdelmal), whose Mario Kart speedrunning graphs inspired the ones I
+created on my site. I was particularly inspired by the charts <a
+href="https://chipdelmal.github.io/dataViz/2020-07-15-MK8D1.html">here</a>,
+<a
+href="https://chipdelmal.github.io/dataViz/2020-08-15-MK8D3.html">here</a>,
+and <a
+href="https://chipdelmal.github.io/dataViz/2021-01-15-MK8Dpypi.html">here</a>.
+Additionally, his <a href="https://pypi.org/project/MK8D/">MK8D Python
+package</a> is what I use to convert my speedrun splits into a csv file,
+which was essential to being able to create and automate my speedrunning
+dashboard. Go check out his blog, he’s made a lot of awesome graphs with
+great, clear explanations.</p>
+<p>This website was made with R in RStudio (soon to be renamed <a
+href="https://posit.co/">posit</a>); each page originates from an
+RMarkdown file, which allows me to easily pull my most recent data and
+publish it as an interactive graph. I used the <a
+href="https://pkgs.rstudio.com/flexdashboard/index.html">flexdashboard</a>
+package to create my dashboards; <a
+href="https://www.tidyverse.org/">tidyverse</a> tools were essential to
+cleaning and organizing the data; <a
+href="https://lubridate.tidyverse.org/">lubridate</a> made the time data
+pretty, <a href="https://ggplot2.tidyverse.org/">ggplot</a> was use to
+make the graphs and <a href="https://plotly.com/ggplot2/">plotly</a>
+makes them interactive. In the future I want to try converting my
+dashboards into interactive shiny dashboards.</p>
+<hr />
+<p>My Mario Kart <a href="https://sarah.fyi/sr.html">speedrun</a> and <a
+href="https://sarah.fyi/tt.html">time trial</a> dashboards have been a
+months-long passion project. I work full-time and don’t have as much
+time to play as I’d like, so these graphs and tables allow me to focus
+on improving my weakest courses, rather than just replaying my favorite
+tracks. As the dashboards evolved into something I was proud of and
+wanted to share with my friends, they often had the same response: “I
+have no idea what I’m looking at.”</p>
+<p>lol, fair. The dashboards are meant to be a resource for myself to be
+updated regularly, which is why there is no narrative or explanation. I
+open up my dashboard when I open up Mario Kart, and I want to be able to
+refresh the data without rewriting a narrative. But I hope this page
+offers some help.</p>
+</div>
+<div id="speedrunning" class="section level2">
+<h2>Speedrunning</h2>
+<p>Speedrunning is playing a game as fast as possible. I speedrun Mario
+Kart, and my favorite is the 48 Track 150cc speedrun. In this run you
+play through all of the original 48 tracks nonstop, which takes about
+two hours. I also do track and cup runs where you play 16 and 4 tracks
+at a time, respectively, which allows me to train sections of the 48
+track run.</p>
+</div>
+<div id="line-graph" class="section level2">
+<h2>Line graph</h2>
+<p><img src="img/plot_run-duration.png"
+title="fig.align = &quot;center&quot;" /></p>
+<p>The line graph is the most straightforward graph, and shows my total
+run time for each run. It’s good at showing my overall progress over
+time.</p>
+</div>
+<div id="traces-plot" class="section level2">
+<h2>Traces Plot</h2>
+<p>I wanted to be able to graph each of my runs and see how they
+compare, specifically for each track. You might be wondering, “why don’t
+you just put the tracks on one axis and your run time on the other?”
+Because the graph for a 48-track run would look like this:</p>
+<p><img src="img/plot_traces-bad.png" /></p>
+<p>The above graph answers the question, “When I’m on track X, for how
+long have I typically been running?” But we can’t gather much else. My
+run time decreased by over four and a half minutes over a five month
+period, but this change isn’t very noticeable over the course of a
+two-hour run. It’s nearly impossible to see which on tracks I improved
+or faired worse.</p>
+<p>It’s easier to see this information if we center the runs around
+another piece of data. My preferred method is to see how each run
+compares to my slowest run. Instead of the x-axis indicating a run time
+of 0:00:00, we make the x-axis my slowest run.</p>
+<p><img src="img/plot_traces.png" /></p>
+<p>Every line on the graph shows the difference in run duration between
+that run and my slowest run. This time difference, or offset, is
+significantly smaller, giving us more information on how my overall run
+times and specific tracks have changed over time.</p>
+<p><img src="img/plot_traces-hover-2.png" width="400px" style="display: block; margin: auto;" /></p>
+<p>Best Possible Time</p>
+<p><img src="img/plot_traces-hover-1.png" width="275px" style="display: block; margin: auto;" /></p>
+<p>Orange Dots</p>
+</div>
+<div id="violin-plot" class="section level2">
+<h2>Violin Plot</h2>
+<p>Think of a violin plot like a fancy box and whisker plot. Each violin
+contains all the run data for a particular track. The point furthest to
+the left is my fastest time, furthest to the right is my slowest time,
+and all the other runs fall somewhere in the middle. The violin plot
+bulges depending on where most of those other runs fall.</p>
+<p><img src="img/plot_violin.png" width="530px" style="display: block; margin: auto;" /></p>
+<p>Ideally, I want each plot to bulge towards the left side, meaning my
+runs are consistently fast. If a track bulges on the right, that means I
+might have had a fast run or two, but my times are typically slower. For
+instance, I have had some fast runs on Toad’s Turnpike, but my times are
+mostly concentrated to the right, which tells me I typically run into at
+least one car on the track.</p>
+<p>Additionally, the color of each violin signifies the standard
+deviation of the track compared to other tracks. The higher the standard
+deviation, the more my times have varied for that track. So my run times
+are consistent and close together on a track like Baby Park. Dry Dry
+Desert is a track I originally was very slow at running, but I’ve made
+large progress over the past few months so my times have significantly
+improved, and there’s been a lot of variance in my track times.</p>
+<p><img src="img/plot_violin-select.png" width="530px" style="display: block; margin: auto;" /></p>
+<p>The black dot on each violin shows my median track time. The further
+to the left the dot is, the more consistent I am at running that track
+fast.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

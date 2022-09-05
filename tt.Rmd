@@ -16,11 +16,19 @@ $(document).ready(function(){
 
 ```{r lib}
 library(tidyverse)
+library(rvest)
 library(plotly)
 library(lubridate)
 library(knitr)
 library(kableExtra)
 ```
+
+```{r scrapeWRs}
+html <- read_html("http://www.mkwrs.com/mk8dx/wrs.php")
+
+ttwr0 <- html %>% html_elements(".wr") %>% html_table() %>% .[[1]]
+```
+
 
 ```{r import}
 abr <- read_csv("_data/track-abbr.csv")
@@ -45,9 +53,15 @@ tt <- read_csv("_data/time-trials.csv",
   ) %>%
   left_join(abr)
 
-ttwr <- read_csv("_data/tt-wr.csv",
-                 col_types = cols(total = "c")) %>%
-  mutate(total = ms(total))
+ttwr <- ttwr0 %>% 
+  select(track = Track, total = `Time+Video`) %>% 
+  filter(track != "Total:") %>% 
+  distinct() %>% 
+  mutate(total = str_replace_all(total, "'", ":"),
+         total = str_replace_all(total, "\"", "."),
+         total = ms(total)) %>% 
+  left_join(abr, by = c("track" = "lss")) %>% 
+  select(trk, total)
 ```
 
 
