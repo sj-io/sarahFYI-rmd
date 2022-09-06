@@ -29,7 +29,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (05:009),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:010),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:011),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
-(05:000),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
+22/09/05 (05:012),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/25 (06:001),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/22 (06:004),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/28 (06:005),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
@@ -76,6 +76,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/07/04 (10:016),Start,0.0,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:018),Start,0.0,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Start,0.0,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Start,0.0,No Items,Cartridge,150cc,48 Tracks
 (10:000),Start,0.0,No Items,Cartridge,150cc,48 Tracks
 22/04/20 (11:001),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:002),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
@@ -129,6 +130,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (14:017),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:018),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:019),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
+22/09/05 (14:020),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
 (14:000),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/13 (15:001),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
@@ -140,6 +142,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (15:010),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/28 (15:011),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/28 (15:012),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/05 (15:013),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/05 (15:014),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 (15:000),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/05/28 (16:001),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (16:002),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
@@ -238,7 +242,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (05:009),dNBC,141.404239,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:010),dNBC,140.380465,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:011),dNBC,140.476168,150cc,Cartridge,Bell Cup,Bonus Cups
-(05:000),dRiR,145.495915,150cc,Cartridge,Bell Cup,Bonus Cups
+22/09/05 (05:012),dNBC,139.434331,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:001),dRiR,149.345,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:002),dRiR,154.445,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:003),dRiR,145.594,150cc,Cartridge,Bell Cup,Bonus Cups
@@ -248,7 +252,6 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (05:008),dRiR,144.839544,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:010),dRiR,144.150339,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:011),dRiR,144.39008,150cc,Cartridge,Bell Cup,Bonus Cups
-(05:000),dSBS,143.260407,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:001),dSBS,147.582999,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:002),dSBS,145.174,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:003),dSBS,144.5,150cc,Cartridge,Bell Cup,Bonus Cups
@@ -257,7 +260,6 @@ ID,Track,Time,Version,Items,Speed,Category
 22/05/28 (05:007),dSBS,146.8443,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:008),dSBS,146.956434,150cc,Cartridge,Bell Cup,Bonus Cups
 22/08/24 (05:011),dSBS,142.514488,150cc,Cartridge,Bell Cup,Bonus Cups
-(05:000),dBB,119.543818,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:001),dBB,122.83,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:002),dBB,120.793,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:003),dBB,122.379999,150cc,Cartridge,Bell Cup,Bonus Cups
@@ -381,6 +383,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/07/04 (10:016),Mario Kart Stadium,129.805291,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:018),Mario Kart Stadium,128.828902,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Mario Kart Stadium,128.862327,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Mario Kart Stadium,128.205778,No Items,Cartridge,150cc,48 Tracks
 (10:000),Water Park,137.511559,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Water Park,139.363493,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Water Park,138.794012,No Items,Cartridge,150cc,48 Tracks
@@ -399,6 +402,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/07/04 (10:016),Water Park,133.483416,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:018),Water Park,133.975664,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Water Park,132.571369,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Water Park,133.212965,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Sweet Sweet Canyon,153.773971,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Sweet Sweet Canyon,148.698252,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Sweet Sweet Canyon,147.731083,No Items,Cartridge,150cc,48 Tracks
@@ -416,6 +420,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/07/04 (10:016),Sweet Sweet Canyon,147.046246,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:018),Sweet Sweet Canyon,146.187125,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Sweet Sweet Canyon,145.478011,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Sweet Sweet Canyon,145.17382,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Thwomp Ruins,158.786954,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Thwomp Ruins,152.105226,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Thwomp Ruins,151.847036,No Items,Cartridge,150cc,48 Tracks
@@ -431,6 +436,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Thwomp Ruins,147.848519,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Thwomp Ruins,148.683553,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Thwomp Ruins,148.295251,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Thwomp Ruins,146.94993,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Mario Circuit,147.887286,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Mario Circuit,147.466615,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Mario Circuit,147.658331,No Items,Cartridge,150cc,48 Tracks
@@ -446,6 +452,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Mario Circuit,143.217344,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Mario Circuit,141.97631,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Mario Circuit,141.787151,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Mario Circuit,144.123855,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Toad Harbor,167.618421,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Toad Harbor,166.970097,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Toad Harbor,170.961508,No Items,Cartridge,150cc,48 Tracks
@@ -461,6 +468,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Toad Harbor,162.38184,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Toad Harbor,162.023745,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Toad Harbor,162.122393,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Toad Harbor,159.880973,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Twisted Mansion,158.192552,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Twisted Mansion,156.731463,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Twisted Mansion,157.517302,No Items,Cartridge,150cc,48 Tracks
@@ -476,6 +484,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Twisted Mansion,153.010401,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Twisted Mansion,154.58527,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Twisted Mansion,153.09684,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Twisted Mansion,152.488915,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Shy Guy Falls,164.912317,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Shy Guy Falls,163.327739,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Shy Guy Falls,162.706286,No Items,Cartridge,150cc,48 Tracks
@@ -491,6 +500,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Shy Guy Falls,160.046929,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Shy Guy Falls,159.750581,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Shy Guy Falls,159.589834,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Shy Guy Falls,158.167108,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Sunshine Airport,161.372063,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Sunshine Airport,163.323212,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Sunshine Airport,164.189658,No Items,Cartridge,150cc,48 Tracks
@@ -505,6 +515,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Sunshine Airport,156.253399,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Sunshine Airport,156.634889,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Sunshine Airport,156.205162,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Sunshine Airport,156.619597,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Dolphin Shoals,162.519826,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Dolphin Shoals,158.054608,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Dolphin Shoals,158.913516,No Items,Cartridge,150cc,48 Tracks
@@ -519,6 +530,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Dolphin Shoals,154.675396,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Dolphin Shoals,153.11301,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Dolphin Shoals,153.975834,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Dolphin Shoals,152.980421,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Electrodrome,163.026233,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Electrodrome,161.866162,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Electrodrome,159.887879,No Items,Cartridge,150cc,48 Tracks
@@ -533,6 +545,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Electrodrome,158.351062,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Electrodrome,157.113595,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Electrodrome,156.424165,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Electrodrome,155.649697,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Mount Wario,149.275129,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Mount Wario,150.231518,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Mount Wario,149.299541,No Items,Cartridge,150cc,48 Tracks
@@ -547,6 +560,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:015),Mount Wario,144.09898,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:016),Mount Wario,142.920051,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Mount Wario,146.391108,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Mount Wario,141.492792,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Cloudtop Cruise,166.04393,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Cloudtop Cruise,160.329253,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Cloudtop Cruise,162.060031,No Items,Cartridge,150cc,48 Tracks
@@ -560,6 +574,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/06/06 (10:012),Cloudtop Cruise,164.037775,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),Cloudtop Cruise,162.05866,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Cloudtop Cruise,157.435449,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Cloudtop Cruise,157.976867,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Bone-Dry Dunes,159.12439,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Bone-Dry Dunes,158.51818600000001,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Bone-Dry Dunes,155.617118,No Items,Cartridge,150cc,48 Tracks
@@ -572,6 +587,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),Bone-Dry Dunes,155.294674,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),Bone-Dry Dunes,154.02902,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Bone-Dry Dunes,151.494373,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Bone-Dry Dunes,147.893886,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Bowser's Castle,167.638137,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Bowser's Castle,171.63944,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Bowser's Castle,164.866893,No Items,Cartridge,150cc,48 Tracks
@@ -584,6 +600,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),Bowser's Castle,162.474133,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),Bowser's Castle,167.259061,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Bowser's Castle,166.267248,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Bowser's Castle,164.091325,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),Rainbow Road,164.266,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Rainbow Road,166.824412,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Rainbow Road,167.829479,No Items,Cartridge,150cc,48 Tracks
@@ -596,6 +613,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),Rainbow Road,159.349466,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),Rainbow Road,159.104278,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),Rainbow Road,160.764005,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),Rainbow Road,159.339249,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(Wii) Moo Moo Meadows,122.428628,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(Wii) Moo Moo Meadows,124.172353,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(Wii) Moo Moo Meadows,122.428954,No Items,Cartridge,150cc,48 Tracks
@@ -608,6 +626,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(Wii) Moo Moo Meadows,119.833038,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(Wii) Moo Moo Meadows,119.648303,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(Wii) Moo Moo Meadows,119.304264,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(Wii) Moo Moo Meadows,120.285004,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(GBA) Mario Circuit,125.830528,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(GBA) Mario Circuit,125.354729,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(GBA) Mario Circuit,126.199514,No Items,Cartridge,150cc,48 Tracks
@@ -620,6 +639,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(GBA) Mario Circuit,125.085439,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(GBA) Mario Circuit,121.635779,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(GBA) Mario Circuit,122.80498,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(GBA) Mario Circuit,120.821764,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(DS) Cheep Cheep Beach,150.348572,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(DS) Cheep Cheep Beach,148.227032,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(DS) Cheep Cheep Beach,148.398508,No Items,Cartridge,150cc,48 Tracks
@@ -632,6 +652,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(DS) Cheep Cheep Beach,144.492787,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(DS) Cheep Cheep Beach,144.751013,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(DS) Cheep Cheep Beach,146.188516,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(DS) Cheep Cheep Beach,148.377084,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(N64) Toad's Turnpike,147.730741,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(N64) Toad's Turnpike,147.067605,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(N64) Toad's Turnpike,146.511079,No Items,Cartridge,150cc,48 Tracks
@@ -644,6 +665,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(N64) Toad's Turnpike,142.75698,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(N64) Toad's Turnpike,144.866926,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(N64) Toad's Turnpike,140.805962,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(N64) Toad's Turnpike,149.364513,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(GCN) Dry Dry Desert,175.277391,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(GCN) Dry Dry Desert,173.946395,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(GCN) Dry Dry Desert,178.377743,No Items,Cartridge,150cc,48 Tracks
@@ -656,6 +678,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(GCN) Dry Dry Desert,163.57894,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(GCN) Dry Dry Desert,161.595215,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(GCN) Dry Dry Desert,162.6022,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(GCN) Dry Dry Desert,159.419501,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(SNES) Donut Plains 3,119.164076,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(SNES) Donut Plains 3,120.551886,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(SNES) Donut Plains 3,118.217205,No Items,Cartridge,150cc,48 Tracks
@@ -668,6 +691,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(SNES) Donut Plains 3,118.392339,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(SNES) Donut Plains 3,116.058787,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(SNES) Donut Plains 3,115.131468,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(SNES) Donut Plains 3,117.592504,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(N64) Royal Raceway,160.004961,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(N64) Royal Raceway,160.202805,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(N64) Royal Raceway,159.113184,No Items,Cartridge,150cc,48 Tracks
@@ -680,6 +704,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(N64) Royal Raceway,154.742373,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(N64) Royal Raceway,155.403139,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(N64) Royal Raceway,155.926547,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(N64) Royal Raceway,154.635719,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(3DS) DK Jungle,164.344255,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(3DS) DK Jungle,162.88442,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(3DS) DK Jungle,163.440124,No Items,Cartridge,150cc,48 Tracks
@@ -692,6 +717,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(3DS) DK Jungle,160.57401,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(3DS) DK Jungle,160.119758,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(3DS) DK Jungle,160.823778,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(3DS) DK Jungle,159.876987,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(DS) Wario Stadium,156.491577,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(DS) Wario Stadium,156.922663,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(DS) Wario Stadium,154.868037,No Items,Cartridge,150cc,48 Tracks
@@ -704,6 +730,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(DS) Wario Stadium,151.832252,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(DS) Wario Stadium,153.33971,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(DS) Wario Stadium,152.890235,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(DS) Wario Stadium,152.029013,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(GCN) Sherbet Land,154.951376,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(GCN) Sherbet Land,153.832963,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(GCN) Sherbet Land,152.786461,No Items,Cartridge,150cc,48 Tracks
@@ -716,6 +743,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(GCN) Sherbet Land,150.118544,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(GCN) Sherbet Land,148.80282,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(GCN) Sherbet Land,147.227503,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(GCN) Sherbet Land,147.735358,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(3DS) Music Park,164.544925,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(3DS) Music Park,160.024126,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(3DS) Music Park,162.80524,No Items,Cartridge,150cc,48 Tracks
@@ -728,6 +756,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(3DS) Music Park,158.123485,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(3DS) Music Park,161.148409,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(3DS) Music Park,157.670044,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(3DS) Music Park,164.039443,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(N64) Yoshi Valley,164.439164,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(N64) Yoshi Valley,159.941067,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(N64) Yoshi Valley,159.387109,No Items,Cartridge,150cc,48 Tracks
@@ -740,6 +769,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(N64) Yoshi Valley,157.834677,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(N64) Yoshi Valley,157.478161,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(N64) Yoshi Valley,157.575429,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(N64) Yoshi Valley,158.103462,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(DS) Tick-Tock Clock,149.037548,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(DS) Tick-Tock Clock,150.634824,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(DS) Tick-Tock Clock,148.822846,No Items,Cartridge,150cc,48 Tracks
@@ -752,6 +782,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/23 (10:011),(DS) Tick-Tock Clock,144.809409,No Items,Cartridge,150cc,48 Tracks
 22/06/06 (10:015),(DS) Tick-Tock Clock,143.066315,No Items,Cartridge,150cc,48 Tracks
 22/07/04 (10:019),(DS) Tick-Tock Clock,143.897441,No Items,Cartridge,150cc,48 Tracks
+22/09/06 (10:020),(DS) Tick-Tock Clock,147.534176,No Items,Cartridge,150cc,48 Tracks
 22/02/20 (10:001),(3DS) Piranha Plant Slide,168.743371,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),(3DS) Piranha Plant Slide,168.230233,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),(3DS) Piranha Plant Slide,166.681417,No Items,Cartridge,150cc,48 Tracks
@@ -1091,6 +1122,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (14:017),dYC,142.827125,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:018),dYC,142.620339,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:019),dYC,140.095984,150cc,Cartridge,Egg Cup,Bonus Cups
+22/09/05 (14:020),dYC,139.083675,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:001),dEA,140.364,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:002),dEA,139.597,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/20 (14:003),dEA,140.597844,150cc,Cartridge,Egg Cup,Bonus Cups
@@ -1104,6 +1136,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (14:017),dEA,140.4725,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:018),dEA,138.454656,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:019),dEA,138.914822,150cc,Cartridge,Egg Cup,Bonus Cups
+22/09/05 (14:020),dEA,138.391136,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:001),dDD,144.403,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:002),dDD,146.147,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/20 (14:003),dDD,145.227032,150cc,Cartridge,Egg Cup,Bonus Cups
@@ -1112,6 +1145,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/21 (14:009),dDD,144.042425,150cc,Cartridge,Egg Cup,Bonus Cups
 22/07/25 (14:011),dDD,146.317609,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:019),dDD,141.867796,150cc,Cartridge,Egg Cup,Bonus Cups
+22/09/05 (14:020),dDD,143.85514,150cc,Cartridge,Egg Cup,Bonus Cups
 (14:000),dMC,151.726001,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:001),dMC,156.621999,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:002),dMC,151.726,150cc,Cartridge,Egg Cup,Bonus Cups
@@ -1120,6 +1154,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/04/20 (14:006),dMC,151.798643,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/21 (14:009),dMC,151.526923,150cc,Cartridge,Egg Cup,Bonus Cups
 22/08/20 (14:019),dMC,146.327593,150cc,Cartridge,Egg Cup,Bonus Cups
+22/09/05 (14:020),dMC,149.491069,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/13 (15:001),dWGM,157.088999,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),dWGM,157.490999,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/22 (15:003),dWGM,153.1788,150cc,Cartridge,Triforce Cup,Bonus Cups
@@ -1130,12 +1165,15 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (15:010),dWGM,154.18701,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/28 (15:011),dWGM,153.016074,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/28 (15:012),dWGM,152.155571,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/05 (15:013),dWGM,152.507205,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/05 (15:014),dWGM,151.273372,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/13 (15:001),dRR,120.003,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),dRR,120.188,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/22 (15:006),dRR,120.27989,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/22 (15:007),dRR,119.342181,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/26 (15:009),dRR,118.978963,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/28 (15:012),dRR,119.720243,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/05 (15:013),dRR,119.130234,150cc,Cartridge,Triforce Cup,Bonus Cups
 (15:000),dIIO,142.538001,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/13 (15:001),dIIO,142.538,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),dIIO,144.548,150cc,Cartridge,Triforce Cup,Bonus Cups
