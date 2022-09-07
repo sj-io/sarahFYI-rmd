@@ -17,6 +17,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/23 (04:005),Start,0.0,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:006),Start,0.0,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:007),Start,0.0,150cc,Cartridge,Star Cup,Nitro Cups
+22/09/06 (04:008),Start,0.0,150cc,Cartridge,Star Cup,Nitro Cups
+(04:-01),Start,0.0,150cc,Cartridge,Star Cup,Nitro Cups
 (04:000),Start,0.0,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/13 (05:001),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:002),Start,0.0,150cc,Cartridge,Bell Cup,Bonus Cups
@@ -41,6 +43,12 @@ ID,Track,Time,Version,Items,Speed,Category
 22/09/03 (06:012),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:013),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:014),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:015),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:016),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:017),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:018),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:019),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
+(06:000),Start,0.0,150cc,Cartridge,Special Cup,Nitro Cups
 22/04/13 (07:001),Start,0.0,150cc,Cartridge,Leaf Cup,Retro Cups
 22/04/13 (07:002),Start,0.0,150cc,Cartridge,Leaf Cup,Retro Cups
 22/04/13 (07:003),Start,0.0,150cc,Cartridge,Leaf Cup,Retro Cups
@@ -55,6 +63,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/23 (08:005),Start,0.0,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/29 (08:006),Start,0.0,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/30 (08:007),Start,0.0,150cc,Cartridge,Mushroom Cup,Nitro Cups
+22/09/06 (08:008),Start,0.0,150cc,Cartridge,Mushroom Cup,Nitro Cups
+(08:000),Start,0.0,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/24 (09:001),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:002),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
@@ -89,6 +99,9 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (11:009),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:010),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:011),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:012),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:013),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
+(11:-01),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
 (11:000),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (12:001),Start,0.0,150cc,Cartridge,Propeller Cup,DLC Cups
 22/08/24 (12:002),Start,0.0,150cc,Cartridge,Propeller Cup,DLC Cups
@@ -115,6 +128,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (13:020),Start,0.0,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/20 (13:021),Start,0.0,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/24 (13:023),Start,0.0,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:025),Start,0.0,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:026),Start,0.0,150cc,Cartridge,Shell Cup,Retro Cups
 (13:000),Start,0.0,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/15 (14:001),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:002),Start,0.0,150cc,Cartridge,Egg Cup,Bonus Cups
@@ -144,6 +159,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (15:012),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/09/05 (15:013),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/09/05 (15:014),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/07 (15:015),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 (15:000),Start,0.0,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/05/28 (16:001),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (16:002),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
@@ -156,6 +172,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (16:014),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/30 (16:015),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (16:016),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/07 (16:017),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
+(16:000),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (17:001),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:002),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:003),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
@@ -164,6 +182,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (17:007),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:008),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:009),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:010),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:011),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/24 (01:001),bNYM,118.282324,150cc,Cartridge,Turnip Cup,DLC Cups
 22/08/29 (01:002),bNYM,116.748199,150cc,Cartridge,Turnip Cup,DLC Cups
 22/08/24 (01:001),bMC3,128.150125,150cc,Cartridge,Turnip Cup,DLC Cups
@@ -213,24 +233,31 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/23 (04:005),SA,152.283245,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:006),SA,153.76941,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:007),SA,152.650329,150cc,Cartridge,Star Cup,Nitro Cups
+22/09/06 (04:008),SA,151.853269,150cc,Cartridge,Star Cup,Nitro Cups
+(04:-01),DS,151.975236,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/15 (04:001),DS,153.709999,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/15 (04:002),DS,151.293999,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/22 (04:003),DS,152.183024,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/23 (04:005),DS,151.975236,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:006),DS,152.136363,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:007),DS,151.782405,150cc,Cartridge,Star Cup,Nitro Cups
+22/09/06 (04:008),DS,151.824985,150cc,Cartridge,Star Cup,Nitro Cups
+(04:-01),Ed,156.461495,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/15 (04:001),Ed,157.316,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/15 (04:002),Ed,157.103999,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/22 (04:003),Ed,156.490347,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/23 (04:005),Ed,156.461495,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:006),Ed,158.012408,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:007),Ed,156.491811,150cc,Cartridge,Star Cup,Nitro Cups
+22/09/06 (04:008),Ed,155.309524,150cc,Cartridge,Star Cup,Nitro Cups
+(04:-01),MW,141.897043,150cc,Cartridge,Star Cup,Nitro Cups
 (04:000),MW,147.232001,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/15 (04:001),MW,145.358,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/15 (04:002),MW,147.232,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/23 (04:005),MW,141.897043,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:006),MW,141.667133,150cc,Cartridge,Star Cup,Nitro Cups
 22/08/29 (04:007),MW,141.830048,150cc,Cartridge,Star Cup,Nitro Cups
+22/09/06 (04:008),MW,141.077943,150cc,Cartridge,Star Cup,Nitro Cups
 22/04/13 (05:001),dNBC,143.81,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:002),dNBC,142.268,150cc,Cartridge,Bell Cup,Bonus Cups
 22/04/13 (05:003),dNBC,142.742,150cc,Cartridge,Bell Cup,Bonus Cups
@@ -278,6 +305,12 @@ ID,Track,Time,Version,Items,Speed,Category
 22/09/03 (06:012),CC,152.38077,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:013),CC,152.248686,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:014),CC,151.895445,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:015),CC,152.581216,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:016),CC,149.863738,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:017),CC,151.78363,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:018),CC,151.772871,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:019),CC,149.93112,150cc,Cartridge,Special Cup,Nitro Cups
+(06:000),BDD,146.138222,150cc,Cartridge,Special Cup,Nitro Cups
 22/04/25 (06:001),BDD,154.964958,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/22 (06:004),BDD,149.288446,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/28 (06:007),BDD,148.61926,150cc,Cartridge,Special Cup,Nitro Cups
@@ -287,6 +320,9 @@ ID,Track,Time,Version,Items,Speed,Category
 22/09/03 (06:012),BDD,146.309797,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:013),BDD,147.272952,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:014),BDD,147.066038,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:015),BDD,145.191248,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:017),BDD,146.138222,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:019),BDD,145.653484,150cc,Cartridge,Special Cup,Nitro Cups
 22/04/25 (06:001),BC,161.626593,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/22 (06:004),BC,161.624685,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/28 (06:007),BC,161.23984,150cc,Cartridge,Special Cup,Nitro Cups
@@ -295,6 +331,10 @@ ID,Track,Time,Version,Items,Speed,Category
 22/09/01 (06:011),BC,160.151713,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/03 (06:012),BC,158.474303,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:014),BC,161.195589,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:015),BC,161.612829,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:017),BC,160.652245,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:019),BC,159.370891,150cc,Cartridge,Special Cup,Nitro Cups
+(06:000),RR,159.397525,150cc,Cartridge,Special Cup,Nitro Cups
 22/04/25 (06:001),RR,161.444811,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/22 (06:004),RR,160.551534,150cc,Cartridge,Special Cup,Nitro Cups
 22/08/28 (06:007),RR,162.025504,150cc,Cartridge,Special Cup,Nitro Cups
@@ -302,6 +342,9 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (06:010),RR,159.320542,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/01 (06:011),RR,159.288852,150cc,Cartridge,Special Cup,Nitro Cups
 22/09/05 (06:014),RR,159.899619,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/06 (06:015),RR,161.6204,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:017),RR,159.397525,150cc,Cartridge,Special Cup,Nitro Cups
+22/09/07 (06:019),RR,159.126577,150cc,Cartridge,Special Cup,Nitro Cups
 22/04/13 (07:001),rWS,155.245,150cc,Cartridge,Leaf Cup,Retro Cups
 22/04/13 (07:002),rWS,148.069999,150cc,Cartridge,Leaf Cup,Retro Cups
 22/04/13 (07:003),rWS,148.851,150cc,Cartridge,Leaf Cup,Retro Cups
@@ -338,24 +381,29 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/23 (08:005),MKS,127.806859,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/29 (08:006),MKS,128.284177,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/30 (08:007),MKS,128.534316,150cc,Cartridge,Mushroom Cup,Nitro Cups
+22/09/06 (08:008),MKS,128.188561,150cc,Cartridge,Mushroom Cup,Nitro Cups
+(08:000),WP,132.871035,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/04/25 (08:001),WP,133.637934,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/22 (08:002),WP,134.308529,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/23 (08:003),WP,132.871035,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/23 (08:005),WP,133.217353,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/29 (08:006),WP,133.352104,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/30 (08:007),WP,132.890736,150cc,Cartridge,Mushroom Cup,Nitro Cups
+22/09/06 (08:008),WP,132.501733,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/04/25 (08:001),SSC,146.120483,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/22 (08:002),SSC,146.235477,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/23 (08:003),SSC,145.211592,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/23 (08:005),SSC,144.922318,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/29 (08:006),SSC,146.408074,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/30 (08:007),SSC,145.542994,150cc,Cartridge,Mushroom Cup,Nitro Cups
+22/09/06 (08:008),SSC,144.473148,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/04/25 (08:001),TR,149.54251,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/22 (08:002),TR,147.575642,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/23 (08:003),TR,147.046816,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/23 (08:005),TR,147.52606,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/29 (08:006),TR,147.849887,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/30 (08:007),TR,147.222505,150cc,Cartridge,Mushroom Cup,Nitro Cups
+22/09/06 (08:008),TR,146.954278,150cc,Cartridge,Mushroom Cup,Nitro Cups
 22/08/24 (09:001),bTB,114.300075,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:002),bTB,113.436427,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),bTB,113.421052,150cc,Cartridge,Lucky Cat Cup,DLC Cups
@@ -1012,6 +1060,9 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (11:009),dBP,93.886214,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:010),dBP,94.013672,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:011),dBP,93.133581,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:012),dBP,92.988101,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:013),dBP,92.701986,150cc,Cartridge,Crossing Cup,Bonus Cups
+(11:-01),dCL,143.863525,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:001),dCL,149.456338,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:002),dCL,147.068993,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/21 (11:003),dCL,150.030626,150cc,Cartridge,Crossing Cup,Bonus Cups
@@ -1022,6 +1073,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (11:009),dCL,143.129637,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:010),dCL,144.98319,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:011),dCL,143.863525,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:013),dCL,144.455508,150cc,Cartridge,Crossing Cup,Bonus Cups
+(11:-01),dWW,142.651449,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:001),dWW,143.917456,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:002),dWW,144.23161,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/21 (11:003),dWW,143.677649,150cc,Cartridge,Crossing Cup,Bonus Cups
@@ -1030,6 +1083,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/23 (11:008),dWW,141.25687,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:010),dWW,141.948177,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:011),dWW,142.651449,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:013),dWW,142.298615,150cc,Cartridge,Crossing Cup,Bonus Cups
+(11:-01),dAC,135.816032,150cc,Cartridge,Crossing Cup,Bonus Cups
 (11:000),dAC,137.383722,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:001),dAC,136.216101,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/04/20 (11:002),dAC,136.389997,150cc,Cartridge,Crossing Cup,Bonus Cups
@@ -1039,6 +1094,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/23 (11:008),dAC,137.549936,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:010),dAC,135.751321,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (11:011),dAC,135.816032,150cc,Cartridge,Crossing Cup,Bonus Cups
+22/09/07 (11:013),dAC,135.515889,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/24 (12:001),bSS,153.470954,150cc,Cartridge,Propeller Cup,DLC Cups
 22/08/24 (12:002),bSS,154.828259,150cc,Cartridge,Propeller Cup,DLC Cups
 22/08/24 (12:003),bSS,154.506198,150cc,Cartridge,Propeller Cup,DLC Cups
@@ -1073,6 +1129,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (13:020),rMMM,114.972916,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/20 (13:021),rMMM,113.676819,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/24 (13:023),rMMM,112.669469,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:025),rMMM,115.023897,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:026),rMMM,112.428737,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:001),rMC,123.038361,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:003),rMC,120.632088,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:004),rMC,124.231916,150cc,Cartridge,Shell Cup,Retro Cups
@@ -1087,7 +1145,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (13:020),rMC,119.943707,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/20 (13:021),rMC,121.175913,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/24 (13:023),rMC,121.048709,150cc,Cartridge,Shell Cup,Retro Cups
-(13:000),rCCB,143.580319,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:026),rMC,122.023989,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:001),rCCB,144.962075,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:003),rCCB,148.654888,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:004),rCCB,145.535295,150cc,Cartridge,Shell Cup,Retro Cups
@@ -1098,6 +1156,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (13:017),rCCB,143.580319,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/20 (13:021),rCCB,145.132696,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/24 (13:023),rCCB,144.394415,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:026),rCCB,143.370898,150cc,Cartridge,Shell Cup,Retro Cups
 (13:000),rTT,140.422534,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:001),rTT,154.10848,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/22 (13:003),rTT,142.690604,150cc,Cartridge,Shell Cup,Retro Cups
@@ -1108,6 +1167,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/20 (13:015),rTT,139.84531,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/20 (13:017),rTT,140.422533,150cc,Cartridge,Shell Cup,Retro Cups
 22/08/24 (13:023),rTT,139.799406,150cc,Cartridge,Shell Cup,Retro Cups
+22/09/07 (13:026),rTT,142.457621,150cc,Cartridge,Shell Cup,Retro Cups
 22/04/15 (14:001),dYC,146.179,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/15 (14:002),dYC,142.562999,150cc,Cartridge,Egg Cup,Bonus Cups
 22/04/20 (14:003),dYC,146.091211,150cc,Cartridge,Egg Cup,Bonus Cups
@@ -1167,6 +1227,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (15:012),dWGM,152.155571,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/09/05 (15:013),dWGM,152.507205,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/09/05 (15:014),dWGM,151.273372,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/07 (15:015),dWGM,153.0052,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/13 (15:001),dRR,120.003,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),dRR,120.188,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/22 (15:006),dRR,120.27989,150cc,Cartridge,Triforce Cup,Bonus Cups
@@ -1174,11 +1235,13 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/26 (15:009),dRR,118.978963,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/28 (15:012),dRR,119.720243,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/09/05 (15:013),dRR,119.130234,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/07 (15:015),dRR,119.431296,150cc,Cartridge,Triforce Cup,Bonus Cups
 (15:000),dIIO,142.538001,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/13 (15:001),dIIO,142.538,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),dIIO,144.548,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/22 (15:007),dIIO,142.132885,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/26 (15:009),dIIO,142.009362,150cc,Cartridge,Triforce Cup,Bonus Cups
+22/09/07 (15:015),dIIO,141.466963,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/13 (15:001),dHC,150.756999,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/04/15 (15:002),dHC,150.541,150cc,Cartridge,Triforce Cup,Bonus Cups
 22/08/22 (15:007),dHC,151.302471,150cc,Cartridge,Triforce Cup,Bonus Cups
@@ -1194,6 +1257,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (16:014),rDDD,158.017892,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/30 (16:015),rDDD,157.543352,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (16:016),rDDD,154.652128,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/07 (16:017),rDDD,155.722855,150cc,Cartridge,Banana Cup,Retro Cups
+(16:000),rDP3,112.572127,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (16:001),rDP3,114.118124,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (16:002),rDP3,115.11207,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/20 (16:005),rDP3,112.872911,150cc,Cartridge,Banana Cup,Retro Cups
@@ -1201,6 +1266,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (16:014),rDP3,113.7492,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/30 (16:015),rDP3,112.987089,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (16:016),rDP3,114.005462,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/07 (16:017),rDP3,112.504445,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (16:001),rRRy,155.164259,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (16:002),rRRy,154.87528,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/20 (16:005),rRRy,155.401749,150cc,Cartridge,Banana Cup,Retro Cups
@@ -1208,6 +1274,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (16:014),rRRy,154.448645,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/30 (16:015),rRRy,153.754398,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (16:016),rRRy,154.559126,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/07 (16:017),rRRy,153.806385,150cc,Cartridge,Banana Cup,Retro Cups
+(16:000),rDKJ,159.364505,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (16:001),rDKJ,159.764482,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (16:002),rDKJ,160.246313,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/20 (16:005),rDKJ,160.518708,150cc,Cartridge,Banana Cup,Retro Cups
@@ -1215,6 +1283,7 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (16:014),rDKJ,158.775593,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/30 (16:015),rDKJ,159.273386,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (16:016),rDKJ,158.961849,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/07 (16:017),rDKJ,158.34011,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (17:001),rTTC,143.754722,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:002),rTTC,139.051969,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:003),rTTC,138.856063,150cc,Cartridge,Lightning Cup,Retro Cups
@@ -1223,6 +1292,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (17:007),rTTC,138.702979,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:008),rTTC,137.645832,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:009),rTTC,137.086126,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:010),rTTC,137.246378,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:011),rTTC,135.943414,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:001),rPPS,161.605479,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:002),rPPS,158.086442,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:005),rPPS,158.930008,150cc,Cartridge,Lightning Cup,Retro Cups
@@ -1230,6 +1301,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (17:007),rPPS,158.229338,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:008),rPPS,157.409314,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:009),rPPS,159.252481,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:010),rPPS,157.173283,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:011),rPPS,158.484959,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:001),rGV,154.028891,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:002),rGV,154.298845,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:005),rGV,156.618637,150cc,Cartridge,Lightning Cup,Retro Cups
@@ -1237,6 +1310,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (17:007),rGV,152.882021,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:008),rGV,152.029345,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:009),rGV,153.11219,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:010),rGV,153.798227,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:011),rGV,151.560629,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:001),rRRd,112.35865,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:002),rRRd,112.407361,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (17:005),rRRd,111.672921,150cc,Cartridge,Lightning Cup,Retro Cups
@@ -1244,3 +1319,4 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/28 (17:007),rRRd,110.231315,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:008),rRRd,117.816268,150cc,Cartridge,Lightning Cup,Retro Cups
 22/08/30 (17:009),rRRd,114.748208,150cc,Cartridge,Lightning Cup,Retro Cups
+22/09/07 (17:010),rRRd,111.182198,150cc,Cartridge,Lightning Cup,Retro Cups

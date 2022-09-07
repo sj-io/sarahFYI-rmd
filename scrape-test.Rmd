@@ -10,3 +10,15 @@ html <- read_html("http://www.mkwrs.com/mk8dx/wrs.php")
 wr <- html %>% html_elements(".wr") %>% html_table() %>% .[[1]]
 ```
 
+```{r}
+html <- read_html("https://www.speedrun.com/mk8dx#48_Tracks")
+
+search <- html_form(html)[[3]]
+
+search2 <- search %>% html_form_set(variable11257 = "38019", 
+                                    variable23164 = "77235")
+
+resp <- html_form_submit(search2)
+
+test <- read_html(resp) %>% html_table() %>% .[[1]]
+```

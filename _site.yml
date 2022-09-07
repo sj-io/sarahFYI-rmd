@@ -1,5 +1,6 @@
 name: "sarahFYI"
 title: "SJ"
+favicon: img/favicon.png
 description: |
   Sarah Johnson
 output_dir: "_site"
