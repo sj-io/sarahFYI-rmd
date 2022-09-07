@@ -5,6 +5,9 @@ output:
     orientation: columns
     navbar:
       - { icon: "fas fa-home", href: "index.html", align: right}
+    theme:
+      version: 4
+      bootswatch: minty
 ---
 
 ```{bash llstocsv, include=FALSE}
