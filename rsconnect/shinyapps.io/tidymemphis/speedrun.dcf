@@ -1,0 +1,14 @@
+name: speedrun
+title: speedrun
+username:
+account: tidymemphis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6951519
+bundleId: 6280747
+url: https://sarahjohnson.shinyapps.io/speedrun/
+when: 1662623237.92817
+lastSyncTime: 1662623237.92818
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: _site.yml|art.Rmd|graph-guide.Rmd|index.Rmd|lsstocsv.R|map.Rmd|README.md|scrape-test.Rmd|sr.Rmd|tt.Rmd|_site|img

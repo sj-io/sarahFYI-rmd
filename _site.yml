@@ -17,6 +17,8 @@ navbar:
           href: sr.html
         - text: "Time Trials"
           href: tt.html
+        - text: "Speedruns (Shiny App)"
+          href: https://sarahjohnson.shinyapps.io/speedrun/
     - text: "Art"
       href: art.html
     - icon: fa fa-twitch
