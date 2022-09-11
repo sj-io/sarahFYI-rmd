@@ -21,49 +21,12 @@ library(plotly)
 ```
 
 ```{r}
-raw <- read_csv("_data/splits/MK8D_trks.csv") %>% rename_with(tolower, 2:7)
-abr <- read_csv("_data/track-abbr.csv") %>% 
-  pivot_longer(cols = c(trk, split, track), 
-               names_to = "ref", values_to = "og") %>% 
-  select(trkNO, og, lss, cup, type) %>% 
-  distinct() %>% 
-  add_row(trkNO = 0, og = "Start", lss = "Start", 
-          cup = " ", type = " ", .before = 1) %>% 
-  mutate(lss = fct_inorder(lss),
-         cup = fct_inorder(cup))
-```
+source("lsstocsv.R")
 
-```{r}
-clean0 <- raw %>% 
-  filter(str_detect(ID, "/")) %>% 
-  mutate(track = str_replace_all(track, "^b", "w")) %>% 
-  left_join(abr, by = c("track" = "og")) %>% 
-  select(ID, track = lss, time, cup, category) %>% 
-  mutate(date = str_extract_all(ID, "\\d{2}/\\d{2}/\\d{2}"),
-         date = ymd(date),
-         time = seconds(time)) %>% 
-  group_by(ID) %>% 
-  mutate(trkNO = row_number(ID)) %>% 
-  ungroup() %>% 
-  group_by(category, track) %>% 
-  mutate(sd = sd(time), .after = time) %>% 
+sr <- sr %>% 
+  group_by(cat2, track) %>% 
+  mutate(sd = sd(time)) %>% 
   ungroup()
-
-cupID <- clean0 %>%
-  filter(track != "Start") %>% 
-  select(ID, category, cup) %>% 
-  filter(str_detect(category, "Cups")) %>% 
-  select(-category) %>% 
-  distinct()
-
-clean <- clean0 %>% 
-  left_join(cupID, by = "ID") %>% 
-  mutate(cup = case_when(
-    category == "48 Tracks" ~ cup.x,
-    category != "48 Tracks" ~ cup.y
-  )) %>% 
-  select(-c(cup.x, cup.y)) %>% 
-  mutate(cup = str_replace_all(cup, "^ $", "Mushroom"))
 ```
 
 # 48 Tracks
@@ -73,14 +36,16 @@ clean <- clean0 %>%
 ### Track Time Distributions
 
 ```{r}
-violin48 <- clean %>% 
-  filter(category == "48 Tracks" & track != "Start") %>% 
+violin_48 <- sr %>% 
+  filter(cat2 == "Original 48" & track != "Start") %>% 
   ggplot(aes(factor(track), time)) +
   geom_violin(scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) +
   stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
   scale_x_discrete(limits = rev) +
   coord_flip() +
@@ -96,101 +61,7 @@ violin48 <- clean %>%
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(violin48)
-```
-
-
-```{r}
-finished_runs <- clean %>%
-  filter(str_detect(category, "Cups") & trkNO == 5 |
-           category == "48 Tracks" & trkNO == 49) %>% 
-  arrange(ID) %>% 
-  group_by(category, cup) %>% 
-  mutate(runNO = row_number()) %>% 
-  ungroup() %>% 
-  select(ID, runNO)
-
-PB_tracks <- clean %>% 
-  group_by(category, cup, track) %>% 
-  slice_min(time, with_ties = FALSE) %>% 
-  ungroup() %>% 
-  select(category, cup, track, PBtime = time, PBdate = date) %>% 
-  arrange(track)
-
-PB_48 <- PB_tracks %>% 
-  filter(category == "48 Tracks") %>% 
-  mutate(cumsum = cumsum(PBtime))
-
-PB_cups <- PB_tracks %>% 
-  filter(str_detect(category, "Cups")) %>% 
-  group_by(cup) %>% 
-  mutate(cumsum = cumsum(PBtime)) %>% 
-  ungroup()
-
-runs <- clean %>% 
-  left_join(finished_runs, by = "ID") %>% 
-  left_join(PB_tracks, by = c("category", "cup", "track"), copy = TRUE) %>% 
-  filter(!is.na(runNO)) %>% 
-  group_by(ID) %>% 
-  arrange(track) %>% 
-  mutate(cumsum = cumsum(time)) %>% 
-  ungroup()
-
-slowest_runs <- runs %>% 
-  filter(str_detect(category, "Cups") & trkNO == 5 |
-           category == "48 Tracks" & trkNO == 49) %>% 
-  group_by(category, cup) %>% 
-  slice_max(cumsum) %>% 
-  ungroup() %>% 
-  select(ID) %>% 
-  left_join(runs) %>% 
-  select(track, cup, category, max = cumsum)
-
-PB_runs <- runs %>% 
-  filter(str_detect(category, "Cups") & trkNO == 5 |
-           category == "48 Tracks" & trkNO == 49) %>% 
-  group_by(category, cup) %>% 
-  slice_min(cumsum) %>% 
-  ungroup() %>% 
-  select(ID) %>% 
-  left_join(runs) %>% 
-  mutate(pts = time - PBtime) %>% 
-  select(ID, track, pts)
-
-BPT <- rbind(PB_48, PB_cups) %>% 
-  mutate(time = PBtime, date = PBdate, runNO = 0, 
-         ID = "Best Possible Time",
-         label = paste0("<b>Best Possible Time</b>",
-                        "<br><b>Track:</b> ", track,
-                        "<br><b>PB Date:</b> ", PBdate,
-                        "<br><b>PB Time:</b> ", round(seconds_to_period(PBtime), 2),
-                        "<br><b>Run Time:</b> ", round(seconds_to_period(cumsum), 2)))
-
-lvl <- abr$cup %>% unique() %>% fct_inorder()
-
-runs_full <- runs %>% 
-  select(-c(sd, trkNO)) %>% 
-  mutate(label = paste0("<b>", "Run #", runNO, " ", date, "</b>", 
-                        "<br><b>Track:</b> ", track,
-                        "<br><b>Split Time:</b> ", round(seconds_to_period(time), 2),
-                        "<br><b>Run Time:</b> ", round(seconds_to_period(cumsum), 2))) %>% 
-  rbind(BPT) %>% 
-  left_join(slowest_runs, by = c("category", "cup", "track")) %>% 
-  left_join(PB_runs, by = c("ID", "track")) %>% 
-  mutate(maxdiff = cumsum - max,
-         cumsum = seconds(cumsum),
-         max = seconds(max),
-         maxdiff = seconds(maxdiff),
-         label = if_else(pts > 0, 
-                         paste0(label, 
-                                "<br><b>Possible Time Save:</b> ", 
-                                round(seconds_to_period(pts), 3)), 
-                         label, 
-                         missing = label),
-         cup = factor(cup, levels = lvl),
-         track = recode(track, "Start" = " ")) 
-
-color_range <- colorRampPalette(c("plum", "darkcyan"))
+ggplotly(violin_48)
 ```
 
 ## Col 2 {.tabset}
@@ -198,9 +69,9 @@ color_range <- colorRampPalette(c("plum", "darkcyan"))
 ### Improvement
 
 ```{r}
-runs_48 <- runs_full %>% 
-  filter(category == "48 Tracks") %>% 
-  group_by(category, track) %>% 
+runs_48 <- runs %>% 
+  filter(cat2 == "Original 48") %>% 
+  group_by(cat2, track) %>% 
   mutate(sd = sd(time)) %>% 
   ungroup()
 
@@ -267,31 +138,166 @@ ggplotly(traces_48, tooltip = "text") %>%
 ### Run Time
 
 ```{r}
-run_time <- runs %>% 
-  group_by(ID) %>% 
-  slice_max(track) %>% 
-  ungroup() %>% 
-  select(runNO, category, cup, date, cumsum) %>% 
-  mutate(cup = factor(cup, levels = lvl))
-```
-
-```{r}
-run_time_48 <- run_time %>% 
-  filter(category == "48 Tracks") %>% 
-  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
-                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(runNO, cumsum)) +
+run_time_48 <- run_time %>%
+  filter(cat2 == "Original 48") %>%
+  mutate(label = paste0(
+    "<b>Run #",
+    runNO,
+    " ",
+    date,
+    "</b>",
+    "<br>",
+    round(seconds_to_period(cumsum), 2)
+  )) %>%
+  ggplot(aes(runNO, cumsum, color = "goldenrod")) +
   geom_line() +
   geom_point(aes(text = label)) +
-  scale_y_time() +
+  scale_y_time(labels = scales::label_time()) +
+  scale_x_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_color_identity() +
   labs(x = "Run Number", y = "") +
   theme_minimal() +
-  theme(axis.ticks = element_line(size = .2), 
-        panel.border = element_rect(fill = NA, size = .2))
+  theme(axis.ticks = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
 
 ggplotly(run_time_48, tooltip = "text")
 ```
 
+# Nitro Tracks {data-navmenu="16 Tracks"}
+
+## Col 1 {data-width="350"}
+
+### Track Time Distributions
+
+```{r}
+violin_nt <- sr %>% 
+  filter(cat2 == "Nitro Tracks" & track != "Start") %>% 
+  ggplot(aes(factor(track), time)) +
+  geom_violin(scale = "width",
+              aes(fill = sd, color=sd),
+              alpha = .7) +
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
+  stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_color_gradient(low = "darkcyan", high = "plum") +
+  scale_y_time() +
+  scale_x_discrete(limits = rev) +
+  coord_flip() +
+  labs(x = "",
+       y = "Time") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 0.98,
+                                   vjust = 0.9),
+        axis.text = element_text(size = 8),
+        axis.ticks = element_line(size = .2),
+        panel.grid = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(violin_nt)
+```
+
+## Col 2 {.tabset}
+
+### Improvement
+
+```{r}
+runs_nt <- runs %>% 
+  filter(cat2 == "Nitro Tracks") %>% 
+  group_by(cat2, track) %>% 
+  mutate(sd = sd(time)) %>% 
+  ungroup()
+
+colors_nt <- color_range(length(unique(runs_nt$runNO)))
+
+runs_nt <- runs_nt %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_nt[runs_nt$runNO]))
+```
+
+```{r}
+traces_nt <- ggplot() +
+  geom_violin(data = runs_nt[which(runs_nt$runNO != 0),],
+                aes(
+                  factor(track), 
+                  maxdiff,
+                  color = NA,
+                  fill = sd,
+                  alpha = .1),
+                scale = "width") +
+  geom_line(data = runs_nt, aes(
+    factor(track),
+    maxdiff,
+    group = runNO,
+    color = clr,
+    alpha = runNO,
+    text = label
+  )) +
+  geom_point(data = runs_nt[which(runs_nt$pts > 0),], aes(
+    factor(track), 
+    maxdiff, 
+    size = pts,
+    color = "tomato",
+    text = label)) +
+  scale_y_time() +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_size_continuous(range = c(.05, 2.75)) +
+  scale_color_identity() +
+  scale_alpha_continuous(range = c(.35, .8)) +
+  labs(x = "",
+       y = "") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 0.98,
+      vjust = 0.9
+    ),
+    axis.text = element_text(size = 8),
+    axis.ticks = element_line(size = .2),
+    panel.grid = element_line(size = .2),
+    panel.border = element_rect(fill = NA, size = .2),
+    legend.position = "none"
+  )
+
+
+
+ggplotly(traces_nt, tooltip = "text") %>% 
+  layout(margin = list(t = 60),
+    title = list(text = paste0('Improvement from Slowest Run',
+                                    '<br><sup>Nitro Tracks, 150cc, No Items</sup>'))) %>% 
+  style(hoverinfo = "skip", traces = 0:length(unique(runs_nt$track)))
+```
+
+### Run Time
+
+```{r}
+run_time_nt <- run_time %>%
+  filter(cat2 == "Nitro Tracks") %>%
+  mutate(label = paste0(
+    "<b>Run #",
+    runNO,
+    " ",
+    date,
+    "</b>",
+    "<br>",
+    round(seconds_to_period(cumsum), 2)
+  )) %>%
+  ggplot(aes(runNO, cumsum, color = "goldenrod")) +
+  geom_line() +
+  geom_point(aes(text = label)) +
+  scale_y_time(labels = scales::label_time()) +
+  scale_x_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_color_identity() +
+  labs(x = "Run Number", y = "") +
+  theme_minimal() +
+  theme(axis.ticks = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
+
+ggplotly(run_time_nt, tooltip = "text")
+```
 
 # Nitro Cups {data-navmenu="Cups"}
 
@@ -300,14 +306,16 @@ ggplotly(run_time_48, tooltip = "text")
 ### Track Time Distributions
 
 ```{r}
-violinnitro <- clean %>% 
-  filter(category == "Nitro Cups" & track != "Start") %>% 
+violin_nc <- sr %>% 
+  filter(cat1 == "Nitro Cups" & track != "Start") %>% 
   ggplot(aes(factor(track), time)) +
   geom_violin(scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) +
   stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
   scale_x_discrete(limits = rev) +
   coord_flip() +
@@ -323,7 +331,7 @@ violinnitro <- clean %>%
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(violinnitro)
+ggplotly(violin_nc)
 ```
 
 ## Col 2 {.tabset}
@@ -331,18 +339,29 @@ ggplotly(violinnitro)
 ### Improvement
 
 ```{r}
-runs_nitro <- runs_full %>% 
-  filter(category == "Nitro Cups")
+runs_nc <- runs %>% 
+  filter(cat1 == "Nitro Cups") %>% 
+  group_by(cat1, track) %>% 
+  mutate(sd = sd(time)) %>% 
+  ungroup()
 
-colors_nitro <- color_range(length(unique(runs_nitro$runNO)))
+colors_nc <- color_range(length(unique(runs_nc$runNO)))
 
-runs_nitro <- runs_nitro %>% 
-  mutate(clr = ifelse(runNO == 0, "grey", colors_nitro[runs_nitro$runNO]))
+runs_nc <- runs_nc %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_nc[runs_nc$runNO]))
 ```
 
 ```{r}
-traces_nitro <- ggplot() +
-  geom_line(data = runs_nitro, aes(
+traces_nc <- ggplot() +
+  geom_violin(data = runs_nc[which(runs_nc$runNO != 0), ],
+                aes(
+                  factor(track), 
+                  maxdiff,
+                  color = NA,
+                  fill = sd,
+                  alpha = .1),
+                scale = "width") +
+  geom_line(data = runs_nc, aes(
     factor(track),
     maxdiff,
     group = runNO,
@@ -350,17 +369,18 @@ traces_nitro <- ggplot() +
     alpha = runNO,
     text = label
   )) +
-  geom_point(data = runs_nitro[which(runs_nitro$pts > 0),], aes(
+  geom_point(data = runs_nc[which(runs_nc$pts > 0),], aes(
     factor(track), 
     maxdiff, 
     size = pts,
     color = "tomato",
     text = label)) +
-  facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.25)) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_size_continuous(range = c(.05, 2.75)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
+  facet_wrap(~cat2, scales = "free") +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -377,45 +397,60 @@ traces_nitro <- ggplot() +
     legend.position = "none"
   )
 
-ggplotly(traces_nitro, tooltip = "text") %>% 
-  layout(margin = list(b = 110))
+
+
+ggplotly(traces_nc, tooltip = "text") %>% 
+  layout(margin = list(b = 110)) %>% 
+  style(hoverinfo = "skip", traces = 0:length(unique(runs_nc$track)))
 ```
 
 ### Run Time
 
 ```{r}
-run_time_n <- run_time %>% 
-  filter(category == "Nitro Cups") %>% 
-  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
-                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(runNO, cumsum)) +
+run_time_nc <- run_time %>%
+  filter(cat1 == "Nitro Cups") %>%
+  mutate(label = paste0(
+    "<b>Run #",
+    runNO,
+    " ",
+    date,
+    "</b>",
+    "<br>",
+    round(seconds_to_period(cumsum), 2)
+  )) %>%
+  ggplot(aes(runNO, cumsum, color = "goldenrod")) +
   geom_line() +
   geom_point(aes(text = label)) +
-  facet_wrap(~cup, scales = "free") +
-  scale_y_time() +
-  labs(x = "", y = "") +
+  scale_y_time(labels = scales::label_time()) +
+  scale_x_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_color_identity() +
+  facet_wrap(~cat2, scales = "free") +
+  labs(x = "Run Number", y = "") +
   theme_minimal() +
-  theme(axis.ticks = element_line(size = .2), 
-        panel.border = element_rect(fill = NA, size = .2))
+  theme(axis.ticks = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
 
-ggplotly(run_time_n, tooltip = "text")
+ggplotly(run_time_nc, tooltip = "text")
 ```
 
 # Retro Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Track Time Distribution
+### Track Time Distributions
 
 ```{r}
-violinretro <- clean %>% 
-  filter(category == "Retro Cups" & track != "Start") %>% 
+violin_rc <- sr %>% 
+  filter(cat1 == "Retro Cups" & track != "Start") %>% 
   ggplot(aes(factor(track), time)) +
   geom_violin(scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) +
   stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
   scale_x_discrete(limits = rev) +
   coord_flip() +
@@ -431,7 +466,7 @@ violinretro <- clean %>%
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(violinretro)
+ggplotly(violin_rc)
 ```
 
 ## Col 2 {.tabset}
@@ -439,18 +474,29 @@ ggplotly(violinretro)
 ### Improvement
 
 ```{r}
-runs_retro <- runs_full %>% 
-  filter(category == "Retro Cups")
+runs_rc <- runs %>% 
+  filter(cat1 == "Retro Cups") %>% 
+  group_by(cat1, track) %>% 
+  mutate(sd = sd(time)) %>% 
+  ungroup()
 
-colors_retro <- color_range(length(unique(runs_retro$runNO)))
+colors_rc <- color_range(length(unique(runs_rc$runNO)))
 
-runs_retro <- runs_retro %>% 
-  mutate(clr = ifelse(runNO == 0, "grey", colors_retro[runs_retro$runNO]))
+runs_rc <- runs_rc %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_rc[runs_rc$runNO]))
 ```
 
 ```{r}
-traces_retro <- ggplot() +
-  geom_line(data = runs_retro, aes(
+traces_rc <- ggplot() +
+  geom_violin(data = runs_rc[which(runs_rc$runNO != 0), ],
+                aes(
+                  factor(track), 
+                  maxdiff,
+                  color = NA,
+                  fill = sd,
+                  alpha = .1),
+                scale = "width") +
+  geom_line(data = runs_rc, aes(
     factor(track),
     maxdiff,
     group = runNO,
@@ -458,17 +504,18 @@ traces_retro <- ggplot() +
     alpha = runNO,
     text = label
   )) +
-  geom_point(data = runs_retro[which(runs_retro$pts > 0),], aes(
+  geom_point(data = runs_rc[which(runs_rc$pts > 0),], aes(
     factor(track), 
     maxdiff, 
     size = pts,
     color = "tomato",
     text = label)) +
-  facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.25)) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_size_continuous(range = c(.05, 2.75)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
+  facet_wrap(~cat2, scales = "free") +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -485,45 +532,60 @@ traces_retro <- ggplot() +
     legend.position = "none"
   )
 
-ggplotly(traces_retro, tooltip = "text") %>% 
-  layout(margin = list(b = 110))
+
+
+ggplotly(traces_rc, tooltip = "text") %>% 
+  layout(margin = list(b = 110)) %>% 
+  style(hoverinfo = "skip", traces = 0:length(unique(runs_rc$track)))
 ```
 
 ### Run Time
 
 ```{r}
-run_time_r <- run_time %>% 
-  filter(category == "Retro Cups") %>% 
-  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
-                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(runNO, cumsum)) +
+run_time_rc <- run_time %>%
+  filter(cat1 == "Retro Cups") %>%
+  mutate(label = paste0(
+    "<b>Run #",
+    runNO,
+    " ",
+    date,
+    "</b>",
+    "<br>",
+    round(seconds_to_period(cumsum), 2)
+  )) %>%
+  ggplot(aes(runNO, cumsum, color = "goldenrod")) +
   geom_line() +
   geom_point(aes(text = label)) +
-  facet_wrap(~cup, scales = "free") +
-  scale_y_time() +
-  labs(x = "", y = "") +
+  scale_y_time(labels = scales::label_time()) +
+  scale_x_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_color_identity() +
+  facet_wrap(~cat2, scales = "free") +
+  labs(x = "Run Number", y = "") +
   theme_minimal() +
-  theme(axis.ticks = element_line(size = .2), 
-        panel.border = element_rect(fill = NA, size = .2))
+  theme(axis.ticks = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
 
-ggplotly(run_time_r, tooltip = "text")
+ggplotly(run_time_rc, tooltip = "text")
 ```
 
 # Bonus Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Track Time Distribution
+### Track Time Distributions
 
 ```{r}
-violinbonus <- clean %>% 
-  filter(category == "Bonus Cups" & track != "Start") %>% 
+violin_bc <- sr %>% 
+  filter(cat1 == "Bonus Cups" & track != "Start") %>% 
   ggplot(aes(factor(track), time)) +
   geom_violin(scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) +
   stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
   scale_x_discrete(limits = rev) +
   coord_flip() +
@@ -539,7 +601,7 @@ violinbonus <- clean %>%
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(violinbonus)
+ggplotly(violin_bc)
 ```
 
 ## Col 2 {.tabset}
@@ -547,18 +609,29 @@ ggplotly(violinbonus)
 ### Improvement
 
 ```{r}
-runs_bonus <- runs_full %>% 
-  filter(category == "Bonus Cups")
+runs_bc <- runs %>% 
+  filter(cat1 == "Bonus Cups") %>% 
+  group_by(cat1, track) %>% 
+  mutate(sd = sd(time)) %>% 
+  ungroup()
 
-colors_bonus <- color_range(length(unique(runs_bonus$runNO)))
+colors_bc <- color_range(length(unique(runs_bc$runNO)))
 
-runs_bonus <- runs_bonus %>% 
-  mutate(clr = ifelse(runNO == 0, "grey", colors_bonus[runs_bonus$runNO]))
+runs_bc <- runs_bc %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_bc[runs_bc$runNO]))
 ```
 
 ```{r}
-traces_bonus <- ggplot() +
-  geom_line(data = runs_bonus, aes(
+traces_bc <- ggplot() +
+  geom_violin(data = runs_bc[which(runs_bc$runNO != 0), ],
+                aes(
+                  factor(track), 
+                  maxdiff,
+                  color = NA,
+                  fill = sd,
+                  alpha = .1),
+                scale = "width") +
+  geom_line(data = runs_bc, aes(
     factor(track),
     maxdiff,
     group = runNO,
@@ -566,17 +639,18 @@ traces_bonus <- ggplot() +
     alpha = runNO,
     text = label
   )) +
-  geom_point(data = runs_bonus[which(runs_bonus$pts > 0),], aes(
+  geom_point(data = runs_bc[which(runs_bc$pts > 0),], aes(
     factor(track), 
     maxdiff, 
     size = pts,
     color = "tomato",
     text = label)) +
-  facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.25)) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_size_continuous(range = c(.05, 2.75)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
+  facet_wrap(~cat2, scales = "free") +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -593,45 +667,60 @@ traces_bonus <- ggplot() +
     legend.position = "none"
   )
 
-ggplotly(traces_bonus, tooltip = "text") %>% 
-  layout(margin = list(b = 110))
+
+
+ggplotly(traces_bc, tooltip = "text") %>% 
+  layout(margin = list(b = 110)) %>% 
+  style(hoverinfo = "skip", traces = 0:length(unique(runs_bc$track)))
 ```
 
 ### Run Time
 
 ```{r}
-run_time_b <- run_time %>% 
-  filter(category == "Bonus Cups") %>% 
-  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
-                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(runNO, cumsum)) +
+run_time_bc <- run_time %>%
+  filter(cat1 == "Bonus Cups") %>%
+  mutate(label = paste0(
+    "<b>Run #",
+    runNO,
+    " ",
+    date,
+    "</b>",
+    "<br>",
+    round(seconds_to_period(cumsum), 2)
+  )) %>%
+  ggplot(aes(runNO, cumsum, color = "goldenrod")) +
   geom_line() +
   geom_point(aes(text = label)) +
-  facet_wrap(~cup, scales = "free") +
-  scale_y_time() +
-  labs(x = "", y = "") +
+  scale_y_time(labels = scales::label_time()) +
+  scale_x_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_color_identity() +
+  facet_wrap(~cat2, scales = "free") +
+  labs(x = "Run Number", y = "") +
   theme_minimal() +
-  theme(axis.ticks = element_line(size = .2), 
-        panel.border = element_rect(fill = NA, size = .2))
+  theme(axis.ticks = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
 
-ggplotly(run_time_b, tooltip = "text")
+ggplotly(run_time_bc, tooltip = "text")
 ```
 
 # DLC Cups {data-navmenu="Cups"}
 
 ## Col 1 {data-width="350"}
 
-### Track Time Distribution
+### Track Time Distributions
 
 ```{r}
-violindlc <- clean %>% 
-  filter(category == "DLC Cups" & track != "Start") %>% 
+violin_dc <- sr %>% 
+  filter(cat1 == "DLC Cups" & track != "Start") %>% 
   ggplot(aes(factor(track), time)) +
   geom_violin(scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) +
   stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
   scale_x_discrete(limits = rev) +
   coord_flip() +
@@ -647,7 +736,7 @@ violindlc <- clean %>%
         panel.border = element_rect(fill = NA, size = .2),
         legend.position = "none")
 
-ggplotly(violindlc)
+ggplotly(violin_dc)
 ```
 
 ## Col 2 {.tabset}
@@ -655,18 +744,29 @@ ggplotly(violindlc)
 ### Improvement
 
 ```{r}
-runs_dlc <- runs_full %>% 
-  filter(category == "DLC Cups")
+runs_dc <- runs %>% 
+  filter(cat1 == "DLC Cups") %>% 
+  group_by(cat1, track) %>% 
+  mutate(sd = sd(time)) %>% 
+  ungroup()
 
-colors_dlc <- color_range(length(unique(runs_dlc$runNO)))
+colors_dc <- color_range(length(unique(runs_dc$runNO)))
 
-runs_dlc <- runs_dlc %>% 
-  mutate(clr = ifelse(runNO == 0, "grey", colors_dlc[runs_dlc$runNO]))
+runs_dc <- runs_dc %>% 
+  mutate(clr = ifelse(runNO == 0, "grey", colors_dc[runs_dc$runNO]))
 ```
 
 ```{r}
-traces_dlc <- ggplot() +
-  geom_line(data = runs_dlc, aes(
+traces_dc <- ggplot() +
+  geom_violin(data = runs_dc[which(runs_dc$runNO != 0), ],
+                aes(
+                  factor(track), 
+                  maxdiff,
+                  color = NA,
+                  fill = sd,
+                  alpha = .1),
+                scale = "width") +
+  geom_line(data = runs_dc, aes(
     factor(track),
     maxdiff,
     group = runNO,
@@ -674,17 +774,18 @@ traces_dlc <- ggplot() +
     alpha = runNO,
     text = label
   )) +
-  geom_point(data = runs_dlc[which(runs_dlc$pts > 0),], aes(
+  geom_point(data = runs_dc[which(runs_dc$pts > 0),], aes(
     factor(track), 
     maxdiff, 
     size = pts,
     color = "tomato",
     text = label)) +
-  facet_wrap(~cup, scales = "free") +
   scale_y_time() +
-  scale_size_continuous(range = c(.05, 2.25)) +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
+  scale_size_continuous(range = c(.05, 2.75)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
+  facet_wrap(~cat2, scales = "free") +
   labs(x = "",
        y = "") +
   theme_minimal() +
@@ -701,26 +802,39 @@ traces_dlc <- ggplot() +
     legend.position = "none"
   )
 
-ggplotly(traces_dlc, tooltip = "text") %>% 
-  layout(margin = list(b = 110))
+
+
+ggplotly(traces_dc, tooltip = "text") %>% 
+  layout(margin = list(b = 110)) %>% 
+  style(hoverinfo = "skip", traces = 0:length(unique(runs_dc$track)))
 ```
 
 ### Run Time
 
 ```{r}
-run_time_d <- run_time %>% 
-  filter(category == "DLC Cups") %>% 
-  mutate(label = paste0("<b>Run #", runNO, " ", date, "</b>",
-                        "<br>", round(seconds_to_period(cumsum), 2))) %>% 
-  ggplot(aes(runNO, cumsum)) +
+run_time_dc <- run_time %>%
+  filter(cat1 == "DLC Cups") %>%
+  mutate(label = paste0(
+    "<b>Run #",
+    runNO,
+    " ",
+    date,
+    "</b>",
+    "<br>",
+    round(seconds_to_period(cumsum), 2)
+  )) %>%
+  ggplot(aes(runNO, cumsum, color = "goldenrod")) +
   geom_line() +
   geom_point(aes(text = label)) +
-  facet_wrap(~cup, scales = "free") +
-  scale_y_time() +
-  labs(x = "", y = "") +
+  scale_y_time(labels = scales::label_time()) +
+  scale_x_continuous(labels = scales::label_number(accuracy = 1)) +
+  scale_color_identity() +
+  facet_wrap(~cat2, scales = "free") +
+  labs(x = "Run Number", y = "") +
   theme_minimal() +
-  theme(axis.ticks = element_line(size = .2), 
-        panel.border = element_rect(fill = NA, size = .2))
+  theme(axis.ticks = element_line(size = .2),
+        panel.border = element_rect(fill = NA, size = .2),
+        legend.position = "none")
 
-ggplotly(run_time_d, tooltip = "text")
+ggplotly(run_time_dc, tooltip = "text")
 ```

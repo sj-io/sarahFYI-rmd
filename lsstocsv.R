@@ -158,7 +158,7 @@ runs <- cum_run %>%
   rbind(BPT) %>% 
   left_join(slowest_run, by = c("cat1", "cat2", "track")) %>% 
   left_join(PB_run, by = c("ID", "track")) %>% 
-  mutate(maxdiff = cumsum - max,
+  mutate(maxdiff = (cumsum - max)*-1,
          cumsum = seconds(cumsum),
          max = seconds(max),
          maxdiff = seconds(maxdiff),

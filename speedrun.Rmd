@@ -15,6 +15,15 @@ output:
 runtime: shiny
 ---
 
+```{bash llstocsv, eval=FALSE, include=FALSE}
+#' I use chipdelmal's MK8D package to 
+#' convert all lss files in a folder to csv
+#' https://github.com/Chipdelmal/MK8D
+#' His blog was also the inspiration for the traces/violin plot. 
+#' https://chipdelmal.github.io/
+MK8D_trk2csv ./_data/splits ./_data/splits MK8D_trks.csv
+```
+
 ```{r setup, include=FALSE}
 library(shiny)
 library(flexdashboard)
@@ -34,13 +43,14 @@ source("lsstocsv.R")
 
 ## Welcome {.sidebar}
 
-<small>
-This dashboard gives an overview of my **Mario Kart 8 Deluxe** (**MK8D**) 150cc speedruns. 
+
+<small>An overview of my **Mario Kart 8 Deluxe** (**MK8D**) 150cc speedruns.</small>
 
 ```{r}
 selectInput("v_cat2", label = "Select a Category:", choices = ct2)
 ```
 
+<small>
 <details><summary>Show/Hide explanation of data, graphs, and speedrunning.</summary>
 <p></p>
 
@@ -305,7 +315,7 @@ renderPlotly({
                  text = label
                )) +
     scale_y_time() +
-    scale_x_reverse() +
+    scale_x_discrete(limits = rev) +
     coord_flip() +
     scale_fill_gradient(low = "darkcyan", high = "plum") +
     scale_size_continuous(range = c(.5, 2.75)) +
