@@ -6,7 +6,6 @@ output:
     navbar:
       - { icon: "fas fa-home", href: "index.html", align: right}
     theme:
-      version: 4
       bootswatch: minty
 ---
 
@@ -200,7 +199,10 @@ color_range <- colorRampPalette(c("plum", "darkcyan"))
 
 ```{r}
 runs_48 <- runs_full %>% 
-  filter(category == "48 Tracks")
+  filter(category == "48 Tracks") %>% 
+  group_by(category, track) %>% 
+  mutate(sd = sd(time)) %>% 
+  ungroup()
 
 colors_48 <- color_range(length(unique(runs_48$runNO)))
 
@@ -210,6 +212,14 @@ runs_48 <- runs_48 %>%
 
 ```{r}
 traces_48 <- ggplot() +
+  geom_violin(data = runs_48[which(runs_48$runNO != 0), ],
+                aes(
+                  factor(track), 
+                  maxdiff,
+                  color = NA,
+                  fill = sd,
+                  alpha = .1),
+                scale = "width") +
   geom_line(data = runs_48, aes(
     factor(track),
     maxdiff,
@@ -225,6 +235,7 @@ traces_48 <- ggplot() +
     color = "tomato",
     text = label)) +
   scale_y_time() +
+  scale_fill_gradient(low = "darkcyan", high = "plum") +
   scale_size_continuous(range = c(.05, 2.75)) +
   scale_color_identity() +
   scale_alpha_continuous(range = c(.35, .8)) +
@@ -244,10 +255,13 @@ traces_48 <- ggplot() +
     legend.position = "none"
   )
 
+
+
 ggplotly(traces_48, tooltip = "text") %>% 
   layout(margin = list(t = 60),
     title = list(text = paste0('Improvement from Slowest Run',
-                                    '<br><sup>48 Tracks, 150cc, No Items</sup>')))
+                                    '<br><sup>48 Tracks, 150cc, No Items</sup>'))) %>% 
+  style(hoverinfo = "skip", traces = 0:length(unique(runs_48$track)))
 ```
 
 ### Run Time

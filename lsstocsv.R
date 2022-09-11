@@ -1,8 +1,3 @@
-library(tidyverse)
-library(lubridate)
-
-# Split names often vary, with abbreviations, parenthesis, etc.
-# Use this file to help standardize names
 abr <- read_csv("_data/abr.csv") %>%
   mutate(
     splits = ifelse(!is.na(source), paste0("(", source, ") ", short), short),
@@ -28,7 +23,7 @@ abr <- read_csv("_data/abr.csv") %>%
   ) %>% 
   mutate(output = fct_inorder(output))
 
-# Create factors for categories
+#' Create factors for categories. Tracks and cups are ordered by appearance in game.
 ct1 <-
   c("48 Tracks", "16 Tracks", "Nitro Cups", "Retro Cups",
     "Bonus Cups", "DLC Cups") %>%
@@ -40,10 +35,12 @@ ct2 <- c("Original 48",
   unique() %>%
   fct_inorder()
 
-# Import splits data
-raw <- read_csv("_data/splits/MK8D_trks.csv") %>% rename_with(tolower, 2:7)
+#' Import splits data. In my static dashboard, I use a code chunk that runs a python script that auto converts lss to csv format. The package I use is MK8D, created by Chipdelmal https://github.com/Chipdelmal/MK8D
 
-# Tidy data and factor categories
+raw <- read_csv("_data/splits/MK8D_trks.csv") %>% 
+  rename_with(tolower, 2:7)
+
+# Tidy data and factor categories. Format dates and times
 sr <- raw %>%
   filter(str_detect(ID, "/")) %>%
   left_join(abr, by = c("track" = "input")) %>%
@@ -71,15 +68,10 @@ sr <- raw %>%
 
 rm(abr, raw)
 
-# Standard Deviation for Violin Plots
-stdev <- sr %>% 
-  filter(track != "Start") %>%
-  group_by(cat2, track) %>% 
-  mutate(sd = sd(time)) %>% 
-  ungroup()
+#' Traces + Violin Plot!
+#' There's a lotta parts to making this.
 
-### Traces Plot ###
-# 1. What is my best time for each track?
+#' 1. What is my best time for each track?
 PB_tracks <- sr %>% 
   group_by(cat1, cat2, track) %>% 
   slice_min(time, with_ties = FALSE) %>% 
@@ -87,7 +79,7 @@ PB_tracks <- sr %>%
   select(cat1, cat2, track, PBtime = time, PBdate = date) %>% 
   arrange(track)
 
-# 2. What is my best possible time for each subcategory?
+# 2. What is my best possible cumulative time for each subcategory?
 # Add a label column that will be used in the final plot
 BPT <- PB_tracks %>%
   group_by(cat2) %>%
@@ -111,7 +103,7 @@ BPT <- PB_tracks %>%
     )
   )
 
-# 3. Find which runs were completed
+# 3. Which runs were completed?
 finished_runs <- sr %>%
   filter(
     str_detect(cat1, "Cups") & trkNO == 5 |
