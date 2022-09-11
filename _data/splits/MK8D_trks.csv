@@ -68,7 +68,9 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (09:001),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:002),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
-(09:000),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:004),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:005),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:006),Start,0.0,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/02/20 (10:001),Start,0.0,No Items,Cartridge,150cc,48 Tracks
 22/02/23 (10:002),Start,0.0,No Items,Cartridge,150cc,48 Tracks
 22/02/25 (10:003),Start,0.0,No Items,Cartridge,150cc,48 Tracks
@@ -410,11 +412,16 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/24 (09:001),bTB,114.300075,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:002),bTB,113.436427,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),bTB,113.421052,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:004),bTB,114.011087,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:005),bTB,114.301461,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:006),bTB,112.572531,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/24 (09:001),bSR,143.641253,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),bSR,141.43159,150cc,Cartridge,Lucky Cat Cup,DLC Cups
-(09:000),bSG,123.738539,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:004),bSR,144.134847,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:006),bSR,141.6068,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/24 (09:001),bSG,123.738539,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),bSG,123.709606,150cc,Cartridge,Lucky Cat Cup,DLC Cups
+22/09/11 (09:006),bSG,126.220805,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/24 (09:001),bNH,156.630114,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/08/29 (09:003),bNH,153.785488,150cc,Cartridge,Lucky Cat Cup,DLC Cups
 22/02/20 (10:001),Mario Kart Stadium,135.951707,No Items,Cartridge,150cc,48 Tracks
