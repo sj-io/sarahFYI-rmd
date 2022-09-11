@@ -4,10 +4,9 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     navbar:
-      - { title: "Time Trials", href: "tt.hrml", align: right}
+      - { title: "Time Trials", href: "tt.html", align: right}
       - { icon: "fas fa-home", href: "index.html", align: right}
-    theme:
-      bootswatch: minty
+    theme: sandstone
     favicon: blueshell.png
     source_code: embed
 ---

@@ -5,7 +5,7 @@ output:
     orientation: columns
     theme: sandstone
     navbar:
-      - { title: "Speedruns", href: "sr.hrml", align: right}
+      - { title: "Speedruns", href: "sr.html", align: right}
       - { icon: "fas fa-home", href: "index.html", align: right}
     favicon: blueshell.png
     source_code: embed
