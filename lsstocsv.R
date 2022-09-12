@@ -168,7 +168,13 @@ runs <- cum_run %>%
                                 round(seconds_to_period(pts), 3)), 
                          label, 
                          missing = label),
-         track = recode(track, "Start" = " "))
+         track = recode(track, "Start" = " ")) %>% 
+  group_by(cat2, track) %>% 
+  mutate(
+    worst = ifelse(time == max(time) & track != " ", "yes", NA),
+    best = ifelse(time == min(time) & track != " " & runNO != 0, "yes", NA)
+         ) %>% 
+  ungroup()
 
 rm(finished_runs, PB_tracks, BPT, slowest_run, PB_run, cum_run)
 

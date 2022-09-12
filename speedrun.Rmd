@@ -30,6 +30,7 @@ library(flexdashboard)
 library(tidyverse)
 library(lubridate)
 library(plotly)
+library(emojifont)
 
 #' This is my first shiny-ish app. 
 #' very unoptimized b/c idk what I'm doing (how do reactives work??). 
@@ -51,6 +52,7 @@ selectInput("v_cat2", label = "Select a Category:", choices = ct2)
 ```
 
 <small>
+
 <details><summary>Show/Hide explanation of data, graphs, and speedrunning.</summary>
 <p></p>
 
@@ -58,7 +60,7 @@ selectInput("v_cat2", label = "Select a Category:", choices = ct2)
 
 The **Run Duration over Time** graph shows how my run times have changed (usually decreasing & improving) since I began running. 
 
-The **Improvement from Slowest Run** graph shows this data with more detail. Each line is a completed run, comparing my cumulative run time for each track to that of my slowest run. The lowest colored line is my current **personal best** (**PB**), AKA the fastest time I've run the category. The orange dots show tracks where my PB run had a slower time than a previous run, indicating a **possible time save**; the size of the dot indicates how much time save is available. The grey line is my hypothetical **best possible time**, the cumulative sum of my best time for each track across all run attempts. Hover over any point/line for more detail.
+The **Improvement from Slowest Run** graph shows this data with more detail. Each line is a completed run, comparing my cumulative run time for each track to that of my slowest run. The lowest colored line is my current **personal best** (**PB**), AKA the fastest time I've run the category. The orange dots show tracks where my PB run had a slower time than a previous run, indicating a **possible time save**; the size of the dot indicates how much time save is available. The poop emoji shows my worst splits. The grey line is my hypothetical **best possible time**, the cumulative sum of my best time for each track across all run attempts. Hover over any point/line for more detail.
 
 Overlayed on the graph is a violin plot for each track. The color of each violin is relative to the track's **standard deviation**. The more spread out a track time's are relative to the other tracks, the lighter the color of its violin.
 </details>
@@ -86,28 +88,6 @@ renderValueBox({
   valueBox(
     value = recentRun,
     icon = "fa fa-calendar"
-  )
-})
-```
-
-### Completed / Attempted Runs
-
-```{r}
-renderValueBox({
-  completes <- rn_a() %>%
-    filter(ID != "Best Possible Time") %>%
-    distinct(ID) %>% 
-    count()
-  
-  attempts <- rn_c() %>% 
-    distinct(ID) %>%
-    count()
-  
-  runAttempts <- paste(completes, "/", attempts)
-  
-  valueBox(
-    value = runAttempts,
-    icon = "fa fa-flag-checkered"
   )
 })
 ```
@@ -200,30 +180,31 @@ renderPlotly({
 
 ```{r warning=FALSE}
 renderPlotly({
-  rn <- runs %>% 
-    group_by(cat2, track) %>% 
-    mutate(sd = sd(time)) %>% 
-    ungroup() %>% 
+  rn <- runs %>%
+    group_by(cat2, track) %>%
+    mutate(sd = sd(time)) %>%
+    ungroup() %>%
     filter(cat2 == input$v_cat2)
   
   # name colors
   colors <- color_range(length(unique(rn$runNO)))
   rn <- rn %>%
-    mutate(
-      clr = ifelse(runNO == 0, "grey", 
-                   colors[rn$runNO]))
-  
+    mutate(clr = ifelse(runNO == 0, "grey",
+                        colors[rn$runNO]))
   
   # traces plot
   ggTraces <- ggplot() +
-    geom_violin(data = rn[which(rn$runNO != 0), ],
-                aes(
-                  factor(track), 
-                  maxdiff,
-                  color = NA,
-                  fill = sd,
-                  alpha = .1),
-                scale = "width") +
+    geom_violin(
+      data = rn[which(rn$runNO != 0),],
+      aes(
+        factor(track),
+        maxdiff,
+        color = NA,
+        fill = sd,
+        alpha = .1
+      ),
+      scale = "width"
+    ) +
     geom_line(data = rn,
               aes(
                 factor(track),
@@ -233,7 +214,7 @@ renderPlotly({
                 alpha = runNO,
                 text = label
               )) +
-    geom_point(data = rn[which(rn$pts > 0), ],
+    geom_point(data = rn[which(rn$pts > 0),],
                aes(
                  factor(track),
                  maxdiff,
@@ -241,6 +222,12 @@ renderPlotly({
                  color = "tomato",
                  text = label
                )) +
+    geom_text(
+      data = rn[which(rn$worst == "yes"),],
+      aes(factor(track), maxdiff, text = label),
+      label = emoji("poop"),
+      family = 'EmojiOne',
+      size = 3) +
     scale_y_time() +
     scale_fill_gradient(low = "darkcyan", high = "plum") +
     scale_size_continuous(range = c(.5, 2.75)) +
@@ -345,6 +332,28 @@ renderPlotly({
 ```
 
 ## Bottom Storyboard {.storyboard}
+
+### Completed / Attempted Runs
+
+```{r}
+renderValueBox({
+  completes <- rn_a() %>%
+    filter(ID != "Best Possible Time") %>%
+    distinct(ID) %>% 
+    count()
+  
+  attempts <- rn_c() %>% 
+    distinct(ID) %>%
+    count()
+  
+  runAttempts <- paste(completes, "/", attempts)
+  
+  valueBox(
+    value = runAttempts,
+    icon = "fa fa-flag-checkered"
+  )
+})
+```
 
 ### Oldest Gold
 
