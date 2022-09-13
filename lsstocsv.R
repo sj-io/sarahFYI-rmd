@@ -66,6 +66,17 @@ sr <- raw %>%
   mutate(trkNO = row_number(ID), .before = track) %>% 
   ungroup() 
 
+# Find best & worst tracks
+sr2 <- sr %>% 
+  group_by(cat2, track) %>% 
+  mutate(
+    worst = ifelse(time == max(time) & track != "Start", "yes", NA),
+    best = ifelse(time == min(time) & track != "Start", "yes", NA)
+  ) %>% 
+  ungroup() %>% 
+  select(ID, track, worst, best) %>% 
+  filter(!is.na(worst) | !is.na(best))
+
 rm(abr, raw)
 
 #' Traces + Violin Plot!
@@ -169,14 +180,9 @@ runs <- cum_run %>%
                          label, 
                          missing = label),
          track = recode(track, "Start" = " ")) %>% 
-  group_by(cat2, track) %>% 
-  mutate(
-    worst = ifelse(time == max(time) & track != " ", "yes", NA),
-    best = ifelse(time == min(time) & track != " " & runNO != 0, "yes", NA)
-         ) %>% 
-  ungroup()
+  left_join(sr2, by = c("ID", "track"))
 
-rm(finished_runs, PB_tracks, BPT, slowest_run, PB_run, cum_run)
+rm(finished_runs, PB_tracks, BPT, slowest_run, PB_run, cum_run, sr2)
 
 # 8. Create a color range for the data
 color_range <- colorRampPalette(c("plum", "darkcyan"))

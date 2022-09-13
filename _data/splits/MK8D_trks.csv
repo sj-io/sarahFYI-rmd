@@ -107,6 +107,9 @@ ID,Track,Time,Version,Items,Speed,Category
 (11:000),Start,0.0,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/23 (12:001),Start,0.0,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Start,0.0,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:003),Start,0.0,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Start,0.0,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:005),Start,0.0,No Items,Cartridge,150cc,Nitro Tracks
 (12:000),Start,0.0,No Items,Cartridge,150cc,Nitro Tracks
 22/08/24 (13:001),Start,0.0,150cc,Cartridge,Propeller Cup,DLC Cups
 22/08/24 (13:002),Start,0.0,150cc,Cartridge,Propeller Cup,DLC Cups
@@ -178,7 +181,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (17:015),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (17:016),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/07 (17:017),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
-(17:000),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:018),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:019),Start,0.0,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (18:001),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (18:002),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (18:003),Start,0.0,150cc,Cartridge,Lightning Cup,Retro Cups
@@ -1107,35 +1111,44 @@ ID,Track,Time,Version,Items,Speed,Category
 22/09/07 (11:013),dAC,135.515889,150cc,Cartridge,Crossing Cup,Bonus Cups
 22/08/23 (12:001),Mario Kart Stadium,128.557836,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Mario Kart Stadium,128.310216,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Water Park,133.020851,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:003),Mario Kart Stadium,128.635859,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Mario Kart Stadium,128.715582,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:005),Mario Kart Stadium,128.506999,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Water Park,133.020851,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Water Park,132.457955,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:003),Water Park,133.09596,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Water Park,132.552384,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:005),Water Park,133.271995,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Sweet Sweet Canyon,144.886162,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Sweet Sweet Canyon,144.920735,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:003),Sweet Sweet Canyon,145.322617,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Sweet Sweet Canyon,145.613541,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:005),Sweet Sweet Canyon,145.260122,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Thwomp Ruins,147.160042,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Thwomp Ruins,146.581475,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Mario Circuit,142.204685,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Thwomp Ruins,146.549078,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:005),Thwomp Ruins,146.631816,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Mario Circuit,142.204685,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Mario Circuit,141.566408,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Toad Harbor,160.965205,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Mario Circuit,143.772868,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:005),Mario Circuit,141.449369,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Toad Harbor,160.965205,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Toad Harbor,160.67918,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Toad Harbor,160.759469,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Twisted Mansion,151.643434,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Twisted Mansion,152.601859,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Shy Guy Falls,158.78979,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Twisted Mansion,152.711983,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Shy Guy Falls,158.78979,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Shy Guy Falls,158.07139,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Sunshine Airport,156.282394,No Items,Cartridge,150cc,Nitro Tracks
+22/09/13 (12:004),Shy Guy Falls,159.431524,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Sunshine Airport,156.282394,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Sunshine Airport,156.937958,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Dolphin Shoals,153.671582,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Dolphin Shoals,153.671582,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Dolphin Shoals,152.8692,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Electrodome,155.673143,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Electrodome,155.228579,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Mount Wario,141.92716,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Mount Wario,141.703426,No Items,Cartridge,150cc,Nitro Tracks
-(12:000),Cloudtop Cruise,157.500392,No Items,Cartridge,150cc,Nitro Tracks
 22/08/23 (12:001),Cloudtop Cruise,157.500392,No Items,Cartridge,150cc,Nitro Tracks
 22/09/07 (12:002),Cloudtop Cruise,158.668338,No Items,Cartridge,150cc,Nitro Tracks
 (12:000),Bone-Dry Dunes,148.917804,No Items,Cartridge,150cc,Nitro Tracks
@@ -1309,7 +1322,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (17:015),rDDD,157.543352,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (17:016),rDDD,154.652128,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/07 (17:017),rDDD,155.722855,150cc,Cartridge,Banana Cup,Retro Cups
-(17:000),rDP3,112.572127,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:018),rDDD,154.426325,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:019),rDDD,154.865307,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (17:001),rDP3,114.118124,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (17:002),rDP3,115.11207,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/20 (17:005),rDP3,112.872911,150cc,Cartridge,Banana Cup,Retro Cups
@@ -1318,6 +1332,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (17:015),rDP3,112.987089,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (17:016),rDP3,114.005462,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/07 (17:017),rDP3,112.504445,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:018),rDP3,112.842275,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:019),rDP3,112.931753,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (17:001),rRRy,155.164259,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (17:002),rRRy,154.87528,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/20 (17:005),rRRy,155.401749,150cc,Cartridge,Banana Cup,Retro Cups
@@ -1326,7 +1342,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (17:015),rRRy,153.754398,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (17:016),rRRy,154.559126,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/07 (17:017),rRRy,153.806385,150cc,Cartridge,Banana Cup,Retro Cups
-(17:000),rDKJ,159.364505,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:018),rRRy,153.46296,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:019),rRRy,153.625803,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (17:001),rDKJ,159.764482,150cc,Cartridge,Banana Cup,Retro Cups
 22/07/24 (17:002),rDKJ,160.246313,150cc,Cartridge,Banana Cup,Retro Cups
 22/08/20 (17:005),rDKJ,160.518708,150cc,Cartridge,Banana Cup,Retro Cups
@@ -1335,6 +1352,8 @@ ID,Track,Time,Version,Items,Speed,Category
 22/08/30 (17:015),rDKJ,159.273386,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/01 (17:016),rDKJ,158.961849,150cc,Cartridge,Banana Cup,Retro Cups
 22/09/07 (17:017),rDKJ,158.34011,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:018),rDKJ,160.539035,150cc,Cartridge,Banana Cup,Retro Cups
+22/09/13 (17:019),rDKJ,159.383462,150cc,Cartridge,Banana Cup,Retro Cups
 22/05/28 (18:001),rTTC,143.754722,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (18:002),rTTC,139.051969,150cc,Cartridge,Lightning Cup,Retro Cups
 22/05/28 (18:003),rTTC,138.856063,150cc,Cartridge,Lightning Cup,Retro Cups
