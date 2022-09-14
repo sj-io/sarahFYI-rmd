@@ -7,7 +7,7 @@ output:
     navbar:
       - { title: "Speedruns", href: "sr.html", align: right}
       - { icon: "fas fa-home", href: "index.html", align: right}
-    favicon: blueshell.png
+    favicon: favicon.png
     source_code: embed
 ---
 
@@ -19,6 +19,7 @@ $(document).ready(function(){
 
 ```{r lib}
 library(tidyverse)
+library(flexdashboard)
 library(rvest)
 library(plotly)
 library(lubridate)
@@ -119,9 +120,6 @@ tt_all <- tt %>%
   left_join(tt_PB, by = c("track", "total", "dt")) %>%
   mutate(track = factor(track, levels = ctrk))
 
-tt_tbl <- tt_all %>%
-  select(trkNO, cup, track, date, total, improve, WR_total, WR_diff)
-
 wk_now <- as_tibble_col(1:(week(today()) - 4)) 
 ```
 
@@ -135,13 +133,56 @@ tt_48 <- tt_all %>%
   ungroup()
 ```
 
-## Col Graphs
+## Value Boxes
 
 ```{r}
+v_worst_48 <- slice_max(tt_48, WR_diff)
+v_best_48 <- slice_min(tt_48, WR_diff)
+v_new_48 <- slice_max(tt_48, dt)
+v_old_48 <- slice_min(tt_48, dt)
+```
+
+### Best Track (`r v_best_48$WR_diff`S from WR)
+
+```{r}
+valueBox(value = v_best_48$track, 
+         icon = "fa fa-splotch") 
+```
+
+### Worst Track (`r v_worst_48$WR_diff`S from WR)
+
+```{r}
+valueBox(value = v_worst_48$track, 
+         icon = "fa fa-poo") 
+```
+
+### Most Recent PB (Set on `r v_new_48$date`)
+
+```{r}
+valueBox(value = v_new_48$track, 
+         icon = "fa fa-hourglass-start") 
+```
+
+### Oldest PB (Set on `r v_old_48$date`)
+
+```{r}
+valueBox(value = v_old_48$track, 
+         icon = "fa fa-hourglass-end") 
+```
+
+## Graphs
+
+```{r}
+PBs <- count(tt_48)
+  
 tt_48_wk <- tt_48 %>% 
   group_by(wk) %>% 
-  summarise(mean = mean(improve), n = n()) %>% 
+  mutate(n = n(),
+         th = sum(improve * n),
+         wmean = th / PBs$n) %>% 
   ungroup() %>% 
+  select(wk, wmean, n) %>% 
+  distinct() %>% 
   full_join(wk_now, by = c("wk" = "value")) %>% 
   mutate(across(2:3, ~ replace_na(.x, 0))) %>% 
   arrange(wk)
@@ -152,26 +193,28 @@ tt_48_wk <- tt_48 %>%
 ```{r}
 gg_48_wk <- tt_48_wk %>% 
   ggplot() +
-  geom_line(aes(x=wk, y=n)) +
+  geom_line(aes(x=wk, y=n), color = "#ecc371") +
   theme_minimal() +
-  labs(y = "PBs",
+  labs(y = "",
        x = "Week")
 
 ggplotly(gg_48_wk)
 ```
 
-### Average Improvement by Week
+### Weighted Average Improvement by Week
 
 ```{r}
-gg_48_wk_2 <- tt_48_wk %>% 
-  ggplot(aes(x=wk, y=mean)) +
-  geom_line() +
+gg_48_wk_wt <- tt_48_wk %>% 
+  ggplot(aes(x=wk, y=wmean)) +
+  geom_line(color = "#85a1ac") +
   theme_minimal() + 
   labs(x = "Week",
-       y = "Average Improvement (secs)")
+       y = "Improvement (secs)")
 
-ggplotly(gg_48_wk_2)
+ggplotly(gg_48_wk_wt)
 ```
+
+> Improvement for each track weighted by percent of PBs that week compared to total.
 
 ### Cumulative Improvement
 
@@ -181,16 +224,16 @@ gg_cts_48 <- tt_48 %>%
   arrange(dt) %>% 
   mutate(cumsum = cumsum(improve)) %>% 
   ggplot(aes(x=dt, y=cumsum)) +
-  geom_step() +
+  geom_step(color = "#6868ac") +
   theme_minimal() +
-  labs(x="", y="Cumulative Improvement (secs)") +
+  labs(x="", y="Improvement (secs)") +
   theme(axis.text.x = element_text(angle = 90),
         legend.position = "none")
 
 ggplotly(gg_cts_48)
 ```
 
-## Col Violin
+## Violin
 
 ### PB Time Distributions, Feb 01, 2022 - Present
 
@@ -202,17 +245,18 @@ gg_48 <- tt_48 %>%
               scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) + 
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) +
   geom_text(aes(factor(track), WR_total), 
-            label = emoji("star"), 
+            label = emoji("trophy"), 
             family = 'EmojiOne',
-            size = 2) +
+            size = 3) +
   scale_fill_gradient(low = "darkcyan", high = "plum") +
   scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
-  scale_x_discrete(limits = rev) +
+  scale_x_discrete() +
   labs(x = "",
-       y = "PB Time") +
+       y = "") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 0.98,
@@ -236,14 +280,60 @@ tt_96 <- tt_all %>%
   ungroup()
 ```
 
-## Col Graphs {data-width=330}
+## Value Boxes
 
 ```{r}
+v_worst_96 <- slice_max(tt_96, WR_diff)
+v_best_96 <- slice_min(tt_96, WR_diff)
+v_new_96 <- slice_max(tt_96, dt)
+v_old_96 <- slice_min(tt_96, dt)
+```
+
+### Best Track (`r v_best_96$WR_diff`S from WR)
+
+```{r}
+valueBox(value = v_best_96$track, 
+         icon = "fa fa-splotch") 
+```
+
+### Worst Track (`r v_worst_96$WR_diff`S from WR)
+
+```{r}
+valueBox(value = v_worst_96$track, 
+         icon = "fa fa-poo") 
+```
+
+### Most Recent PB (Set on `r v_new_96$date`)
+
+```{r}
+valueBox(value = v_new_96$track, 
+         icon = "fa fa-hourglass-start") 
+```
+
+### Oldest PB (Set on `r v_old_96$date`)
+
+```{r}
+valueBox(value = v_old_96$track, 
+         icon = "fa fa-hourglass-end") 
+```
+
+## Graphs {data-width=330}
+
+```{r}
+PBs_96 <- count(tt_96)
+
+wk_now_96 <- wk_now %>% 
+  filter(value > 6)
+
 tt_96_wk <- tt_96 %>% 
   group_by(wk) %>% 
-  summarise(mean = mean(improve), n = n()) %>% 
+  mutate(n = n(),
+         wt = n / PBs_96$n,
+         wmean = sum(improve * wt)) %>% 
   ungroup() %>% 
-  full_join(wk_now, by = c("wk" = "value")) %>% 
+  select(wk, wmean, n) %>% 
+  distinct() %>% 
+  full_join(wk_now_96, by = c("wk" = "value")) %>% 
   mutate(across(2:3, ~ replace_na(.x, 0))) %>% 
   arrange(wk)
 ```
@@ -253,26 +343,28 @@ tt_96_wk <- tt_96 %>%
 ```{r}
 gg_96_wk <- tt_96_wk %>% 
   ggplot() +
-  geom_line(aes(x=wk, y=n)) +
+  geom_line(aes(x=wk, y=n), color = "#ecc371") +
   theme_minimal() +
-  labs(y = "PBs",
+  labs(y = "",
        x = "")
 
 ggplotly(gg_96_wk)
 ```
 
-### Average Improvement by Week
+### Weighted Average Improvement by Week
 
 ```{r}
-gg_96_wk_2 <- tt_96_wk %>% 
-  ggplot(aes(x=wk, y=mean)) +
-  geom_line() +
+gg_96_wk_wt <- tt_96_wk %>% 
+  ggplot(aes(x=wk, y=wmean)) +
+  geom_line(color = "#85a1ac") +
   theme_minimal() + 
   labs(x = "",
-       y = "Improvement (secs)")
+       y = "Improvement")
 
-ggplotly(gg_96_wk_2)
+ggplotly(gg_96_wk_wt)
 ```
+
+> Improvement for each track weighted by percent of PBs that week compared to total.
 
 ### Cumulative Improvement
 
@@ -282,7 +374,7 @@ gg_cts_96 <- tt_96 %>%
   arrange(dt) %>% 
   mutate(cumsum = cumsum(improve)) %>% 
   ggplot(aes(x=dt, y=cumsum)) +
-  geom_step() +
+  geom_step(color = "#6868ac") +
   theme_minimal() +
   labs(x="", y="Improvement (secs)") +
   theme(axis.text.x = element_text(angle = 90),
@@ -291,13 +383,12 @@ gg_cts_96 <- tt_96 %>%
 ggplotly(gg_cts_96)
 ```
 
-## Col Violin
+## Violin
 
-### PB Time Distributions, Feb 01, 2022 - Present
+### PB Time Distributions
 
 ```{r violin96, fig.height=10}
 gg_96 <- tt_96 %>% 
-  filter(track != "GCN Baby Park") %>% 
   group_by(track) %>% 
   mutate(sd = sd(total)) %>% 
   ungroup() %>% 
@@ -306,17 +397,18 @@ gg_96 <- tt_96 %>%
               scale = "width",
               aes(fill = sd, color=sd),
               alpha = .7) + 
+  stat_summary(fun = "mean", geom = "crossbar", size = .2, aes(color = sd)) +
   stat_summary(fun = "median", geom = "point", size = .4) + 
   geom_text(aes(factor(track), WR_total), 
-            label = emoji("star"), 
+            label = emoji("trophy"), 
             family = 'EmojiOne',
-            size = 2) +
+            size = 3) +
   scale_fill_gradient(low = "darkcyan", high = "plum") +
   scale_color_gradient(low = "darkcyan", high = "plum") +
   scale_y_time() +
-  scale_x_discrete(limits = rev) +
+  scale_x_discrete() +
   labs(x = "",
-       y = "PB Time") +
+       y = "") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45,
                                    hjust = 0.98,
@@ -332,30 +424,22 @@ ggplotly(gg_96)
 
 # Tables {data-orientation=columns}
 
-## Col Table {.tabset data-width=500}
+## Current PBs {.tabset data-width=500}
 
 ```{r}
-tt_tbl_48 <- tt_tbl %>% 
-  filter(trkNO < 49) %>% 
+tt_tbl <- tt_all %>%
+  select(trkNO, cup, track, date, total, improve, WR_total, WR_diff) %>% 
   select(-trkNO)
 
-PB_tbl_48 <- tt_tbl_48 %>% 
-  filter(!is.na(WR_total)) %>% 
-  select(-improve)
-
-tt_tbl_96 <- tt_tbl %>% 
-  filter(trkNO > 48) %>% 
-  select(-trkNO)
-
-PB_tbl_96 <- tt_tbl_96 %>% 
+PB_tbl <- tt_tbl %>% 
   filter(!is.na(WR_total)) %>% 
   select(-improve)
 ```
 
-### Current PBs Tracks 1-48 
+### Current PBs 
 
 ```{r}
-PB_tbl_48 %>% 
+PB_tbl %>% 
   kbl(
     col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
     align = "c",
@@ -371,46 +455,13 @@ PB_tbl_48 %>%
     6,
     color = "white",
     background = spec_color(
-      PB_tbl_48$WR_diff,
+      PB_tbl$WR_diff,
       begin = 0.3,
       end = 0.7,
       alpha = 0.7,
       option = "A"
     ),
-    popover = paste0("WR: ", PB_tbl_48$WR_total)
-  ) %>%
-  remove_column(5) %>%
-  collapse_rows(columns = 1,
-                row_group_label_position = 'stack') %>%
-  row_spec(0, align = "c")
-```
-
-### Tracks 49-96
-
-```{r}
-PB_tbl_96 %>% 
-  kbl(
-    col.names = c(" ", "Track", "PB Date", "PB", "WR", "WR Diff"),
-    align = "c",
-    escape = FALSE,
-    longtable = TRUE
-  ) %>% 
-  kable_styling(full_width = TRUE) %>%
-  column_spec(column = 1,
-              extra_css = 'transform: rotate(270deg);') %>%
-  column_spec(3:4,
-              extra_css = 'font-size: 80%;') %>%
-  column_spec(
-    6,
-    color = "white",
-    background = spec_color(
-      PB_tbl_96$WR_diff,
-      begin = 0.3,
-      end = 0.7,
-      alpha = 0.7,
-      option = "A"
-    ),
-    popover = paste0("WR: ", PB_tbl_96$WR_total)
+    popover = paste0("WR: ", PB_tbl$WR_total)
   ) %>%
   remove_column(5) %>%
   collapse_rows(columns = 1,
@@ -420,10 +471,10 @@ PB_tbl_96 %>%
 
 ## All Records {.tabset}
 
-### All Records Tracks 1-48 
+### All Records
 
 ```{r}
-tt_tbl_48 %>%
+tt_tbl %>%
   select(-WR_total) %>%
   mutate(total = paste(total),
          improve = ifelse(improve == 0, NA, improve)) %>%
@@ -441,27 +492,3 @@ tt_tbl_48 %>%
   ) %>%
   formatStyle(3:6, `font-size` = '80%') 
 ```
-
-### Tracks 49-96
-
-```{r}
-tt_tbl_96 %>%
-  select(-WR_total) %>%
-  mutate(total = paste(total),
-         improve = ifelse(improve == 0, NA, improve)) %>%
-  arrange(desc(WR_diff)) %>%
-  datatable(
-    rownames = FALSE,
-    colnames = c("Cup", "Track", "PB Date", "PB",
-                 "Improvement", "WR Diff"),
-    filter = 'top',
-    options = list(pageLength = 48,
-                   autoWidth = TRUE,
-                   columnDefs = list(
-                     list(className = 'dt-center', targets = 0:3)
-                   ))
-  ) %>%
-  formatStyle(3:6, `font-size` = '80%') 
-```
-
-

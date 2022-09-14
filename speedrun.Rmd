@@ -3,7 +3,7 @@ title: "Mario Kart Speedruns"
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
-    favicon: favicon.png
+    favicon: blueshell.png
     source_code: embed
     theme:
       version: 4

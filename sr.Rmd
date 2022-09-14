@@ -7,7 +7,7 @@ output:
       - { title: "Time Trials", href: "tt.html", align: right}
       - { icon: "fas fa-home", href: "index.html", align: right}
     theme: sandstone
-    favicon: blueshell.png
+    favicon: favicon.png
     source_code: embed
 ---
 
